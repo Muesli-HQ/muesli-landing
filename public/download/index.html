@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Muesli for macOS</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+    <style>
+      :root {
+        color: #30271d;
+        background: #fff6dd;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 20% 12%, rgba(97, 173, 213, 0.24), transparent 30%),
+          radial-gradient(circle at 80% 18%, rgba(242, 184, 79, 0.26), transparent 28%),
+          linear-gradient(180deg, #eaf7f3 0%, #fff6dd 58%, #e4f2d5 100%);
+      }
+
+      main {
+        width: min(680px, 100%);
+        padding: clamp(28px, 7vw, 58px);
+        border: 1px solid rgba(74, 52, 27, 0.16);
+        border-radius: 14px;
+        background: rgba(255, 249, 231, 0.82);
+        box-shadow: 0 24px 80px rgba(90, 56, 22, 0.16);
+        text-align: center;
+      }
+
+      img {
+        width: 68px;
+        height: 68px;
+        border-radius: 16px;
+      }
+
+      .eyebrow {
+        margin: 22px 0 12px;
+        color: #285f4c;
+        font-size: 0.84rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.4rem, 8vw, 4.5rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 18px auto 0;
+        max-width: 520px;
+        color: #74634d;
+        font-size: 1.08rem;
+        line-height: 1.55;
+      }
+
+      .button {
+        display: none;
+        width: fit-content;
+        min-height: 52px;
+        margin: 30px auto 0;
+        align-items: center;
+        justify-content: center;
+        padding: 0 22px;
+        border-radius: 10px;
+        background: #30271d;
+        color: #fff9e8;
+        font-weight: 800;
+        text-decoration: none;
+        box-shadow: 0 12px 34px rgba(48, 39, 29, 0.22);
+      }
+
+      .button[data-ready="true"] {
+        display: inline-flex;
+      }
+
+      .status {
+        min-height: 28px;
+        font-weight: 700;
+      }
+
+      .back {
+        display: inline-flex;
+        margin-top: 24px;
+        color: #285f4c;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .error {
+        color: #8b3327;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/icon.png" alt="" />
+      <div class="eyebrow">Download Muesli</div>
+      <h1>Your Mac app is on the way.</h1>
+      <p>This page finds the latest production Muesli release and starts the macOS download.</p>
+      <p class="status" id="status">Looking up the latest release...</p>
+      <a class="button" id="downloadLink" href="#">Download for macOS</a>
+      <a class="back" href="/">Back to muesli.works</a>
+    </main>
+
+    <script>
+      const statusNode = document.getElementById('status');
+      const downloadLink = document.getElementById('downloadLink');
+
+      async function startDownload() {
+        try {
+          const response = await fetch('https://api.github.com/repos/pHequals7/muesli/releases/latest');
+          if (!response.ok) throw new Error('Could not reach GitHub releases.');
+
+          const release = await response.json();
+          const asset = (release.assets || []).find((item) => (
+            item.name.endsWith('.dmg') &&
+            item.name.startsWith('Muesli-') &&
+            !item.name.toLowerCase().includes('preprod')
+          ));
+
+          if (!asset || !asset.browser_download_url) {
+            throw new Error('No production macOS DMG was found on the latest release.');
+          }
+
+          downloadLink.href = asset.browser_download_url;
+          downloadLink.textContent = `Download ${release.tag_name || 'for macOS'}`;
+          downloadLink.dataset.ready = 'true';
+          statusNode.textContent = 'Starting download...';
+          window.setTimeout(() => {
+            window.location.href = asset.browser_download_url;
+          }, 700);
+        } catch (error) {
+          statusNode.className = 'status error';
+          statusNode.textContent = `${error.message} Please use the GitHub releases link.`;
+          downloadLink.href = 'https://github.com/pHequals7/muesli/releases/latest';
+          downloadLink.textContent = 'Open GitHub releases';
+          downloadLink.dataset.ready = 'true';
+        }
+      }
+
+      startDownload();
+    </script>
+  </body>
+</html>
