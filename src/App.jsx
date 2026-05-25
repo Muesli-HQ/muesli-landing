@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  ArrowLeft,
   ArrowRight,
   BotOff,
   CalendarDays,
@@ -293,6 +294,198 @@ const speechSamples = [
   'Turn that into action items.',
 ];
 
+const legalPages = {
+  privacy: {
+    title: 'Privacy Policy',
+    updated: 'May 25, 2026',
+    intro: 'Muesli is local-first speech software for macOS. Dictation and speech-to-text transcription run on your Mac using on-device models. Audio is not sent to Muesli servers for transcription.',
+    sections: [
+      {
+        title: 'What Muesli Does',
+        body: [
+          'Muesli is a native macOS app for dictation, meeting transcription, and meeting notes. It uses CoreML and Apple Silicon acceleration to convert speech to text locally on your device.',
+        ],
+      },
+      {
+        title: 'Data That Stays on Your Device',
+        body: [
+          'Muesli stores application data locally on your Mac unless you explicitly enable an optional connected service.',
+        ],
+        bullets: [
+          'Audio captured for dictation and meetings',
+          'Transcripts, dictations, and meeting notes stored in a local SQLite database',
+          'Configuration and preferences stored in a local JSON file',
+          'Downloaded speech models cached on your device',
+          'OAuth tokens and connected-service credentials stored in macOS Keychain where applicable',
+        ],
+      },
+      {
+        title: 'Optional Cloud Services',
+        body: [
+          'Muesli includes optional integrations that require explicit user action. When enabled, the data needed for that feature is sent directly to the selected provider.',
+        ],
+        bullets: [
+          'OpenAI API, OpenRouter, or ChatGPT may receive meeting transcript text for optional AI meeting summaries.',
+          'Google Calendar may be used to read upcoming meeting event metadata and meeting links.',
+          'Sparkle or GitHub-hosted update checks may be used to discover new app releases.',
+        ],
+      },
+      {
+        title: 'Google Calendar Integration',
+        body: [
+          'If you connect Google Calendar, Muesli requests read-only calendar access so it can show upcoming meetings and help start recordings. Calendar data is used for meeting detection and display inside the app. You can revoke access from your Google Account permissions page.',
+        ],
+      },
+      {
+        title: 'macOS Permissions',
+        body: [
+          'Muesli requests macOS permissions only for product features you use.',
+        ],
+        bullets: [
+          'Microphone for dictation and meeting microphone audio',
+          'Screen Recording or Screen & System Audio Recording for system audio capture during meetings',
+          'Accessibility for pasting text and optional screen context capture',
+          'Input Monitoring for global hotkey detection',
+          'Calendar for local macOS calendar events',
+        ],
+      },
+      {
+        title: 'Anonymous Usage Analytics',
+        body: [
+          'Muesli may use privacy-focused analytics to understand broad feature usage and app health. Analytics never include audio, transcripts, meeting notes, calendar content, screen content, or other personal text.',
+        ],
+      },
+      {
+        title: 'Open Source',
+        body: [
+          'Muesli is open source under the MIT license. You can inspect the code and releases on GitHub.',
+        ],
+      },
+      {
+        title: 'Children’s Privacy',
+        body: [
+          'Muesli is not directed to children under 13, and we do not knowingly collect personal information from children.',
+        ],
+      },
+      {
+        title: 'Changes to This Policy',
+        body: [
+          'If this policy changes, the updated version will be posted on this page with a revised date.',
+        ],
+      },
+      {
+        title: 'Contact',
+        body: [
+          'For privacy questions, open an issue on GitHub or contact the maintainer through the repository.',
+        ],
+      },
+    ],
+  },
+  terms: {
+    title: 'Terms of Service',
+    updated: 'May 25, 2026',
+    intro: 'Muesli is open-source macOS software. These terms cover your use of the application, website, downloads, and optional connected services.',
+    sections: [
+      {
+        title: 'Acceptance of Terms',
+        body: [
+          'By downloading, installing, or using Muesli, you agree to these terms. If you do not agree, do not use the application.',
+        ],
+      },
+      {
+        title: 'Description of Service',
+        body: [
+          'Muesli provides local-first dictation, meeting transcription, and meeting notes on macOS. Optional integrations may connect to third-party services such as OpenAI, OpenRouter, ChatGPT, and Google Calendar.',
+        ],
+      },
+      {
+        title: 'License',
+        body: [
+          'Muesli is distributed under the MIT License. The source code is available on GitHub. Your rights to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the software are governed by that license.',
+        ],
+      },
+      {
+        title: 'User Responsibilities',
+        body: [
+          'You are responsible for how you use Muesli and for the content you record, transcribe, summarize, export, or share.',
+        ],
+        bullets: [
+          'Comply with laws that apply to recording conversations, meetings, calls, system audio, and other people’s speech in your jurisdiction.',
+          'Obtain any required knowledge, notice, or consent from participants before recording or transcribing.',
+          'Review generated transcripts and summaries before relying on them as records.',
+          'Secure your device and the local data stored by Muesli.',
+        ],
+      },
+      {
+        title: 'No Professional Advice',
+        body: [
+          'Muesli transcripts, summaries, action items, meeting notes, and exports are for informational and productivity purposes only. They are not legal, medical, financial, HR, compliance, or other professional advice.',
+        ],
+      },
+      {
+        title: 'AI Output Accuracy',
+        body: [
+          'Speech recognition, speaker diarization, summaries, action items, and generated notes may be inaccurate, incomplete, mislabeled, delayed, or missing context. You are responsible for reviewing and verifying outputs before relying on them, sharing them, or using them as records.',
+        ],
+      },
+      {
+        title: 'Third-Party Services',
+        body: [
+          'Optional integrations and externally hosted resources are governed by the terms and privacy policies of their respective providers. This may include OpenAI, OpenRouter, ChatGPT, Google Calendar, GitHub Releases, model repositories, and downloaded model providers. Muesli is not responsible for the availability, accuracy, security, pricing, policy changes, or continued operation of third-party services.',
+        ],
+      },
+      {
+        title: 'Google Calendar Integration',
+        body: [
+          'When you connect Google Calendar, Muesli requests read-only access to calendar events for meeting detection and display. Muesli’s use and transfer of information received from Google APIs is intended to comply with the Google API Services User Data Policy, including Limited Use requirements.',
+        ],
+      },
+      {
+        title: 'Updates and Changes',
+        body: [
+          'Muesli may change, remove, rename, limit, or stop maintaining features, models, integrations, release channels, downloads, documentation, or update mechanisms at any time.',
+        ],
+      },
+      {
+        title: 'Export Control and Restricted Use',
+        body: [
+          'You are responsible for complying with applicable export control, sanctions, trade, and restricted-use laws. You may not use Muesli or optional connected services where such use is prohibited by applicable law or by the terms of a connected provider.',
+        ],
+      },
+      {
+        title: 'Termination or Limitation',
+        body: [
+          'Muesli is local software, but access to website downloads, update feeds, OAuth integrations, connected services, support channels, or related infrastructure may be limited, suspended, discontinued, or refused for misuse, legal risk, security risk, or operational reasons.',
+        ],
+      },
+      {
+        title: 'Disclaimer of Warranties',
+        body: [
+          'Muesli is provided “as is,” without warranty of any kind. Speech recognition accuracy depends on audio quality, language, model behavior, system conditions, and user configuration.',
+        ],
+      },
+      {
+        title: 'Limitation of Liability',
+        body: [
+          'To the maximum extent permitted by law, the authors and copyright holders of Muesli are not liable for claims, damages, or other liability arising from use of the software, website, downloads, or optional integrations.',
+        ],
+      },
+      {
+        title: 'Changes to These Terms',
+        body: [
+          'These terms may be updated from time to time. The updated version will be posted on this page with a revised date. Continued use of Muesli after changes means you accept the updated terms.',
+        ],
+      },
+      {
+        title: 'Contact',
+        body: [
+          'For questions about these terms, open an issue on GitHub or contact the maintainer through the repository.',
+        ],
+      },
+    ],
+  },
+};
+
 function PixelGarden() {
   return (
     <div className="pixel-garden" aria-label="Animated local speech workflow with a laptop and floating Muesli capture icon">
@@ -360,7 +553,55 @@ function PixelGarden() {
   );
 }
 
-function App() {
+function LegalPage({ page }) {
+  useEffect(() => {
+    document.title = `${page.title} · Muesli`;
+  }, [page.title]);
+
+  return (
+    <main className="legal-page">
+      <nav className="legal-nav">
+        <a className="brand" href="/" aria-label="Muesli home">
+          <img src={iconUrl} alt="" />
+          <span>muesli</span>
+        </a>
+        <a className="legal-back" href="/">
+          <ArrowLeft size={17} />
+          Back to muesli.works
+        </a>
+      </nav>
+
+      <article className="legal-document">
+        <h1>{page.title}</h1>
+        <p className="legal-updated">Last updated: {page.updated}</p>
+        <p className="legal-intro">{page.intro}</p>
+
+        {page.sections.map((section) => (
+          <section className="legal-section" key={section.title}>
+            <h2>{section.title}</h2>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            {section.bullets && (
+              <ul>
+                {section.bullets.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
+      </article>
+
+      <footer className="legal-footer">
+        <span>muesli · local-first · open source</span>
+        <a href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">GitHub</a>
+      </footer>
+    </main>
+  );
+}
+
+function LandingPage() {
   const [stars, setStars] = useState(157);
   const [brewCopied, setBrewCopied] = useState(false);
   const [releases, setReleases] = useState([]);
@@ -823,10 +1064,29 @@ function App() {
           © 2026 Muesli. Built with &lt;3 by{' '}
           <a href="https://github.com/pHequals7" target="_blank" rel="noreferrer">pHequals7</a>
           {' '}and 10+ contributors.
+          <span className="footer-links" aria-label="Legal links">
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+          </span>
         </p>
       </section>
     </main>
   );
+}
+
+function App() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  const legalKey = path === '/privacy' || path === '/privacy.html'
+    ? 'privacy'
+    : path === '/terms' || path === '/terms.html'
+      ? 'terms'
+      : null;
+
+  if (legalKey) {
+    return <LegalPage page={legalPages[legalKey]} />;
+  }
+
+  return <LandingPage />;
 }
 
 createRoot(document.getElementById('root')).render(<App />);
