@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
 import {
   ArrowLeft,
   ArrowRight,
@@ -486,6 +485,35 @@ const legalPages = {
   },
 };
 
+export const prerenderRoutes = ['/', '/privacy', '/terms'];
+
+export const routeMeta = {
+  '/': {
+    title: 'Muesli - speak, and keep your notes close',
+    canonical: 'https://muesli.works/',
+    description: 'Muesli is a local-first Mac app for dictation, meeting notes, and private speech-to-text.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy · Muesli',
+    canonical: 'https://muesli.works/privacy',
+    description: 'Privacy policy for Muesli, a local-first macOS app for on-device dictation and meeting transcription.',
+  },
+  '/terms': {
+    title: 'Terms of Service · Muesli',
+    canonical: 'https://muesli.works/terms',
+    description: 'Terms of Service for Muesli, a local-first macOS app for dictation, meeting transcription, and private meeting notes.',
+  },
+};
+
+function normalizePath(pathname = '/') {
+  const path = pathname.replace(/\/+$/, '') || '/';
+
+  if (path === '/privacy.html') return '/privacy';
+  if (path === '/terms.html') return '/terms';
+
+  return path;
+}
+
 function setCanonicalUrl(path = '/') {
   const canonical = `https://muesli.works${path === '/' ? '/' : path}`;
   let link = document.querySelector('link[rel="canonical"]');
@@ -566,11 +594,12 @@ function PixelGarden() {
   );
 }
 
-function LegalPage({ page }) {
+function LegalPage({ page, path }) {
   useEffect(() => {
-    document.title = `${page.title} · Muesli`;
-    setCanonicalUrl(page.title === 'Privacy Policy' ? '/privacy' : '/terms');
-  }, [page.title]);
+    const meta = routeMeta[path];
+    document.title = meta?.title || `${page.title} · Muesli`;
+    setCanonicalUrl(path);
+  }, [page.title, path]);
 
   return (
     <main className="legal-page">
@@ -1093,19 +1122,17 @@ function LandingPage() {
   );
 }
 
-function App() {
-  const path = window.location.pathname.replace(/\/+$/, '') || '/';
-  const legalKey = path === '/privacy' || path === '/privacy.html'
+export function App({ pathname = '/' }) {
+  const path = normalizePath(pathname);
+  const legalKey = path === '/privacy'
     ? 'privacy'
-    : path === '/terms' || path === '/terms.html'
+    : path === '/terms'
       ? 'terms'
       : null;
 
   if (legalKey) {
-    return <LegalPage page={legalPages[legalKey]} />;
+    return <LegalPage page={legalPages[legalKey]} path={path} />;
   }
 
   return <LandingPage />;
 }
-
-createRoot(document.getElementById('root')).render(<App />);

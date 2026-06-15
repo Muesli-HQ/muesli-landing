@@ -12,24 +12,26 @@
       ],
       "destination": "https://muesli.works/:path*",
       "permanent": true
+    },
+    {
+      "source": "/privacy.html",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/terms.html",
+      "destination": "/terms",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/privacy",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/privacy.html",
-      "destination": "/index.html"
+      "destination": "/privacy/index.html"
     },
     {
       "source": "/terms",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/terms.html",
-      "destination": "/index.html"
+      "destination": "/terms/index.html"
     }
   ],
   "git": {
