@@ -32,6 +32,14 @@
     {
       "source": "/terms",
       "destination": "/terms/index.html"
+    },
+    {
+      "source": "/on-device-dictation",
+      "destination": "/on-device-dictation/index.html"
+    },
+    {
+      "source": "/meeting-notes",
+      "destination": "/meeting-notes/index.html"
     }
   ],
   "git": {

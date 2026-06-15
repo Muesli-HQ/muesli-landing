@@ -8,12 +8,17 @@ import {
   ClipboardCheck,
   CloudOff,
   Coffee,
+  Cpu,
   Download,
+  FileText,
   History,
   Github,
+  HardDrive,
   Keyboard,
   LockKeyhole,
   Mic2,
+  MousePointer2,
+  ShieldCheck,
   Sparkles,
   Star,
   Stars,
@@ -31,6 +36,8 @@ import cohereUrl from '../assets/cohere.png';
 import qwenUrl from '../assets/Qwen_logo.svg.png';
 import presidioHeroBgUrl from './assets/presidio-laptop-hero-bg.png';
 import solarpunkBgUrl from './assets/solarpunk-speech-workspace.png';
+import solarpunkDictationUrl from './assets/solarpunk-greenhouse-dictation.png';
+import solarpunkMeetingNotesUrl from './assets/solarpunk-meeting-notes.png';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -150,12 +157,16 @@ const featureRows = [
     title: 'Dictate anywhere on your Mac',
     body: 'Press a hotkey, speak naturally, and Muesli pastes clean text into the app you are already using.',
     dictationPill: true,
+    href: '/on-device-dictation/',
+    linkLabel: 'Explore on-device dictation',
   },
   {
     icon: CalendarDays,
     title: 'Meeting notes without a bot',
     body: 'Capture meetings from your own computer audio, then keep the transcript local and easy to revisit.',
     meetingLogos: true,
+    href: '/meeting-notes/',
+    linkLabel: 'Explore local meeting notes',
   },
   {
     icon: CloudOff,
@@ -201,6 +212,162 @@ const trustItems = [
   { icon: LockKeyhole, text: 'Transcripts stay close to your machine' },
   { icon: Keyboard, text: 'One hotkey for thought-to-text' },
   { icon: Github, text: 'Open-source and inspectable' },
+];
+
+const dictationSteps = [
+  {
+    icon: Keyboard,
+    title: 'Hold your hotkey',
+    body: 'Use a modifier key such as Right Command when you want to dictate. Speak in the app you were already using.',
+  },
+  {
+    icon: Cpu,
+    title: 'Transcribe on Apple Silicon',
+    body: 'Muesli runs speech recognition locally through CoreML, Metal, and the Apple Neural Engine. Parakeet is built for fast everyday dictation.',
+  },
+  {
+    icon: MousePointer2,
+    title: 'Paste where your cursor is',
+    body: 'When you release the hotkey, Muesli pastes the cleaned text into the active text field instead of making you copy from a separate transcript window.',
+  },
+];
+
+const dictationNotes = [
+  {
+    title: 'No cloud speech round trip',
+    body: 'After the model is installed, day-to-day dictation does not need a hosted speech-to-text API. Your voice is processed on your Mac, which removes the usual upload, queue, retention, and vendor-account surface from quick dictation.',
+  },
+  {
+    title: 'Less exposed by default',
+    body: 'Cloud transcription can be the right tradeoff for some teams, but it adds more places where audio, transcripts, credentials, logs, and third-party access policies have to be trusted. Muesli keeps the dictation path narrower.',
+  },
+  {
+    title: 'Open-source and inspectable',
+    body: 'Muesli is public on GitHub, so the app, model routing, permissions, paste behavior, and local storage choices can be inspected instead of hidden behind a hosted black box.',
+  },
+];
+
+const dictationModels = [
+  ['Parakeet v3', 'Recommended', 'CoreML / Neural Engine', '~0.13s'],
+  ['Whisper Small', 'Compact', 'WhisperKit / CoreML', '~1-2s'],
+  ['Qwen3 ASR', 'Multilingual', 'CoreML', '~2-3s'],
+];
+
+const dictationAnswerCards = [
+  {
+    title: 'Open-source Mac dictation app',
+    body: 'Muesli is a local-first macOS dictation app that turns speech into text on your Mac and pastes it into the app you are already using.',
+  },
+  {
+    title: 'Private alternative to cloud dictation',
+    body: 'For normal dictation, speech recognition runs on-device instead of sending audio to a hosted speech-to-text API.',
+  },
+  {
+    title: 'Works where you already type',
+    body: 'Use Muesli for notes, email, Slack, docs, issue trackers, prompts, and other Mac text fields without moving your writing into a separate editor.',
+  },
+];
+
+const dictationFaqItems = [
+  {
+    question: 'Does Muesli send dictation audio to a cloud speech API?',
+    answer: 'Normal dictation runs on your Mac. Meeting summaries can optionally use services such as OpenAI, OpenRouter, ChatGPT, or Ollama, but that is separate from the local dictation path.',
+  },
+  {
+    question: 'Is Muesli a private alternative to cloud dictation?',
+    answer: 'Yes. Muesli is designed as a local-first Mac dictation app for people who do not want quick speech-to-text to depend on a hosted transcription service.',
+  },
+  {
+    question: 'Can I use Muesli offline?',
+    answer: 'After the speech model is installed, normal dictation can run without an internet connection. Optional downloads, updates, calendar integrations, and cloud summarization providers still need network access.',
+  },
+  {
+    question: 'Does Muesli work in any Mac app?',
+    answer: 'Muesli pastes dictated text into the active app using macOS accessibility and clipboard behavior, so it is built for notes, email, chat, documents, issue trackers, browser text fields, and other places you already type.',
+  },
+  {
+    question: 'What makes Muesli different from Apple Dictation?',
+    answer: 'Muesli is open-source, model-flexible, and built around a hold-to-talk workflow with local ASR models such as Parakeet, Whisper, and Qwen3 ASR. It also connects dictation with meeting transcription and local-first notes workflows.',
+  },
+  {
+    question: 'What permissions are involved?',
+    answer: 'Dictation needs microphone access, input monitoring for the hotkey, and accessibility permission to paste the result. The app guides those permissions during onboarding.',
+  },
+];
+
+const meetingSteps = [
+  {
+    icon: CalendarDays,
+    title: 'Start from the meeting you already have',
+    body: 'Muesli can surface upcoming calls from Calendar, extract meeting links, and let you join, record, or do both without sending a bot into the room.',
+  },
+  {
+    icon: BotOff,
+    title: 'Capture both sides locally',
+    body: 'The app records your microphone and system audio from your own Mac, then uses local speech recognition to build the transcript.',
+  },
+  {
+    icon: FileText,
+    title: 'Turn the transcript into notes',
+    body: 'Keep the raw transcript, generate structured notes with your chosen summary backend, and export notes or the full meeting as Markdown or PDF.',
+  },
+];
+
+const meetingAnswerCards = [
+  {
+    title: 'AI meeting notes without a bot',
+    body: 'Muesli records from your Mac instead of joining Zoom, Meet, or Teams as another attendee.',
+  },
+  {
+    title: 'Local meeting transcription',
+    body: 'Speech-to-text runs on-device with CoreML and Apple Silicon. The transcript is created on your machine before any optional summary step.',
+  },
+  {
+    title: 'Private meeting notes for Mac',
+    body: 'Meetings, transcripts, and exports live in local app storage, with optional providers only when you ask Muesli to summarize.',
+  },
+];
+
+const meetingNotes = [
+  {
+    title: 'No bot-shaped social tax',
+    body: 'Some meetings should not start with a mystery participant joining the call. Muesli listens from your own computer, so the capture layer stays out of the guest list.',
+  },
+  {
+    title: 'Raw transcript stays reviewable',
+    body: 'Summaries are useful, but they are not a source of truth. Muesli keeps the transcript close so you can check names, decisions, and action items before sharing notes.',
+  },
+  {
+    title: 'Built for messy real calls',
+    body: 'Meetings have interruptions, system audio, people talking over each other, and app switching. Muesli is designed around that desktop reality rather than a perfect recording studio.',
+  },
+];
+
+const meetingFaqItems = [
+  {
+    question: 'Does Muesli join my meeting as a bot?',
+    answer: 'No. Muesli records from your Mac, using your microphone and system audio, so it does not need to appear as another participant in Zoom, Google Meet, Teams, or other calls.',
+  },
+  {
+    question: 'Is meeting transcription local?',
+    answer: 'The speech-to-text path runs on-device using Apple Silicon, CoreML, and local ASR models. Optional summaries can use services such as OpenAI, OpenRouter, ChatGPT, or Ollama depending on your setup.',
+  },
+  {
+    question: 'Where are meeting transcripts and notes stored?',
+    answer: 'Muesli stores dictations, transcripts, and meeting notes in local app storage on your Mac. You can export notes, transcripts, or the full meeting as Markdown or PDF.',
+  },
+  {
+    question: 'Can Muesli capture Zoom, Google Meet, Teams, and Slack calls?',
+    answer: 'Muesli captures audio from your own computer rather than depending on a specific meeting provider. It is designed for common meeting surfaces such as Zoom, Google Meet, Microsoft Teams, Slack, and browser-based calls.',
+  },
+  {
+    question: 'What permissions are needed for meeting notes?',
+    answer: 'Meeting capture uses microphone permission for your voice, Screen Recording or Screen & System Audio Recording for computer audio, and optional Calendar access for upcoming meeting detection. Camera state may help detect active meetings, but Muesli is not recording video.',
+  },
+  {
+    question: 'Are AI meeting notes always accurate?',
+    answer: 'No transcript or summary system should be treated as perfect. Review the transcript and generated notes before relying on them as a record, sending them to teammates, or using them for decisions.',
+  },
 ];
 
 const tweetTestimonials = [
@@ -485,7 +652,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/meeting-notes'];
 
 export const routeMeta = {
   '/': {
@@ -502,6 +669,16 @@ export const routeMeta = {
     title: 'Terms of Service · Muesli',
     canonical: 'https://muesli.works/terms',
     description: 'Terms of Service for Muesli, a local-first macOS app for dictation, meeting transcription, and private meeting notes.',
+  },
+  '/on-device-dictation': {
+    title: 'On-device dictation for Mac · Muesli',
+    canonical: 'https://muesli.works/on-device-dictation',
+    description: 'Muesli is an open-source Mac dictation app and private cloud dictation alternative that runs speech-to-text locally on Apple Silicon.',
+  },
+  '/meeting-notes': {
+    title: 'AI meeting notes without a bot · Muesli',
+    canonical: 'https://muesli.works/meeting-notes',
+    description: 'Muesli captures private meeting notes on Mac without a meeting bot. Local transcription runs on-device, with optional AI summaries and exports.',
   },
 };
 
@@ -640,6 +817,504 @@ function LegalPage({ page, path }) {
         <span>muesli · local-first · open source</span>
         <a href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">GitHub</a>
       </footer>
+    </main>
+  );
+}
+
+function ProductPageNav() {
+  return (
+    <nav className="product-nav">
+      <a className="brand" href="/" aria-label="Muesli home">
+        <img src={iconUrl} alt="" />
+        <span>muesli</span>
+      </a>
+      <div className="product-nav-links">
+        <a href="/#notes">Product</a>
+        <a href="/#privacy">Privacy</a>
+        <a href="/#changelog">Releases</a>
+        <a className="product-nav-cta" href={downloadUrl}>
+          <Download size={17} />
+          Download
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+function OnDeviceDictationPage() {
+  useEffect(() => {
+    const meta = routeMeta['/on-device-dictation'];
+    document.title = meta.title;
+    setCanonicalUrl('/on-device-dictation');
+  }, []);
+
+  const dictationStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'SoftwareApplication',
+        '@id': 'https://muesli.works/on-device-dictation#software',
+        name: 'Muesli',
+        applicationCategory: 'ProductivityApplication',
+        operatingSystem: 'macOS',
+        softwareRequirements: 'Apple Silicon Mac',
+        url: 'https://muesli.works/on-device-dictation',
+        downloadUrl: 'https://muesli.works/download/',
+        codeRepository: 'https://github.com/pHequals7/muesli',
+        description: 'Muesli is an open-source Mac dictation app that runs speech-to-text on-device using Apple Silicon and pastes clean text into the app you are already using.',
+        featureList: [
+          'On-device dictation for Mac',
+          'Local speech-to-text with CoreML and Apple Neural Engine',
+          'Hold-to-talk hotkey dictation',
+          'Private alternative to hosted cloud dictation',
+          'Optional meeting transcription and meeting notes',
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://muesli.works/on-device-dictation#faq',
+        mainEntity: dictationFaqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
+
+  return (
+    <main className="product-page dictation-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(dictationStructuredData) }}
+      />
+      <ProductPageNav />
+
+      <section className="product-hero">
+        <img className="product-hero-bg" src={presidioHeroBgUrl} alt="" aria-hidden="true" />
+        <div className="product-hero-copy">
+          <h1>Dictation that stays on your Mac.</h1>
+          <p className="lede">
+            Muesli turns spoken thoughts into clean text without sending everyday dictation through a cloud
+            speech pipeline. Hold a hotkey, speak naturally, release, and the text lands where your cursor already is.
+          </p>
+          <div className="cta-row">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
+              <Github size={18} />
+              Read the source
+            </a>
+          </div>
+        </div>
+
+        <div className="dictation-demo-card" aria-label="Muesli on-device dictation flow">
+          <div className="notes-mock-chrome">
+            <div className="notes-window-dots" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="notes-toolbar">
+              <span>Aa</span>
+              <span>☑</span>
+              <span>▦</span>
+            </div>
+            <div className="notes-search">Search</div>
+          </div>
+          <div className="notes-mock-body">
+            <aside className="notes-sidebar" aria-label="Notes folders">
+              <div className="notes-folder muted">Quick Notes <span>1</span></div>
+              <p>iCloud</p>
+              <div className="notes-folder active">Muesli Notes <span>12</span></div>
+              <div className="notes-folder">Dictations <span>41</span></div>
+              <div className="notes-folder">Meetings <span>8</span></div>
+              <div className="notes-folder muted">Local AI <span>3</span></div>
+            </aside>
+            <div className="notes-list" aria-label="Recent notes">
+              <strong>Previous 30 Days</strong>
+              <div className="notes-list-item active">
+                <b>On-device AI</b>
+                <span>Today · Voice became text without leaving this Mac.</span>
+              </div>
+              <div className="notes-list-item">
+                <b>Meeting recap</b>
+                <span>No bot joined. Transcript stayed local.</span>
+              </div>
+              <div className="notes-list-item">
+                <b>Launch tasks</b>
+                <span>Clean up onboarding feedback.</span>
+              </div>
+            </div>
+            <article className="notes-editor" aria-label="Muesli note output">
+              <div className="notes-date">Today at 11:52 AM</div>
+              <h3>On-device AI for everyday words</h3>
+              <p>
+                Hold Right Command, speak naturally, and Muesli pastes clean text into the note you were already writing.
+              </p>
+              <p>
+                The dictation model runs on Apple Silicon. No hosted speech-to-text API is needed for quick thoughts,
+                issue drafts, messages, or notes.
+              </p>
+              <div className="notes-caret" aria-hidden="true" />
+            </article>
+          </div>
+          <div className="notes-muesli-status" aria-label="Muesli dictation is listening locally">
+            <div className="dictation-hotkey">
+              <img src={iconUrl} alt="" />
+              <span>Hold Right Cmd</span>
+              <div className="mini-wave" aria-hidden="true">
+                <b />
+                <b />
+                <b />
+                <b />
+              </div>
+            </div>
+            <div className="dictation-local-strip">
+              <span><HardDrive size={15} /> local model</span>
+              <span><ShieldCheck size={15} /> no STT API</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="dictation-answer-strip" aria-label="Muesli on-device dictation summary">
+        {dictationAnswerCards.map((card) => (
+          <article key={card.title}>
+            <h2>{card.title}</h2>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="product-section product-section-tight">
+        <div className="product-story-grid">
+          <div className="product-section-heading story-heading">
+            <h2>For the text you were going to type anyway.</h2>
+            <p>
+              Dictation is most useful when it disappears into normal work. Muesli does not ask you to move your writing
+              into a recorder app. It listens from the menu bar and pastes into Messages, Slack, Linear, Notion, Google
+              Docs, email, terminals, issue trackers, or wherever the cursor is waiting.
+            </p>
+          </div>
+          <figure className="story-visual">
+            <img src={solarpunkDictationUrl} alt="A warm greenhouse workspace with a laptop and a blurred person nearby, suggesting natural local dictation" />
+            <figcaption>
+              <span>local speech layer</span>
+              <strong>voice in, text out, no hosted STT detour</strong>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div className="dictation-step-grid">
+          {dictationSteps.map((step) => {
+            const Icon = step.icon;
+            return (
+              <article className="dictation-step" key={step.title}>
+                <Icon size={22} />
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="product-section dictation-proof-section">
+        <div className="dictation-proof-card">
+          <h2>Speech is a little too personal to treat like a generic upload.</h2>
+          <p>
+            A cloud dictation product can be convenient, but the security tradeoff is real: your voice leaves the
+            machine before it becomes text, and every extra service in that path becomes another place to secure,
+            audit, and trust. Muesli is designed for the opposite default. The dictation path runs locally, then uses
+            macOS accessibility and paste behavior to put the result back into your current app.
+          </p>
+          <div className="dictation-note-list">
+            {dictationNotes.map((note) => (
+              <article key={note.title}>
+                <h3>{note.title}</h3>
+                <p>{note.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="product-section dictation-models-section">
+        <div>
+          <h2>Fast when you want fast. Flexible when you need a different model.</h2>
+          <p>
+            The recommended path is Parakeet on the Apple Neural Engine for quick dictation. Muesli also supports
+            Whisper and Qwen3 ASR options for people who care more about a particular language, model family, or
+            accuracy tradeoff than raw speed.
+          </p>
+        </div>
+        <div className="model-table" role="table" aria-label="Muesli dictation model options">
+          {dictationModels.map(([model, fit, runtime, latency]) => (
+            <div className="model-row" role="row" key={model}>
+              <strong>{model}</strong>
+              <span>{fit}</span>
+              <span>{runtime}</span>
+              <b>{latency}</b>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="product-section dictation-faq-section">
+        <div className="dictation-faq-heading">
+          <h2>What “on-device” means here.</h2>
+          <p>Short answers for the parts people usually want clarified before trusting dictation software.</p>
+        </div>
+        <div className="faq-list dictation-faq-list">
+          {dictationFaqItems.map((item, index) => (
+            <details className="faq-item" open={index === 0} key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="product-bottom-cta">
+        <img src={iconUrl} alt="" />
+        <h2>Try local-first dictation before renting another speech pipeline.</h2>
+        <p>Open-source, Mac-native, and built for people who would rather keep their voice close.</p>
+        <a className="primary-cta" href={downloadUrl}>
+          <span className="apple-mark" aria-hidden="true"></span>
+          Download Muesli
+        </a>
+      </section>
+    </main>
+  );
+}
+
+function MeetingNotesPage() {
+  useEffect(() => {
+    const meta = routeMeta['/meeting-notes'];
+    document.title = meta.title;
+    setCanonicalUrl('/meeting-notes');
+  }, []);
+
+  const meetingStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'SoftwareApplication',
+        '@id': 'https://muesli.works/meeting-notes#software',
+        name: 'Muesli',
+        applicationCategory: 'ProductivityApplication',
+        operatingSystem: 'macOS',
+        softwareRequirements: 'Apple Silicon Mac',
+        url: 'https://muesli.works/meeting-notes',
+        downloadUrl: 'https://muesli.works/download/',
+        codeRepository: 'https://github.com/pHequals7/muesli',
+        description: 'Muesli is a local-first Mac app for meeting transcription and AI meeting notes without inviting a meeting bot.',
+        featureList: [
+          'AI meeting notes without a meeting bot',
+          'Local meeting transcription on Apple Silicon',
+          'Microphone and system audio capture from your Mac',
+          'Speaker diarization and structured meeting notes',
+          'Markdown and PDF meeting export',
+          'Optional Google Calendar meeting detection',
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://muesli.works/meeting-notes#faq',
+        mainEntity: meetingFaqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
+
+  return (
+    <main className="product-page meeting-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(meetingStructuredData) }}
+      />
+      <ProductPageNav />
+
+      <section className="product-hero meeting-hero">
+        <img className="product-hero-bg" src={solarpunkMeetingNotesUrl} alt="" aria-hidden="true" />
+        <div className="product-hero-copy">
+          <h1>Only Notes. No uninvited bots.</h1>
+          <p className="lede">
+            Muesli records from your own Mac, captures microphone and computer audio, and turns the transcript into
+            meeting notes you can actually review. The meeting does not need another participant named “AI Notetaker.”
+          </p>
+          <div className="cta-row">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
+              <Github size={18} />
+              Read the source
+            </a>
+          </div>
+        </div>
+
+        <figure className="meeting-hero-card">
+          <img src={solarpunkMeetingNotesUrl} alt="A warm solarpunk meeting workspace with notebooks, a laptop, and blurred people at the table" />
+          <figcaption className="meeting-listening-pill" aria-label="Muesli is listening to this meeting">
+            <img src={iconUrl} alt="" />
+            <span className="meeting-listening-wave" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+              <i />
+              <i />
+              <i />
+            </span>
+            <span className="meeting-stop-indicator" aria-hidden="true" />
+          </figcaption>
+        </figure>
+      </section>
+
+      <section className="dictation-answer-strip meeting-answer-strip" aria-label="Muesli meeting notes summary">
+        {meetingAnswerCards.map((card) => (
+          <article key={card.title}>
+            <h2>{card.title}</h2>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="product-section product-section-tight">
+        <div className="product-story-grid meeting-story-grid">
+          <div className="product-section-heading story-heading meeting-story-heading">
+            <h2>Most meeting notes should begin with a transcript you control.</h2>
+            <p>
+              A summary is only useful if you can check it. Muesli keeps the raw meeting record close: what you said,
+              what came through your speakers, and the notes generated from that transcript. Use it for standups,
+              customer calls, research chats, interviews, or the messy internal meeting where the real decisions happen.
+            </p>
+          </div>
+
+          <aside className="meeting-evidence-card" aria-label="Muesli meeting notes workflow">
+            <h3>Keep the source material close, then let AI help with the shape.</h3>
+            <p>
+              The useful thing is not a beautiful summary by itself. It is a reviewable record of the call: microphone,
+              system audio, transcript, then notes. Muesli keeps those layers visible instead of asking you to trust a
+              black-box recap.
+            </p>
+            <div className="meeting-evidence-list">
+              <article>
+                <span>01</span>
+                <strong>Capture</strong>
+                <p>Record your voice and the call audio from your own Mac.</p>
+              </article>
+              <article>
+                <span>02</span>
+                <strong>Review</strong>
+                <p>Use the transcript as the source when names, decisions, or wording matter.</p>
+              </article>
+              <article>
+                <span>03</span>
+                <strong>Export</strong>
+                <p>Save notes, transcript, or the full meeting as Markdown or PDF.</p>
+              </article>
+            </div>
+          </aside>
+        </div>
+
+        <div className="dictation-step-grid">
+          {meetingSteps.map((step) => {
+            const Icon = step.icon;
+            return (
+              <article className="dictation-step meeting-step" key={step.title}>
+                <Icon size={22} />
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="product-section dictation-proof-section meeting-proof-section">
+        <div className="dictation-proof-card">
+          <h2>Meeting memory should not require renting another attendee.</h2>
+          <p>
+            Bot-based notetakers are convenient until the room changes because they are there. Muesli takes a quieter
+            route: record from the machine you control, keep the transcript reviewable, and use summaries as a layer
+            on top of the source material rather than a replacement for it.
+          </p>
+          <div className="dictation-note-list">
+            {meetingNotes.map((note) => (
+              <article key={note.title}>
+                <h3>{note.title}</h3>
+                <p>{note.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="product-section dictation-models-section meeting-export-section">
+        <div>
+          <h2>Keep the notes useful, but keep the source nearby.</h2>
+          <p>
+            Muesli can generate structured meeting notes, action items, and summaries, then export them as PDF or
+            Markdown. If the wording matters, jump back to the transcript before treating the notes as the record.
+          </p>
+        </div>
+        <div className="meeting-export-list" aria-label="Muesli meeting note outputs">
+          <article>
+            <span>01</span>
+            <h3>Notes</h3>
+            <p>Clean summary, decisions, action items, and follow-ups.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Transcript</h3>
+            <p>The raw meeting text stays available for review and correction.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Export</h3>
+            <p>Save notes, transcript, or the full meeting as Markdown or PDF.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="product-section dictation-faq-section">
+        <div className="dictation-faq-heading">
+          <h2>What “without a bot” means here.</h2>
+          <p>Short answers for the parts people usually want clear before trusting meeting notes software.</p>
+        </div>
+        <div className="faq-list dictation-faq-list">
+          {meetingFaqItems.map((item, index) => (
+            <details className="faq-item" open={index === 0} key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="product-bottom-cta meeting-bottom-cta">
+        <img src={iconUrl} alt="" />
+        <h2>Try meeting notes that do not enter the room before you do.</h2>
+        <p>Mac-native, local-first, and built around a transcript you can inspect.</p>
+        <a className="primary-cta" href={downloadUrl}>
+          <span className="apple-mark" aria-hidden="true"></span>
+          Download Muesli
+        </a>
+      </section>
     </main>
   );
 }
@@ -825,8 +1500,8 @@ function LandingPage() {
       <section className="feature-band">
         {featureRows.map((feature) => {
           const Icon = feature.icon;
-          return (
-            <article className="feature" key={feature.title}>
+          const content = (
+            <>
               <Icon size={22} />
               <h3>{feature.title}</h3>
               <p>{feature.body}</p>
@@ -850,6 +1525,26 @@ function LandingPage() {
                   ))}
                 </div>
               )}
+              {feature.linkLabel && (
+                <span className="feature-link-label">
+                  {feature.linkLabel}
+                  <ArrowRight size={16} aria-hidden="true" />
+                </span>
+              )}
+            </>
+          );
+
+          if (feature.href) {
+            return (
+              <a className="feature feature-link" href={feature.href} key={feature.title}>
+                {content}
+              </a>
+            );
+          }
+
+          return (
+            <article className="feature" key={feature.title}>
+              {content}
             </article>
           );
         })}
@@ -1132,6 +1827,14 @@ export function App({ pathname = '/' }) {
 
   if (legalKey) {
     return <LegalPage page={legalPages[legalKey]} path={path} />;
+  }
+
+  if (path === '/on-device-dictation') {
+    return <OnDeviceDictationPage />;
+  }
+
+  if (path === '/meeting-notes') {
+    return <MeetingNotesPage />;
   }
 
   return <LandingPage />;
