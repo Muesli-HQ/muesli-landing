@@ -486,6 +486,19 @@ const legalPages = {
   },
 };
 
+function setCanonicalUrl(path = '/') {
+  const canonical = `https://muesli.works${path === '/' ? '/' : path}`;
+  let link = document.querySelector('link[rel="canonical"]');
+
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'canonical';
+    document.head.appendChild(link);
+  }
+
+  link.href = canonical;
+}
+
 function PixelGarden() {
   return (
     <div className="pixel-garden" aria-label="Animated local speech workflow with a laptop and floating Muesli capture icon">
@@ -556,6 +569,7 @@ function PixelGarden() {
 function LegalPage({ page }) {
   useEffect(() => {
     document.title = `${page.title} · Muesli`;
+    setCanonicalUrl(page.title === 'Privacy Policy' ? '/privacy' : '/terms');
   }, [page.title]);
 
   return (
@@ -606,6 +620,11 @@ function LandingPage() {
   const [brewCopied, setBrewCopied] = useState(false);
   const [releases, setReleases] = useState([]);
   const [releaseStatus, setReleaseStatus] = useState('loading');
+
+  useEffect(() => {
+    document.title = 'Muesli - speak, and keep your notes close';
+    setCanonicalUrl('/');
+  }, []);
 
   useEffect(() => {
     fetch('https://api.github.com/repos/pHequals7/muesli')

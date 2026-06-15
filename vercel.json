@@ -1,6 +1,19 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": null,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.muesli.works"
+        }
+      ],
+      "destination": "https://muesli.works/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/privacy",
