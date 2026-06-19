@@ -4,6 +4,7 @@ import {
   ArrowRight,
   BotOff,
   CalendarDays,
+  ChevronDown,
   Clipboard,
   ClipboardCheck,
   CloudOff,
@@ -1722,7 +1723,17 @@ function LandingPage() {
           <span>muesli</span>
         </a>
         <div className="nav-links">
-          <a href="#notes">Notes</a>
+          <details className="nav-feature-menu">
+            <summary>
+              Features
+              <ChevronDown size={15} aria-hidden="true" />
+            </summary>
+            <div className="nav-dropdown">
+              <a href="/on-device-dictation/">On-device Dictation</a>
+              <a href="/meeting-notes/">Meeting Notes</a>
+              <a href="/local-first-ai/">Local-first AI</a>
+            </div>
+          </details>
           <a href="#privacy">Privacy</a>
           <a href="#changelog">Changelog</a>
           <a href="#faq">FAQ</a>
