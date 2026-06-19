@@ -54,10 +54,11 @@ import blinkitLogoSvg from './assets/company-wordmarks/blinkit.svg?raw';
 import kalaariLogoUrl from './assets/company-wordmarks/kalaari.png';
 import datadogLogoUrl from './assets/company-wordmarks/datadog.png';
 import razorpayLogoUrl from './assets/company-wordmarks/razorpay.png';
+import { changelogLinks, sameAsLinks, siteData, supportFaqItems } from './siteData.js';
 
 const downloadUrl = '/download/';
-const brewCommand = 'brew tap pHequals7/muesli && brew install --cask muesli';
-const githubReleasesUrl = 'https://github.com/pHequals7/muesli/releases';
+const brewCommand = siteData.homebrewCommand;
+const githubReleasesUrl = siteData.releasesUrl;
 const githubReleasesApiUrl = 'https://api.github.com/repos/pHequals7/muesli/releases';
 
 function formatStars(count) {
@@ -151,6 +152,160 @@ function normalizeRelease(release) {
     summary: parsed.summary,
     sections: parsed.sections,
   };
+}
+
+function useStableReleases() {
+  const [releases, setReleases] = useState([]);
+  const [releaseStatus, setReleaseStatus] = useState('loading');
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadReleases() {
+      try {
+        const collected = [];
+
+        for (let page = 1; page <= 5; page += 1) {
+          const response = await fetch(`${githubReleasesApiUrl}?per_page=100&page=${page}`, {
+            headers: { Accept: 'application/vnd.github+json' },
+          });
+
+          if (!response.ok) throw new Error('Unable to load releases');
+
+          const pageItems = await response.json();
+          collected.push(...pageItems);
+          if (pageItems.length < 100) break;
+        }
+
+        if (!isMounted) return;
+
+        setReleases(
+          collected
+            .filter((release) => !release.draft && !release.prerelease && !/alpha|preprod|pre-release|prerelease/i.test(`${release.tag_name} ${release.name}`))
+            .map(normalizeRelease)
+        );
+        setReleaseStatus('ready');
+      } catch {
+        if (!isMounted) return;
+        setReleaseStatus('error');
+      }
+    }
+
+    loadReleases();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return { releases, releaseStatus };
+}
+
+function ReleaseFeed({ releases, releaseStatus, maxVisible = 3 }) {
+  const visibleReleases = releases.slice(0, maxVisible);
+  const latestRelease = visibleReleases[0];
+  const olderReleaseCount = Math.max(releases.length - visibleReleases.length, 0);
+
+  if (releaseStatus === 'loading') {
+    return (
+      <div className="changelog-shell changelog-loading" aria-live="polite">
+        <span />
+        <strong>Loading releases from GitHub...</strong>
+        <p>Fetching the current release history for pHequals7/muesli.</p>
+      </div>
+    );
+  }
+
+  if (releaseStatus === 'error') {
+    return (
+      <div className="changelog-shell changelog-error">
+        <strong>Couldn’t load the release feed.</strong>
+        <p>GitHub may be rate-limiting this browser. The canonical changelog is still available on GitHub.</p>
+        <a href={githubReleasesUrl} target="_blank" rel="noreferrer">Open GitHub Releases</a>
+      </div>
+    );
+  }
+
+  if (!latestRelease) {
+    return (
+      <div className="changelog-shell changelog-error">
+        <strong>No stable releases found.</strong>
+        <p>The canonical changelog is available on GitHub Releases.</p>
+        <a href={githubReleasesUrl} target="_blank" rel="noreferrer">Open GitHub Releases</a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="changelog-grid">
+      <article className="latest-release">
+        <div className="release-meta">
+          <span>Latest stable</span>
+          <b>{latestRelease.date}</b>
+        </div>
+        <h3>{latestRelease.title}</h3>
+        <p>{latestRelease.summary || 'The newest public Muesli build is available from GitHub Releases.'}</p>
+        {latestRelease.sections[0]?.bullets?.length > 0 && (
+          <ul>
+            {latestRelease.sections[0].bullets.slice(0, 4).map((item, itemIndex) => (
+              <li key={`${latestRelease.id}-latest-${itemIndex}`}>{item}</li>
+            ))}
+          </ul>
+        )}
+        <div className="release-actions">
+          <a href={latestRelease.htmlUrl} target="_blank" rel="noreferrer">Release notes</a>
+          {latestRelease.downloadUrl && (
+            <a href={latestRelease.downloadUrl}>Download DMG</a>
+          )}
+        </div>
+      </article>
+
+      <div className="release-timeline" aria-label="GitHub release history">
+        <div className="timeline-topline">
+          <span>Latest {visibleReleases.length} releases</span>
+          <a href={githubReleasesUrl} target="_blank" rel="noreferrer">View on GitHub</a>
+        </div>
+        {visibleReleases.map((release, index) => (
+          <details className="release-item" key={release.id} open={index === 0}>
+            <summary>
+              <span className="release-dot" />
+              <span className="release-title">
+                <strong>{release.title}</strong>
+                <small>{release.date}</small>
+              </span>
+              <span className="release-badge">stable</span>
+            </summary>
+            <div className="release-body">
+              {release.summary && <p>{release.summary}</p>}
+              {release.sections.length > 0 ? (
+                release.sections.map((section, sectionIndex) => (
+                  <div className="release-section" key={`${release.id}-${section.title}-${sectionIndex}`}>
+                    <h4>{section.title}</h4>
+                    <ul>
+                      {section.bullets.map((item, itemIndex) => (
+                        <li key={`${release.id}-${sectionIndex}-${itemIndex}`}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <p>GitHub release notes are available for this build.</p>
+              )}
+              <a className="release-link" href={release.htmlUrl} target="_blank" rel="noreferrer">
+                Open full release
+              </a>
+            </div>
+          </details>
+        ))}
+        {olderReleaseCount > 0 && (
+          <a className="older-releases-link" href={githubReleasesUrl} target="_blank" rel="noreferrer">
+            <span>{olderReleaseCount} older stable releases</span>
+            <strong>Open GitHub Releases</strong>
+          </a>
+        )}
+      </div>
+    </div>
+  );
 }
 
 const featureRows = [
@@ -448,71 +603,7 @@ const tweetTestimonials = [
   'https://twitter.com/arcane_bloom/status/2036775141351547080',
 ];
 
-const faqItems = [
-  {
-    question: 'App won’t open?',
-    answer: (
-      <>
-        If macOS says Muesli is damaged, open <strong>System Settings → Privacy & Security</strong>,
-        scroll down, and click <strong>Open Anyway</strong>. If that still doesn’t clear it, run:
-        <span className="command-row">
-          <code>sudo xattr -cr /Applications/Muesli.app</code>
-        </span>
-      </>
-    ),
-  },
-  {
-    question: 'Why isn’t my transcription pasting into the input box?',
-    answer: (
-      <>
-        Usually this means Accessibility access is missing, stale, or attached to the wrong copy of Muesli.
-        Open <strong>System Settings → Privacy & Security → Accessibility</strong>, make sure <strong>Muesli</strong> is enabled,
-        then quit and reopen it from <strong>/Applications</strong>. If it still fails, remove Muesli from Accessibility,
-        add it back, and relaunch.
-      </>
-    ),
-  },
-  {
-    question: 'Why doesn’t the hotkey start dictation?',
-    answer: (
-      <>
-        The global hotkey depends on <strong>Input Monitoring</strong>. Open <strong>System Settings → Privacy & Security → Input Monitoring</strong>,
-        confirm Muesli is allowed, then relaunch the app from <strong>/Applications</strong>. If you changed the shortcut in Settings,
-        make sure you’re using the configured key instead of assuming the default.
-      </>
-    ),
-  },
-  {
-    question: 'Why did Muesli stop working after an update or reinstall?',
-    answer: (
-      <>
-        macOS permissions are tied to a specific installed app path and signature. If you launch Muesli from Downloads,
-        Desktop, or an older duplicate copy, paste and hotkey permissions can silently stop working. Keep one copy in
-        <strong> /Applications</strong>, delete duplicates, then re-grant Accessibility and Input Monitoring if needed.
-      </>
-    ),
-  },
-  {
-    question: 'Why is meeting recording failing or missing system audio?',
-    answer: (
-      <>
-        Muesli needs <strong>Screen Recording</strong> or <strong>Screen & System Audio Recording</strong> permission for meeting capture.
-        Open <strong>System Settings → Privacy & Security</strong>, enable Muesli under the relevant recording pane,
-        then relaunch. If microphone transcription works but meeting capture doesn’t, this is usually the missing permission.
-      </>
-    ),
-  },
-  {
-    question: 'Why isn’t Muesli showing upcoming meetings?',
-    answer: (
-      <>
-        Upcoming meetings come from local macOS Calendar access, Google Calendar, or both. If the list is empty, first check
-        Calendar permission. If you rely on Google Calendar, reconnect it in Settings and wait for the next refresh. If you use both,
-        Muesli deduplicates matching events, so you should still only see one entry per meeting.
-      </>
-    ),
-  },
-];
+const faqItems = supportFaqItems;
 
 const workflow = [
   'Speak in the flow of work',
@@ -720,40 +811,9 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/meeting-notes', '/local-first-ai'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
-export const routeMeta = {
-  '/': {
-    title: 'Muesli - speak, and keep your notes close',
-    canonical: 'https://muesli.works/',
-    description: 'Muesli is a local-first Mac app for dictation, meeting notes, and private speech-to-text.',
-  },
-  '/privacy': {
-    title: 'Privacy Policy · Muesli',
-    canonical: 'https://muesli.works/privacy',
-    description: 'Privacy policy for Muesli, a local-first macOS app for on-device dictation and meeting transcription.',
-  },
-  '/terms': {
-    title: 'Terms of Service · Muesli',
-    canonical: 'https://muesli.works/terms',
-    description: 'Terms of Service for Muesli, a local-first macOS app for dictation, meeting transcription, and private meeting notes.',
-  },
-  '/on-device-dictation': {
-    title: 'On-device dictation for Mac · Muesli',
-    canonical: 'https://muesli.works/on-device-dictation',
-    description: 'Muesli is an open-source Mac dictation app and private cloud dictation alternative that runs speech-to-text locally on Apple Silicon.',
-  },
-  '/meeting-notes': {
-    title: 'AI meeting notes without a bot · Muesli',
-    canonical: 'https://muesli.works/meeting-notes',
-    description: 'Muesli captures private meeting notes on Mac without a meeting bot. Local transcription runs on-device, with optional AI summaries and exports.',
-  },
-  '/local-first-ai': {
-    title: 'Local-first AI for Mac · Muesli',
-    canonical: 'https://muesli.works/local-first-ai',
-    description: 'Muesli is a local-first AI Mac app for private dictation and meeting transcription, with on-device speech-to-text and open-source design.',
-  },
-};
+export const routeMeta = siteData.routes;
 
 function normalizePath(pathname = '/') {
   const path = pathname.replace(/\/+$/, '') || '/';
@@ -775,6 +835,113 @@ function setCanonicalUrl(path = '/') {
   }
 
   link.href = canonical;
+}
+
+function JsonLd({ data }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+function pageSchema(path, type = 'WebPage') {
+  const meta = routeMeta[path] || routeMeta['/'];
+  return {
+    '@type': type,
+    '@id': `${meta.canonical}#webpage`,
+    url: meta.canonical,
+    name: meta.title,
+    description: meta.description,
+    isPartOf: { '@id': `${siteData.siteUrl}/#website` },
+  };
+}
+
+function organizationSchema() {
+  return {
+    '@type': 'Organization',
+    '@id': `${siteData.siteUrl}/#organization`,
+    name: siteData.name,
+    legalName: siteData.legalName,
+    url: siteData.siteUrl,
+    logo: siteData.logoUrl,
+    sameAs: sameAsLinks,
+  };
+}
+
+function softwareSchema(path = '/') {
+  const meta = routeMeta[path] || routeMeta['/'];
+  return {
+    '@type': 'SoftwareApplication',
+    '@id': `${siteData.siteUrl}/#software`,
+    name: siteData.name,
+    applicationCategory: siteData.applicationCategory,
+    operatingSystem: siteData.operatingSystem,
+    softwareRequirements: siteData.softwareRequirements,
+    url: meta.canonical,
+    downloadUrl: siteData.downloadUrl,
+    codeRepository: siteData.repositoryUrl,
+    image: siteData.ogImageUrl,
+    description: meta.description,
+    featureList: siteData.keyFacts,
+    publisher: { '@id': `${siteData.siteUrl}/#organization` },
+  };
+}
+
+function breadcrumbSchema(items) {
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': `${items[items.length - 1].url}#breadcrumb`,
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+function faqSchema(path, items) {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${routeMeta[path].canonical}#faq`,
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.command ? `${item.answer} Command: ${item.command}` : item.answer,
+      },
+    })),
+  };
+}
+
+function baseStructuredData(path, extras = []) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationSchema(),
+      {
+        '@type': 'WebSite',
+        '@id': `${siteData.siteUrl}/#website`,
+        url: `${siteData.siteUrl}/`,
+        name: siteData.name,
+        description: siteData.description,
+        publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      },
+      softwareSchema(path),
+      pageSchema(path),
+      ...extras,
+    ],
+  };
+}
+
+function pageBreadcrumb(path, name) {
+  return breadcrumbSchema([
+    { name: 'Muesli', url: `${siteData.siteUrl}/` },
+    { name, url: routeMeta[path].canonical },
+  ]);
 }
 
 function PixelGarden() {
@@ -867,8 +1034,13 @@ function LegalPage({ page, path }) {
     setCanonicalUrl(path);
   }, [page.title, path]);
 
+  const structuredData = baseStructuredData(path, [
+    pageBreadcrumb(path, page.title),
+  ]);
+
   return (
     <main className="legal-page">
+      <JsonLd data={structuredData} />
       <nav className="legal-nav">
         <a className="brand" href="/" aria-label="Muesli home">
           <img src={iconUrl} alt="" />
@@ -910,6 +1082,125 @@ function LegalPage({ page, path }) {
   );
 }
 
+function SupportAnswer({ item }) {
+  return (
+    <>
+      <p>{item.answer}</p>
+      {item.command && (
+        <span className="command-row">
+          <code>{item.command}</code>
+        </span>
+      )}
+    </>
+  );
+}
+
+function HelpPage() {
+  useEffect(() => {
+    const meta = routeMeta['/help'];
+    document.title = meta.title;
+    setCanonicalUrl('/help');
+  }, []);
+
+  const structuredData = baseStructuredData('/help', [
+    pageBreadcrumb('/help', 'Help and troubleshooting'),
+    faqSchema('/help', supportFaqItems),
+  ]);
+
+  return (
+    <main className="legal-page utility-page">
+      <JsonLd data={structuredData} />
+      <nav className="legal-nav">
+        <a className="brand" href="/" aria-label="Muesli home">
+          <img src={iconUrl} alt="" />
+          <span>muesli</span>
+        </a>
+        <a className="legal-back" href="/">
+          <ArrowLeft size={17} />
+          Back to muesli.works
+        </a>
+      </nav>
+
+      <article className="legal-document">
+        <h1>Help and troubleshooting</h1>
+        <p className="legal-intro">
+          Fix common Muesli setup issues around macOS permissions, paste behavior, hotkeys, meeting audio,
+          calendar events, and app installation.
+        </p>
+
+        {supportFaqItems.map((item) => (
+          <section className="legal-section" key={item.question}>
+            <h2>{item.question}</h2>
+            <SupportAnswer item={item} />
+          </section>
+        ))}
+      </article>
+
+      <footer className="legal-footer">
+        <span>Still stuck? The project is open source.</span>
+        <a href={siteData.repositoryUrl} target="_blank" rel="noreferrer">Open GitHub</a>
+      </footer>
+    </main>
+  );
+}
+
+function ChangelogPage() {
+  const { releases, releaseStatus } = useStableReleases();
+
+  useEffect(() => {
+    const meta = routeMeta['/changelog'];
+    document.title = meta.title;
+    setCanonicalUrl('/changelog');
+  }, []);
+
+  const structuredData = baseStructuredData('/changelog', [
+    pageBreadcrumb('/changelog', 'Changelog'),
+  ]);
+
+  return (
+    <main className="legal-page utility-page">
+      <JsonLd data={structuredData} />
+      <nav className="legal-nav">
+        <a className="brand" href="/" aria-label="Muesli home">
+          <img src={iconUrl} alt="" />
+          <span>muesli</span>
+        </a>
+        <a className="legal-back" href="/">
+          <ArrowLeft size={17} />
+          Back to muesli.works
+        </a>
+      </nav>
+
+      <article className="legal-document">
+        <h1>Changelog</h1>
+        <p className="legal-intro">
+          Muesli ships in public. Stable release notes and macOS downloads are published through GitHub Releases,
+          where each production build has its canonical notes and DMG assets.
+        </p>
+
+        <div className="utility-changelog-feed">
+          <ReleaseFeed releases={releases} releaseStatus={releaseStatus} maxVisible={6} />
+        </div>
+
+        {changelogLinks.map((link) => (
+          <section className="legal-section" key={link.title}>
+            <h2>{link.title}</h2>
+            <p>{link.body}</p>
+            <p>
+              <a href={link.url} target="_blank" rel="noreferrer">{link.url}</a>
+            </p>
+          </section>
+        ))}
+      </article>
+
+      <footer className="legal-footer">
+        <span>Prefer the latest build?</span>
+        <a href={siteData.latestReleaseUrl} target="_blank" rel="noreferrer">Open latest release</a>
+      </footer>
+    </main>
+  );
+}
+
 function ProductPageNav() {
   return (
     <nav className="product-nav">
@@ -920,7 +1211,7 @@ function ProductPageNav() {
       <div className="product-nav-links">
         <a href="/#notes">Product</a>
         <a href="/#privacy">Privacy</a>
-        <a href="/#changelog">Releases</a>
+        <a href="/changelog">Releases</a>
         <a className="product-nav-cta" href={downloadUrl}>
           <Download size={17} />
           Download
@@ -937,49 +1228,14 @@ function OnDeviceDictationPage() {
     setCanonicalUrl('/on-device-dictation');
   }, []);
 
-  const dictationStructuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'SoftwareApplication',
-        '@id': 'https://muesli.works/on-device-dictation#software',
-        name: 'Muesli',
-        applicationCategory: 'ProductivityApplication',
-        operatingSystem: 'macOS',
-        softwareRequirements: 'Apple Silicon Mac',
-        url: 'https://muesli.works/on-device-dictation',
-        downloadUrl: 'https://muesli.works/download/',
-        codeRepository: 'https://github.com/pHequals7/muesli',
-        description: 'Muesli is an open-source Mac dictation app that runs speech-to-text on-device using Apple Silicon and pastes clean text into the app you are already using.',
-        featureList: [
-          'On-device dictation for Mac',
-          'Local speech-to-text with CoreML and Apple Neural Engine',
-          'Hold-to-talk hotkey dictation',
-          'Private alternative to hosted cloud dictation',
-          'Optional meeting transcription and meeting notes',
-        ],
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': 'https://muesli.works/on-device-dictation#faq',
-        mainEntity: dictationFaqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer,
-          },
-        })),
-      },
-    ],
-  };
+  const dictationStructuredData = baseStructuredData('/on-device-dictation', [
+    pageBreadcrumb('/on-device-dictation', 'On-device Dictation'),
+    faqSchema('/on-device-dictation', dictationFaqItems),
+  ]);
 
   return (
     <main className="product-page dictation-page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(dictationStructuredData) }}
-      />
+      <JsonLd data={dictationStructuredData} />
       <ProductPageNav />
 
       <section className="product-hero">
@@ -1190,50 +1446,14 @@ function MeetingNotesPage() {
     setCanonicalUrl('/meeting-notes');
   }, []);
 
-  const meetingStructuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'SoftwareApplication',
-        '@id': 'https://muesli.works/meeting-notes#software',
-        name: 'Muesli',
-        applicationCategory: 'ProductivityApplication',
-        operatingSystem: 'macOS',
-        softwareRequirements: 'Apple Silicon Mac',
-        url: 'https://muesli.works/meeting-notes',
-        downloadUrl: 'https://muesli.works/download/',
-        codeRepository: 'https://github.com/pHequals7/muesli',
-        description: 'Muesli is a local-first Mac app for meeting transcription and AI meeting notes without inviting a meeting bot.',
-        featureList: [
-          'AI meeting notes without a meeting bot',
-          'Local meeting transcription on Apple Silicon',
-          'Microphone and system audio capture from your Mac',
-          'Speaker diarization and structured meeting notes',
-          'Markdown and PDF meeting export',
-          'Optional Google Calendar meeting detection',
-        ],
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': 'https://muesli.works/meeting-notes#faq',
-        mainEntity: meetingFaqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer,
-          },
-        })),
-      },
-    ],
-  };
+  const meetingStructuredData = baseStructuredData('/meeting-notes', [
+    pageBreadcrumb('/meeting-notes', 'Meeting Notes'),
+    faqSchema('/meeting-notes', meetingFaqItems),
+  ]);
 
   return (
     <main className="product-page meeting-page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(meetingStructuredData) }}
-      />
+      <JsonLd data={meetingStructuredData} />
       <ProductPageNav />
 
       <section className="product-hero meeting-hero">
@@ -1415,50 +1635,14 @@ function LocalFirstPage() {
     setCanonicalUrl('/local-first-ai');
   }, []);
 
-  const localFirstStructuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'SoftwareApplication',
-        '@id': 'https://muesli.works/local-first-ai#software',
-        name: 'Muesli',
-        applicationCategory: 'ProductivityApplication',
-        operatingSystem: 'macOS',
-        softwareRequirements: 'Apple Silicon Mac',
-        url: 'https://muesli.works/local-first-ai',
-        downloadUrl: 'https://muesli.works/download/',
-        codeRepository: 'https://github.com/pHequals7/muesli',
-        description: 'Muesli is a local-first AI Mac app for private dictation and meeting transcription with on-device speech-to-text.',
-        featureList: [
-          'Local-first AI for Mac',
-          'On-device speech-to-text',
-          'Open-source macOS app',
-          'Private dictation and meeting transcription',
-          'CoreML and Apple Neural Engine support',
-          'Optional cloud summaries and integrations',
-        ],
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': 'https://muesli.works/local-first-ai#faq',
-        mainEntity: localFirstFaqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer,
-          },
-        })),
-      },
-    ],
-  };
+  const localFirstStructuredData = baseStructuredData('/local-first-ai', [
+    pageBreadcrumb('/local-first-ai', 'Local-first AI'),
+    faqSchema('/local-first-ai', localFirstFaqItems),
+  ]);
 
   return (
     <main className="product-page local-first-page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localFirstStructuredData) }}
-      />
+      <JsonLd data={localFirstStructuredData} />
       <ProductPageNav />
 
       <section className="product-hero local-first-hero">
@@ -1615,8 +1799,7 @@ function LocalFirstPage() {
 function LandingPage() {
   const [stars, setStars] = useState(157);
   const [brewCopied, setBrewCopied] = useState(false);
-  const [releases, setReleases] = useState([]);
-  const [releaseStatus, setReleaseStatus] = useState('loading');
+  const { releases, releaseStatus } = useStableReleases();
 
   useEffect(() => {
     document.title = 'Muesli - speak, and keep your notes close';
@@ -1630,46 +1813,6 @@ function LandingPage() {
         if (data?.stargazers_count != null) setStars(data.stargazers_count);
       })
       .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    async function loadReleases() {
-      try {
-        const collected = [];
-
-        for (let page = 1; page <= 5; page += 1) {
-          const response = await fetch(`${githubReleasesApiUrl}?per_page=100&page=${page}`, {
-            headers: { Accept: 'application/vnd.github+json' },
-          });
-
-          if (!response.ok) throw new Error('Unable to load releases');
-
-          const pageItems = await response.json();
-          collected.push(...pageItems);
-          if (pageItems.length < 100) break;
-        }
-
-        if (!isMounted) return;
-
-        setReleases(
-          collected
-            .filter((release) => !release.draft && !release.prerelease && !/alpha|preprod|pre-release|prerelease/i.test(`${release.tag_name} ${release.name}`))
-            .map(normalizeRelease)
-        );
-        setReleaseStatus('ready');
-      } catch {
-        if (!isMounted) return;
-        setReleaseStatus('error');
-      }
-    }
-
-    loadReleases();
-
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
   useEffect(() => {
@@ -1711,12 +1854,11 @@ function LandingPage() {
     }
   }
 
-  const visibleReleases = releases.slice(0, 3);
-  const latestRelease = visibleReleases[0];
-  const olderReleaseCount = Math.max(releases.length - visibleReleases.length, 0);
+  const landingStructuredData = baseStructuredData('/');
 
   return (
     <main className="no-graphics">
+      <JsonLd data={landingStructuredData} />
       <nav className="nav">
         <a className="brand" href="#top" aria-label="Muesli home">
           <img src={iconUrl} alt="" />
@@ -1735,8 +1877,8 @@ function LandingPage() {
             </div>
           </details>
           <a href="#privacy">Privacy</a>
-          <a href="#changelog">Changelog</a>
-          <a href="#faq">FAQ</a>
+          <a href="/changelog">Changelog</a>
+          <a href="/help">Help</a>
           <a className="github-pill" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
             <Github size={17} />
             <span>Open source</span>
@@ -1992,94 +2134,7 @@ function LandingPage() {
           </p>
         </div>
 
-        {releaseStatus === 'loading' && (
-          <div className="changelog-shell changelog-loading" aria-live="polite">
-            <span />
-            <strong>Loading releases from GitHub...</strong>
-            <p>Fetching the current release history for pHequals7/muesli.</p>
-          </div>
-        )}
-
-        {releaseStatus === 'error' && (
-          <div className="changelog-shell changelog-error">
-            <strong>Couldn’t load the release feed.</strong>
-            <p>GitHub may be rate-limiting this browser. The canonical changelog is still available on GitHub.</p>
-            <a href={githubReleasesUrl} target="_blank" rel="noreferrer">Open GitHub Releases</a>
-          </div>
-        )}
-
-        {releaseStatus === 'ready' && (
-          <div className="changelog-grid">
-            {latestRelease && (
-              <article className="latest-release">
-                <div className="release-meta">
-                  <span>Latest stable</span>
-                  <b>{latestRelease.date}</b>
-                </div>
-                <h3>{latestRelease.title}</h3>
-                <p>{latestRelease.summary || 'The newest public Muesli build is available from GitHub Releases.'}</p>
-                {latestRelease.sections[0]?.bullets?.length > 0 && (
-                  <ul>
-                    {latestRelease.sections[0].bullets.slice(0, 4).map((item, itemIndex) => (
-                      <li key={`${latestRelease.id}-latest-${itemIndex}`}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-                <div className="release-actions">
-                  <a href={latestRelease.htmlUrl} target="_blank" rel="noreferrer">Release notes</a>
-                  {latestRelease.downloadUrl && (
-                    <a href={latestRelease.downloadUrl}>Download DMG</a>
-                  )}
-                </div>
-              </article>
-            )}
-
-            <div className="release-timeline" aria-label="GitHub release history">
-              <div className="timeline-topline">
-                <span>Latest {visibleReleases.length} releases</span>
-                <a href={githubReleasesUrl} target="_blank" rel="noreferrer">View on GitHub</a>
-              </div>
-              {visibleReleases.map((release, index) => (
-                <details className="release-item" key={release.id} open={index === 0}>
-                  <summary>
-                    <span className="release-dot" />
-                    <span className="release-title">
-                      <strong>{release.title}</strong>
-                      <small>{release.date}</small>
-                    </span>
-                    <span className="release-badge">stable</span>
-                  </summary>
-                  <div className="release-body">
-                    {release.summary && <p>{release.summary}</p>}
-                    {release.sections.length > 0 ? (
-                      release.sections.map((section, sectionIndex) => (
-                        <div className="release-section" key={`${release.id}-${section.title}-${sectionIndex}`}>
-                          <h4>{section.title}</h4>
-                          <ul>
-                            {section.bullets.map((item, itemIndex) => (
-                              <li key={`${release.id}-${sectionIndex}-${itemIndex}`}>{item}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))
-                    ) : (
-                      <p>GitHub release notes are available for this build.</p>
-                    )}
-                    <a className="release-link" href={release.htmlUrl} target="_blank" rel="noreferrer">
-                      Open full release
-                    </a>
-                  </div>
-                </details>
-              ))}
-              {olderReleaseCount > 0 && (
-                <a className="older-releases-link" href={githubReleasesUrl} target="_blank" rel="noreferrer">
-                  <span>{olderReleaseCount} older stable releases</span>
-                  <strong>Open GitHub Releases</strong>
-                </a>
-              )}
-            </div>
-          </div>
-        )}
+        <ReleaseFeed releases={releases} releaseStatus={releaseStatus} />
       </section>
 
       <section className="faq" id="faq">
@@ -2091,7 +2146,7 @@ function LandingPage() {
           {faqItems.map((item) => (
             <details className="faq-item" key={item.question}>
               <summary>{item.question}</summary>
-              <p>{item.answer}</p>
+              <SupportAnswer item={item} />
             </details>
           ))}
         </div>
@@ -2119,6 +2174,8 @@ function LandingPage() {
           <a href="https://github.com/pHequals7" target="_blank" rel="noreferrer">pHequals7</a>
           {' '}and 10+ contributors.
           <span className="footer-links" aria-label="Legal links">
+            <a href="/help">Help</a>
+            <a href="/changelog">Changelog</a>
             <a href="/privacy">Privacy</a>
             <a href="/terms">Terms</a>
           </span>
@@ -2138,6 +2195,14 @@ export function App({ pathname = '/' }) {
 
   if (legalKey) {
     return <LegalPage page={legalPages[legalKey]} path={path} />;
+  }
+
+  if (path === '/help') {
+    return <HelpPage />;
+  }
+
+  if (path === '/changelog') {
+    return <ChangelogPage />;
   }
 
   if (path === '/on-device-dictation') {

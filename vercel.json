@@ -44,6 +44,14 @@
     {
       "source": "/local-first-ai",
       "destination": "/local-first-ai/index.html"
+    },
+    {
+      "source": "/help",
+      "destination": "/help/index.html"
+    },
+    {
+      "source": "/changelog",
+      "destination": "/changelog/index.html"
     }
   ],
   "git": {

@@ -3533,6 +3533,12 @@ h3 {
   margin-right: auto;
 }
 
+.utility-page .legal-nav,
+.utility-page .legal-document,
+.utility-page .legal-footer {
+  width: min(1180px, 100%);
+}
+
 .legal-nav {
   display: flex;
   align-items: center;
@@ -3622,6 +3628,19 @@ h3 {
 
 .legal-section li::marker {
   color: var(--fern);
+}
+
+.utility-changelog-feed {
+  margin: 34px 0 38px;
+}
+
+.utility-page .latest-release {
+  position: relative;
+  top: auto;
+}
+
+.utility-page .latest-release h3 {
+  font-size: clamp(2rem, 4.2vw, 3.8rem);
 }
 
 .legal-footer {
