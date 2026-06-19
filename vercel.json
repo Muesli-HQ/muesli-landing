@@ -40,6 +40,10 @@
     {
       "source": "/meeting-notes",
       "destination": "/meeting-notes/index.html"
+    },
+    {
+      "source": "/local-first-ai",
+      "destination": "/local-first-ai/index.html"
     }
   ],
   "git": {

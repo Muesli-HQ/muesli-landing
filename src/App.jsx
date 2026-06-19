@@ -38,6 +38,7 @@ import presidioHeroBgUrl from './assets/presidio-laptop-hero-bg.png';
 import solarpunkBgUrl from './assets/solarpunk-speech-workspace.png';
 import solarpunkDictationUrl from './assets/solarpunk-greenhouse-dictation.png';
 import solarpunkMeetingNotesUrl from './assets/solarpunk-meeting-notes.png';
+import solarpunkLocalFirstUrl from './assets/solarpunk-local-first.png';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -173,6 +174,8 @@ const featureRows = [
     title: 'Local-first by design',
     body: 'Open-source, built for Apple Silicon, and ready for the speech models you already trust.',
     logos: true,
+    href: '/local-first-ai/',
+    linkLabel: 'Explore local-first AI',
   },
 ];
 
@@ -367,6 +370,70 @@ const meetingFaqItems = [
   {
     question: 'Are AI meeting notes always accurate?',
     answer: 'No transcript or summary system should be treated as perfect. Review the transcript and generated notes before relying on them as a record, sending them to teammates, or using them for decisions.',
+  },
+];
+
+const localFirstAnswerCards = [
+  {
+    title: 'Local-first AI for Mac',
+    body: 'Muesli treats speech-to-text as a Mac-level feature. Dictation and transcription start on your device, not in a hosted speech pipeline.',
+  },
+  {
+    title: 'Private speech-to-text by default',
+    body: 'Everyday voice input should not require uploading raw audio before it becomes text.',
+  },
+  {
+    title: 'Open-source and inspectable',
+    body: 'The app is public on GitHub, so model routing, permissions, paste behavior, and local storage choices can be inspected instead of guessed.',
+  },
+];
+
+const localFirstPrinciples = [
+  {
+    title: 'Transcribe on the device',
+    body: 'Speech-to-text should feel like part of the operating system: speak, transcribe locally, paste or save the text.',
+  },
+  {
+    title: 'Use cloud GPUs for harder work',
+    body: 'Use the cloud for heavier reasoning, summaries, downloads, and integrations. Do not use it as the default path for basic transcription.',
+  },
+  {
+    title: 'Inspectability over slogans',
+    body: '“Private” means more when the code, storage model, permissions, and integration boundaries are visible. Muesli is open-source so those claims can be checked.',
+  },
+];
+
+const localFirstStack = [
+  ['Apple Silicon', 'Runs speech models on the Mac instead of sending every utterance to a server.'],
+  ['CoreML + Neural Engine', 'Keeps supported ASR models fast and Mac-native instead of wrapping a web app.'],
+  ['Local storage', 'Dictations, transcripts, and meeting records stay in app storage on the machine.'],
+  ['Optional providers', 'Cloud summaries and integrations are explicit choices, not the default transcription path.'],
+];
+
+const localFirstFaqItems = [
+  {
+    question: 'What does local-first mean for Muesli?',
+    answer: 'It means speech-to-text runs on your Mac first. Dictation and meeting transcription start with on-device models and local app storage, not a hosted speech-to-text API.',
+  },
+  {
+    question: 'Does Muesli work without the cloud?',
+    answer: 'Normal dictation and local transcription can run after models are installed. The network is still useful for downloads, updates, calendar integrations, and optional summaries.',
+  },
+  {
+    question: 'Is Muesli open-source?',
+    answer: 'Yes. Muesli is open-source, so the app behavior, model choices, macOS permissions, and storage decisions can be inspected on GitHub.',
+  },
+  {
+    question: 'Why does local-first matter for voice?',
+    answer: 'Voice often contains names, customer details, private thoughts, and unfinished work. Basic transcription should not require sending that raw audio to another service.',
+  },
+  {
+    question: 'What data is still sent to third-party services?',
+    answer: 'Optional features can send data to services you configure, such as OpenAI, OpenRouter, ChatGPT, Google Calendar, or model/download providers. Those integrations are separate from the default local transcription path.',
+  },
+  {
+    question: 'Is Muesli a native Mac app?',
+    answer: 'Yes. Muesli is a native macOS app built for Apple Silicon, CoreML, and the Apple Neural Engine rather than an Electron wrapper around a cloud transcription service.',
   },
 ];
 
@@ -652,7 +719,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/meeting-notes'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/meeting-notes', '/local-first-ai'];
 
 export const routeMeta = {
   '/': {
@@ -679,6 +746,11 @@ export const routeMeta = {
     title: 'AI meeting notes without a bot · Muesli',
     canonical: 'https://muesli.works/meeting-notes',
     description: 'Muesli captures private meeting notes on Mac without a meeting bot. Local transcription runs on-device, with optional AI summaries and exports.',
+  },
+  '/local-first-ai': {
+    title: 'Local-first AI for Mac · Muesli',
+    canonical: 'https://muesli.works/local-first-ai',
+    description: 'Muesli is a local-first AI Mac app for private dictation and meeting transcription, with on-device speech-to-text and open-source design.',
   },
 };
 
@@ -768,6 +840,22 @@ function PixelGarden() {
         </div>
       </div>
     </div>
+  );
+}
+
+function XLogo(props) {
+  return (
+    <svg viewBox="0 0 1200 1227" aria-hidden="true" focusable="false" {...props}>
+      <path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894L144.011 79.694h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z" />
+    </svg>
+  );
+}
+
+function LinkedInLogo(props) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" {...props}>
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.85-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.119 20.452H3.554V9h3.565v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
+    </svg>
   );
 }
 
@@ -1319,6 +1407,210 @@ function MeetingNotesPage() {
   );
 }
 
+function LocalFirstPage() {
+  useEffect(() => {
+    const meta = routeMeta['/local-first-ai'];
+    document.title = meta.title;
+    setCanonicalUrl('/local-first-ai');
+  }, []);
+
+  const localFirstStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'SoftwareApplication',
+        '@id': 'https://muesli.works/local-first-ai#software',
+        name: 'Muesli',
+        applicationCategory: 'ProductivityApplication',
+        operatingSystem: 'macOS',
+        softwareRequirements: 'Apple Silicon Mac',
+        url: 'https://muesli.works/local-first-ai',
+        downloadUrl: 'https://muesli.works/download/',
+        codeRepository: 'https://github.com/pHequals7/muesli',
+        description: 'Muesli is a local-first AI Mac app for private dictation and meeting transcription with on-device speech-to-text.',
+        featureList: [
+          'Local-first AI for Mac',
+          'On-device speech-to-text',
+          'Open-source macOS app',
+          'Private dictation and meeting transcription',
+          'CoreML and Apple Neural Engine support',
+          'Optional cloud summaries and integrations',
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://muesli.works/local-first-ai#faq',
+        mainEntity: localFirstFaqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
+
+  return (
+    <main className="product-page local-first-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localFirstStructuredData) }}
+      />
+      <ProductPageNav />
+
+      <section className="product-hero local-first-hero">
+        <img className="product-hero-bg" src={solarpunkLocalFirstUrl} alt="" aria-hidden="true" />
+        <div className="product-hero-copy">
+          <h1>AI that stays on your Mac.</h1>
+          <p className="lede">
+            Muesli turns speech into text locally, so everyday dictation and meeting transcripts do not have to begin
+            with a cloud upload.
+          </p>
+          <div className="cta-row">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
+              <Github size={18} />
+              Read the source
+            </a>
+          </div>
+        </div>
+
+        <figure className="meeting-hero-card local-first-hero-card">
+          <img src={solarpunkLocalFirstUrl} alt="A warm solarpunk desk with a laptop, notebooks, plants, and small local hardware in sunlight" />
+          <figcaption className="local-compute-pill" aria-label="Muesli local compute status">
+            <HardDrive size={18} />
+            <span>local model</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section className="dictation-answer-strip local-first-answer-strip" aria-label="Muesli local-first summary">
+        {localFirstAnswerCards.map((card) => (
+          <article key={card.title}>
+            <h2>{card.title}</h2>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="product-section product-section-tight">
+        <div className="product-story-grid">
+          <div className="product-section-heading story-heading local-first-story-heading">
+            <h2>Privacy is easier when less leaves in the first place.</h2>
+            <p>
+              Speech-to-text should sit inside the device boundary. Your Mac hears the audio, transcribes it, and gives
+              you text. More complex work can still go to stronger models when you choose, but transcription should not
+              start with a cloud upload.
+            </p>
+          </div>
+
+          <aside className="local-first-machine-card" aria-label="Muesli local-first design">
+            <h3>Basic transcription should not need a server.</h3>
+            <p>
+              Cloud GPUs are useful. Put them to work on harder tasks: reasoning, long summaries, integrations, and
+              model-heavy workflows. Turning speech into text should happen on the machine already listening.
+            </p>
+            <div className="local-first-circuit">
+              <span><Mic2 size={16} /> audio</span>
+              <ArrowRight size={18} />
+              <span><Cpu size={16} /> Mac</span>
+              <ArrowRight size={18} />
+              <span><FileText size={16} /> text</span>
+            </div>
+          </aside>
+        </div>
+
+        <div className="dictation-step-grid">
+          {localFirstPrinciples.map((item, index) => {
+            const icons = [HardDrive, CloudOff, Github];
+            const Icon = icons[index];
+            return (
+              <article className="dictation-step local-first-step" key={item.title}>
+                <Icon size={22} />
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="product-section dictation-models-section local-first-stack-section">
+        <div>
+          <h2>Local transcription. Explicit connections.</h2>
+          <p>
+            Muesli is not pretending the internet does not exist. It makes the boundary clear: speech-to-text starts on
+            the Mac, storage stays local, and external providers are named parts of the workflow.
+          </p>
+        </div>
+        <div className="local-first-stack-list" aria-label="Muesli local-first architecture">
+          {localFirstStack.map(([title, body]) => (
+            <article key={title}>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="product-section dictation-proof-section">
+        <div className="dictation-proof-card local-first-proof-card">
+          <h2>Open-source is how trust is established.</h2>
+          <p>
+            A privacy claim is weak if the product is a sealed box. Muesli’s code is public, so the important details can
+            be inspected: what permissions are requested, where transcripts are stored, which model path runs, and when
+            an optional integration is allowed to send data elsewhere.
+          </p>
+          <div className="dictation-note-list">
+            <article>
+              <h3>Permissions are tied to features</h3>
+              <p>Microphone, Accessibility, Input Monitoring, Screen Recording, and Calendar each map to concrete app behavior.</p>
+            </article>
+            <article>
+              <h3>Storage is local by default</h3>
+              <p>Dictations, meetings, transcripts, and notes are kept in app storage on the Mac instead of a hosted dashboard.</p>
+            </article>
+            <article>
+              <h3>Integrations stay visible</h3>
+              <p>OpenAI, OpenRouter, ChatGPT, Google Calendar, and model downloads are optional layers, not hidden transcription defaults.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="product-section dictation-faq-section">
+        <div className="dictation-faq-heading">
+          <h2>What local-first means here.</h2>
+          <p>Short answers about Muesli’s local transcription path, optional network features, and open-source design.</p>
+        </div>
+        <div className="faq-list dictation-faq-list">
+          {localFirstFaqItems.map((item, index) => (
+            <details className="faq-item" open={index === 0} key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="product-bottom-cta">
+        <img src={iconUrl} alt="" />
+        <h2>Try speech-to-text that starts on the machine you already trust.</h2>
+        <p>Open-source, Mac-native, and designed to keep the default path close.</p>
+        <a className="primary-cta" href={downloadUrl}>
+          <span className="apple-mark" aria-hidden="true"></span>
+          Download Muesli
+        </a>
+      </section>
+    </main>
+  );
+}
+
 function LandingPage() {
   const [stars, setStars] = useState(157);
   const [brewCopied, setBrewCopied] = useState(false);
@@ -1803,6 +2095,14 @@ function LandingPage() {
           <span className="apple-mark" aria-hidden="true"></span>
           Try the Mac app
         </a>
+        <div className="social-links" aria-label="Muesli social links">
+          <a href="https://x.com/fastspeech2text" target="_blank" rel="noreferrer" aria-label="Follow Muesli on X">
+            <XLogo />
+          </a>
+          <a href="https://www.linkedin.com/company/mueslios/" target="_blank" rel="noreferrer" aria-label="Follow Muesli on LinkedIn">
+            <LinkedInLogo />
+          </a>
+        </div>
         <p className="copyright">
           © 2026 Muesli. Built with &lt;3 by{' '}
           <a href="https://github.com/pHequals7" target="_blank" rel="noreferrer">pHequals7</a>
@@ -1835,6 +2135,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/meeting-notes') {
     return <MeetingNotesPage />;
+  }
+
+  if (path === '/local-first-ai') {
+    return <LocalFirstPage />;
   }
 
   return <LandingPage />;
