@@ -45,6 +45,14 @@ export const siteData = {
       description: 'A local-first AI Mac app where speech-to-text starts on-device and optional cloud providers stay explicit.',
     },
   ],
+  guidePages: [
+    {
+      title: 'Mac Dictation App',
+      path: '/mac-dictation-app',
+      url: 'https://muesli.works/mac-dictation-app',
+      description: 'A practical guide to Mac dictation apps, local speech-to-text, offline models such as Parakeet and Whisper, and private voice typing on Apple Silicon.',
+    },
+  ],
   routes: {
     '/': {
       title: 'Muesli - speak, and keep your notes close',
@@ -65,6 +73,11 @@ export const siteData = {
       title: 'On-device dictation for Mac · Muesli',
       canonical: 'https://muesli.works/on-device-dictation',
       description: 'Muesli is an open-source Mac dictation app and private cloud dictation alternative that runs speech-to-text locally on Apple Silicon.',
+    },
+    '/mac-dictation-app': {
+      title: 'Mac dictation app for local speech-to-text · Muesli',
+      canonical: 'https://muesli.works/mac-dictation-app',
+      description: 'A practical guide to choosing a Mac dictation app for local speech-to-text, offline models such as Parakeet and Whisper, and private voice typing on Apple Silicon.',
     },
     '/meeting-notes': {
       title: 'AI meeting notes without a bot · Muesli',

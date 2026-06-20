@@ -38,6 +38,10 @@
       "destination": "/on-device-dictation/index.html"
     },
     {
+      "source": "/mac-dictation-app",
+      "destination": "/mac-dictation-app/index.html"
+    },
+    {
       "source": "/meeting-notes",
       "destination": "/meeting-notes/index.html"
     },

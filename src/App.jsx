@@ -40,6 +40,7 @@ import solarpunkBgUrl from './assets/solarpunk-speech-workspace.png';
 import solarpunkDictationUrl from './assets/solarpunk-greenhouse-dictation.png';
 import solarpunkMeetingNotesUrl from './assets/solarpunk-meeting-notes.png';
 import solarpunkLocalFirstUrl from './assets/solarpunk-local-first.png';
+import solarpunkParkSpeechLawnUrl from './assets/solarpunk-park-speech-lawn.png';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -454,6 +455,50 @@ const dictationFaqItems = [
   },
 ];
 
+const macDictationUseCases = [
+  {
+    title: 'Can I dictate notes and drafts on Mac?',
+    body: 'Capture rough thinking before it becomes too polished. Dictate into Notes, Obsidian, Notion, Google Docs, or the draft window already open on your Mac.',
+  },
+  {
+    title: 'Can I use speech-to-text for chat and email?',
+    body: 'Say the reply out loud, then edit it in place. The point is not to replace writing; it is to get the first version down faster.',
+  },
+  {
+    title: 'Can I dictate issue tickets and AI prompts?',
+    body: 'Use speech for bug reports, support replies, Linear tickets, commit notes, research prompts, or any other text field where a blank cursor slows you down.',
+  },
+];
+
+const macDictationComparisonRows = [
+  ['Built-in dictation', 'Convenient and already installed.', 'Less control over the model, workflow, and local-first behavior.'],
+  ['Cloud transcription', 'Useful when a hosted model is the right tradeoff.', 'Audio leaves the device before it becomes text.'],
+  ['Muesli', 'Offline models such as Parakeet and Whisper transcribe everyday speech locally on Apple Silicon.', 'You still need macOS permissions for the hotkey, microphone, and paste.'],
+];
+
+const macDictationFaqItems = [
+  {
+    question: 'What should I look for in a Mac dictation app?',
+    answer: 'Look for a fast capture flow, reliable paste behavior, clear macOS permissions, local model support, and an easy way to keep using the apps where you already write.',
+  },
+  {
+    question: 'Can offline models such as Parakeet and Whisper transcribe on a Mac?',
+    answer: 'Yes. Muesli can run offline speech-to-text models on Apple Silicon. Parakeet is the recommended fast path for short dictation, while Whisper is useful when you prefer that model family or its tradeoffs.',
+  },
+  {
+    question: 'Is local dictation the same as private dictation?',
+    answer: 'Local dictation is a stronger privacy default because the audio does not need to start with a cloud upload. You still need to understand app permissions, storage, optional integrations, and any services you choose to connect.',
+  },
+  {
+    question: 'Does Muesli replace Apple Dictation?',
+    answer: 'Muesli is a separate Mac app for people who want an open-source, local-first workflow with model choice, hold-to-talk capture, paste into the current app, and adjacent meeting transcription features.',
+  },
+  {
+    question: 'Does Muesli work offline?',
+    answer: 'Normal dictation can work offline after the speech model is installed. Downloads, updates, calendar integrations, and optional cloud summarization providers still require network access.',
+  },
+];
+
 const meetingSteps = [
   {
     icon: CalendarDays,
@@ -811,7 +856,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -1218,6 +1263,209 @@ function ProductPageNav() {
         </a>
       </div>
     </nav>
+  );
+}
+
+function MacDictationAppPage() {
+  useEffect(() => {
+    const meta = routeMeta['/mac-dictation-app'];
+    document.title = meta.title;
+    setCanonicalUrl('/mac-dictation-app');
+  }, []);
+
+  const macDictationStructuredData = baseStructuredData('/mac-dictation-app', [
+    pageBreadcrumb('/mac-dictation-app', 'Mac Dictation App'),
+    faqSchema('/mac-dictation-app', macDictationFaqItems),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta['/mac-dictation-app'].canonical}#article`,
+      headline: 'A Mac dictation app that keeps your speech on your Mac',
+      description: routeMeta['/mac-dictation-app'].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta['/mac-dictation-app'].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page mac-dictation-page">
+      <JsonLd data={macDictationStructuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className="seo-article-image">
+          <img src={solarpunkParkSpeechLawnUrl} alt="A solarpunk park workspace with gardens, solar structures, a laptop, and no visible human face" />
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">Mac dictation guide</div>
+          <h1>A Mac dictation app that keeps your speech on your Mac.</h1>
+          <p>
+            Dictation is most useful when it stays close to the work. Muesli turns speech into text on Apple
+            Silicon, then pastes it into the app you were already using.
+          </p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="/on-device-dictation/">
+              Read the product page
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          <p>
+            A good Mac dictation app should not feel like a recording booth. It should feel like a small speech layer
+            sitting inside the apps you already use: notes, email, chat, documents, issue trackers, browser fields,
+            and the unfinished draft you were avoiding.
+          </p>
+          <p>
+            That is the practical case for Muesli. Hold a hotkey, speak normally, release, and the cleaned text lands
+            at the cursor. For everyday dictation, offline models such as Parakeet and Whisper transcribe on the Mac
+            instead of sending each thought through a hosted speech-to-text pipeline.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>What matters</span>
+            <h2>What makes a Mac dictation app fast enough for everyday writing?</h2>
+          </div>
+          <p>
+            Many speech-to-text tools work only after you move into their editor, start a recording, copy the
+            transcript, and paste it back where the text was supposed to go. That is a high-friction path for a
+            sentence, a reply, or a half-formed paragraph.
+          </p>
+          <p>
+            Muesli is built around the shorter version: capture speech from the menu bar, transcribe locally, clean up
+            the text, and paste it into the active Mac app. The workflow is intentionally plain because dictation is
+            usually a means to an end, not the main event.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Model choice</span>
+            <h2>Can offline models such as Parakeet and Whisper transcribe well on Mac?</h2>
+          </div>
+          <p>
+            Apple Silicon changed the shape of local speech-to-text. Fast local models can handle short dictation
+            without a cloud round trip, while larger model families give people more control over accuracy, language,
+            and latency tradeoffs.
+          </p>
+          <p>
+            Muesli supports local ASR options including Parakeet, Whisper, Qwen3 ASR, and other model paths. The
+            important part is not having a long model list. It is that a Mac dictation app can choose the right local
+            model for the job instead of treating every spoken sentence as a server request.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-comparison-section">
+          <div className="seo-section-heading">
+            <span>Comparison</span>
+            <h2>Should I use Apple Dictation, cloud transcription, or Muesli?</h2>
+          </div>
+          <div className="seo-comparison-table" role="table" aria-label="Mac dictation app comparison">
+            <div className="seo-comparison-row seo-comparison-head" role="row">
+              <strong>Option</strong>
+              <strong>Where it helps</strong>
+              <strong>Tradeoff</strong>
+            </div>
+            {macDictationComparisonRows.map(([option, helps, tradeoff]) => (
+              <div className="seo-comparison-row" role="row" key={option}>
+                <strong>{option}</strong>
+                <span>{helps}</span>
+                <span>{tradeoff}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Where it fits</span>
+            <h2>Where can I use speech-to-text on my Mac?</h2>
+          </div>
+          <div className="seo-card-grid">
+            {macDictationUseCases.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Privacy</span>
+            <h2>Is local dictation more private than cloud speech-to-text?</h2>
+          </div>
+          <p>
+            The useful distinction is simple: local dictation means the normal speech-to-text path does not begin by
+            uploading audio to a hosted transcription service. That reduces the number of systems involved in turning a
+            spoken thought into text.
+          </p>
+          <p>
+            Muesli still uses normal macOS permissions. Microphone access captures speech, Input Monitoring handles
+            the hotkey, and Accessibility lets the app paste text back into the active field. Optional integrations,
+            such as cloud summarization or calendar access, are separate choices rather than the default dictation
+            path.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Beyond dictation</span>
+            <h2>Can the same Mac app handle dictation and meeting notes?</h2>
+          </div>
+          <p>
+            Muesli is not only a voice typing tool. The same app can also capture meeting audio from your Mac and keep
+            a transcript you can review. That matters because many people need both workflows: quick dictation during
+            the day, and a searchable record after calls.
+          </p>
+          <p>
+            If that is the workflow you care about, read the meeting notes page after this one. The design principle is
+            the same: capture from the machine you control, keep the source material close, and use AI as a layer on
+            top rather than a place where the record disappears.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-faq-section">
+          <div className="seo-section-heading">
+            <span>FAQ</span>
+            <h2>What do people ask before switching Mac dictation tools?</h2>
+          </div>
+          <div className="faq-list dictation-faq-list">
+            {macDictationFaqItems.map((item, index) => (
+              <details className="faq-item" open={index === 0} key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="" />
+          <div>
+            <h2>Want local dictation before adding another cloud speech service?</h2>
+            <p>Open-source, Mac-native, and built for people who want speech-to-text to start on their own machine.</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+    </main>
   );
 }
 
@@ -2207,6 +2455,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/on-device-dictation') {
     return <OnDeviceDictationPage />;
+  }
+
+  if (path === '/mac-dictation-app') {
+    return <MacDictationAppPage />;
   }
 
   if (path === '/meeting-notes') {

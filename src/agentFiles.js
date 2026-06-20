@@ -5,7 +5,7 @@ function lines(items) {
 }
 
 function pageList() {
-  return siteData.featurePages
+  return [...siteData.featurePages, ...(siteData.guidePages || [])]
     .map((page) => `- ${page.title}: ${page.url} - ${page.description}`)
     .join('\n');
 }
@@ -31,6 +31,7 @@ export function generateAgentFiles() {
     softwareRequirements: siteData.softwareRequirements,
     keyFacts: siteData.keyFacts,
     featurePages: siteData.featurePages,
+    guidePages: siteData.guidePages,
     supportFaqs: supportFaqItems,
     canonicalPages: Object.entries(siteData.routes).map(([path, meta]) => ({
       path,
