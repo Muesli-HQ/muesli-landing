@@ -64,6 +64,12 @@ export const siteData = {
       url: 'https://muesli.works/local-meeting-transcription-mac',
       description: 'A practical guide to local meeting transcription on Mac and macOS, meeting notes without a bot, and what can stay on your own computer.',
     },
+    {
+      title: 'Granola Alternative',
+      path: '/granola-alternative',
+      url: 'https://muesli.works/granola-alternative',
+      description: 'A practical Granola alternative guide for people who want local-first meeting notes, open-source software, and more ownership of their workday memory.',
+    },
   ],
   routes: {
     '/': {
@@ -100,6 +106,11 @@ export const siteData = {
       title: 'Local meeting transcription for Mac and macOS · Muesli',
       canonical: 'https://muesli.works/local-meeting-transcription-mac',
       description: 'Local meeting transcription on Mac and macOS for people who want meeting notes without a bot, with audio captured from their own computer.',
+    },
+    '/granola-alternative': {
+      title: 'Granola alternative for local-first meeting notes · Muesli',
+      canonical: 'https://muesli.works/granola-alternative',
+      description: 'A Granola alternative for people who want local-first meeting transcription, open-source software, and meeting notes they own instead of renting workday memory from the cloud.',
     },
     '/meeting-notes': {
       title: 'AI meeting notes without a bot · Muesli',

@@ -50,6 +50,10 @@
       "destination": "/local-meeting-transcription-mac/index.html"
     },
     {
+      "source": "/granola-alternative",
+      "destination": "/granola-alternative/index.html"
+    },
+    {
       "source": "/meeting-notes",
       "destination": "/meeting-notes/index.html"
     },

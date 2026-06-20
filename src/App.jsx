@@ -43,6 +43,7 @@ import solarpunkLocalFirstUrl from './assets/solarpunk-local-first.png';
 import solarpunkParkSpeechLawnUrl from './assets/solarpunk-park-speech-lawn.png';
 import solarpunkOfflineDictationUrl from './assets/solarpunk-offline-dictation.webp';
 import solarpunkLocalMeetingTranscriptionUrl from './assets/solarpunk-local-meeting-transcription.webp';
+import solarpunkGranolaAlternativeUrl from './assets/solarpunk-granola-alternative.webp';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -589,6 +590,49 @@ const localMeetingTranscriptionFaqItems = [
   },
 ];
 
+const granolaAlternativeComparisonRows = [
+  ['Granola', 'A polished AI notepad for meetings, summaries, templates, and searchable meeting memory.', 'Hosted product posture; best when you want a managed AI workspace around meetings.'],
+  ['Muesli', 'Local-first Mac meeting transcription, raw transcript review, exports, and open-source inspectability.', 'Mac-first and more explicit about local capture and optional cloud features.'],
+];
+
+const granolaAlternativeFitCards = [
+  {
+    title: 'Do you want meeting notes to start locally?',
+    body: 'Muesli records from the Mac already in the call, then keeps the transcript available before any optional summary layer gets involved.',
+  },
+  {
+    title: 'Do you want open-source meeting software?',
+    body: 'Muesli is inspectable on GitHub, so the product can earn trust through source code, release history, and a clearer local-first architecture.',
+  },
+  {
+    title: 'Do you want to own the transcript?',
+    body: 'The transcript is a source record you can review and export, not just a generated summary inside a cloud knowledge layer.',
+  },
+];
+
+const granolaAlternativeFaqItems = [
+  {
+    question: 'Is Muesli a Granola alternative?',
+    answer: 'Yes, if you are looking for Mac meeting notes with local-first transcription, open-source software, and a workflow that starts from the computer already in the meeting. It is not a clone of Granola; it makes different tradeoffs.',
+  },
+  {
+    question: 'What is Granola good at?',
+    answer: 'Granola is a polished AI meeting notepad for people who want hosted meeting notes, summaries, templates, and searchable meeting context. Muesli is better framed as the local-first alternative for people who want more ownership of capture and transcripts.',
+  },
+  {
+    question: 'Does Muesli send a bot into meetings?',
+    answer: 'No. Muesli records from your Mac instead of joining Zoom, Google Meet, Teams, or browser calls as another attendee.',
+  },
+  {
+    question: 'Is Muesli open source?',
+    answer: 'Yes. Muesli is open source and available on GitHub, which makes it a better fit for people who want to inspect the software they trust with speech and meeting records.',
+  },
+  {
+    question: 'When should I still choose Granola?',
+    answer: 'Choose Granola if you want a polished hosted AI notepad and team knowledge workspace more than local capture, source availability, or transcript ownership. The right tool depends on which tradeoff matters more.',
+  },
+];
+
 const meetingSteps = [
   {
     icon: CalendarDays,
@@ -946,7 +990,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/offline-dictation-mac', '/local-meeting-transcription-mac', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/offline-dictation-mac', '/local-meeting-transcription-mac', '/granola-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -1162,6 +1206,91 @@ function LinkedInLogo(props) {
   );
 }
 
+const footerDirectoryColumns = [
+  {
+    title: 'Product',
+    links: [
+      ['On-device dictation', '/on-device-dictation'],
+      ['Meeting notes', '/meeting-notes'],
+      ['Local-first AI', '/local-first-ai'],
+      ['Download', '/download/'],
+    ],
+  },
+  {
+    title: 'Guides',
+    links: [
+      ['Mac dictation app', '/mac-dictation-app'],
+      ['Offline dictation for Mac', '/offline-dictation-mac'],
+      ['Local meeting transcription', '/local-meeting-transcription-mac'],
+    ],
+  },
+  {
+    title: 'Compare',
+    links: [
+      ['Granola alternative', '/granola-alternative'],
+    ],
+    planned: [
+      'Wispr Flow alternative',
+      'Otter.ai alternative',
+      'Fireflies.ai alternative',
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      ['Help', '/help'],
+      ['Changelog', '/changelog'],
+      ['GitHub', 'https://github.com/pHequals7/muesli'],
+      ['llms.txt', '/llms.txt'],
+      ['facts.json', '/facts.json'],
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      ['X', 'https://x.com/fastspeech2text'],
+      ['LinkedIn', 'https://www.linkedin.com/company/mueslios/'],
+      ['Privacy', '/privacy'],
+      ['Terms', '/terms'],
+    ],
+  },
+];
+
+function SiteFooterDirectory({ compact = false } = {}) {
+  return (
+    <nav className={`site-footer-directory${compact ? ' site-footer-directory-compact' : ''}`} aria-label="Site footer">
+      {footerDirectoryColumns.map((column) => (
+        <div className="site-footer-column" key={column.title}>
+          <h3>{column.title}</h3>
+          {column.links.length > 0 && (
+            <ul>
+              {column.links.map(([label, href]) => {
+                const external = href.startsWith('http');
+
+                return (
+                  <li key={href}>
+                    <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+          {column.planned && (
+            <ul className="site-footer-planned" aria-label="Planned comparison pages">
+              {column.planned.map((label) => (
+                <li key={label}>{label}</li>
+              ))}
+            </ul>
+          )}
+          {column.note && <p>{column.note}</p>}
+        </div>
+      ))}
+    </nav>
+  );
+}
+
 function LegalPage({ page, path }) {
   useEffect(() => {
     const meta = routeMeta[path];
@@ -1213,6 +1342,7 @@ function LegalPage({ page, path }) {
         <span>muesli · local-first · open source</span>
         <a href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">GitHub</a>
       </footer>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -1275,6 +1405,7 @@ function HelpPage() {
         <span>Still stuck? The project is open source.</span>
         <a href={siteData.repositoryUrl} target="_blank" rel="noreferrer">Open GitHub</a>
       </footer>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -1332,6 +1463,7 @@ function ChangelogPage() {
         <span>Prefer the latest build?</span>
         <a href={siteData.latestReleaseUrl} target="_blank" rel="noreferrer">Open latest release</a>
       </footer>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -1555,6 +1687,7 @@ function MacDictationAppPage() {
           </a>
         </footer>
       </article>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -1755,6 +1888,7 @@ function OfflineDictationMacPage() {
           </a>
         </footer>
       </article>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -1970,6 +2104,204 @@ function LocalMeetingTranscriptionMacPage() {
           </a>
         </footer>
       </article>
+      <SiteFooterDirectory compact />
+    </main>
+  );
+}
+
+function GranolaAlternativePage() {
+  useEffect(() => {
+    const meta = routeMeta['/granola-alternative'];
+    document.title = meta.title;
+    setCanonicalUrl('/granola-alternative');
+  }, []);
+
+  const granolaStructuredData = baseStructuredData('/granola-alternative', [
+    pageBreadcrumb('/granola-alternative', 'Granola Alternative'),
+    faqSchema('/granola-alternative', granolaAlternativeFaqItems),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta['/granola-alternative'].canonical}#article`,
+      headline: 'A Granola alternative for local-first meeting notes',
+      description: routeMeta['/granola-alternative'].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta['/granola-alternative'].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page granola-alternative-page">
+      <JsonLd data={granolaStructuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className="seo-article-image">
+          <img src={solarpunkGranolaAlternativeUrl} alt="A solarpunk breakfast workspace with a bowl of muesli, an unbranded laptop, a microphone, and no visible human face" />
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">Granola alternative</div>
+          <h1>A Granola alternative for the healthier version of your workday meeting notes.</h1>
+          <p>
+            Muesli is for people who want local-first meeting transcription, open-source software, and notes they can
+            own instead of renting their workday memory from the cloud.
+          </p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="/local-meeting-transcription-mac/">
+              Read the local transcription guide
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          <p>
+            Granola is a polished AI notepad for back-to-back meetings. It makes sense for people who want a managed,
+            hosted place for meeting notes, summaries, templates, and searchable context.
+          </p>
+          <p>
+            Muesli is a different choice. It starts with the Mac already in the call, captures meeting audio locally,
+            keeps the transcript reviewable, and treats AI notes as a layer on top rather than the only record you get
+            back.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Positioning</span>
+            <h2>What is Granola good at?</h2>
+          </div>
+          <p>
+            Granola is strongest when you want a polished meeting notepad that sits alongside your calendar and turns
+            meetings into AI-written notes. It is designed around convenience, meeting memory, templates, and a smooth
+            hosted product experience.
+          </p>
+          <p>
+            That is a legitimate product direction. The question is whether your meeting notes should live primarily
+            inside another cloud workspace, or whether the source record should begin on the computer you control.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Ownership</span>
+            <h2>Why look for a Granola alternative?</h2>
+          </div>
+          <p>
+            The reason is not that every hosted meeting-notes product is bad. The reason is ownership. Meetings contain
+            customer context, hiring decisions, product strategy, personal judgment, and unfinished thinking. Renting
+            that memory back from the cloud is a real tradeoff.
+          </p>
+          <p>
+            Muesli is built for people who want a local-first default: capture from the Mac, keep the transcript close,
+            export ordinary files, and choose optional AI summarization deliberately.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-comparison-section">
+          <div className="seo-section-heading">
+            <span>Comparison</span>
+            <h2>Granola vs Muesli: what changes?</h2>
+          </div>
+          <div className="seo-comparison-table" role="table" aria-label="Granola vs Muesli comparison">
+            <div className="seo-comparison-row seo-comparison-head" role="row">
+              <strong>Option</strong>
+              <strong>Best fit</strong>
+              <strong>Tradeoff</strong>
+            </div>
+            {granolaAlternativeComparisonRows.map(([option, fit, tradeoff]) => (
+              <div className="seo-comparison-row" role="row" key={option}>
+                <strong>{option}</strong>
+                <span>{fit}</span>
+                <span>{tradeoff}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Fit</span>
+            <h2>When is Muesli the better Granola alternative?</h2>
+          </div>
+          <div className="seo-card-grid">
+            {granolaAlternativeFitCards.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Botless</span>
+            <h2>Can meeting notes work without adding a bot to the call?</h2>
+          </div>
+          <p>
+            Yes. Muesli records from your Mac rather than entering the meeting as another participant. Your microphone
+            captures your side of the conversation, and system audio captures what you hear from the call.
+          </p>
+          <p>
+            This is useful when a meeting bot would change the room, raise a permission discussion, or make the meeting
+            record feel like it started somewhere other than your own machine.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Open source</span>
+            <h2>Why does open-source meeting software matter?</h2>
+          </div>
+          <p>
+            Meeting notes ask for a lot of trust. Open source does not magically solve every privacy question, but it
+            changes the trust model. You can inspect the code, follow releases, and reason about the product without
+            treating the app as a black box.
+          </p>
+          <p>
+            That is the difference Muesli is trying to make: less mystery around the speech layer, more ownership of
+            the transcript, and fewer assumptions hidden inside a hosted workspace.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-faq-section">
+          <div className="seo-section-heading">
+            <span>FAQ</span>
+            <h2>What do people ask before choosing a Granola alternative?</h2>
+          </div>
+          <div className="faq-list dictation-faq-list">
+            {granolaAlternativeFaqItems.map((item, index) => (
+              <details className="faq-item" open={index === 0} key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="" />
+          <div>
+            <h2>Switch to the healthier version of your workday morning cereal.</h2>
+            <p>Local-first meeting notes, open-source software, and a transcript you can keep.</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -2188,6 +2520,7 @@ function OnDeviceDictationPage() {
           Download Muesli
         </a>
       </section>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -2377,6 +2710,7 @@ function MeetingNotesPage() {
           Download Muesli
         </a>
       </section>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -2545,6 +2879,7 @@ function LocalFirstPage() {
           Download Muesli
         </a>
       </section>
+      <SiteFooterDirectory compact />
     </main>
   );
 }
@@ -2922,16 +3257,11 @@ function LandingPage() {
             <LinkedInLogo />
           </a>
         </div>
+        <SiteFooterDirectory />
         <p className="copyright">
           © 2026 Muesli. Built with &lt;3 by{' '}
           <a href="https://github.com/pHequals7" target="_blank" rel="noreferrer">pHequals7</a>
           {' '}and 10+ contributors.
-          <span className="footer-links" aria-label="Legal links">
-            <a href="/help">Help</a>
-            <a href="/changelog">Changelog</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-          </span>
         </p>
       </section>
     </main>
@@ -2972,6 +3302,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/local-meeting-transcription-mac') {
     return <LocalMeetingTranscriptionMacPage />;
+  }
+
+  if (path === '/granola-alternative') {
+    return <GranolaAlternativePage />;
   }
 
   if (path === '/meeting-notes') {
