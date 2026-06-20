@@ -3738,6 +3738,10 @@ h3 {
   margin-top: 12px;
 }
 
+.site-footer-column ul + ul {
+  margin-top: 9px;
+}
+
 .site-footer-column a {
   color: #5b4b38;
   font-size: 0.95rem;
