@@ -41,6 +41,7 @@ import solarpunkDictationUrl from './assets/solarpunk-greenhouse-dictation.png';
 import solarpunkMeetingNotesUrl from './assets/solarpunk-meeting-notes.png';
 import solarpunkLocalFirstUrl from './assets/solarpunk-local-first.png';
 import solarpunkParkSpeechLawnUrl from './assets/solarpunk-park-speech-lawn.png';
+import solarpunkOfflineDictationUrl from './assets/solarpunk-offline-dictation.webp';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -499,6 +500,50 @@ const macDictationFaqItems = [
   },
 ];
 
+const offlineDictationUseCases = [
+  {
+    title: 'Can I dictate when Wi-Fi is unreliable?',
+    body: 'Offline dictation is useful on planes, trains, shared office networks, hotel Wi-Fi, and any place where a cloud round trip makes short notes feel fragile.',
+  },
+  {
+    title: 'Can I use local speech-to-text for private drafts?',
+    body: 'Use local dictation for early notes, personal writing, issue drafts, customer follow-ups, and other text that should not need a hosted transcription step.',
+  },
+  {
+    title: 'Can offline dictation still paste into normal Mac apps?',
+    body: 'Muesli is built to return text to the current app, so the offline speech model is only one part of the workflow. The result still lands where you were typing.',
+  },
+];
+
+const offlineDictationComparisonRows = [
+  ['Cloud-only dictation', 'Can use large hosted models without local setup.', 'Requires network access and sends audio away before text comes back.'],
+  ['Built-in dictation', 'Convenient for quick voice typing on many Macs.', 'Less transparent model choice and less control over the surrounding workflow.'],
+  ['Muesli offline dictation', 'Runs local speech-to-text models such as Parakeet and Whisper on Apple Silicon.', 'The model needs to be installed first, and macOS permissions still matter.'],
+];
+
+const offlineDictationFaqItems = [
+  {
+    question: 'Can dictation work offline on a Mac?',
+    answer: 'Yes, if the app has a local speech-to-text model installed and does not require a cloud transcription request for normal dictation. In Muesli, everyday dictation can run locally on Apple Silicon after setup.',
+  },
+  {
+    question: 'Which offline speech models can Muesli use?',
+    answer: 'Muesli supports local ASR options including Parakeet and Whisper, with other model paths such as Qwen3 ASR available for different tradeoffs. Parakeet is the recommended fast path for everyday short dictation.',
+  },
+  {
+    question: 'Does offline dictation mean no data ever leaves my Mac?',
+    answer: 'Offline dictation means the normal speech-to-text path does not need to upload audio to a hosted transcription service. Optional integrations, updates, downloads, calendar features, and cloud summaries are separate choices.',
+  },
+  {
+    question: 'Do I need Apple Silicon for offline dictation?',
+    answer: 'Muesli is built for Apple Silicon Macs. Local transcription performance depends on the model and the hardware path, including CoreML and the Apple Neural Engine for supported models.',
+  },
+  {
+    question: 'What still requires internet access?',
+    answer: 'Model downloads, app updates, GitHub releases, calendar sync, and optional cloud summarization providers require network access. The everyday dictation path can work offline after the model is already installed.',
+  },
+];
+
 const meetingSteps = [
   {
     icon: CalendarDays,
@@ -856,7 +901,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/offline-dictation-mac', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -1458,6 +1503,206 @@ function MacDictationAppPage() {
           <div>
             <h2>Want local dictation before adding another cloud speech service?</h2>
             <p>Open-source, Mac-native, and built for people who want speech-to-text to start on their own machine.</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+    </main>
+  );
+}
+
+function OfflineDictationMacPage() {
+  useEffect(() => {
+    const meta = routeMeta['/offline-dictation-mac'];
+    document.title = meta.title;
+    setCanonicalUrl('/offline-dictation-mac');
+  }, []);
+
+  const offlineStructuredData = baseStructuredData('/offline-dictation-mac', [
+    pageBreadcrumb('/offline-dictation-mac', 'Offline Dictation for Mac'),
+    faqSchema('/offline-dictation-mac', offlineDictationFaqItems),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta['/offline-dictation-mac'].canonical}#article`,
+      headline: 'Offline dictation for Mac without a cloud speech pipeline',
+      description: routeMeta['/offline-dictation-mac'].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta['/offline-dictation-mac'].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page offline-dictation-page">
+      <JsonLd data={offlineStructuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className="seo-article-image">
+          <img src={solarpunkOfflineDictationUrl} alt="A solarpunk writing studio with plants, solar structures, an unbranded laptop, and no visible human face" />
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">Offline dictation guide</div>
+          <h1>Offline dictation for Mac without a cloud speech pipeline.</h1>
+          <p>
+            Muesli turns speech into text on Apple Silicon, so everyday dictation can keep working after the local
+            model is installed.
+          </p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="/mac-dictation-app/">
+              Read the Mac dictation guide
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          <p>
+            Offline dictation is not only about working without Wi-Fi. It is about removing the default cloud step
+            from the shortest path between speech and text. If the model can run locally, a quick note or reply does
+            not need to become an audio upload first.
+          </p>
+          <p>
+            Muesli is built around that narrower default. Hold a hotkey, speak normally, release, and the text lands
+            in the current app. Local models such as Parakeet and Whisper can transcribe on the Mac instead of asking a
+            hosted speech-to-text service to handle every sentence.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Offline basics</span>
+            <h2>How does offline dictation work on a Mac?</h2>
+          </div>
+          <p>
+            Offline dictation needs three pieces to line up: microphone capture, a speech-to-text model that runs on
+            the device, and a way to return the resulting text to the app where you are writing. If any one of those
+            pieces depends on a server, the workflow is not really offline.
+          </p>
+          <p>
+            Muesli keeps the normal dictation path local after setup. The app listens from the menu bar, routes audio
+            through a local ASR model, cleans up the result, and pastes it back into the active Mac text field.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Model choice</span>
+            <h2>Which offline speech-to-text models work well on Apple Silicon?</h2>
+          </div>
+          <p>
+            Parakeet is the practical default for quick dictation because it is built for low-latency speech-to-text
+            on modern Apple hardware. Whisper is useful when you prefer that model family or need its particular
+            accuracy and language tradeoffs.
+          </p>
+          <p>
+            The useful question is not whether one model wins every case. It is whether the dictation app lets you run
+            a local model that fits the job: fast notes, longer utterances, multilingual speech, or a workflow where
+            privacy matters more than shaving off every millisecond.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-comparison-section">
+          <div className="seo-section-heading">
+            <span>Comparison</span>
+            <h2>Should I use offline dictation or cloud transcription?</h2>
+          </div>
+          <div className="seo-comparison-table" role="table" aria-label="Offline dictation comparison">
+            <div className="seo-comparison-row seo-comparison-head" role="row">
+              <strong>Option</strong>
+              <strong>Where it helps</strong>
+              <strong>Tradeoff</strong>
+            </div>
+            {offlineDictationComparisonRows.map(([option, helps, tradeoff]) => (
+              <div className="seo-comparison-row" role="row" key={option}>
+                <strong>{option}</strong>
+                <span>{helps}</span>
+                <span>{tradeoff}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Where it fits</span>
+            <h2>When is offline dictation useful on Mac?</h2>
+          </div>
+          <div className="seo-card-grid">
+            {offlineDictationUseCases.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Privacy</span>
+            <h2>Is offline dictation more private than online voice typing?</h2>
+          </div>
+          <p>
+            Offline dictation is a stronger default because the audio does not need to leave the machine before it
+            becomes text. That does not mean every part of the app is magically private. It means the core
+            speech-to-text step can avoid the hosted transcription surface.
+          </p>
+          <p>
+            Muesli still uses macOS permissions for microphone access, hotkey monitoring, and paste behavior. Optional
+            services such as cloud summaries or calendar integrations remain explicit choices, not requirements for
+            normal dictation.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Limits</span>
+            <h2>What does offline dictation still need from the internet?</h2>
+          </div>
+          <p>
+            The offline part begins after the local model is installed. Downloading the app, fetching models, checking
+            releases, and using optional connected services still require network access. That distinction matters
+            because “offline” should not be used as a vague privacy slogan.
+          </p>
+          <p>
+            For day-to-day voice typing, the useful promise is narrower and more concrete: once the model is available
+            locally, dictation should not require sending each sentence to a cloud speech-to-text API.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-faq-section">
+          <div className="seo-section-heading">
+            <span>FAQ</span>
+            <h2>What do people ask about offline dictation on Mac?</h2>
+          </div>
+          <div className="faq-list dictation-faq-list">
+            {offlineDictationFaqItems.map((item, index) => (
+              <details className="faq-item" open={index === 0} key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="" />
+          <div>
+            <h2>Want offline dictation that starts on your own Mac?</h2>
+            <p>Open-source, Mac-native, and built around local speech-to-text instead of a default cloud upload.</p>
           </div>
           <a className="primary-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
@@ -2459,6 +2704,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/mac-dictation-app') {
     return <MacDictationAppPage />;
+  }
+
+  if (path === '/offline-dictation-mac') {
+    return <OfflineDictationMacPage />;
   }
 
   if (path === '/meeting-notes') {
