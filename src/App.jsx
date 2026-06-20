@@ -42,6 +42,7 @@ import solarpunkMeetingNotesUrl from './assets/solarpunk-meeting-notes.png';
 import solarpunkLocalFirstUrl from './assets/solarpunk-local-first.png';
 import solarpunkParkSpeechLawnUrl from './assets/solarpunk-park-speech-lawn.png';
 import solarpunkOfflineDictationUrl from './assets/solarpunk-offline-dictation.webp';
+import solarpunkLocalMeetingTranscriptionUrl from './assets/solarpunk-local-meeting-transcription.webp';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -544,6 +545,50 @@ const offlineDictationFaqItems = [
   },
 ];
 
+const localMeetingTranscriptionUseCases = [
+  {
+    title: 'Can I transcribe Zoom, Google Meet, and Teams calls on macOS?',
+    body: 'A local Mac recorder can capture the meeting audio from your own machine, which makes the workflow useful across browser calls and desktop meeting apps.',
+  },
+  {
+    title: 'Can I keep meeting notes without adding a bot?',
+    body: 'Bot-free transcription is useful when you do not want another attendee in the room, another service receiving the call, or another permission conversation before the meeting starts.',
+  },
+  {
+    title: 'Can local meeting transcription help after the call ends?',
+    body: 'The transcript becomes a local record you can search, review, summarize, and export instead of relying only on memory or scattered action items.',
+  },
+];
+
+const localMeetingTranscriptionComparisonRows = [
+  ['Meeting bot', 'Easy to invite and often works across hosted meeting platforms.', 'A third-party participant joins the call, and the meeting record starts outside your Mac.'],
+  ['Cloud recorder', 'Can be convenient when the organization has already approved the service.', 'Audio or transcript processing usually depends on a hosted pipeline.'],
+  ['Muesli local transcription', 'Captures mic and system audio from your Mac, then keeps the transcript close to your workspace.', 'You need macOS permissions for microphone and system audio, and optional summaries are a separate choice.'],
+];
+
+const localMeetingTranscriptionFaqItems = [
+  {
+    question: 'What is local meeting transcription on Mac?',
+    answer: 'Local meeting transcription means the meeting audio is captured from your own Mac and turned into a transcript without requiring a meeting bot to join the call. In Muesli, transcription starts from the device you control.',
+  },
+  {
+    question: 'Does local meeting transcription work on macOS?',
+    answer: 'Yes. Muesli is a macOS app built for Apple Silicon Macs. It uses normal macOS permissions for microphone access and system audio capture so meetings can be recorded from the computer already in the call.',
+  },
+  {
+    question: 'Is a meeting bot required?',
+    answer: 'No. Muesli is designed for meeting notes without a bot. It records from your Mac instead of joining Zoom, Google Meet, Teams, FaceTime, or browser calls as another participant.',
+  },
+  {
+    question: 'Can Muesli create AI meeting notes from a local transcript?',
+    answer: 'Yes. Muesli can keep the transcript and then generate structured notes through the summarization backend you choose. The local transcript and optional summary step are separate parts of the workflow.',
+  },
+  {
+    question: 'What macOS permissions are needed for meeting transcription?',
+    answer: 'Meeting transcription uses microphone access for your side of the call and system audio capture for the other side. Calendar access is optional and helps with upcoming meeting detection and join links.',
+  },
+];
+
 const meetingSteps = [
   {
     icon: CalendarDays,
@@ -901,7 +946,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/offline-dictation-mac', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/offline-dictation-mac', '/local-meeting-transcription-mac', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -1703,6 +1748,221 @@ function OfflineDictationMacPage() {
           <div>
             <h2>Want offline dictation that starts on your own Mac?</h2>
             <p>Open-source, Mac-native, and built around local speech-to-text instead of a default cloud upload.</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+    </main>
+  );
+}
+
+function LocalMeetingTranscriptionMacPage() {
+  useEffect(() => {
+    const meta = routeMeta['/local-meeting-transcription-mac'];
+    document.title = meta.title;
+    setCanonicalUrl('/local-meeting-transcription-mac');
+  }, []);
+
+  const localMeetingStructuredData = baseStructuredData('/local-meeting-transcription-mac', [
+    pageBreadcrumb('/local-meeting-transcription-mac', 'Local Meeting Transcription for Mac'),
+    faqSchema('/local-meeting-transcription-mac', localMeetingTranscriptionFaqItems),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta['/local-meeting-transcription-mac'].canonical}#article`,
+      headline: 'Local meeting transcription for Mac without a meeting bot',
+      description: routeMeta['/local-meeting-transcription-mac'].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta['/local-meeting-transcription-mac'].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page local-meeting-transcription-page">
+      <JsonLd data={localMeetingStructuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className="seo-article-image">
+          <img src={solarpunkLocalMeetingTranscriptionUrl} alt="A solarpunk meeting workspace with plants, an unbranded laptop, a notebook, and no visible human face" />
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">Local meeting transcription guide</div>
+          <h1>Local meeting transcription for Mac without a meeting bot.</h1>
+          <p>
+            Muesli records meetings from your own macOS workspace, so the transcript can start on the Mac already in
+            the call.
+          </p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="/meeting-notes/">
+              Read the meeting notes page
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          <p>
+            Most meeting transcription tools start by adding another participant to the call or sending the recording
+            into a hosted pipeline. That can be acceptable for some teams, but it is not the only shape meeting notes
+            should take on macOS.
+          </p>
+          <p>
+            Local meeting transcription starts closer to the source. Muesli captures microphone and system audio from
+            your Mac, builds a transcript you can keep, and lets optional AI notes sit on top of that record rather than
+            replacing it.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Local basics</span>
+            <h2>What is local meeting transcription on Mac and macOS?</h2>
+          </div>
+          <p>
+            Local meeting transcription means the capture begins on your own machine. Instead of inviting a bot into the
+            meeting, the Mac records the audio it can hear: your microphone for your side, and system audio for the
+            other side of the call.
+          </p>
+          <p>
+            That difference matters because meeting notes are usually not just generic content. They include names,
+            plans, customer details, hiring discussions, product decisions, and unfinished thoughts that should not move
+            through more systems than necessary.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Capture</span>
+            <h2>How can a Mac transcribe meeting audio without a bot?</h2>
+          </div>
+          <p>
+            A Mac can capture both sides of a meeting when the app has the right macOS permissions. Microphone access
+            handles your voice. System audio capture handles the meeting audio playing through the computer.
+          </p>
+          <p>
+            Muesli uses that local capture path so the transcript starts from the device already participating in the
+            meeting. The app does not need to appear as another attendee in Zoom, Google Meet, Teams, FaceTime, or a
+            browser call.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-comparison-section">
+          <div className="seo-section-heading">
+            <span>Comparison</span>
+            <h2>Should I use a meeting bot, cloud transcription, or local Mac transcription?</h2>
+          </div>
+          <div className="seo-comparison-table" role="table" aria-label="Local meeting transcription comparison">
+            <div className="seo-comparison-row seo-comparison-head" role="row">
+              <strong>Option</strong>
+              <strong>Where it helps</strong>
+              <strong>Tradeoff</strong>
+            </div>
+            {localMeetingTranscriptionComparisonRows.map(([option, helps, tradeoff]) => (
+              <div className="seo-comparison-row" role="row" key={option}>
+                <strong>{option}</strong>
+                <span>{helps}</span>
+                <span>{tradeoff}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Where it fits</span>
+            <h2>When is local meeting transcription useful on macOS?</h2>
+          </div>
+          <div className="seo-card-grid">
+            {localMeetingTranscriptionUseCases.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Notes</span>
+            <h2>Can local meeting transcription become AI meeting notes?</h2>
+          </div>
+          <p>
+            A transcript is the durable record. AI meeting notes are a layer on top. That separation is useful because a
+            summary can be wrong, too compressed, or missing a decision, while the transcript remains available for
+            review.
+          </p>
+          <p>
+            Muesli can generate structured notes from the transcript using the summarization backend you choose. The
+            important part is that the capture and transcript do not require a meeting bot as the starting point.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Privacy</span>
+            <h2>Is local meeting transcription more private than a meeting bot?</h2>
+          </div>
+          <p>
+            Local transcription gives you a narrower default. The meeting record begins on the Mac in front of you
+            rather than in a third-party participant or hosted recorder. That does not remove every trust decision, but
+            it reduces the number of systems involved in creating the transcript.
+          </p>
+          <p>
+            Optional cloud summarization, calendar access, and connected services are separate choices. They should be
+            evaluated separately from the basic question of where the meeting audio is captured.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Exports</span>
+            <h2>Can I export meeting transcripts and notes from a Mac app?</h2>
+          </div>
+          <p>
+            Meeting notes are more useful when they can leave the app in ordinary formats. Muesli can keep the meeting
+            record locally and export notes or transcripts as Markdown or PDF when you need to share, archive, or review
+            them elsewhere.
+          </p>
+          <p>
+            That makes the app useful for people who want a private capture path but still need practical follow-up:
+            action items, customer notes, research calls, team syncs, and decision logs.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-faq-section">
+          <div className="seo-section-heading">
+            <span>FAQ</span>
+            <h2>What do people ask about local meeting transcription on Mac?</h2>
+          </div>
+          <div className="faq-list dictation-faq-list">
+            {localMeetingTranscriptionFaqItems.map((item, index) => (
+              <details className="faq-item" open={index === 0} key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="" />
+          <div>
+            <h2>Want meeting notes without sending a bot into the room?</h2>
+            <p>Open-source, Mac-native, and built for local meeting transcription on Apple Silicon.</p>
           </div>
           <a className="primary-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
@@ -2708,6 +2968,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/offline-dictation-mac') {
     return <OfflineDictationMacPage />;
+  }
+
+  if (path === '/local-meeting-transcription-mac') {
+    return <LocalMeetingTranscriptionMacPage />;
   }
 
   if (path === '/meeting-notes') {

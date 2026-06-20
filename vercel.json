@@ -46,6 +46,10 @@
       "destination": "/offline-dictation-mac/index.html"
     },
     {
+      "source": "/local-meeting-transcription-mac",
+      "destination": "/local-meeting-transcription-mac/index.html"
+    },
+    {
       "source": "/meeting-notes",
       "destination": "/meeting-notes/index.html"
     },

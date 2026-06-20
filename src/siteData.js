@@ -58,6 +58,12 @@ export const siteData = {
       url: 'https://muesli.works/offline-dictation-mac',
       description: 'A practical guide to offline dictation on Mac, local speech-to-text models, and what can run without sending audio to a cloud transcription service.',
     },
+    {
+      title: 'Local Meeting Transcription for Mac',
+      path: '/local-meeting-transcription-mac',
+      url: 'https://muesli.works/local-meeting-transcription-mac',
+      description: 'A practical guide to local meeting transcription on Mac and macOS, meeting notes without a bot, and what can stay on your own computer.',
+    },
   ],
   routes: {
     '/': {
@@ -89,6 +95,11 @@ export const siteData = {
       title: 'Offline dictation for Mac · Muesli',
       canonical: 'https://muesli.works/offline-dictation-mac',
       description: 'Offline dictation on Mac with local speech-to-text models such as Parakeet and Whisper, built for people who do not want everyday voice typing to start with a cloud upload.',
+    },
+    '/local-meeting-transcription-mac': {
+      title: 'Local meeting transcription for Mac and macOS · Muesli',
+      canonical: 'https://muesli.works/local-meeting-transcription-mac',
+      description: 'Local meeting transcription on Mac and macOS for people who want meeting notes without a bot, with audio captured from their own computer.',
     },
     '/meeting-notes': {
       title: 'AI meeting notes without a bot · Muesli',
