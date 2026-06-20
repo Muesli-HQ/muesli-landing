@@ -54,6 +54,18 @@
       "destination": "/granola-alternative/index.html"
     },
     {
+      "source": "/wispr-flow-alternative",
+      "destination": "/wispr-flow-alternative/index.html"
+    },
+    {
+      "source": "/otter-ai-alternative",
+      "destination": "/otter-ai-alternative/index.html"
+    },
+    {
+      "source": "/fireflies-ai-alternative",
+      "destination": "/fireflies-ai-alternative/index.html"
+    },
+    {
       "source": "/meeting-notes",
       "destination": "/meeting-notes/index.html"
     },

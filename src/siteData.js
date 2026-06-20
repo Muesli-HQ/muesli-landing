@@ -70,6 +70,24 @@ export const siteData = {
       url: 'https://muesli.works/granola-alternative',
       description: 'A practical Granola alternative guide for people who want local-first meeting notes, open-source software, and more ownership of their workday memory.',
     },
+    {
+      title: 'Wispr Flow Alternative',
+      path: '/wispr-flow-alternative',
+      url: 'https://muesli.works/wispr-flow-alternative',
+      description: 'A practical Wispr Flow alternative guide for Mac and macOS users who want local-first dictation, offline speech models, and more ownership of voice-to-text.',
+    },
+    {
+      title: 'Otter.ai Alternative',
+      path: '/otter-ai-alternative',
+      url: 'https://muesli.works/otter-ai-alternative',
+      description: 'A practical Otter.ai alternative guide for macOS users who want local-first meeting transcription, no meeting bot by default, and notes they can own.',
+    },
+    {
+      title: 'Fireflies.ai Alternative',
+      path: '/fireflies-ai-alternative',
+      url: 'https://muesli.works/fireflies-ai-alternative',
+      description: 'A practical Fireflies.ai alternative guide for macOS users who want meeting transcription to start on their Mac without sending a bot into every room.',
+    },
   ],
   routes: {
     '/': {
@@ -111,6 +129,21 @@ export const siteData = {
       title: 'Granola alternative for local-first meeting notes · Muesli',
       canonical: 'https://muesli.works/granola-alternative',
       description: 'A Granola alternative for people who want local-first meeting transcription, open-source software, and meeting notes they own instead of renting workday memory from the cloud.',
+    },
+    '/wispr-flow-alternative': {
+      title: 'Wispr Flow alternative for local Mac dictation · Muesli',
+      canonical: 'https://muesli.works/wispr-flow-alternative',
+      description: 'A Wispr Flow alternative for Mac and macOS users who want fast voice-to-text, local speech models, open-source software, and dictation they own instead of renting every spoken draft from the cloud.',
+    },
+    '/otter-ai-alternative': {
+      title: 'Otter.ai alternative for Mac meeting notes · Muesli',
+      canonical: 'https://muesli.works/otter-ai-alternative',
+      description: 'A fair Otter.ai alternative for macOS users who want local-first meeting transcription, no meeting bot by default, and notes they can own instead of renting meeting memory from the cloud.',
+    },
+    '/fireflies-ai-alternative': {
+      title: 'Fireflies.ai alternative for Mac meeting notes · Muesli',
+      canonical: 'https://muesli.works/fireflies-ai-alternative',
+      description: 'A Fireflies.ai alternative for macOS users who want meeting transcription to start on their Mac, avoid meeting bots, and keep ownership of their workday memory instead of renting it from the cloud.',
     },
     '/meeting-notes': {
       title: 'AI meeting notes without a bot · Muesli',

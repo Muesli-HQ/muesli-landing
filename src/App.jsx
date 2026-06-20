@@ -44,6 +44,9 @@ import solarpunkParkSpeechLawnUrl from './assets/solarpunk-park-speech-lawn.png'
 import solarpunkOfflineDictationUrl from './assets/solarpunk-offline-dictation.webp';
 import solarpunkLocalMeetingTranscriptionUrl from './assets/solarpunk-local-meeting-transcription.webp';
 import solarpunkGranolaAlternativeUrl from './assets/solarpunk-granola-alternative.webp';
+import solarpunkWisprFlowAlternativeUrl from './assets/solarpunk-wispr-flow-alternative.webp';
+import solarpunkOtterAiAlternativeUrl from './assets/solarpunk-otter-ai-alternative.webp';
+import solarpunkFirefliesAiAlternativeUrl from './assets/solarpunk-fireflies-ai-alternative.webp';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -633,6 +636,263 @@ const granolaAlternativeFaqItems = [
   },
 ];
 
+const wisprFlowAlternativeFaqItems = [
+  {
+    question: 'Is Muesli a Wispr Flow alternative?',
+    answer: 'Yes. Muesli can be a Wispr Flow alternative for Mac users who want local-first dictation, offline speech-to-text models, and open-source software. It is not a cross-platform voice keyboard; it is focused on macOS and Apple Silicon.',
+  },
+  {
+    question: 'Does Muesli work on macOS?',
+    answer: 'Yes. Muesli is a native macOS app for Apple Silicon Macs. It supports dictation from the menu bar and can paste cleaned text back into the app you were already using.',
+  },
+  {
+    question: 'Does Muesli use offline models such as Parakeet and Whisper?',
+    answer: 'Yes. Muesli supports local ASR options including Parakeet and Whisper, with other model paths available for different accuracy and latency tradeoffs.',
+  },
+  {
+    question: 'Is Muesli better than Wispr Flow for privacy?',
+    answer: 'Muesli is better for users who want the normal speech-to-text path to start locally on their Mac. That is different from claiming every feature is always offline. Optional integrations and cloud summarization are separate choices.',
+  },
+  {
+    question: 'Should I switch from Wispr Flow to Muesli?',
+    answer: 'Switch if your priority is local-first Mac dictation, transcript ownership, open-source software, and offline-capable speech-to-text. Stay with Wispr Flow if you want polished cross-platform dictation across desktop and mobile.',
+  },
+];
+
+const otterAiAlternativeFaqItems = [
+  {
+    question: 'Is Muesli an Otter.ai alternative?',
+    answer: 'Yes, for macOS users who want local-first meeting transcription and meeting notes without relying on a cloud-first transcription workspace. It is not an Otter.ai clone; it is a different approach built around Mac capture, ownership, and open-source software.',
+  },
+  {
+    question: 'Does Muesli send a bot into meetings like some transcription tools?',
+    answer: 'No. Muesli is designed to capture meeting audio from your Mac rather than joining as a separate meeting participant by default.',
+  },
+  {
+    question: 'When is Otter.ai still the better choice?',
+    answer: 'Otter.ai may be better for teams that want a mature hosted transcription platform, shared cloud notes, centralized search, and collaboration across many users.',
+  },
+  {
+    question: 'Does Muesli work on macOS?',
+    answer: 'Yes. Muesli is a native macOS app focused on Apple Silicon Macs.',
+  },
+  {
+    question: 'Can Muesli make AI meeting summaries?',
+    answer: 'Yes. Muesli can create meeting notes from transcripts, with summarization choices layered on top of the captured meeting record.',
+  },
+  {
+    question: 'Does local-first mean everything is offline?',
+    answer: 'No. Local-first means the transcription workflow starts on your Mac. Model downloads, updates, calendar sync, and optional cloud summarization may still use the internet.',
+  },
+];
+
+const firefliesAiAlternativeFaqItems = [
+  {
+    question: 'Is Muesli a Fireflies.ai alternative?',
+    answer: 'Yes, if you want meeting transcription and notes on macOS without relying on a hosted AI meeting assistant as the default workflow. Muesli is a local-first alternative, not a feature-for-feature clone.',
+  },
+  {
+    question: 'Does Muesli send a bot into meetings?',
+    answer: 'No. Muesli captures meeting audio from the Mac in the call instead of sending a separate AI notetaker participant into the meeting.',
+  },
+  {
+    question: 'Does Muesli work on macOS?',
+    answer: 'Yes. Muesli is a native macOS app built for Apple Silicon Macs, with local speech-to-text for dictation and meeting transcription workflows.',
+  },
+  {
+    question: 'Can Muesli summarize meetings like Fireflies.ai?',
+    answer: 'Muesli can create AI-powered meeting notes from transcripts, with optional summarization backends. The key distinction is that transcription starts closer to the Mac instead of beginning as a hosted meeting assistant workflow.',
+  },
+  {
+    question: 'Which is better for team-wide meeting search?',
+    answer: 'Fireflies.ai is likely the better fit if your main requirement is centralized team search and cloud meeting intelligence. Muesli is better when you care more about local capture, inspectability, and ownership.',
+  },
+  {
+    question: 'Is local-first meeting transcription more private?',
+    answer: 'It is a narrower default. Local-first transcription reduces the need to upload meeting audio just to produce a transcript, while optional cloud summaries or integrations remain separate choices.',
+  },
+];
+
+const alternativePageConfigs = {
+  '/wispr-flow-alternative': {
+    breadcrumb: 'Wispr Flow Alternative',
+    faqItems: wisprFlowAlternativeFaqItems,
+    image: solarpunkWisprFlowAlternativeUrl,
+    imageAlt: 'A solarpunk Mac writing workspace with an unbranded laptop, notebook, microphone, and no visible human face',
+    kicker: 'Wispr Flow alternative',
+    headline: 'A Wispr Flow alternative for people who want to own their voice-to-text workflow.',
+    subcopy: 'Wispr Flow is a polished AI voice keyboard for speaking into apps across Mac, Windows, iPhone, and Android. Muesli is for Mac and macOS users who want dictation to start locally, stay inspectable, and turn speech into text without renting every spoken draft back from the cloud.',
+    secondaryHref: '/mac-dictation-app/',
+    secondaryText: 'Read the Mac dictation guide',
+    articleHeadline: 'A Wispr Flow alternative for local Mac dictation',
+    lede: [
+      'The best voice-to-text app is not always the one with the most magic. Sometimes it is the one you can understand.',
+      'If your dictation contains private drafts, prompts, emails, notes, code comments, or unfinished thinking, the place where speech becomes text matters. Muesli is built around a simpler default: hold a hotkey, speak, release, and let local speech-to-text models such as Parakeet and Whisper transcribe on your Mac.',
+    ],
+    sections: [
+      {
+        eyebrow: 'Positioning',
+        title: 'What is Wispr Flow good at?',
+        body: ['Wispr Flow is strong when you want a polished cross-platform voice keyboard. It works across common writing apps, emphasizes fast voice-to-text, and uses AI formatting to turn natural speech into cleaner writing. For people who want one dictation layer across desktop and mobile, that can be the right tradeoff.'],
+      },
+      {
+        eyebrow: 'Ownership',
+        title: 'Why look for a Wispr Flow alternative on Mac?',
+        body: ['The question is not whether Wispr Flow is useful. The question is whether your everyday dictation should depend on a hosted speech pipeline. Some Mac users want their rough thoughts, customer replies, AI prompts, and private notes to start on the machine they control.', 'Muesli is built for that preference: local-first dictation on Apple Silicon, open-source software, and a workflow that keeps the transcript close to the cursor.'],
+      },
+      {
+        eyebrow: 'Local-first',
+        title: 'What changes when dictation runs locally on macOS?',
+        body: ['Local dictation changes the default path. Instead of sending each utterance away before text comes back, the speech-to-text step can run on Apple Silicon.', 'That does not make every feature offline or every workflow private by magic. It does make the normal dictation path narrower, easier to reason about, and less dependent on a cloud service for every sentence.'],
+      },
+      {
+        eyebrow: 'Scope',
+        title: 'Is Muesli a Wispr Flow clone?',
+        body: ['No. Wispr Flow is a broad AI voice keyboard. Muesli is a Mac-native speech workspace for dictation and meeting transcription.', 'The overlap is voice-to-text; the philosophy is different. Muesli is better suited to people who care about local models, open-source code, raw transcript ownership, and keeping workday memory under their control.'],
+      },
+      {
+        eyebrow: 'When not',
+        title: 'When might Wispr Flow still be the better choice?',
+        body: ['Choose Wispr Flow if you want one polished dictation product across Mac, Windows, iPhone, and Android, or if cloud AI formatting is more important to you than local-first ownership.', 'Muesli is intentionally narrower: it is for Mac users who want dictation and meeting transcription to start from the machine they control.'],
+      },
+    ],
+    comparison: {
+      title: 'Should I use Wispr Flow or Muesli for macOS dictation?',
+      aria: 'Wispr Flow vs Muesli comparison',
+      rows: [
+        ['Wispr Flow', 'Polished cross-platform AI dictation for Mac, Windows, iPhone, and Android.', 'Best if you want a hosted, highly finished voice keyboard across devices.'],
+        ['Apple Dictation', 'Free and already built into macOS.', 'Best for quick snippets, but less flexible for model choice, cleanup, and longer work sessions.'],
+        ['Muesli', 'Local-first Mac dictation with offline models such as Parakeet and Whisper.', 'Best if you want speech-to-text to begin on your Mac and remain inspectable.'],
+      ],
+    },
+    fitTitle: 'When is Muesli the better Wispr Flow alternative?',
+    fitCards: [
+      ['Do you want offline dictation on Mac?', 'Use Muesli when your preferred dictation path should keep working after local models are installed, even when Wi-Fi is unreliable or cloud transcription is not the right default.'],
+      ['Do you dictate private drafts or AI prompts?', 'Use Muesli when spoken drafts include sensitive notes, customer context, research prompts, or unfinished thinking that should not need a hosted transcription step.'],
+      ['Do you want open-source Mac software?', 'Use Muesli when inspectability matters. The app is open source, Mac-native, and built around local speech-to-text rather than an opaque voice layer.'],
+    ],
+    faqTitle: 'What do people ask about Wispr Flow alternatives?',
+    ctaTitle: 'Want voice-to-text that starts on your own Mac?',
+    ctaBody: 'Muesli gives Mac users a local-first dictation workflow for everyday writing, prompts, notes, and replies, without making every spoken draft depend on a cloud speech pipeline.',
+  },
+  '/otter-ai-alternative': {
+    breadcrumb: 'Otter.ai Alternative',
+    faqItems: otterAiAlternativeFaqItems,
+    image: solarpunkOtterAiAlternativeUrl,
+    imageAlt: 'A solarpunk meeting-notes workspace with an unbranded laptop, organized transcript pages, and no visible human face',
+    kicker: 'Otter.ai alternative',
+    headline: 'An Otter.ai alternative for people who want to own their meeting memory.',
+    subcopy: 'Otter.ai is built for cloud transcription, meeting bots, and shared team notes. Muesli is for macOS users who want meeting audio captured from their own Mac, local-first transcripts, and a workflow that keeps meeting memory closer to the machine they control.',
+    secondaryHref: '/local-meeting-transcription-mac/',
+    secondaryText: 'Read the meeting transcription guide',
+    articleHeadline: 'An Otter.ai alternative for local-first meeting notes',
+    lede: [
+      'There are good reasons to use Otter.ai: it is established, collaborative, and built around cloud meeting transcription at team scale.',
+      'But not every meeting note workflow needs another bot, another hosted transcript library, or another cloud place where your workday memory lives. If you want Mac meeting transcription that starts locally and stays inspectable, Muesli is the healthier alternative.',
+    ],
+    sections: [
+      {
+        eyebrow: 'Positioning',
+        title: 'What is Otter.ai good at?',
+        body: ['Otter.ai is useful for teams that want cloud transcription, shared meeting notes, meeting bots, searchable conversations, and collaboration features across many calls. It is a broad transcription workspace, not just a small Mac utility.', 'If your company wants a hosted record of meetings with team sharing and admin controls, Otter.ai may be the better fit.'],
+      },
+      {
+        eyebrow: 'Ownership',
+        title: 'Why look for an Otter.ai alternative on macOS?',
+        body: ['People usually look for an Otter.ai alternative when they want fewer cloud defaults. They may not want a bot joining meetings, may want more direct ownership of raw transcripts, or may prefer software that begins with local capture on the Mac already in the call.', 'The question is not whether cloud transcription can be useful. It is whether every meeting should start by renting your meeting memory back from a hosted system.'],
+      },
+      {
+        eyebrow: 'Choice',
+        title: 'Should I use Otter.ai or Muesli for meeting notes?',
+        body: ['Use Otter.ai if your team wants a mature hosted transcription workspace, shared meeting libraries, and centralized collaboration.', 'Use Muesli if you want meeting transcription to start from your own Mac, avoid a bot-first workflow, and keep the raw record closer before deciding what to summarize or share.'],
+      },
+      {
+        eyebrow: 'Botless',
+        title: 'Can Muesli create meeting notes without joining the call?',
+        body: ['Yes. Muesli is built around capturing audio from the Mac you are already using. It can record your microphone and system audio for meetings, then turn the transcript into notes you can review.', 'That makes it useful for Zoom, Google Meet, Teams, FaceTime, browser calls, and other meeting workflows where you do not want another participant in the room.'],
+      },
+      {
+        eyebrow: 'Privacy',
+        title: 'What does local-first meeting transcription mean for privacy?',
+        body: ['Local-first does not mean pretending privacy is magic. It means the default transcription path starts on the device you control instead of beginning with a hosted transcription service.', 'Muesli still uses normal macOS permissions for microphone, system audio, and accessibility-based workflows. Optional cloud summaries or integrations can exist, but they sit on top of the transcript workflow rather than replacing ownership of the underlying meeting record.'],
+      },
+    ],
+    comparison: {
+      title: 'How is Muesli different from Otter.ai?',
+      aria: 'Otter.ai vs Muesli comparison',
+      rows: [
+        ['Otter.ai', 'Cloud transcription, shared meeting notes, meeting bots, searchable conversations, and team collaboration.', 'Best for teams that want shared cloud meeting intelligence and centralized collaboration.'],
+        ['Muesli', 'Local-first macOS speech workspace for dictation and meeting transcription with raw transcript review and exports.', 'Best for Mac users who want local-first meeting transcription, open-source software, and direct control.'],
+      ],
+    },
+    fitTitle: 'Where does Muesli fit best?',
+    fitCards: [
+      ['Want Mac meeting notes without a bot?', 'Use Muesli when you want to capture a meeting from your own Mac instead of inviting another assistant into the call.'],
+      ['Want transcripts you can inspect and export?', 'Use Muesli when the raw transcript matters and you want notes or exports you can keep outside a hosted meeting workspace.'],
+      ['Want one app for dictation and meetings?', 'Use Muesli when your speech workflow includes both quick dictation during the day and longer meeting transcription after calls.'],
+    ],
+    faqTitle: 'What do people ask when comparing Otter.ai and Muesli?',
+    ctaTitle: 'Want meeting notes you own instead of renting them from the cloud?',
+    ctaBody: 'Muesli gives macOS users a local-first way to capture meetings, review transcripts, and create notes without making every conversation start inside another hosted workspace.',
+  },
+  '/fireflies-ai-alternative': {
+    breadcrumb: 'Fireflies.ai Alternative',
+    faqItems: firefliesAiAlternativeFaqItems,
+    image: solarpunkFirefliesAiAlternativeUrl,
+    imageAlt: 'A dusk solarpunk meeting-notes workspace with garden lanterns, an unbranded laptop, a microphone, and no visible human face',
+    kicker: 'Fireflies.ai alternative',
+    headline: 'A Fireflies.ai alternative for people who want meeting memory they can own.',
+    subcopy: 'Fireflies.ai is a broad AI meeting assistant for recording, transcribing, summarizing, and searching meetings across a team. Muesli is for macOS users who want meeting transcription to begin on the Mac already in the call, without sending a bot into every room or renting their workday memory back from the cloud.',
+    secondaryHref: '/local-meeting-transcription-mac/',
+    secondaryText: 'Read the local meeting transcription guide',
+    articleHeadline: 'A Fireflies.ai alternative for local-first meeting notes',
+    lede: [
+      'Fireflies.ai is built for teams that want recordings, transcripts, summaries, searchable meeting history, and workflow integrations in one hosted system.',
+      'Muesli is a different choice for Mac users: capture from the machine already in the call, keep the transcript inspectable, and decide when summaries or cloud services should enter the workflow.',
+    ],
+    sections: [
+      {
+        eyebrow: 'Context',
+        title: 'What is Fireflies.ai good at?',
+        body: ['Fireflies.ai is built as an AI meeting assistant for teams that want recordings, transcripts, summaries, searchable meeting history, and workflow integrations in one hosted system.', 'That can be useful when the goal is shared meeting memory across a sales team, recruiting team, customer success team, or any organization that wants meeting content pushed into a cloud workspace automatically. If that is the job, Fireflies.ai is a strong fit.'],
+      },
+      {
+        eyebrow: 'Why switch',
+        title: 'Why look for a Fireflies.ai alternative on Mac?',
+        body: ['The reason to look elsewhere is usually not that Fireflies.ai lacks features. It is that the product shape may be heavier than the workflow.', 'Some people do not want a meeting bot joining calls, storing conversations in another cloud system, and turning every meeting into a hosted workspace they have to manage. They want the transcript to start on their own Mac, remain inspectable, and stay closer to the person who was actually in the meeting.'],
+      },
+      {
+        eyebrow: 'Local-first',
+        title: 'What does Muesli do differently from an AI meeting bot?',
+        body: ['Muesli treats meeting notes as something that should begin near the audio source. It captures microphone and system audio from your Mac, creates a transcript you can inspect, and lets summaries sit on top of that source material.', 'The important difference is not a larger feature checklist. It is the default: your meeting memory starts on your machine before it becomes anything else.'],
+      },
+      {
+        eyebrow: 'When not',
+        title: 'When should I still choose Fireflies.ai?',
+        body: ['Choose Fireflies.ai if you mainly want a mature cloud meeting assistant for a team, with centralized meeting search, CRM-style workflows, collaboration features, and broad integrations.', 'Muesli is not trying to clone that entire platform. It is the better choice when the priority is local-first Mac capture, ownership, and avoiding another cloud workspace for your workday memory.'],
+      },
+    ],
+    comparison: {
+      title: 'Should I use Fireflies.ai or Muesli for meeting notes?',
+      aria: 'Fireflies.ai vs Muesli comparison',
+      rows: [
+        ['Fireflies.ai', 'Hosted AI meeting assistant for recording, transcription, summaries, search, integrations, and team workflows.', 'Best for teams that want a centralized cloud meeting assistant with broad automation.'],
+        ['Muesli', 'Local-first macOS speech workspace for dictation and meeting transcription from the Mac already in the call.', 'Best for Mac users who want local-first capture, open-source software, and fewer cloud assumptions.'],
+      ],
+    },
+    fitTitle: 'When is Muesli the better Fireflies.ai alternative?',
+    fitCards: [
+      ['When you do not want a bot in the meeting', 'Use Muesli when the people in the call should not need to see another AI participant just so you can keep useful notes.'],
+      ['When you want local transcription on macOS', 'Muesli is built for Mac users who want meeting transcription to start from the machine already handling the call.'],
+      ['When you care about owning the raw transcript', 'A summary is useful, but the transcript is the source. Muesli keeps that source visible instead of hiding it behind a hosted memory layer.'],
+      ['When open-source software matters', 'Muesli gives technical users and teams a more inspectable path than a closed meeting assistant workflow.'],
+    ],
+    faqTitle: 'What do people ask when comparing Fireflies.ai and Muesli?',
+    ctaTitle: 'Want meeting notes without renting your workday memory from the cloud?',
+    ctaBody: 'Muesli is open-source, Mac-native, and built for people who want meeting transcription to start on the machine they control.',
+  },
+};
+
 const meetingSteps = [
   {
     icon: CalendarDays,
@@ -990,7 +1250,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/offline-dictation-mac', '/local-meeting-transcription-mac', '/granola-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/offline-dictation-mac', '/local-meeting-transcription-mac', '/granola-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -1228,11 +1488,9 @@ const footerDirectoryColumns = [
     title: 'Compare',
     links: [
       ['Granola alternative', '/granola-alternative'],
-    ],
-    planned: [
-      'Wispr Flow alternative',
-      'Otter.ai alternative',
-      'Fireflies.ai alternative',
+      ['Wispr Flow alternative', '/wispr-flow-alternative'],
+      ['Otter.ai alternative', '/otter-ai-alternative'],
+      ['Fireflies.ai alternative', '/fireflies-ai-alternative'],
     ],
   },
   {
@@ -2306,6 +2564,157 @@ function GranolaAlternativePage() {
   );
 }
 
+function AlternativeComparisonPage({ route }) {
+  const config = alternativePageConfigs[route];
+
+  useEffect(() => {
+    const meta = routeMeta[route];
+    document.title = meta.title;
+    setCanonicalUrl(route);
+  }, [route]);
+
+  const structuredData = baseStructuredData(route, [
+    pageBreadcrumb(route, config.breadcrumb),
+    faqSchema(route, config.faqItems),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta[route].canonical}#article`,
+      headline: config.articleHeadline,
+      description: routeMeta[route].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta[route].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page comparison-alternative-page">
+      <JsonLd data={structuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className="seo-article-image">
+          <img src={config.image} alt={config.imageAlt} />
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">{config.kicker}</div>
+          <h1>{config.headline}</h1>
+          <p>{config.subcopy}</p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href={config.secondaryHref}>
+              {config.secondaryText}
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          {config.lede.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </section>
+
+        {config.sections.slice(0, 2).map((section) => (
+          <section className="seo-article-section" key={section.title}>
+            <div className="seo-section-heading">
+              <span>{section.eyebrow}</span>
+              <h2>{section.title}</h2>
+            </div>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </section>
+        ))}
+
+        <section className="seo-article-section seo-comparison-section">
+          <div className="seo-section-heading">
+            <span>Comparison</span>
+            <h2>{config.comparison.title}</h2>
+          </div>
+          <div className="seo-comparison-table" role="table" aria-label={config.comparison.aria}>
+            <div className="seo-comparison-row seo-comparison-head" role="row">
+              <strong>Option</strong>
+              <strong>Best fit</strong>
+              <strong>Tradeoff</strong>
+            </div>
+            {config.comparison.rows.map(([option, fit, tradeoff]) => (
+              <div className="seo-comparison-row" role="row" key={option}>
+                <strong>{option}</strong>
+                <span>{fit}</span>
+                <span>{tradeoff}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {config.sections.slice(2).map((section) => (
+          <section className="seo-article-section" key={section.title}>
+            <div className="seo-section-heading">
+              <span>{section.eyebrow}</span>
+              <h2>{section.title}</h2>
+            </div>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </section>
+        ))}
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Fit</span>
+            <h2>{config.fitTitle}</h2>
+          </div>
+          <div className="seo-card-grid">
+            {config.fitCards.map(([title, body]) => (
+              <article key={title}>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section seo-faq-section">
+          <div className="seo-section-heading">
+            <span>FAQ</span>
+            <h2>{config.faqTitle}</h2>
+          </div>
+          <div className="faq-list dictation-faq-list">
+            {config.faqItems.map((item, index) => (
+              <details className="faq-item" open={index === 0} key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="" />
+          <div>
+            <h2>{config.ctaTitle}</h2>
+            <p>{config.ctaBody}</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+      <SiteFooterDirectory compact />
+    </main>
+  );
+}
+
 function OnDeviceDictationPage() {
   useEffect(() => {
     const meta = routeMeta['/on-device-dictation'];
@@ -3306,6 +3715,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/granola-alternative') {
     return <GranolaAlternativePage />;
+  }
+
+  if (path === '/wispr-flow-alternative' || path === '/otter-ai-alternative' || path === '/fireflies-ai-alternative') {
+    return <AlternativeComparisonPage route={path} />;
   }
 
   if (path === '/meeting-notes') {
