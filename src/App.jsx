@@ -1140,7 +1140,7 @@ const legalPages = {
       {
         title: 'Contact',
         body: [
-          'For privacy questions, open an issue on GitHub or contact the maintainer through the repository.',
+          'For privacy questions, email pranav@muesli.works.',
         ],
       },
     ],
@@ -1243,7 +1243,7 @@ const legalPages = {
       {
         title: 'Contact',
         body: [
-          'For questions about these terms, open an issue on GitHub or contact the maintainer through the repository.',
+          'For questions about these terms, email pranav@muesli.works.',
         ],
       },
     ],
