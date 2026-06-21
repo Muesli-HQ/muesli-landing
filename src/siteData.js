@@ -53,6 +53,12 @@ export const siteData = {
       description: 'A practical guide to Mac dictation apps, local speech-to-text, offline models such as Parakeet and Whisper, and private voice typing on Apple Silicon.',
     },
     {
+      title: 'Best Dictation Apps for Mac',
+      path: '/best-dictation-apps-mac',
+      url: 'https://muesli.works/best-dictation-apps-mac',
+      description: 'A fair 2026 guide to the best dictation apps for Mac and macOS, including Apple Dictation, Muesli, Superwhisper, Wispr Flow, VoiceInk, and other voice-to-text options.',
+    },
+    {
       title: 'Offline Dictation for Mac',
       path: '/offline-dictation-mac',
       url: 'https://muesli.works/offline-dictation-mac',
@@ -114,6 +120,11 @@ export const siteData = {
       title: 'Mac dictation app for local speech-to-text · Muesli',
       canonical: 'https://muesli.works/mac-dictation-app',
       description: 'A practical guide to choosing a Mac dictation app for local speech-to-text, offline models such as Parakeet and Whisper, and private voice typing on Apple Silicon.',
+    },
+    '/best-dictation-apps-mac': {
+      title: 'Best dictation apps for Mac in 2026 · Muesli',
+      canonical: 'https://muesli.works/best-dictation-apps-mac',
+      description: 'A practical 2026 comparison of the best dictation apps for Mac and macOS, including local-first voice-to-text, offline speech models, Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and Muesli.',
     },
     '/offline-dictation-mac': {
       title: 'Offline dictation for Mac · Muesli',

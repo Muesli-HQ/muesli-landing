@@ -42,6 +42,10 @@
       "destination": "/mac-dictation-app/index.html"
     },
     {
+      "source": "/best-dictation-apps-mac",
+      "destination": "/best-dictation-apps-mac/index.html"
+    },
+    {
       "source": "/offline-dictation-mac",
       "destination": "/offline-dictation-mac/index.html"
     },
