@@ -30,6 +30,7 @@ export function generateAgentFiles() {
     operatingSystem: siteData.operatingSystem,
     softwareRequirements: siteData.softwareRequirements,
     keyFacts: siteData.keyFacts,
+    technicalFacts: siteData.technicalFacts,
     featurePages: siteData.featurePages,
     guidePages: siteData.guidePages,
     supportFaqs: supportFaqItems,
@@ -55,6 +56,9 @@ ${pageList()}
 ## Key Facts
 ${lines(siteData.keyFacts)}
 
+## Technical Facts
+${lines(siteData.technicalFacts || [])}
+
 ## Social Links
 ${sameAsLinks.map((url) => `- ${url}`).join('\n')}
 `;
@@ -78,6 +82,9 @@ ${siteData.name} is a native macOS app for local-first speech workflows.
 
 ## What It Does
 ${lines(siteData.keyFacts)}
+
+## Technical Facts
+${lines(siteData.technicalFacts || [])}
 
 ## Best Pages To Cite
 ${pageList()}

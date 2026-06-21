@@ -50,6 +50,14 @@
       "destination": "/offline-dictation-mac/index.html"
     },
     {
+      "source": "/apple-neural-engine-speech-to-text-mac",
+      "destination": "/apple-neural-engine-speech-to-text-mac/index.html"
+    },
+    {
+      "source": "/local-speech-to-text-glossary",
+      "destination": "/local-speech-to-text-glossary/index.html"
+    },
+    {
       "source": "/local-meeting-transcription-mac",
       "destination": "/local-meeting-transcription-mac/index.html"
     },

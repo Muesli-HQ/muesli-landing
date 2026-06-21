@@ -25,6 +25,18 @@ export const siteData = {
     'Open-source and inspectable on GitHub.',
     'Optional services such as OpenAI, OpenRouter, ChatGPT, and Google Calendar are explicit integrations, not the default transcription path.',
   ],
+  technicalFacts: [
+    'Muesli is a native macOS app built with Swift and AppKit, not Electron.',
+    'Local speech-to-text runs on Apple Silicon through CoreML and Apple Neural Engine-capable model paths where supported.',
+    'For short dictation, local Apple Silicon inference can reduce latency by avoiding the cloud upload, remote inference, response, and paste-back round trip.',
+    'The Apple Neural Engine is dedicated neural network hardware, which helps supported speech models run efficiently on device.',
+    'Muesli supports local ASR model options including NVIDIA Parakeet, Whisper, Qwen3 ASR, and Nemotron Streaming.',
+    'The default dictation workflow does not require a hosted speech-to-text API after local models are installed.',
+    'Meeting transcription combines microphone audio, system audio capture, voice activity detection, and speaker diarization.',
+    'Meeting echo cancellation runs locally with bundled LocalVQE by default and DTLN available as a fallback AEC path.',
+    'Parakeet and Nemotron come from NVIDIA, Whisper comes from OpenAI, Qwen3 ASR comes from Alibaba’s Qwen model family, and Cohere Transcribe comes from Cohere.',
+    'Optional summarization providers are separate from the local transcription path.',
+  ],
   featurePages: [
     {
       title: 'On-device Dictation',
@@ -63,6 +75,18 @@ export const siteData = {
       path: '/offline-dictation-mac',
       url: 'https://muesli.works/offline-dictation-mac',
       description: 'A practical guide to offline dictation on Mac, local speech-to-text models, and what can run without sending audio to a cloud transcription service.',
+    },
+    {
+      title: 'Apple Neural Engine Speech-to-Text on Mac',
+      path: '/apple-neural-engine-speech-to-text-mac',
+      url: 'https://muesli.works/apple-neural-engine-speech-to-text-mac',
+      description: 'A technical guide to Apple Neural Engine speech-to-text on Mac, CoreML, local ASR models such as Parakeet and Whisper, and how Muesli uses Apple Silicon for local dictation.',
+    },
+    {
+      title: 'Local Speech-to-Text Glossary',
+      path: '/local-speech-to-text-glossary',
+      url: 'https://muesli.works/local-speech-to-text-glossary',
+      description: 'A technical glossary for local speech-to-text on Mac, covering ASR versus speech-to-text, CoreML, Apple Neural Engine, Parakeet, Whisper, Qwen3 ASR, VAD, diarization, neural AEC, LocalVQE, and local-first transcription.',
     },
     {
       title: 'Local Meeting Transcription for Mac',
@@ -130,6 +154,16 @@ export const siteData = {
       title: 'Offline dictation for Mac · Muesli',
       canonical: 'https://muesli.works/offline-dictation-mac',
       description: 'Offline dictation on Mac with local speech-to-text models such as Parakeet and Whisper, built for people who do not want everyday voice typing to start with a cloud upload.',
+    },
+    '/apple-neural-engine-speech-to-text-mac': {
+      title: 'Apple Neural Engine speech-to-text on Mac · Muesli',
+      canonical: 'https://muesli.works/apple-neural-engine-speech-to-text-mac',
+      description: 'How Apple Neural Engine speech-to-text works on Mac with CoreML, local ASR models such as Parakeet and Whisper, and Muesli’s local-first dictation workflow on Apple Silicon.',
+    },
+    '/local-speech-to-text-glossary': {
+      title: 'Local speech-to-text glossary for Mac · Muesli',
+      canonical: 'https://muesli.works/local-speech-to-text-glossary',
+      description: 'A technical glossary for local speech-to-text on Mac, including ASR versus speech-to-text, CoreML, Apple Neural Engine, Parakeet, Whisper, Qwen3 ASR, VAD, diarization, neural AEC, LocalVQE, and local-first transcription.',
     },
     '/local-meeting-transcription-mac': {
       title: 'Local meeting transcription for Mac and macOS · Muesli',

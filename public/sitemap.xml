@@ -37,6 +37,18 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://muesli.works/apple-neural-engine-speech-to-text-mac</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.76</priority>
+  </url>
+  <url>
+    <loc>https://muesli.works/local-speech-to-text-glossary</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+  <url>
     <loc>https://muesli.works/local-meeting-transcription-mac</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>

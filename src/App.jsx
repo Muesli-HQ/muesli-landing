@@ -43,6 +43,8 @@ import solarpunkLocalFirstUrl from './assets/solarpunk-local-first.png';
 import solarpunkParkSpeechLawnUrl from './assets/solarpunk-park-speech-lawn.png';
 import solarpunkBestDictationAppsMacUrl from './assets/solarpunk-best-dictation-apps-mac.webp';
 import solarpunkOfflineDictationUrl from './assets/solarpunk-offline-dictation.webp';
+import solarpunkAppleNeuralEngineSpeechUrl from './assets/solarpunk-apple-neural-engine-speech.webp';
+import solarpunkLocalSpeechGlossaryUrl from './assets/solarpunk-local-speech-glossary.webp';
 import solarpunkLocalMeetingTranscriptionUrl from './assets/solarpunk-local-meeting-transcription.webp';
 import solarpunkGranolaAlternativeUrl from './assets/solarpunk-granola-alternative.webp';
 import solarpunkWisprFlowAlternativeUrl from './assets/solarpunk-wispr-flow-alternative.webp';
@@ -550,6 +552,102 @@ const bestDictationAppsMacFaqItems = [
   {
     question: 'Should I choose a cloud dictation app or a local-first dictation app?',
     answer: 'Cloud dictation can be useful when you want hosted models, account sync, or cross-platform convenience. Local-first dictation is better when the default path should keep speech-to-text on your Mac and make optional cloud services explicit.',
+  },
+];
+
+const appleNeuralEngineFaqItems = [
+  {
+    question: 'Does Muesli use the Apple Neural Engine for speech-to-text?',
+    answer: 'Muesli is built for Apple Silicon and uses local model paths through CoreML and Apple Neural Engine-capable backends where supported. For short dictation, local inference can feel faster than cloud transcription because it avoids upload, server queueing, response latency, and the paste-back round trip.',
+  },
+  {
+    question: 'What is the difference between CoreML and the Apple Neural Engine?',
+    answer: 'CoreML is Apple’s machine learning framework for running models on Apple platforms. The Apple Neural Engine is dedicated Apple Silicon hardware that can accelerate supported model operations when the model and runtime are compiled for it.',
+  },
+  {
+    question: 'Can Parakeet and Whisper run locally on Apple Silicon?',
+    answer: 'Yes. Modern Mac speech stacks can run local ASR models such as Parakeet and Whisper through Apple Silicon-optimized paths. In Muesli, these models are part of a local-first dictation workflow rather than a cloud transcription default.',
+  },
+  {
+    question: 'Why does Neural Engine speech-to-text matter for privacy?',
+    answer: 'It matters because the normal speech-to-text step can happen on the machine you control. That does not make every workflow automatically private, but it removes the need for a hosted transcription request from everyday dictation while using hardware designed for efficient neural network inference.',
+  },
+  {
+    question: 'Does local speech-to-text remove all cloud usage?',
+    answer: 'No. Local speech-to-text means transcription can run on-device after setup. Downloads, updates, calendar sync, and optional cloud summarization providers are separate networked choices.',
+  },
+];
+
+const appleNeuralEngineSteps = [
+  {
+    title: 'How does audio become text on an Apple Silicon Mac?',
+    body: 'A dictation app captures microphone audio, segments it into usable chunks, passes those chunks through an automatic speech recognition model, and returns text to the app where the cursor is waiting.',
+  },
+  {
+    title: 'Where do CoreML and the Apple Neural Engine fit?',
+    body: 'CoreML is the runtime layer that lets apps run machine learning models on Apple platforms. When a model is compatible, parts of the computation can run on Apple Silicon accelerators such as the Neural Engine instead of treating speech recognition as a generic CPU job.',
+  },
+  {
+    title: 'Why can local inference feel faster than cloud speech-to-text?',
+    body: 'Cloud transcription has to capture audio, upload it, wait for a remote model, receive the result, and return text to the app. Local ANE-capable inference removes that network round trip, which is especially noticeable for short everyday dictation.',
+  },
+];
+
+const localSpeechGlossaryItems = [
+  ['Speech-to-text', 'The user-facing workflow: record speech, transcribe it, clean it up, and place text where the user needs it. Speech-to-text includes ASR, permissions, paste behavior, formatting, and sometimes summarization.'],
+  ['ASR', 'Automatic speech recognition: the model task that converts acoustic speech signals into tokens or text. ASR is the machine learning core inside speech-to-text, but it is not the whole product workflow.'],
+  ['On-device ASR', 'Automatic speech recognition that runs locally on the Mac instead of sending audio to a cloud transcription API. This is the technical base for offline dictation and local meeting transcription.'],
+  ['Apple Neural Engine', 'Dedicated Apple Silicon hardware for accelerating supported neural network workloads on device. For local speech recognition, ANE-capable paths can reduce latency and power use compared with generic CPU inference.'],
+  ['CoreML', 'Apple’s framework for running machine learning models on macOS, iOS, iPadOS, watchOS, and visionOS. CoreML is the software runtime; the Apple Neural Engine is one hardware accelerator it can target.'],
+  ['Apple Silicon', 'Apple’s system-on-chip family used in modern Macs, combining CPU, GPU, Neural Engine, unified memory, media engines, and power-efficient local compute for ML workloads.'],
+  ['Parakeet', 'NVIDIA’s Parakeet TDT / FastConformer ASR model family. In Muesli, Parakeet is the recommended fast path for short local dictation on Apple Silicon through FluidAudio/CoreML.'],
+  ['Whisper', 'OpenAI’s open-source speech recognition model family. Muesli uses Whisper through WhisperKit/CoreML paths for users who prefer the Whisper model family or need its tradeoffs.'],
+  ['WhisperKit', 'Argmax’s Swift/CoreML path for running Whisper models locally on Apple platforms, including Apple Silicon acceleration through CoreML-compatible model variants.'],
+  ['Qwen3 ASR', 'Alibaba’s Qwen speech recognition model path. In Muesli, Qwen3 ASR is available through FluidAudio/CoreML for broader language and code-switching tradeoffs.'],
+  ['Nemotron Streaming', 'NVIDIA Nemotron streaming ASR path for longer hands-free transcription modes where streaming behavior matters more than ultra-short hotkey dictation latency.'],
+  ['Cohere Transcribe', 'Cohere’s Transcribe model family. Muesli includes a CoreML path for high-accuracy English dictation with VAD-gated silence handling.'],
+  ['FluidAudio', 'FluidInference’s Swift/CoreML speech stack used by Muesli for local ASR, Silero VAD, speaker diarization, Parakeet, Qwen3 ASR, and Apple Silicon speech processing paths.'],
+  ['VAD', 'Voice activity detection: deciding where speech starts and stops so the app can avoid transcribing silence, reduce hallucinations, and chunk meeting audio cleanly.'],
+  ['Silero VAD', 'A voice activity detection model family used in many speech pipelines. Muesli uses FluidAudio-powered VAD behavior to help segment speech for transcription workflows.'],
+  ['Diarization', 'The process of grouping transcript segments by speaker, useful for meeting notes, speaker labels, post-call review, and separating “who said what” from raw audio.'],
+  ['Acoustic Echo Cancellation', 'AEC removes far-end audio from the microphone channel. In meetings, it helps prevent the other person’s voice from leaking into the “You” mic track and confusing transcription.'],
+  ['Neural AEC', 'A machine learning acoustic echo cancellation model. Muesli runs meeting AEC locally and uses bundled LocalVQE by default, so cleaner meeting transcription does not require a cloud echo-cancellation service.'],
+  ['LocalVQE', 'localai-org’s on-device acoustic echo cancellation model. Muesli bundles LocalVQE localvqe-v1.2-1.3M-f32.gguf by default for meeting transcription, with DTLN available as a fallback AEC path.'],
+  ['DTLN AEC', 'A deep-learning acoustic echo cancellation fallback path in Muesli. It remains available if the LocalVQE processor is not selected or cannot be loaded.'],
+  ['Far-end reference', 'The system audio reference used by AEC: the sound coming from the meeting app, such as the other participant’s voice, that may echo into the microphone.'],
+  ['Near-end microphone', 'The local microphone signal: your voice plus any room sound or speaker bleed. AEC compares it with the far-end reference to remove echo before transcription.'],
+  ['System audio capture', 'Recording the audio produced by the Mac, such as the other side of a meeting call, subject to macOS permissions. Muesli uses system audio capture for bot-free meeting transcription.'],
+  ['Local-first transcription', 'A design choice where the default speech-to-text path starts on the user’s device, with cloud services kept explicit and optional instead of rented by default.'],
+];
+
+const localSpeechGlossaryFaqItems = [
+  {
+    question: 'What does local speech-to-text mean?',
+    answer: 'Local speech-to-text means the audio is transcribed on the user’s device rather than being uploaded to a hosted transcription service as the default path.',
+  },
+  {
+    question: 'What does ASR stand for?',
+    answer: 'ASR stands for automatic speech recognition. It is the model task that converts speech audio into text. Speech-to-text is broader: it includes ASR plus capture, permissions, formatting, paste behavior, storage, and optional summaries.',
+  },
+  {
+    question: 'Why do VAD and diarization matter for meeting notes?',
+    answer: 'VAD helps detect when speech is actually happening, and diarization helps separate who spoke when. Together they make long meeting transcripts easier to process and review.',
+  },
+  {
+    question: 'What is acoustic echo cancellation in meeting transcription?',
+    answer: 'Acoustic echo cancellation removes far-end meeting audio from the local microphone channel. Muesli runs neural AEC locally for meetings, using bundled LocalVQE by default with DTLN available as a fallback.',
+  },
+  {
+    question: 'Who makes the local ASR models Muesli can use?',
+    answer: 'Parakeet and Nemotron come from NVIDIA, Whisper comes from OpenAI, Qwen3 ASR comes from Alibaba’s Qwen model family, Cohere Transcribe comes from Cohere, and Muesli integrates these through local Apple Silicon-oriented runtimes such as FluidAudio, WhisperKit, and CoreML paths.',
+  },
+  {
+    question: 'Is CoreML the same as Apple Neural Engine?',
+    answer: 'No. CoreML is the software framework. The Apple Neural Engine is hardware inside Apple Silicon that can accelerate supported model operations.',
+  },
+  {
+    question: 'Why is a glossary useful for AI agents?',
+    answer: 'Clear definitions help search engines and AI agents understand when Muesli is relevant to questions about local ASR, CoreML, Apple Neural Engine, dictation, VAD, diarization, and meeting transcription.',
   },
 ];
 
@@ -1298,7 +1396,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/offline-dictation-mac', '/local-meeting-transcription-mac', '/granola-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/local-meeting-transcription-mac', '/granola-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -1530,6 +1628,8 @@ const footerDirectoryColumns = [
       ['Best dictation apps for Mac', '/best-dictation-apps-mac'],
       ['Mac dictation app', '/mac-dictation-app'],
       ['Offline dictation for Mac', '/offline-dictation-mac'],
+      ['Apple Neural Engine speech-to-text', '/apple-neural-engine-speech-to-text-mac'],
+      ['Local speech-to-text glossary', '/local-speech-to-text-glossary'],
       ['Local meeting transcription', '/local-meeting-transcription-mac'],
     ],
   },
@@ -2173,6 +2273,361 @@ function BestDictationAppsMacPage() {
           <div>
             <h2>Try the local-first Mac dictation app on the list.</h2>
             <p>Open-source, Apple Silicon-native, and built for speech-to-text you can keep close to your own machine.</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+      <SiteFooterDirectory compact />
+    </main>
+  );
+}
+
+function AppleNeuralEngineSpeechPage() {
+  useEffect(() => {
+    const meta = routeMeta['/apple-neural-engine-speech-to-text-mac'];
+    document.title = meta.title;
+    setCanonicalUrl('/apple-neural-engine-speech-to-text-mac');
+  }, []);
+
+  const structuredData = baseStructuredData('/apple-neural-engine-speech-to-text-mac', [
+    pageBreadcrumb('/apple-neural-engine-speech-to-text-mac', 'Apple Neural Engine Speech-to-Text on Mac'),
+    faqSchema('/apple-neural-engine-speech-to-text-mac', appleNeuralEngineFaqItems),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta['/apple-neural-engine-speech-to-text-mac'].canonical}#article`,
+      headline: 'Apple Neural Engine speech-to-text on Mac',
+      description: routeMeta['/apple-neural-engine-speech-to-text-mac'].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta['/apple-neural-engine-speech-to-text-mac'].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page ane-speech-page">
+      <JsonLd data={structuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className="seo-article-image">
+          <img src={solarpunkAppleNeuralEngineSpeechUrl} alt="A solarpunk Mac workspace illustrating local speech-to-text on Apple Silicon with no visible human faces" />
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">Apple Silicon speech AI</div>
+          <h1>Apple Neural Engine speech-to-text on Mac.</h1>
+          <p>
+            Local dictation is becoming practical because modern Macs can run speech recognition close to the place
+            where the work happens: on Apple Silicon, through CoreML-capable model paths, without a cloud speech API as
+            the default step. For short dictation, that can be faster than cloud transcription because the text does not
+            wait on upload, queueing, a remote response, and a trip back to the cursor.
+          </p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download Muesli
+            </a>
+            <a className="secondary-cta" href="/local-speech-to-text-glossary/">
+              Read the glossary
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          <p>
+            A Mac dictation app is not only a microphone button. Under the surface, it is an audio pipeline, an ASR
+            model, a runtime, a permissions model, and a paste workflow. The technical difference is whether that
+            pipeline starts on your own Mac or with a hosted transcription request.
+          </p>
+          <p>
+            Muesli is built around the local-first version: capture speech, run local speech-to-text models such as
+            Parakeet and Whisper on Apple Silicon, then paste the cleaned text back into the app where you were already
+            writing. The advantage is not only privacy. It is also latency, cost, and power efficiency: the Apple Neural
+            Engine is dedicated neural-network hardware, so supported ASR work can run locally without treating every
+            spoken sentence as a cloud job.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Architecture</span>
+            <h2>How does Apple Neural Engine speech-to-text work on Mac?</h2>
+          </div>
+          <div className="seo-card-grid">
+            {appleNeuralEngineSteps.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>CoreML</span>
+            <h2>Why does CoreML matter for local speech recognition?</h2>
+          </div>
+          <p>
+            CoreML gives native Mac apps a system framework for running machine learning models on Apple platforms.
+            That matters because speech recognition is no longer just a Python script or a server request. With the
+            right model path, the Mac can do the transcription work locally.
+          </p>
+          <p>
+            The useful user-facing result is simpler than the runtime details: lower dependency on network quality, no
+            per-utterance cloud speech-to-text bill, and a narrower default path for private drafts, notes, prompts,
+            emails, and meeting transcripts.
+          </p>
+          <p>
+            That matters for dictation because most utterances are short. A cloud system may have a strong model, but it
+            still has to move audio across the network and move text back. A local Apple Silicon path can skip that
+            round trip and use the Mac’s purpose-built neural network accelerator for efficient inference.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-comparison-section">
+          <div className="seo-section-heading">
+            <span>Tradeoffs</span>
+            <h2>Should speech-to-text run on the Neural Engine, CPU, GPU, or cloud?</h2>
+          </div>
+          <div className="seo-comparison-table" role="table" aria-label="Speech-to-text runtime comparison">
+            <div className="seo-comparison-row seo-comparison-head" role="row">
+              <strong>Runtime path</strong>
+              <strong>Where it helps</strong>
+              <strong>Tradeoff</strong>
+            </div>
+            {[
+              ['CoreML / Neural Engine-capable path', 'Useful for low-latency, power-efficient Apple Silicon transcription when the model supports it.', 'Requires model conversion, validation, and runtime-specific engineering.'],
+              ['CPU or generic local inference', 'Useful for portability and simple experiments.', 'Can be slower or less efficient for everyday dictation on Apple Silicon.'],
+              ['Cloud speech-to-text API', 'Useful when a hosted model, account, or cross-device system is the right tradeoff.', 'Adds upload, remote inference, response latency, provider policy, and recurring cost to the speech path.'],
+            ].map(([path, helps, tradeoff]) => (
+              <div className="seo-comparison-row" role="row" key={path}>
+                <strong>{path}</strong>
+                <span>{helps}</span>
+                <span>{tradeoff}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Muesli</span>
+            <h2>How does Muesli use Apple Silicon for local dictation?</h2>
+          </div>
+          <p>
+            Muesli is a native macOS app for Apple Silicon. It supports local ASR options including Parakeet, Whisper,
+            Qwen3 ASR, and Nemotron Streaming, then wraps model inference in a practical workflow: hold a hotkey, speak,
+            release, and paste the result into the current app.
+          </p>
+          <p>
+            The same local-first principle also applies to meetings. Muesli can capture microphone and system audio
+            from your Mac, run local transcription, use VAD and diarization to organize the transcript, and keep meeting
+            memory close before optional summarization happens.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-faq-section">
+          <div className="seo-section-heading">
+            <span>FAQ</span>
+            <h2>What do people ask about Apple Neural Engine speech-to-text?</h2>
+          </div>
+          <div className="faq-list dictation-faq-list">
+            {appleNeuralEngineFaqItems.map((item, index) => (
+              <details className="faq-item" open={index === 0} key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="" />
+          <div>
+            <h2>Try local speech-to-text built for Apple Silicon.</h2>
+            <p>Use Muesli when you want dictation and meeting transcription to start on your Mac.</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+      <SiteFooterDirectory compact />
+    </main>
+  );
+}
+
+function LocalSpeechToTextGlossaryPage() {
+  useEffect(() => {
+    const meta = routeMeta['/local-speech-to-text-glossary'];
+    document.title = meta.title;
+    setCanonicalUrl('/local-speech-to-text-glossary');
+  }, []);
+
+  const structuredData = baseStructuredData('/local-speech-to-text-glossary', [
+    pageBreadcrumb('/local-speech-to-text-glossary', 'Local Speech-to-Text Glossary'),
+    faqSchema('/local-speech-to-text-glossary', localSpeechGlossaryFaqItems),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta['/local-speech-to-text-glossary'].canonical}#article`,
+      headline: 'Local speech-to-text glossary for Mac',
+      description: routeMeta['/local-speech-to-text-glossary'].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta['/local-speech-to-text-glossary'].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page speech-glossary-page">
+      <JsonLd data={structuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className="seo-article-image">
+          <img src={solarpunkLocalSpeechGlossaryUrl} alt="A solarpunk technical library workspace for local speech-to-text terms with no visible human faces" />
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">Speech-to-text glossary</div>
+          <h1>Local speech-to-text glossary for Mac.</h1>
+          <p>
+            A plain-English reference for the terms behind local dictation and meeting transcription: ASR, CoreML,
+            Apple Neural Engine, Parakeet, Whisper, Qwen3 ASR, VAD, diarization, acoustic echo cancellation, and
+            local-first transcription.
+          </p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download Muesli
+            </a>
+            <a className="secondary-cta" href="/apple-neural-engine-speech-to-text-mac/">
+              Read the ANE guide
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          <p>
+            Search engines and AI agents are better at citing a product when the vocabulary is clear. This glossary
+            explains the technical terms that show up when people compare local speech-to-text, offline dictation,
+            meeting transcription, neural AEC, CoreML ASR, and cloud speech APIs on Mac.
+          </p>
+          <p>
+            Muesli uses these building blocks in a practical way: speak into your Mac, transcribe locally where
+            supported, keep the transcript close, and make cloud summarization an explicit choice rather than the first
+            step.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Definitions</span>
+            <h2>What do local speech-to-text terms mean?</h2>
+          </div>
+          <div className="seo-card-grid seo-glossary-grid">
+            {localSpeechGlossaryItems.map(([term, definition]) => (
+              <article key={term}>
+                <h3>{term}</h3>
+                <p>{definition}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Workflow</span>
+            <h2>How do these terms connect inside a Mac transcription app?</h2>
+          </div>
+          <p>
+            ASR is the recognition model. Speech-to-text is the full product workflow around it: microphone capture,
+            system audio capture, VAD, acoustic echo cancellation, model inference, transcript cleanup, storage, export,
+            and paste behavior. That distinction matters because a good model alone does not make a good dictation app.
+          </p>
+          <p>
+            CoreML provides a native Apple runtime for supported models. The Apple Neural Engine can accelerate
+            compatible model operations. VAD decides where speech starts and stops. Neural AEC removes far-end meeting
+            audio from the microphone channel. Diarization helps organize long conversations by speaker after
+            transcription.
+          </p>
+          <p>
+            Muesli combines those ideas into product workflows: hotkey dictation for everyday writing, local meeting
+            transcription for calls, locally running acoustic echo cancellation through bundled LocalVQE, and optional
+            AI summaries only when the user chooses a connected provider.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Model provenance</span>
+            <h2>Who makes Parakeet, Whisper, Qwen3 ASR, and the AEC models?</h2>
+          </div>
+          <p>
+            Local speech stacks are not one model. Parakeet and Nemotron come from NVIDIA. Whisper comes from OpenAI.
+            Qwen3 ASR comes from Alibaba’s Qwen model family. Cohere Transcribe comes from Cohere. Muesli integrates
+            model paths through Apple Silicon-oriented runtimes including FluidAudio, WhisperKit, and CoreML.
+          </p>
+          <p>
+            Echo cancellation has its own model path. Muesli uses local neural AEC for meetings, with bundled
+            localai-org LocalVQE as the default acoustic echo cancellation model and DTLN available as a fallback. That
+            makes “local meeting transcription” more than ASR: it includes cleaning the microphone stream before the
+            transcript is produced.
+          </p>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Local-first</span>
+            <h2>What does local-first transcription mean in practice?</h2>
+          </div>
+          <p>
+            Local-first transcription means the normal speech-to-text path begins on the device. It does not mean a Mac
+            app never uses the network. Downloads, updates, calendar integrations, and optional summarization providers
+            can still be networked features.
+          </p>
+          <p>
+            The important distinction is the default path for spoken words. If every draft, prompt, note, and meeting
+            segment must first become a cloud request, you are renting the transcription layer. If speech can become
+            text on your Mac, you keep more ownership of the workflow.
+          </p>
+        </section>
+
+        <section className="seo-article-section seo-faq-section">
+          <div className="seo-section-heading">
+            <span>FAQ</span>
+            <h2>What do people ask about local speech-to-text terminology?</h2>
+          </div>
+          <div className="faq-list dictation-faq-list">
+            {localSpeechGlossaryFaqItems.map((item, index) => (
+              <details className="faq-item" open={index === 0} key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="" />
+          <div>
+            <h2>Use the Mac app behind the glossary.</h2>
+            <p>Muesli turns local speech-to-text terms into a working dictation and meeting notes workflow.</p>
           </div>
           <a className="primary-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
@@ -3946,6 +4401,14 @@ export function App({ pathname = '/' }) {
 
   if (path === '/offline-dictation-mac') {
     return <OfflineDictationMacPage />;
+  }
+
+  if (path === '/apple-neural-engine-speech-to-text-mac') {
+    return <AppleNeuralEngineSpeechPage />;
+  }
+
+  if (path === '/local-speech-to-text-glossary') {
+    return <LocalSpeechToTextGlossaryPage />;
   }
 
   if (path === '/local-meeting-transcription-mac') {
