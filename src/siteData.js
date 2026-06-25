@@ -98,7 +98,7 @@ export const siteData = {
       title: 'Granola Alternative',
       path: '/granola-alternative',
       url: 'https://muesli.works/granola-alternative',
-      description: 'A practical Granola alternative guide for people who want local-first meeting notes, open-source software, and more ownership of their workday memory.',
+      description: 'A local Granola alternative guide for people who want local-first meeting notes, open-source software, and more ownership of their workday memory.',
     },
     {
       title: 'Wispr Flow Alternative',
@@ -110,7 +110,7 @@ export const siteData = {
       title: 'Otter.ai Alternative',
       path: '/otter-ai-alternative',
       url: 'https://muesli.works/otter-ai-alternative',
-      description: 'A practical Otter.ai alternative guide for macOS users who want local-first meeting transcription, no meeting bot by default, and notes they can own.',
+      description: 'An Otter.ai alternative guide for Mac users who want local-first meeting transcription, meeting notes without a bot, and notes they can own.',
     },
     {
       title: 'Fireflies.ai Alternative',
@@ -171,9 +171,9 @@ export const siteData = {
       description: 'Local meeting transcription on Mac and macOS for people who want meeting notes without a bot, with audio captured from their own computer.',
     },
     '/granola-alternative': {
-      title: 'Granola alternative for local-first meeting notes · Muesli',
+      title: 'Local Granola alternative for Mac meeting notes · Muesli',
       canonical: 'https://muesli.works/granola-alternative',
-      description: 'A Granola alternative for people who want local-first meeting transcription, open-source software, and meeting notes they own instead of renting workday memory from the cloud.',
+      description: 'A local Granola alternative for Mac users who want local-first meeting transcription, open-source software, and meeting notes they own instead of renting workday memory from the cloud.',
     },
     '/wispr-flow-alternative': {
       title: 'Wispr Flow alternative for local Mac dictation · Muesli',
@@ -181,9 +181,9 @@ export const siteData = {
       description: 'A Wispr Flow alternative for Mac and macOS users who want fast voice-to-text, local speech models, open-source software, and dictation they own instead of renting every spoken draft from the cloud.',
     },
     '/otter-ai-alternative': {
-      title: 'Otter.ai alternative for Mac meeting notes · Muesli',
+      title: 'Otter.ai alternative for Mac meeting notes without a bot · Muesli',
       canonical: 'https://muesli.works/otter-ai-alternative',
-      description: 'A fair Otter.ai alternative for macOS users who want local-first meeting transcription, no meeting bot by default, and notes they can own instead of renting meeting memory from the cloud.',
+      description: 'An Otter.ai alternative for Mac users who want local-first meeting transcription, meeting notes without a bot, and notes they can own instead of renting meeting memory from the cloud.',
     },
     '/fireflies-ai-alternative': {
       title: 'Fireflies.ai alternative for Mac meeting notes · Muesli',

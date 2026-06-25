@@ -746,7 +746,7 @@ const granolaAlternativeComparisonRows = [
 
 const granolaAlternativeFitCards = [
   {
-    title: 'Do you want meeting notes to start locally?',
+    title: 'Do you want a local Granola alternative?',
     body: 'Muesli records from the Mac already in the call, then keeps the transcript available before any optional summary layer gets involved.',
   },
   {
@@ -761,6 +761,10 @@ const granolaAlternativeFitCards = [
 
 const granolaAlternativeFaqItems = [
   {
+    question: 'Is there a local Granola alternative?',
+    answer: 'Yes. Muesli is a local Granola alternative for Mac users who want meeting transcription to start on their own computer, with open-source software and a transcript they can review before any optional summary layer is involved.',
+  },
+  {
     question: 'Is Muesli a Granola alternative?',
     answer: 'Yes, if you are looking for Mac meeting notes with local-first transcription, open-source software, and a workflow that starts from the computer already in the meeting. It is not a clone of Granola; it makes different tradeoffs.',
   },
@@ -771,6 +775,10 @@ const granolaAlternativeFaqItems = [
   {
     question: 'Does Muesli send a bot into meetings?',
     answer: 'No. Muesli records from your Mac instead of joining Zoom, Google Meet, Teams, or browser calls as another attendee.',
+  },
+  {
+    question: 'Can meeting transcription run locally on a Mac?',
+    answer: 'Yes. Muesli is built for local-first meeting transcription on Apple Silicon Macs. It captures meeting audio from the Mac in the call and keeps the transcript close before you decide whether to summarize, export, or share it.',
   },
   {
     question: 'Is Muesli open source?',
@@ -807,6 +815,10 @@ const wisprFlowAlternativeFaqItems = [
 
 const otterAiAlternativeFaqItems = [
   {
+    question: 'Is there an Otter.ai alternative that works without a meeting bot?',
+    answer: 'Yes. Muesli is an Otter.ai alternative for Mac users who want meeting transcription without a bot joining the call by default. It captures audio from the Mac already in the meeting, then keeps the transcript available for review, notes, and export.',
+  },
+  {
     question: 'Is Muesli an Otter.ai alternative?',
     answer: 'Yes, for macOS users who want local-first meeting transcription and meeting notes without relying on a cloud-first transcription workspace. It is not an Otter.ai clone; it is a different approach built around Mac capture, ownership, and open-source software.',
   },
@@ -825,6 +837,10 @@ const otterAiAlternativeFaqItems = [
   {
     question: 'Can Muesli make AI meeting summaries?',
     answer: 'Yes. Muesli can create meeting notes from transcripts, with summarization choices layered on top of the captured meeting record.',
+  },
+  {
+    question: 'Can meeting transcription run locally on a Mac?',
+    answer: 'Yes. Muesli is built for local-first meeting transcription on Apple Silicon Macs. The normal capture path starts from your own Mac rather than a hosted transcription workspace or meeting assistant bot.',
   },
   {
     question: 'Does local-first mean everything is offline?',
@@ -927,14 +943,14 @@ const alternativePageConfigs = {
     image: solarpunkOtterAiAlternativeUrl,
     imageAlt: 'A solarpunk meeting-notes workspace with an unbranded laptop, organized transcript pages, and no visible human face',
     kicker: 'Otter.ai alternative',
-    headline: 'An Otter.ai alternative for people who want to own their meeting memory.',
-    subcopy: 'Otter.ai is built for cloud transcription, meeting bots, and shared team notes. Muesli is for macOS users who want meeting audio captured from their own Mac, local-first transcripts, and a workflow that keeps meeting memory closer to the machine they control.',
+    headline: 'An Otter.ai alternative for Mac meeting notes without a bot.',
+    subcopy: 'Otter.ai is built for cloud transcription, meeting bots, and shared team notes. Muesli is for Mac and macOS users who want meeting audio captured from their own computer, local-first transcripts, and meeting memory closer to the machine they control.',
     secondaryHref: '/local-meeting-transcription-mac/',
     secondaryText: 'Read the meeting transcription guide',
-    articleHeadline: 'An Otter.ai alternative for local-first meeting notes',
+    articleHeadline: 'An Otter.ai alternative for Mac meeting notes without a bot',
     lede: [
       'There are good reasons to use Otter.ai: it is established, collaborative, and built around cloud meeting transcription at team scale.',
-      'But not every meeting note workflow needs another bot, another hosted transcript library, or another cloud place where your workday memory lives. If you want Mac meeting transcription that starts locally and stays inspectable, Muesli is the healthier alternative.',
+      'If you are looking for an Otter.ai alternative for Mac, the practical question is whether every meeting needs a bot, another hosted transcript library, or another cloud place where your workday memory lives. Muesli is built for meeting transcription that starts locally and stays inspectable.',
     ],
     sections: [
       {
@@ -944,8 +960,8 @@ const alternativePageConfigs = {
       },
       {
         eyebrow: 'Ownership',
-        title: 'Why look for an Otter.ai alternative on macOS?',
-        body: ['People usually look for an Otter.ai alternative when they want fewer cloud defaults. They may not want a bot joining meetings, may want more direct ownership of raw transcripts, or may prefer software that begins with local capture on the Mac already in the call.', 'The question is not whether cloud transcription can be useful. It is whether every meeting should start by renting your meeting memory back from a hosted system.'],
+        title: 'Why look for an Otter.ai alternative for Mac?',
+        body: ['People usually look for an Otter.ai alternative for Mac when they want fewer cloud defaults. They may not want a bot joining meetings, may want more direct ownership of raw transcripts, or may prefer software that begins with local capture on the Mac already in the call.', 'The question is not whether cloud transcription can be useful. It is whether every meeting should start by renting your meeting memory back from a hosted system.'],
       },
       {
         eyebrow: 'Choice',
@@ -964,14 +980,14 @@ const alternativePageConfigs = {
       },
     ],
     comparison: {
-      title: 'How is Muesli different from Otter.ai?',
+      title: 'How is Muesli different from Otter.ai for Mac users?',
       aria: 'Otter.ai vs Muesli comparison',
       rows: [
         ['Otter.ai', 'Cloud transcription, shared meeting notes, meeting bots, searchable conversations, and team collaboration.', 'Best for teams that want shared cloud meeting intelligence and centralized collaboration.'],
         ['Muesli', 'Local-first macOS speech workspace for dictation and meeting transcription with raw transcript review and exports.', 'Best for Mac users who want local-first meeting transcription, open-source software, and direct control.'],
       ],
     },
-    fitTitle: 'Where does Muesli fit best?',
+    fitTitle: 'When is Muesli the better Otter.ai alternative for Mac?',
     fitCards: [
       ['Want Mac meeting notes without a bot?', 'Use Muesli when you want to capture a meeting from your own Mac instead of inviting another assistant into the call.'],
       ['Want transcripts you can inspect and export?', 'Use Muesli when the raw transcript matters and you want notes or exports you can keep outside a hosted meeting workspace.'],
@@ -3070,7 +3086,7 @@ function GranolaAlternativePage() {
     {
       '@type': 'Article',
       '@id': `${routeMeta['/granola-alternative'].canonical}#article`,
-      headline: 'A Granola alternative for local-first meeting notes',
+      headline: 'A local Granola alternative for Mac meeting notes',
       description: routeMeta['/granola-alternative'].description,
       image: siteData.ogImageUrl,
       author: {
@@ -3093,11 +3109,11 @@ function GranolaAlternativePage() {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">Granola alternative</div>
-          <h1>A Granola alternative for the healthier version of your workday meeting notes.</h1>
+          <div className="seo-article-kicker">Local Granola alternative</div>
+          <h1>A local Granola alternative for the healthier version of your workday meeting notes.</h1>
           <p>
-            Muesli is for people who want local-first meeting transcription, open-source software, and notes they can
-            own instead of renting their workday memory from the cloud.
+            Muesli is for Mac users who want local-first meeting transcription, open-source software, and notes they
+            can own instead of renting their workday memory from the cloud.
           </p>
           <div className="seo-article-actions">
             <a className="primary-cta" href={downloadUrl}>
@@ -3112,6 +3128,11 @@ function GranolaAlternativePage() {
         </header>
 
         <section className="seo-article-section seo-article-lede">
+          <p>
+            If you are looking for a local Granola alternative, Muesli is the Mac-native path: capture meeting audio
+            from your own computer, keep the transcript reviewable, and choose what to summarize or export after the
+            source record exists.
+          </p>
           <p>
             Granola is a polished AI notepad for back-to-back meetings. It makes sense for people who want a managed,
             hosted place for meeting notes, summaries, templates, and searchable context.
@@ -3142,7 +3163,7 @@ function GranolaAlternativePage() {
         <section className="seo-article-section">
           <div className="seo-section-heading">
             <span>Ownership</span>
-            <h2>Why look for a Granola alternative?</h2>
+            <h2>Why look for a local Granola alternative?</h2>
           </div>
           <p>
             The reason is not that every hosted meeting-notes product is bad. The reason is ownership. Meetings contain
@@ -3158,7 +3179,7 @@ function GranolaAlternativePage() {
         <section className="seo-article-section seo-comparison-section">
           <div className="seo-section-heading">
             <span>Comparison</span>
-            <h2>Granola vs Muesli: what changes?</h2>
+            <h2>Granola vs Muesli: what changes for local meeting notes?</h2>
           </div>
           <div className="seo-comparison-table" role="table" aria-label="Granola vs Muesli comparison">
             <div className="seo-comparison-row seo-comparison-head" role="row">
@@ -3179,7 +3200,7 @@ function GranolaAlternativePage() {
         <section className="seo-article-section">
           <div className="seo-section-heading">
             <span>Fit</span>
-            <h2>When is Muesli the better Granola alternative?</h2>
+            <h2>When is Muesli the better local Granola alternative?</h2>
           </div>
           <div className="seo-card-grid">
             {granolaAlternativeFitCards.map((item) => (
