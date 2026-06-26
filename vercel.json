@@ -46,6 +46,10 @@
       "destination": "/best-dictation-apps-mac/index.html"
     },
     {
+      "source": "/best-offline-dictation-apps-mac",
+      "destination": "/best-offline-dictation-apps-mac/index.html"
+    },
+    {
       "source": "/offline-dictation-mac",
       "destination": "/offline-dictation-mac/index.html"
     },
@@ -62,8 +66,20 @@
       "destination": "/local-meeting-transcription-mac/index.html"
     },
     {
+      "source": "/bot-free-meeting-notes",
+      "destination": "/bot-free-meeting-notes/index.html"
+    },
+    {
+      "source": "/apple-dictation-alternative",
+      "destination": "/apple-dictation-alternative/index.html"
+    },
+    {
       "source": "/granola-alternative",
       "destination": "/granola-alternative/index.html"
+    },
+    {
+      "source": "/superwhisper-alternative",
+      "destination": "/superwhisper-alternative/index.html"
     },
     {
       "source": "/wispr-flow-alternative",

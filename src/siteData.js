@@ -71,6 +71,12 @@ export const siteData = {
       description: 'A fair 2026 guide to the best dictation apps for Mac and macOS, including Apple Dictation, Muesli, Superwhisper, Wispr Flow, VoiceInk, and other voice-to-text options.',
     },
     {
+      title: 'Best Offline Dictation Apps for Mac',
+      path: '/best-offline-dictation-apps-mac',
+      url: 'https://muesli.works/best-offline-dictation-apps-mac',
+      description: 'A practical comparison of offline dictation apps for Mac, including Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and Muesli with local models such as Parakeet, Whisper, and Qwen3 ASR.',
+    },
+    {
       title: 'Offline Dictation for Mac',
       path: '/offline-dictation-mac',
       url: 'https://muesli.works/offline-dictation-mac',
@@ -95,10 +101,28 @@ export const siteData = {
       description: 'A practical guide to local meeting transcription on Mac and macOS, meeting notes without a bot, and what can stay on your own computer.',
     },
     {
+      title: 'Bot-Free Meeting Notes',
+      path: '/bot-free-meeting-notes',
+      url: 'https://muesli.works/bot-free-meeting-notes',
+      description: 'A practical guide to AI meeting notes without a bot, using local-first meeting transcription from the Mac already in the call.',
+    },
+    {
+      title: 'Apple Dictation Alternative',
+      path: '/apple-dictation-alternative',
+      url: 'https://muesli.works/apple-dictation-alternative',
+      description: 'An Apple Dictation alternative guide for Mac users who want local-first dictation, offline speech-to-text models, open-source software, and meeting transcription on Apple Silicon.',
+    },
+    {
       title: 'Granola Alternative',
       path: '/granola-alternative',
       url: 'https://muesli.works/granola-alternative',
       description: 'A local Granola alternative guide for people who want local-first meeting notes, open-source software, and more ownership of their workday memory.',
+    },
+    {
+      title: 'Superwhisper Alternative',
+      path: '/superwhisper-alternative',
+      url: 'https://muesli.works/superwhisper-alternative',
+      description: 'A practical Superwhisper alternative guide for Mac users who want local-first dictation, meeting transcription, open-source code, and offline speech-to-text on Apple Silicon.',
     },
     {
       title: 'Wispr Flow Alternative',
@@ -150,6 +174,11 @@ export const siteData = {
       canonical: 'https://muesli.works/best-dictation-apps-mac',
       description: 'A practical 2026 comparison of the best dictation apps for Mac and macOS, including local-first voice-to-text, offline speech models, Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and Muesli.',
     },
+    '/best-offline-dictation-apps-mac': {
+      title: 'Best offline dictation apps for Mac · Muesli',
+      canonical: 'https://muesli.works/best-offline-dictation-apps-mac',
+      description: 'A practical comparison of offline dictation apps for Mac, including Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and Muesli with local models such as Parakeet, Whisper, and Qwen3 ASR.',
+    },
     '/offline-dictation-mac': {
       title: 'Offline dictation for Mac · Muesli',
       canonical: 'https://muesli.works/offline-dictation-mac',
@@ -170,10 +199,25 @@ export const siteData = {
       canonical: 'https://muesli.works/local-meeting-transcription-mac',
       description: 'Local meeting transcription on Mac and macOS for people who want meeting notes without a bot, with audio captured from their own computer.',
     },
+    '/bot-free-meeting-notes': {
+      title: 'Bot-free meeting notes for Mac · Muesli',
+      canonical: 'https://muesli.works/bot-free-meeting-notes',
+      description: 'AI meeting notes without sending a bot into Zoom, Google Meet, or Teams. Muesli records mic and system audio from the Mac already in the call, then transcribes locally.',
+    },
+    '/apple-dictation-alternative': {
+      title: 'Apple Dictation alternative for Mac · Muesli',
+      canonical: 'https://muesli.works/apple-dictation-alternative',
+      description: 'An Apple Dictation alternative for Mac users who want local-first dictation, offline speech-to-text models, open-source software, and meeting transcription on Apple Silicon.',
+    },
     '/granola-alternative': {
       title: 'Local Granola alternative for Mac meeting notes · Muesli',
       canonical: 'https://muesli.works/granola-alternative',
       description: 'A local Granola alternative for Mac users who want local-first meeting transcription, open-source software, and meeting notes they own instead of renting workday memory from the cloud.',
+    },
+    '/superwhisper-alternative': {
+      title: 'Superwhisper alternative for Mac local dictation · Muesli',
+      canonical: 'https://muesli.works/superwhisper-alternative',
+      description: 'A practical Superwhisper alternative for Mac users who want local-first dictation, meeting transcription, open-source code, and offline speech-to-text on Apple Silicon.',
     },
     '/wispr-flow-alternative': {
       title: 'Wispr Flow alternative for local Mac dictation · Muesli',
