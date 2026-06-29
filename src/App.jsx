@@ -1959,7 +1959,7 @@ function PixelGarden() {
         </div>
       </div>
       <div className="floating-capture">
-        <img className="capture-icon" src={iconUrl} alt="" />
+        <img className="capture-icon" src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <div className="capture-status">
           <span>listening</span>
           <div className="mini-wave">
@@ -2096,7 +2096,7 @@ function LegalPage({ page, path }) {
       <JsonLd data={structuredData} />
       <nav className="legal-nav">
         <a className="brand" href="/" aria-label="Muesli home">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <span>muesli</span>
         </a>
         <a className="legal-back" href="/">
@@ -2166,7 +2166,7 @@ function HelpPage() {
       <JsonLd data={structuredData} />
       <nav className="legal-nav">
         <a className="brand" href="/" aria-label="Muesli home">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <span>muesli</span>
         </a>
         <a className="legal-back" href="/">
@@ -2217,7 +2217,7 @@ function ChangelogPage() {
       <JsonLd data={structuredData} />
       <nav className="legal-nav">
         <a className="brand" href="/" aria-label="Muesli home">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <span>muesli</span>
         </a>
         <a className="legal-back" href="/">
@@ -2261,7 +2261,7 @@ function ProductPageNav() {
   return (
     <nav className="product-nav">
       <a className="brand" href="/" aria-label="Muesli home">
-        <img src={iconUrl} alt="" />
+        <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <span>muesli</span>
       </a>
       <div className="product-nav-links">
@@ -2465,7 +2465,7 @@ function MacDictationAppPage() {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>Want local dictation before adding another cloud speech service?</h2>
             <p>Open-source, Mac-native, and built for people who want speech-to-text to start on their own machine.</p>
@@ -2651,7 +2651,7 @@ function BestDictationAppsMacPage() {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>Try the local-first Mac dictation app on the list.</h2>
             <p>Open-source, Apple Silicon-native, and built for speech-to-text you can keep close to your own machine.</p>
@@ -2833,7 +2833,7 @@ function AppleNeuralEngineSpeechPage() {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>Try local speech-to-text built for Apple Silicon.</h2>
             <p>Use Muesli when you want dictation and meeting transcription to start on your Mac.</p>
@@ -3006,7 +3006,7 @@ function LocalSpeechToTextGlossaryPage() {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>Use the Mac app behind the glossary.</h2>
             <p>Muesli turns local speech-to-text terms into a working dictation and meeting notes workflow.</p>
@@ -3207,7 +3207,7 @@ function OfflineDictationMacPage() {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>Want offline dictation that starts on your own Mac?</h2>
             <p>Open-source, Mac-native, and built around local speech-to-text instead of a default cloud upload.</p>
@@ -3423,7 +3423,7 @@ function LocalMeetingTranscriptionMacPage() {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>Want meeting notes without sending a bot into the room?</h2>
             <p>Open-source, Mac-native, and built for local meeting transcription on Apple Silicon.</p>
@@ -3626,7 +3626,7 @@ function GranolaAlternativePage() {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>Switch to the healthier version of your workday morning cereal.</h2>
             <p>Local-first meeting notes, open-source software, and a transcript you can keep.</p>
@@ -3777,7 +3777,7 @@ function AlternativeComparisonPage({ route }) {
         </section>
 
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
             <h2>{config.ctaTitle}</h2>
             <p>{config.ctaBody}</p>
@@ -3811,7 +3811,7 @@ function OnDeviceDictationPage() {
       <ProductPageNav />
 
       <section className="product-hero">
-        <img className="product-hero-bg" src={presidioHeroBgUrl} alt="" aria-hidden="true" />
+        <img className="product-hero-bg" src={presidioHeroBgUrl} alt="Muesli on-device dictation for Mac shown in a calm solarpunk workspace" />
         <div className="product-hero-copy">
           <h1>Dictation that stays on your Mac.</h1>
           <p className="lede">
@@ -3883,7 +3883,7 @@ function OnDeviceDictationPage() {
           </div>
           <div className="notes-muesli-status" aria-label="Muesli dictation is listening locally">
             <div className="dictation-hotkey">
-              <img src={iconUrl} alt="" />
+              <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
               <span>Hold Right Cmd</span>
               <div className="mini-wave" aria-hidden="true">
                 <b />
@@ -3999,7 +3999,7 @@ function OnDeviceDictationPage() {
       </section>
 
       <section className="product-bottom-cta">
-        <img src={iconUrl} alt="" />
+        <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <h2>Try local-first dictation before renting another speech pipeline.</h2>
         <p>Open-source, Mac-native, and built for people who would rather keep their voice close.</p>
         <a className="primary-cta" href={downloadUrl}>
@@ -4030,7 +4030,7 @@ function MeetingNotesPage() {
       <ProductPageNav />
 
       <section className="product-hero meeting-hero">
-        <img className="product-hero-bg" src={solarpunkMeetingNotesUrl} alt="" aria-hidden="true" />
+        <img className="product-hero-bg" src={solarpunkMeetingNotesUrl} alt="Muesli local-first meeting notes workspace for Mac without a meeting bot" />
         <div className="product-hero-copy">
           <h1>Only Notes. No uninvited bots.</h1>
           <p className="lede">
@@ -4052,7 +4052,7 @@ function MeetingNotesPage() {
         <figure className="meeting-hero-card">
           <img src={solarpunkMeetingNotesUrl} alt="A warm solarpunk meeting workspace with notebooks, a laptop, and blurred people at the table" />
           <figcaption className="meeting-listening-pill" aria-label="Muesli is listening to this meeting">
-            <img src={iconUrl} alt="" />
+            <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
             <span className="meeting-listening-wave" aria-hidden="true">
               <i />
               <i />
@@ -4189,7 +4189,7 @@ function MeetingNotesPage() {
       </section>
 
       <section className="product-bottom-cta meeting-bottom-cta">
-        <img src={iconUrl} alt="" />
+        <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <h2>Try meeting notes that do not enter the room before you do.</h2>
         <p>Mac-native, local-first, and built around a transcript you can inspect.</p>
         <a className="primary-cta" href={downloadUrl}>
@@ -4220,7 +4220,7 @@ function LocalFirstPage() {
       <ProductPageNav />
 
       <section className="product-hero local-first-hero">
-        <img className="product-hero-bg" src={solarpunkLocalFirstUrl} alt="" aria-hidden="true" />
+        <img className="product-hero-bg" src={solarpunkLocalFirstUrl} alt="Local-first AI speech-to-text workspace for Mac with notes and on-device processing" />
         <div className="product-hero-copy">
           <h1>AI that stays on your Mac.</h1>
           <p className="lede">
@@ -4358,7 +4358,7 @@ function LocalFirstPage() {
       </section>
 
       <section className="product-bottom-cta">
-        <img src={iconUrl} alt="" />
+        <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <h2>Try speech-to-text that starts on the machine you already trust.</h2>
         <p>Open-source, Mac-native, and designed to keep the default path close.</p>
         <a className="primary-cta" href={downloadUrl}>
@@ -4436,7 +4436,7 @@ function LandingPage() {
       <JsonLd data={landingStructuredData} />
       <nav className="nav">
         <a className="brand" href="#top" aria-label="Muesli home">
-          <img src={iconUrl} alt="" />
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <span>muesli</span>
         </a>
         <div className="nav-links">
@@ -4463,7 +4463,7 @@ function LandingPage() {
       </nav>
 
       <section className="hero" id="top">
-        <img className="hero-bg-art" src={presidioHeroBgUrl} alt="" aria-hidden="true" />
+        <img className="hero-bg-art" src={presidioHeroBgUrl} alt="Muesli homepage hero showing a calm Mac speech-to-text workspace for dictation and meeting notes" />
         <div className="hero-copy">
           <p className="eyebrow"><Stars size={16} /> local-first speech workspace</p>
           <h1>Your speech should belong to you.</h1>
@@ -4527,7 +4527,7 @@ function LandingPage() {
               <p>{feature.body}</p>
               {feature.dictationPill && (
                 <div className="dictation-pill" aria-label="Muesli floating dictation control">
-                  <img src={iconUrl} alt="" />
+                  <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
                   <span>Hold Right Cmd to dictate</span>
                 </div>
               )}
@@ -4657,7 +4657,7 @@ function LandingPage() {
               <p>Works without internet after install, stays Mac-native, and pastes from your own machine without a meeting bot.</p>
               <div className="local-demo" aria-hidden="true">
                 <div className="local-core">
-                  <img src={iconUrl} alt="" />
+                  <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
                   <span>on your Mac</span>
                 </div>
                 <div className="local-trace">
@@ -4728,8 +4728,8 @@ function LandingPage() {
       </section>
 
       <section className="bottom-cta">
-        <img className="footer-bg-art" src={solarpunkBgUrl} alt="" aria-hidden="true" />
-        <img className="bottom-icon" src={iconUrl} alt="" />
+        <img className="footer-bg-art" src={solarpunkBgUrl} alt="Solarpunk speech workspace representing Muesli local dictation and meeting transcription on Mac" />
+        <img className="bottom-icon" src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <h2>Open-source speech workspace for your working memory.</h2>
         <p>Useful, local, and owned by the person doing the speaking.</p>
         <a className="primary-cta" href={downloadUrl}>
