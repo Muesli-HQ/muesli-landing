@@ -95,6 +95,24 @@ export const siteData = {
       description: 'A technical glossary for local speech-to-text on Mac, covering ASR versus speech-to-text, CoreML, Apple Neural Engine, Parakeet, Whisper, Qwen3 ASR, VAD, diarization, neural AEC, LocalVQE, and local-first transcription.',
     },
     {
+      title: 'ASR Architectures',
+      path: '/asr-architectures',
+      url: 'https://muesli.works/asr-architectures',
+      description: 'A practical guide to common speech-to-text architectures, including CTC, RNN-T, TDT, Conformer encoders, encoder-decoder Transformers, and streaming ASR.',
+    },
+    {
+      title: 'NVIDIA Parakeet Speech-to-Text',
+      path: '/nvidia-parakeet-speech-to-text',
+      url: 'https://muesli.works/nvidia-parakeet-speech-to-text',
+      description: 'A model guide to NVIDIA Parakeet speech-to-text, local English ASR, TDT and CTC model paths, and why Parakeet matters for fast Mac transcription.',
+    },
+    {
+      title: 'Whisper Speech-to-Text',
+      path: '/whisper-speech-to-text',
+      url: 'https://muesli.works/whisper-speech-to-text',
+      description: 'A model guide to OpenAI Whisper speech-to-text, encoder-decoder ASR, multilingual transcription, local inference, and Whisper tradeoffs on Mac.',
+    },
+    {
       title: 'Local Meeting Transcription for Mac',
       path: '/local-meeting-transcription-mac',
       url: 'https://muesli.works/local-meeting-transcription-mac',
@@ -199,6 +217,21 @@ export const siteData = {
       title: 'Local speech-to-text glossary for Mac · Muesli',
       canonical: 'https://muesli.works/local-speech-to-text-glossary',
       description: 'A technical glossary for local speech-to-text on Mac, including ASR versus speech-to-text, CoreML, Apple Neural Engine, Parakeet, Whisper, Qwen3 ASR, VAD, diarization, neural AEC, LocalVQE, and local-first transcription.',
+    },
+    '/asr-architectures': {
+      title: 'Common speech-to-text architectures · Muesli',
+      canonical: 'https://muesli.works/asr-architectures',
+      description: 'Common speech-to-text architectures explained: CTC, RNN-T, TDT, Conformer encoders, encoder-decoder Transformers, streaming ASR, and how model shape changes local transcription.',
+    },
+    '/nvidia-parakeet-speech-to-text': {
+      title: 'NVIDIA Parakeet speech-to-text guide · Muesli',
+      canonical: 'https://muesli.works/nvidia-parakeet-speech-to-text',
+      description: 'NVIDIA Parakeet speech-to-text explained for local English ASR, TDT and CTC model paths, fast Mac transcription, and Muesli’s local-first model strategy.',
+    },
+    '/whisper-speech-to-text': {
+      title: 'OpenAI Whisper speech-to-text guide · Muesli',
+      canonical: 'https://muesli.works/whisper-speech-to-text',
+      description: 'OpenAI Whisper speech-to-text explained: encoder-decoder ASR, multilingual transcription, local inference on Mac, and when Whisper is the right model choice.',
     },
     '/local-meeting-transcription-mac': {
       title: 'Local meeting transcription for Mac and macOS · Muesli',

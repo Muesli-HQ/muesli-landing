@@ -62,6 +62,18 @@
       "destination": "/local-speech-to-text-glossary/index.html"
     },
     {
+      "source": "/asr-architectures",
+      "destination": "/asr-architectures/index.html"
+    },
+    {
+      "source": "/nvidia-parakeet-speech-to-text",
+      "destination": "/nvidia-parakeet-speech-to-text/index.html"
+    },
+    {
+      "source": "/whisper-speech-to-text",
+      "destination": "/whisper-speech-to-text/index.html"
+    },
+    {
       "source": "/local-meeting-transcription-mac",
       "destination": "/local-meeting-transcription-mac/index.html"
     },

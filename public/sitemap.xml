@@ -55,6 +55,24 @@
     <priority>0.74</priority>
   </url>
   <url>
+    <loc>https://muesli.works/asr-architectures</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+  <url>
+    <loc>https://muesli.works/nvidia-parakeet-speech-to-text</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+  <url>
+    <loc>https://muesli.works/whisper-speech-to-text</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+  <url>
     <loc>https://muesli.works/local-meeting-transcription-mac</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>

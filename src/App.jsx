@@ -51,6 +51,9 @@ import solarpunkGranolaVsMuesliUrl from './assets/solarpunk-granola-vs-muesli.we
 import solarpunkWisprFlowAlternativeUrl from './assets/solarpunk-wispr-flow-alternative.webp';
 import solarpunkOtterAiAlternativeUrl from './assets/solarpunk-otter-ai-alternative.webp';
 import solarpunkFirefliesAiAlternativeUrl from './assets/solarpunk-fireflies-ai-alternative.webp';
+import asrArchitecturesHeaderUrl from './assets/asr-architectures-header.webp';
+import nvidiaParakeetSpeechToTextHeaderUrl from './assets/nvidia-parakeet-speech-to-text-header.webp';
+import whisperSpeechToTextHeaderUrl from './assets/whisper-speech-to-text-header.webp';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -1023,6 +1026,222 @@ const botFreeMeetingNotesFaqItems = [
   },
 ];
 
+const speechToTextGuideConfigs = {
+  '/asr-architectures': {
+    breadcrumb: 'ASR Architectures',
+    image: asrArchitecturesHeaderUrl,
+    imageAlt: 'Abstract minimalist diagram of speech-to-text architectures with audio waves flowing through CTC, transducer, encoder-decoder, and Conformer-style model paths',
+    kicker: 'Speech-to-text architecture',
+    headline: 'Common speech-to-text architectures, explained without the fog.',
+    subcopy: 'ASR is not one model shape. CTC, RNN-T, TDT, Conformer encoders, and encoder-decoder Transformers all make different bets about speed, streaming, alignment, and accuracy.',
+    articleHeadline: 'Common speech-to-text architectures explained',
+    lede: [
+      'Speech-to-text looks simple from the outside: audio goes in, words come out. Under the hood, the architecture decides almost everything that users feel: latency, streaming behavior, punctuation quality, robustness to noise, and whether the model is pleasant to run locally.',
+      'Muesli cares about these details because local ASR is not a slogan. If transcription starts on your Mac, the model shape has to respect power, latency, memory, and the fact that people do not want to manage a research project before a meeting note appears.',
+    ],
+    factsTitle: 'What are the main ASR architecture families?',
+    facts: [
+      ['CTC', 'Learns a monotonic alignment between audio frames and output tokens. It is simple, fast, and useful when you want efficient transcription without an autoregressive decoder.'],
+      ['RNN-T / Transducer', 'Predicts tokens while audio streams in, combining an acoustic encoder with a prediction network and joint network. It is a classic choice for low-latency streaming ASR.'],
+      ['TDT', 'Token-and-duration transducer extends the transducer idea by predicting token duration, which can make efficient long-form or streaming transcription more practical.'],
+      ['Encoder-decoder Transformer', 'Encodes audio features, then decodes text autoregressively with attention. Whisper popularized this style for robust multilingual transcription.'],
+      ['Conformer', 'Combines convolution with self-attention so the model can capture both local acoustic patterns and longer context. Many modern ASR encoders use Conformer-style blocks.'],
+      ['Surrounding systems', 'VAD, diarization, punctuation, neural AEC, and post-processing are not ASR architectures, but they decide whether transcription works in real meetings.'],
+    ],
+    sections: [
+      {
+        eyebrow: 'CTC',
+        title: 'When is CTC the right architecture for speech-to-text?',
+        body: ['CTC is attractive when you want a direct audio-to-token path with a monotonic alignment. It does not need a separate autoregressive decoder to emit every token, which makes it simpler and often faster to run.', 'The tradeoff is that CTC can be less expressive than decoder-heavy systems. It is a strong building block, not a magic answer for every meeting, accent, language, or punctuation problem.'],
+      },
+      {
+        eyebrow: 'Transducers',
+        title: 'Why do RNN-T and TDT matter for streaming ASR?',
+        body: ['Transducer models are built for the situation where audio is still arriving. Instead of waiting for the whole file, the model can emit text as speech continues. That is why RNN-T-style systems became common in live voice products.', 'TDT keeps the same broad streaming instinct but adds duration modeling. For local speech-to-text, this matters because streaming is not only about speed; it is also about doing useful work within memory and power limits.'],
+      },
+      {
+        eyebrow: 'Conformer',
+        title: 'Why do modern ASR models use Conformer encoders?',
+        body: ['Speech has local structure and long-range context. Convolution is good at local acoustic patterns; attention is good at broader context. Conformer combines both, which is why it shows up across modern ASR systems.', 'For Muesli, the practical lesson is simple: model architecture affects whether local inference feels instant or heavy. The best local model is not always the biggest model. It is the one whose architecture fits the job.'],
+      },
+      {
+        eyebrow: 'Whisper-style',
+        title: 'What makes encoder-decoder speech-to-text different?',
+        body: ['Encoder-decoder systems turn audio features into an internal representation, then decode text with an autoregressive language-like decoder. Whisper is the reference point many people know: robust, multilingual, and easy to reason about as a sequence-to-sequence model.', 'The cost is latency. Autoregressive decoding can be slower than more direct approaches, especially on smaller devices or short dictation snippets where every extra second is noticeable.'],
+      },
+      {
+        eyebrow: 'Muesli view',
+        title: 'What architecture is best for local speech-to-text on Mac?',
+        body: ['There is no single winner. Short dictation wants speed. Meeting transcription wants robustness over longer audio. Streaming wants low latency. Multilingual transcription wants broader training data and decoding behavior.', 'That is why Muesli supports multiple local model paths instead of pretending one architecture is always right. The product bet is that speech-to-text should start locally when it can, and the model should fit the workflow rather than the other way around.'],
+      },
+    ],
+    table: {
+      title: 'How do common ASR architectures compare?',
+      aria: 'Common ASR architecture comparison',
+      columns: ['Architecture', 'What it is good at', 'Tradeoff'],
+      rows: [
+        ['CTC', 'Fast, monotonic audio-to-token alignment and efficient decoding.', 'Less expressive than decoder-heavy systems for some language and formatting behavior.'],
+        ['RNN-T / Transducer', 'Streaming recognition where text appears while audio is still arriving.', 'More complex training and decoding path than plain CTC.'],
+        ['TDT', 'Efficient token plus duration modeling for streaming or long-form ASR.', 'Less familiar to many builders than CTC, RNN-T, or Whisper-style models.'],
+        ['Conformer encoder', 'Strong acoustic representation with local convolution and global attention.', 'Usually part of a larger ASR system rather than the whole product by itself.'],
+        ['Encoder-decoder Transformer', 'Robust transcription, multilingual behavior, and flexible sequence modeling.', 'Autoregressive decoding can add latency.'],
+      ],
+    },
+    relatedLinks: [
+      ['NVIDIA Parakeet speech-to-text', '/nvidia-parakeet-speech-to-text', 'A practical model guide for Parakeet, TDT, CTC, and why it is interesting for fast local English ASR.'],
+      ['OpenAI Whisper speech-to-text', '/whisper-speech-to-text', 'A model guide for Whisper, encoder-decoder ASR, multilingual transcription, and local inference tradeoffs.'],
+      ['Local speech-to-text glossary', '/local-speech-to-text-glossary', 'Definitions for ASR, VAD, diarization, neural AEC, CoreML, and Apple Neural Engine.'],
+      ['Apple Neural Engine speech-to-text on Mac', '/apple-neural-engine-speech-to-text-mac', 'Why local inference on Apple Silicon changes the economics and latency of speech-to-text.'],
+    ],
+    sources: [
+      ['Connectionist Temporal Classification', 'https://www.cs.toronto.edu/~graves/icml_2006.pdf'],
+      ['Sequence Transduction with Recurrent Neural Networks', 'https://arxiv.org/abs/1211.3711'],
+      ['Conformer: Convolution-augmented Transformer for Speech Recognition', 'https://arxiv.org/abs/2005.08100'],
+      ['Whisper: Robust Speech Recognition via Large-Scale Weak Supervision', 'https://arxiv.org/abs/2212.04356'],
+    ],
+  },
+  '/nvidia-parakeet-speech-to-text': {
+    breadcrumb: 'NVIDIA Parakeet Speech-to-Text',
+    image: nvidiaParakeetSpeechToTextHeaderUrl,
+    imageAlt: 'Abstract green and charcoal speech-to-text header with audio waves, fast local inference blocks, and token streams for NVIDIA Parakeet ASR',
+    logoPair: {
+      aria: 'Muesli loves NVIDIA Parakeet for local speech-to-text on Mac',
+      left: { src: iconUrl, alt: 'Muesli local speech-to-text app icon' },
+      right: { src: nvidiaUrl, alt: 'NVIDIA logo' },
+    },
+    kicker: 'NVIDIA Parakeet speech-to-text',
+    headline: 'Parakeet is the model family that makes local English STT feel practical.',
+    subcopy: 'NVIDIA Parakeet is interesting because it is not only another ASR benchmark name. For Mac users, it points toward fast, local, English speech-to-text that can make cloud transcription feel less inevitable.',
+    articleHeadline: 'NVIDIA Parakeet speech-to-text for local ASR',
+    lede: [
+      'Parakeet matters because it sits close to the Muesli thesis: modern local ASR can be fast enough and accurate enough for everyday English dictation and meeting transcription.',
+      'The important question is not whether cloud ASR still has a place. It does. The question is why a clear English sentence from your own Mac should need a cloud round trip before it becomes text.',
+    ],
+    factsTitle: 'What should I know about NVIDIA Parakeet?',
+    facts: [
+      ['Maker', 'Parakeet is an NVIDIA ASR model family published through NVIDIA NeMo and Hugging Face model releases.'],
+      ['Architecture', 'Parakeet releases include modern CTC and TDT-style ASR variants, which makes it relevant to both efficient decoding and transducer-style transcription.'],
+      ['Best wedge', 'Fast English speech-to-text is the obvious wedge: short dictation, notes, prompts, and meetings where local inference is good enough.'],
+      ['Muesli use', 'Muesli treats Parakeet as one of the local ASR paths that can make transcription start on the Mac instead of a hosted STT API.'],
+      ['Tradeoff', 'Parakeet is not a universal multilingual answer. It should be evaluated by language, accent, audio quality, and workflow.'],
+      ['Why it matters', 'When local English STT feels fast, the default argument for cloud transcription gets weaker.'],
+    ],
+    sections: [
+      {
+        eyebrow: 'Model fit',
+        title: 'Why is NVIDIA Parakeet good for local speech-to-text?',
+        body: ['Parakeet is useful because it makes the speed side of ASR feel real. If you are dictating a sentence, filing a Linear ticket, writing an email, or capturing a meeting note, latency changes whether speech-to-text becomes a habit.', 'A model that runs locally and returns text quickly changes the product shape. You do not need to rent a cloud transcription path for every short utterance if the Mac can do the job itself.'],
+      },
+      {
+        eyebrow: 'Architecture',
+        title: 'What architecture does Parakeet use?',
+        body: ['Parakeet is not one single architecture label. NVIDIA has released Parakeet variants around efficient ASR architectures such as CTC and TDT. The practical point is that Parakeet belongs to the family of models built for serious transcription speed and accuracy, not only offline research demos.', 'For users, architecture matters only when it changes behavior: fast local inference, acceptable accuracy, and fewer cases where the app feels like it is waiting on a remote service.'],
+      },
+      {
+        eyebrow: 'English ASR',
+        title: 'Is Parakeet strong enough for everyday English transcription?',
+        body: ['For many clear English dictation and meeting workflows, yes. Audio quality still matters. Accent, background noise, microphone choice, and meeting overlap still matter. But the floor has moved: local English ASR is no longer a toy category.', 'That is why Muesli can take a stronger position. The transcript can start on the Mac, and cloud summarization can remain an optional layer rather than the default speech-to-text path.'],
+      },
+      {
+        eyebrow: 'Muesli',
+        title: 'Why does Muesli care about Parakeet?',
+        body: ['Muesli is built around the belief that local speech-to-text should be the first option when it is good enough. Parakeet is one of the model families that makes that belief practical for English workflows.', 'The product experience is what matters: hold a hotkey, speak, release, and get useful text without turning every spoken thought into a hosted API request.'],
+      },
+    ],
+    table: {
+      title: 'Where does Parakeet fit among local ASR models?',
+      aria: 'Parakeet speech-to-text comparison',
+      columns: ['Model path', 'Best fit', 'Tradeoff'],
+      rows: [
+        ['NVIDIA Parakeet', 'Fast local English speech-to-text, short dictation, and practical meeting transcription paths.', 'Not the only answer for every language or noisy meeting.'],
+        ['OpenAI Whisper', 'Robust multilingual transcription and broadly understood encoder-decoder ASR behavior.', 'Can be slower for short dictation depending on model size and runtime.'],
+        ['Qwen3 ASR', 'Useful open model path for broader ASR experimentation and local model choice.', 'Latency and language behavior depend heavily on runtime and setup.'],
+      ],
+    },
+    relatedLinks: [
+      ['Common ASR architectures', '/asr-architectures', 'How CTC, RNN-T, TDT, Conformer, and encoder-decoder models differ.'],
+      ['Whisper speech-to-text', '/whisper-speech-to-text', 'Why Whisper became the reference point for robust multilingual ASR.'],
+      ['Apple Neural Engine speech-to-text on Mac', '/apple-neural-engine-speech-to-text-mac', 'How local inference hardware changes latency and power use for STT.'],
+      ['Best offline dictation apps for Mac', '/best-offline-dictation-apps-mac', 'Where local ASR models fit into actual Mac dictation workflows.'],
+    ],
+    sources: [
+      ['NVIDIA Parakeet collection on Hugging Face', 'https://huggingface.co/collections/nvidia/parakeet-66c3ff4f80a86fbe20e5e1b3'],
+      ['NVIDIA Parakeet TDT 0.6B v2 model card', 'https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2'],
+      ['NVIDIA NeMo ASR documentation', 'https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/intro.html'],
+    ],
+  },
+  '/whisper-speech-to-text': {
+    breadcrumb: 'Whisper Speech-to-Text',
+    image: whisperSpeechToTextHeaderUrl,
+    imageAlt: 'Abstract dark speech-to-text header with spectrogram layers, encoder-decoder attention paths, and transcript token streams for OpenAI Whisper',
+    logoPair: {
+      aria: 'Muesli loves OpenAI Whisper for robust speech-to-text',
+      left: { src: iconUrl, alt: 'Muesli local speech-to-text app icon' },
+      right: { src: openAiUrl, alt: 'OpenAI logo' },
+    },
+    kicker: 'OpenAI Whisper speech-to-text',
+    headline: 'Whisper made robust ASR feel obvious. Local products made the tradeoffs visible.',
+    subcopy: 'Whisper is the model that taught a lot of builders what modern speech-to-text could feel like: multilingual, robust, and open enough to run locally. The next question is when Whisper is the right model for the job.',
+    articleHeadline: 'OpenAI Whisper speech-to-text model guide',
+    lede: [
+      'Whisper became the default mental model for modern ASR because it was easy to try, surprisingly robust, multilingual, and backed by a large weakly supervised training recipe.',
+      'That does not mean Whisper is always the right local model. For Muesli, Whisper is one part of the model bench: excellent for robustness and language coverage, but worth comparing against faster local English paths such as Parakeet when dictation latency matters.',
+    ],
+    factsTitle: 'What should I know about Whisper?',
+    facts: [
+      ['Maker', 'Whisper was released by OpenAI as an open-source speech recognition and translation model family.'],
+      ['Training idea', 'The Whisper paper describes large-scale weak supervision across hundreds of thousands of hours of multilingual and multitask audio data.'],
+      ['Architecture', 'Whisper uses an encoder-decoder Transformer: audio features are encoded, then text is decoded autoregressively.'],
+      ['Strength', 'Robust multilingual transcription and translation made Whisper a strong default for many developers.'],
+      ['Tradeoff', 'Autoregressive decoding and larger model sizes can add latency, especially for short dictation.'],
+      ['Muesli view', 'Whisper is useful, but model choice should fit the workflow: dictation, meetings, language, accuracy, and latency are different jobs.'],
+    ],
+    sections: [
+      {
+        eyebrow: 'Basics',
+        title: 'What is OpenAI Whisper?',
+        body: ['Whisper is an automatic speech recognition model family from OpenAI. It can transcribe speech and, for some workflows, translate speech into English. Its popularity came from a rare combination: good results, open weights, broad language coverage, and a simple developer experience.', 'For users, Whisper made ASR feel less like a fragile enterprise API and more like a model you could actually run, test, and build around.'],
+      },
+      {
+        eyebrow: 'Architecture',
+        title: 'How does Whisper speech-to-text work?',
+        body: ['Whisper is an encoder-decoder Transformer. Audio is converted into log-mel spectrogram features, the encoder builds a representation of that audio, and the decoder generates text tokens autoregressively.', 'That architecture is powerful because it can model transcription as a sequence task with language context. The tradeoff is that decoding can be heavier than more direct ASR approaches, especially when the user expects instant short-form dictation.'],
+      },
+      {
+        eyebrow: 'Local inference',
+        title: 'Can Whisper run locally on Mac?',
+        body: ['Yes. Whisper can run locally through different runtimes and model sizes, including CoreML-friendly paths. The practical question is which size and runtime fit your workload.', 'For a long recording, a slower but robust model may be fine. For hold-to-talk dictation, the model has to feel immediate. That is why Muesli treats Whisper as one local option rather than the only serious answer.'],
+      },
+      {
+        eyebrow: 'Model choice',
+        title: 'Should I use Whisper or Parakeet for local STT?',
+        body: ['Use Whisper when robustness, multilingual behavior, and a familiar open ASR baseline matter. Use Parakeet when fast local English transcription is the sharper wedge.', 'The bigger point is that model choice should be explicit. A serious speech-to-text app should let the workflow pick the model, not force every sentence through one default just because it is famous.'],
+      },
+    ],
+    table: {
+      title: 'Where does Whisper fit among speech-to-text models?',
+      aria: 'Whisper speech-to-text comparison',
+      columns: ['Model path', 'Best fit', 'Tradeoff'],
+      rows: [
+        ['OpenAI Whisper', 'Robust multilingual transcription, translation workflows, and a widely understood open ASR baseline.', 'Can be heavier for short dictation depending on model size and runtime.'],
+        ['NVIDIA Parakeet', 'Fast local English ASR and practical low-latency transcription on modern hardware.', 'Less of a universal multilingual baseline than Whisper.'],
+        ['Cloud STT APIs', 'Managed transcription at scale, hosted maintenance, and centralized enterprise workflows.', 'Every transcript begins outside the machine unless you deliberately choose local-first software.'],
+      ],
+    },
+    relatedLinks: [
+      ['Common ASR architectures', '/asr-architectures', 'Why Whisper’s encoder-decoder design differs from CTC, RNN-T, TDT, and Conformer-heavy systems.'],
+      ['NVIDIA Parakeet speech-to-text', '/nvidia-parakeet-speech-to-text', 'The local English ASR model family that makes fast dictation feel practical.'],
+      ['Local speech-to-text glossary', '/local-speech-to-text-glossary', 'Definitions for ASR, log-mel features, VAD, diarization, AEC, and local inference.'],
+      ['Offline dictation for Mac', '/offline-dictation-mac', 'How local models such as Whisper fit into real Mac dictation workflows.'],
+    ],
+    sources: [
+      ['OpenAI Whisper announcement', 'https://openai.com/index/whisper/'],
+      ['OpenAI Whisper GitHub repository', 'https://github.com/openai/whisper'],
+      ['Whisper paper', 'https://arxiv.org/abs/2212.04356'],
+    ],
+  },
+};
+
 const alternativePageConfigs = {
   '/granola-vs-muesli': {
     breadcrumb: 'Granola vs Muesli',
@@ -1874,7 +2093,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2109,6 +2328,9 @@ const footerDirectoryColumns = [
       ['Offline dictation for Mac', '/offline-dictation-mac'],
       ['Apple Neural Engine speech-to-text', '/apple-neural-engine-speech-to-text-mac'],
       ['Local speech-to-text glossary', '/local-speech-to-text-glossary'],
+      ['ASR architectures', '/asr-architectures'],
+      ['NVIDIA Parakeet STT', '/nvidia-parakeet-speech-to-text'],
+      ['Whisper speech-to-text', '/whisper-speech-to-text'],
       ['Local meeting transcription', '/local-meeting-transcription-mac'],
       ['Bot-free meeting notes', '/bot-free-meeting-notes'],
     ],
@@ -3913,6 +4135,181 @@ function AlternativeComparisonPage({ route }) {
   );
 }
 
+function SpeechToTextGuidePage({ route }) {
+  const config = speechToTextGuideConfigs[route];
+
+  useEffect(() => {
+    const meta = routeMeta[route];
+    document.title = meta.title;
+    setCanonicalUrl(route);
+  }, [route]);
+
+  const structuredData = baseStructuredData(route, [
+    pageBreadcrumb(route, config.breadcrumb),
+    {
+      '@type': 'Article',
+      '@id': `${routeMeta[route].canonical}#article`,
+      headline: config.articleHeadline,
+      description: routeMeta[route].description,
+      image: siteData.ogImageUrl,
+      author: {
+        '@type': 'Organization',
+        name: siteData.name,
+      },
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+      mainEntityOfPage: { '@id': `${routeMeta[route].canonical}#webpage` },
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page stt-guide-page">
+      <JsonLd data={structuredData} />
+      <ProductPageNav />
+
+      <article className="seo-article">
+        <figure className={`seo-article-image ${config.logoPair ? 'seo-article-image-logo' : ''}`}>
+          <img src={config.image} alt={config.imageAlt} />
+          {config.logoPair ? (
+            <div className="model-logo-lockup" aria-label={config.logoPair.aria}>
+              <img src={config.logoPair.left.src} alt={config.logoPair.left.alt} />
+              <span aria-hidden="true">♡</span>
+              <span className="model-logo-partner">
+                <img src={config.logoPair.right.src} alt={config.logoPair.right.alt} />
+              </span>
+            </div>
+          ) : null}
+        </figure>
+
+        <header className="seo-article-hero">
+          <div className="seo-article-kicker">{config.kicker}</div>
+          <h1>{config.headline}</h1>
+          <p>{config.subcopy}</p>
+          <div className="seo-article-actions">
+            <a className="primary-cta" href={downloadUrl}>
+              <Download size={19} />
+              Download for macOS
+            </a>
+            <a className="secondary-cta" href="/local-speech-to-text-glossary">
+              Read the glossary
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </header>
+
+        <section className="seo-article-section seo-article-lede">
+          {config.lede.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Model map</span>
+            <h2>{config.factsTitle}</h2>
+          </div>
+          <div className="seo-card-grid seo-guide-fact-grid">
+            {config.facts.map(([title, body]) => (
+              <article key={title}>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {config.sections.slice(0, 2).map((section) => (
+          <section className="seo-article-section" key={section.title}>
+            <div className="seo-section-heading">
+              <span>{section.eyebrow}</span>
+              <h2>{section.title}</h2>
+            </div>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </section>
+        ))}
+
+        <section className="seo-article-section seo-comparison-section">
+          <div className="seo-section-heading">
+            <span>Comparison</span>
+            <h2>{config.table.title}</h2>
+          </div>
+          <div className="seo-comparison-table" role="table" aria-label={config.table.aria}>
+            <div className="seo-comparison-row seo-comparison-head" role="row">
+              {config.table.columns.map((column) => (
+                <strong key={column}>{column}</strong>
+              ))}
+            </div>
+            {config.table.rows.map((row) => (
+              <div className="seo-comparison-row" role="row" key={row[0]}>
+                <strong>{row[0]}</strong>
+                <span>{row[1]}</span>
+                <span>{row[2]}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {config.sections.slice(2).map((section) => (
+          <section className="seo-article-section" key={section.title}>
+            <div className="seo-section-heading">
+              <span>{section.eyebrow}</span>
+              <h2>{section.title}</h2>
+            </div>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </section>
+        ))}
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Keep reading</span>
+            <h2>Where should I go next?</h2>
+          </div>
+          <div className="seo-card-grid">
+            {config.relatedLinks.map(([title, href, body]) => (
+              <article key={href}>
+                <h3>
+                  <a href={href}>{title}</a>
+                </h3>
+                <p>{body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="seo-article-section">
+          <div className="seo-section-heading">
+            <span>Sources</span>
+            <h2>Primary sources and model references</h2>
+          </div>
+          <ul className="seo-source-list">
+            {config.sources.map(([title, href]) => (
+              <li key={href}>
+                <a href={href} target="_blank" rel="noreferrer">{title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <footer className="seo-article-cta">
+          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
+          <div>
+            <h2>Want the speech-to-text layer to start on your own Mac?</h2>
+            <p>Muesli is open-source, Mac-native, and built around local ASR models for dictation and meeting transcription on Apple Silicon.</p>
+          </div>
+          <a className="primary-cta" href={downloadUrl}>
+            <span className="apple-mark" aria-hidden="true"></span>
+            Download Muesli
+          </a>
+        </footer>
+      </article>
+      <SiteFooterDirectory compact />
+    </main>
+  );
+}
+
 function OnDeviceDictationPage() {
   useEffect(() => {
     const meta = routeMeta['/on-device-dictation'];
@@ -4921,6 +5318,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/local-speech-to-text-glossary') {
     return <LocalSpeechToTextGlossaryPage />;
+  }
+
+  if (path === '/asr-architectures' || path === '/nvidia-parakeet-speech-to-text' || path === '/whisper-speech-to-text') {
+    return <SpeechToTextGuidePage route={path} />;
   }
 
   if (path === '/local-meeting-transcription-mac') {
