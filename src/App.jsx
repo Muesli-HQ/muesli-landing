@@ -4894,7 +4894,7 @@ function LandingPage() {
   const { releases, releaseStatus } = useStableReleases();
 
   useEffect(() => {
-    document.title = 'Muesli - speak, and keep your notes close';
+    document.title = 'Muesli - open-source Mac dictation and local speech-to-text';
     setCanonicalUrl('/');
   }, []);
 
@@ -4985,8 +4985,9 @@ function LandingPage() {
           <p className="eyebrow"><Stars size={16} /> local-first speech workspace</p>
           <h1>Your speech should belong to you.</h1>
           <p className="lede">
-            Muesli is an open-source Mac app for dictation and meeting notes. Speak naturally, paste clean text,
-            and keep transcripts close. Do not rent out speech to the cloud when it should be yours.
+            Muesli is an open-source Mac app for local speech-to-text, AI dictation, and meeting
+            transcription. Speak naturally, paste clean text, and keep transcripts close instead of
+            renting out speech to the cloud.
           </p>
           <div className="cta-row">
             <a className="primary-cta" href={downloadUrl}>

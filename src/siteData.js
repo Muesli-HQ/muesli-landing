@@ -3,8 +3,8 @@ export const siteData = {
   name: 'Muesli',
   legalName: 'Muesli',
   tagline: 'Speak, and keep your notes close.',
-  description: 'Muesli is an open-source Mac app for on-device dictation, local-first meeting transcription, and private speech-to-text on Apple Silicon.',
-  shortDescription: 'Open-source local-first dictation and meeting notes for macOS.',
+  description: 'Muesli is an open-source Mac app for local speech-to-text, dictation, and meeting transcription on Apple Silicon with Parakeet, Whisper, and no cloud STT by default.',
+  shortDescription: 'Open-source Mac dictation, local speech-to-text, and meeting notes.',
   downloadUrl: 'https://muesli.works/download/',
   homebrewCommand: 'brew tap pHequals7/muesli && brew install --cask muesli',
   repositoryUrl: 'https://github.com/pHequals7/muesli',
@@ -18,11 +18,13 @@ export const siteData = {
   softwareRequirements: 'Apple Silicon Mac',
   applicationCategory: 'ProductivityApplication',
   keyFacts: [
-    'Runs speech-to-text locally on Apple Silicon.',
-    'Supports hold-to-talk dictation and meeting transcription.',
+    'Runs local speech-to-text on Apple Silicon with model paths such as Parakeet and Whisper.',
+    'Dictate across Mac apps and paste clean text at the cursor.',
+    'Supports hold-to-talk AI dictation and meeting transcription.',
     'Captures meeting audio from your own Mac without adding a meeting bot.',
     'Stores dictations, transcripts, and meeting notes locally by default.',
     'Open-source and inspectable on GitHub.',
+    'No cloud speech-to-text API is required for the default local transcription path after models are installed.',
     'Optional services such as OpenAI, OpenRouter, ChatGPT, and Google Calendar are explicit integrations, not the default transcription path.',
   ],
   technicalFacts: [
@@ -169,9 +171,9 @@ export const siteData = {
   ],
   routes: {
     '/': {
-      title: 'Muesli - speak, and keep your notes close',
+      title: 'Muesli - open-source Mac dictation and local speech-to-text',
       canonical: 'https://muesli.works/',
-      description: 'Muesli is a local-first Mac app for dictation, meeting notes, and private speech-to-text.',
+      description: 'Muesli is an open-source Mac app for local speech-to-text, dictation, and meeting transcription on Apple Silicon with Parakeet and Whisper.',
     },
     '/privacy': {
       title: 'Privacy Policy · Muesli',
