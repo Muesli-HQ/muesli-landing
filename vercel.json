@@ -78,6 +78,10 @@
       "destination": "/granola-alternative/index.html"
     },
     {
+      "source": "/granola-vs-muesli",
+      "destination": "/granola-vs-muesli/index.html"
+    },
+    {
       "source": "/superwhisper-alternative",
       "destination": "/superwhisper-alternative/index.html"
     },

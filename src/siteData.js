@@ -119,6 +119,12 @@ export const siteData = {
       description: 'A local Granola alternative guide for people who want local-first meeting notes, open-source software, and more ownership of their workday memory.',
     },
     {
+      title: 'Granola vs Muesli',
+      path: '/granola-vs-muesli',
+      url: 'https://muesli.works/granola-vs-muesli',
+      description: 'A Granola vs Muesli comparison for Mac users deciding between hosted AI meeting notes and open-source local-first meeting transcription.',
+    },
+    {
       title: 'Superwhisper Alternative',
       path: '/superwhisper-alternative',
       url: 'https://muesli.works/superwhisper-alternative',
@@ -213,6 +219,11 @@ export const siteData = {
       title: 'Local Granola alternative for Mac meeting notes · Muesli',
       canonical: 'https://muesli.works/granola-alternative',
       description: 'A local Granola alternative for Mac users who want local-first meeting transcription, open-source software, and meeting notes they own instead of renting workday memory from the cloud.',
+    },
+    '/granola-vs-muesli': {
+      title: 'Granola vs Muesli for local meeting notes · Muesli',
+      canonical: 'https://muesli.works/granola-vs-muesli',
+      description: 'Granola vs Muesli for Mac users comparing hosted AI meeting notes with open-source local-first transcription, raw transcript ownership, and fewer cloud defaults.',
     },
     '/superwhisper-alternative': {
       title: 'Superwhisper alternative for Mac local dictation · Muesli',

@@ -47,6 +47,7 @@ import solarpunkAppleNeuralEngineSpeechUrl from './assets/solarpunk-apple-neural
 import solarpunkLocalSpeechGlossaryUrl from './assets/solarpunk-local-speech-glossary.webp';
 import solarpunkLocalMeetingTranscriptionUrl from './assets/solarpunk-local-meeting-transcription.webp';
 import solarpunkGranolaAlternativeUrl from './assets/solarpunk-granola-alternative.webp';
+import solarpunkGranolaVsMuesliUrl from './assets/solarpunk-granola-vs-muesli.webp';
 import solarpunkWisprFlowAlternativeUrl from './assets/solarpunk-wispr-flow-alternative.webp';
 import solarpunkOtterAiAlternativeUrl from './assets/solarpunk-otter-ai-alternative.webp';
 import solarpunkFirefliesAiAlternativeUrl from './assets/solarpunk-fireflies-ai-alternative.webp';
@@ -790,6 +791,37 @@ const granolaAlternativeFaqItems = [
   },
 ];
 
+const granolaVsMuesliFaqItems = [
+  {
+    question: 'What is the difference between Granola and Muesli?',
+    answer: 'Granola is a polished hosted AI meeting notepad. Muesli is an open-source Mac app where meeting transcription starts locally on Apple Silicon, with a raw transcript you can inspect before any optional summary layer gets involved.',
+  },
+  {
+    question: 'Is Muesli better than Granola for local meeting transcription?',
+    answer: 'Yes, if the thing you care about is local-first meeting transcription, open-source software, and transcript ownership. Granola is better if you want a managed hosted AI notepad and are comfortable with meeting memory living in another cloud workspace.',
+  },
+  {
+    question: 'Why pay for a hosted meeting notes app if local speech-to-text works on Mac?',
+    answer: 'That is the practical question. For clear English speech, modern local ASR models have become strong enough for many everyday dictation and meeting workflows. If local transcription is good enough for your meetings, paying mainly for a hosted transcript layer starts to look like added sugar.',
+  },
+  {
+    question: 'Is local speech-to-text as accurate as cloud transcription?',
+    answer: 'It depends on audio quality, accents, noise, model choice, and meeting style. The important change is that local models such as Parakeet, Whisper, and Qwen3 ASR are now good enough that cloud transcription should be a choice, not the automatic default for every meeting.',
+  },
+  {
+    question: 'Does Muesli send a bot into meetings?',
+    answer: 'No. Muesli records microphone and system audio from the Mac already in the call instead of joining Zoom, Google Meet, Teams, or browser calls as another participant.',
+  },
+  {
+    question: 'Why does open source matter for meeting notes?',
+    answer: 'Meeting notes apps handle sensitive work memory. Muesli being open source makes the app more inspectable and debuggable: technical users can review how the product is built, how releases change, and where local transcription fits into the workflow.',
+  },
+  {
+    question: 'Does local-first mean Muesli never uses the cloud?',
+    answer: 'No. Local-first means the transcription path starts on your Mac. Optional summarization providers, calendar sync, downloads, and updates may still use the internet, but they are separate from the default speech-to-text path.',
+  },
+];
+
 const wisprFlowAlternativeFaqItems = [
   {
     question: 'Is Muesli a Wispr Flow alternative?',
@@ -992,6 +1024,74 @@ const botFreeMeetingNotesFaqItems = [
 ];
 
 const alternativePageConfigs = {
+  '/granola-vs-muesli': {
+    breadcrumb: 'Granola vs Muesli',
+    faqItems: granolaVsMuesliFaqItems,
+    image: solarpunkGranolaVsMuesliUrl,
+    imageAlt: 'A watercolor solarpunk garden workspace comparing a sugary granola bowl with raw muesli beside a Mac, microphone, and local meeting transcript notebook, with no visible human faces',
+    kicker: 'Granola vs Muesli',
+    headline: 'Granola has the sugar. Muesli keeps your transcript safe and healthy.',
+    subcopy: 'Granola is a polished hosted AI notepad. Muesli is the open-source Mac app for people who think local speech-to-text has advanced far enough that every meeting transcript should not start in someone else’s cloud.',
+    secondaryHref: '/granola-alternative/',
+    secondaryText: 'Read the Granola alternative guide',
+    articleHeadline: 'Granola vs Muesli for local-first meeting notes',
+    lede: [
+      'Granola is good at the sweetened hosted-notes workflow: capture context, write summaries, organize meeting memory, and keep the experience polished. That convenience is real. It is also the added sugar.',
+      'Muesli takes the rawer side. The transcript should start on your Mac, stay inspectable, and only become an AI summary after you decide what should happen to the source record.',
+    ],
+    sections: [
+      {
+        eyebrow: 'Local STT',
+        title: 'Why pay for hosted meeting notes when local speech-to-text is this good?',
+        body: ['The old argument for cloud transcription was simple: local models were not good enough, especially for real work. That argument is getting weaker. For clear English speech, local ASR models such as Parakeet, Whisper, and Qwen3 ASR are now good enough for many everyday dictation and meeting workflows.', 'Cloud transcription can still be useful. The point is narrower: if local speech-to-text is good enough for your workday, paying mainly to move every transcript into a hosted meeting layer starts to look less like infrastructure and more like sugar.'],
+      },
+      {
+        eyebrow: 'Privacy',
+        title: 'What changes when the transcript starts on your Mac instead of a cloud workspace?',
+        body: ['A meeting transcript is not a harmless note. It is work memory: customer names, decisions, half-formed plans, hiring conversations, product issues, and the messy parts that never make it into the final summary.', 'Muesli keeps the first transcription step closer to the machine already in the meeting. That does not make privacy magical, and it does not remove your responsibility to record with consent. It does mean the default path is narrower: capture locally, transcribe locally, inspect the raw record, then choose what deserves a summary or external service.'],
+      },
+      {
+        eyebrow: 'Open source',
+        title: 'Why does open-source meeting transcription matter?',
+        body: ['Closed meeting tools ask for a lot of trust. You are supposed to believe the capture path, storage behavior, model choices, permissions, and export story are all doing what the product page says.', 'Muesli makes a different bet. Open-source software is not automatically perfect, but it is debuggable. You can inspect the code, follow releases, understand the architecture, and see how local transcription fits into the product instead of treating the meeting stack as a black box.'],
+      },
+      {
+        eyebrow: 'Added sugar',
+        title: 'What is the “added sugar” in hosted AI meeting notes?',
+        body: ['The added sugar is everything that feels smooth in the moment but quietly turns into another place your work has to live: a hosted transcript library, a cloud knowledge layer, a generated memory feed, another subscription, another search box, another workspace to maintain.', 'Granola can be the right product if that is exactly what you want. Muesli is for people who would rather keep the raw ingredients: local audio capture, local speech-to-text, a transcript they can inspect, and optional AI on top instead of cloud memory by default.'],
+      },
+      {
+        eyebrow: 'Choice',
+        title: 'When should Mac users choose Muesli over Granola?',
+        body: ['Choose Muesli if you want the transcript to begin on your own Mac, if you care about open-source inspectability, if you want meeting notes without a bot, or if you are tired of renting your workday memory from cloud products.', 'Choose Granola if you want the sweetened hosted experience: polished summaries, a managed meeting notepad, and a product that feels more like a cloud workspace than a local Mac tool. That is a valid tradeoff. It is just not the one Muesli is making.'],
+      },
+    ],
+    comparison: {
+      title: 'Should I use Granola or Muesli for meeting notes?',
+      aria: 'Granola vs Muesli comparison',
+      rows: [
+        ['Granola', 'People who want a polished hosted AI notepad, summaries, templates, and a managed meeting memory layer.', 'Best when convenience matters more than local-first transcription, source transcript ownership, and open-source inspectability.'],
+        ['Muesli', 'Mac users who want local-first meeting transcription, no meeting bot, open-source code, and raw transcripts they can inspect or export.', 'Best when you want the speech layer to start on your own machine instead of becoming another rented cloud habit.'],
+        ['Manual notes', 'People who want full control and do not need transcripts, diarization, or searchable meeting records.', 'Free and private by default, but easy to miss decisions, wording, and follow-ups.'],
+      ],
+    },
+    fitTitle: 'When is Muesli the better choice than Granola?',
+    fitCards: [
+      ['Do you trust local English STT now?', 'Use Muesli when local speech-to-text is good enough for your meetings and you do not want every transcript to begin in a hosted service.'],
+      ['Do you want the raw transcript?', 'Use Muesli when the source record matters. Summaries are useful, but the transcript is what lets you verify what was actually said.'],
+      ['Do you want software you can debug?', 'Use Muesli when open-source code, release history, and a visible local-first architecture matter more than a closed hosted notepad.'],
+    ],
+    relatedLinks: [
+      ['Local Granola alternative for Mac meeting notes', '/granola-alternative', 'The closer page for people already searching for a Granola replacement with local-first transcription.'],
+      ['Local meeting transcription for Mac', '/local-meeting-transcription-mac', 'How Muesli captures mic and system audio from the Mac already in the meeting.'],
+      ['Bot-free meeting notes', '/bot-free-meeting-notes', 'Why Muesli avoids sending another AI participant into Zoom, Meet, or Teams.'],
+      ['Local speech-to-text glossary', '/local-speech-to-text-glossary', 'Definitions for ASR, VAD, diarization, neural AEC, Parakeet, Whisper, Qwen3 ASR, and CoreML.'],
+      ['Apple Neural Engine speech-to-text on Mac', '/apple-neural-engine-speech-to-text-mac', 'Why Apple Silicon makes local transcription faster and more power-efficient than a cloud round trip.'],
+    ],
+    faqTitle: 'What do people ask when comparing Granola and Muesli?',
+    ctaTitle: 'Choose the raw meeting transcript before the added sugar.',
+    ctaBody: 'Download Muesli for Mac if you want local-first meeting notes, open-source software, and a source record you can inspect before AI rewrites it.',
+  },
   '/superwhisper-alternative': {
     breadcrumb: 'Superwhisper Alternative',
     faqItems: superwhisperAlternativeFaqItems,
@@ -1774,7 +1874,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2018,6 +2118,7 @@ const footerDirectoryColumns = [
     links: [
       ['Apple Dictation alternative', '/apple-dictation-alternative'],
       ['Granola alternative', '/granola-alternative'],
+      ['Granola vs Muesli', '/granola-vs-muesli'],
       ['Superwhisper alternative', '/superwhisper-alternative'],
       ['Wispr Flow alternative', '/wispr-flow-alternative'],
       ['Otter.ai alternative', '/otter-ai-alternative'],
@@ -3761,6 +3862,25 @@ function AlternativeComparisonPage({ route }) {
           </div>
         </section>
 
+        {config.relatedLinks ? (
+          <section className="seo-article-section">
+            <div className="seo-section-heading">
+              <span>Keep reading</span>
+              <h2>Where should I go next if I care about local meeting transcription?</h2>
+            </div>
+            <div className="seo-card-grid">
+              {config.relatedLinks.map(([title, href, body]) => (
+                <article key={href}>
+                  <h3>
+                    <a href={href}>{title}</a>
+                  </h3>
+                  <p>{body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <section className="seo-article-section seo-faq-section">
           <div className="seo-section-heading">
             <span>FAQ</span>
@@ -4819,7 +4939,7 @@ export function App({ pathname = '/' }) {
     return <GranolaAlternativePage />;
   }
 
-  if (path === '/superwhisper-alternative' || path === '/wispr-flow-alternative' || path === '/otter-ai-alternative' || path === '/fireflies-ai-alternative') {
+  if (path === '/granola-vs-muesli' || path === '/superwhisper-alternative' || path === '/wispr-flow-alternative' || path === '/otter-ai-alternative' || path === '/fireflies-ai-alternative') {
     return <AlternativeComparisonPage route={path} />;
   }
 
