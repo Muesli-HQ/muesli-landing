@@ -2309,6 +2309,14 @@ function LinkedInLogo(props) {
   );
 }
 
+function YouTubeLogo(props) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" {...props}>
+      <path d="M23.5 6.2a3.03 3.03 0 0 0-2.13-2.14C19.5 3.56 12 3.56 12 3.56s-7.5 0-9.37.5A3.03 3.03 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.03 3.03 0 0 0 2.13 2.14c1.87.5 9.37.5 9.37.5s7.5 0 9.37-.5a3.03 3.03 0 0 0 2.13-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z" />
+    </svg>
+  );
+}
+
 const footerDirectoryColumns = [
   {
     title: 'Product',
@@ -2362,6 +2370,7 @@ const footerDirectoryColumns = [
     links: [
       ['X', 'https://x.com/fastspeech2text'],
       ['LinkedIn', 'https://www.linkedin.com/company/mueslios/'],
+      ['YouTube', 'https://www.youtube.com/@MuesliHQ'],
       ['Privacy', '/privacy'],
       ['Terms', '/terms'],
     ],
@@ -5260,6 +5269,9 @@ function LandingPage() {
           </a>
           <a href="https://www.linkedin.com/company/mueslios/" target="_blank" rel="noreferrer" aria-label="Follow Muesli on LinkedIn">
             <LinkedInLogo />
+          </a>
+          <a href="https://www.youtube.com/@MuesliHQ" target="_blank" rel="noreferrer" aria-label="Subscribe to Muesli on YouTube">
+            <YouTubeLogo />
           </a>
         </div>
         <SiteFooterDirectory />

@@ -12,6 +12,7 @@ export const siteData = {
   latestReleaseUrl: 'https://github.com/pHequals7/muesli/releases/latest',
   xUrl: 'https://x.com/fastspeech2text',
   linkedinUrl: 'https://www.linkedin.com/company/mueslios/',
+  youtubeUrl: 'https://www.youtube.com/@MuesliHQ',
   logoUrl: 'https://muesli.works/icon.png',
   ogImageUrl: 'https://muesli.works/og-muesli.jpg',
   operatingSystem: 'macOS',
@@ -307,6 +308,7 @@ export const sameAsLinks = [
   siteData.repositoryUrl,
   siteData.xUrl,
   siteData.linkedinUrl,
+  siteData.youtubeUrl,
 ];
 
 export const supportFaqItems = [
