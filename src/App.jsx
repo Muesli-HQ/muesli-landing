@@ -68,6 +68,8 @@ import blinkitLogoSvg from './assets/company-wordmarks/blinkit.svg?raw';
 import kalaariLogoUrl from './assets/company-wordmarks/kalaari.png';
 import datadogLogoUrl from './assets/company-wordmarks/datadog.png';
 import razorpayLogoUrl from './assets/company-wordmarks/razorpay.png';
+import nvidiaWordmarkUrl from './assets/company-wordmarks/nvidia.png';
+import lightspeedLogoUrl from './assets/company-wordmarks/lightspeed.png';
 import { changelogLinks, sameAsLinks, siteData, supportFaqItems } from './siteData.js';
 
 const downloadUrl = '/download/';
@@ -368,11 +370,13 @@ const userLogos = [
   { name: 'Atlassian', svg: atlassianLogoSvg },
   { name: 'Goldman Sachs', svg: goldmanSachsLogoSvg },
   { name: 'Datadog', img: datadogLogoUrl },
+  { name: 'NVIDIA', img: nvidiaWordmarkUrl },
   { name: 'Blinkit', svg: blinkitLogoSvg },
   { name: 'Razorpay', img: razorpayLogoUrl },
   { name: 'BCG', svg: bcgLogoSvg },
   { name: 'Kalaari Capital', img: kalaariLogoUrl },
   { name: 'Accel', svg: accelLogoSvg },
+  { name: 'Lightspeed', img: lightspeedLogoUrl },
   { name: 'Delivery Hero', svg: deliveryHeroLogoSvg },
   { name: 'Automattic', svg: automatticLogoSvg },
   { name: 'WordPress', svg: wordpressLogoSvg },
@@ -5012,11 +5016,11 @@ function LandingPage() {
             className={`brew-pill${brewCopied ? ' is-copied' : ''}`}
             type="button"
             onClick={copyBrewCommand}
-            aria-label="Copy Homebrew install command"
+            aria-label="Copy official Homebrew cask install command"
           >
             {brewCopied ? <ClipboardCheck size={16} /> : <Clipboard size={16} />}
             <code>{brewCommand}</code>
-            <span>{brewCopied ? 'Copied' : 'Copy'}</span>
+            <span>{brewCopied ? 'Copied' : 'Official cask'}</span>
           </button>
         </div>
         <PixelGarden />

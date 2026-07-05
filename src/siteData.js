@@ -6,7 +6,7 @@ export const siteData = {
   description: 'Muesli is an open-source Mac app for local speech-to-text, dictation, and meeting transcription on Apple Silicon with Parakeet, Whisper, and no cloud STT by default.',
   shortDescription: 'Open-source Mac dictation, local speech-to-text, and meeting notes.',
   downloadUrl: 'https://muesli.works/download/',
-  homebrewCommand: 'brew tap pHequals7/muesli && brew install --cask muesli',
+  homebrewCommand: 'brew install --cask muesli',
   repositoryUrl: 'https://github.com/pHequals7/muesli',
   releasesUrl: 'https://github.com/pHequals7/muesli/releases',
   latestReleaseUrl: 'https://github.com/pHequals7/muesli/releases/latest',
