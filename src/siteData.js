@@ -117,6 +117,12 @@ export const siteData = {
       description: 'A model guide to OpenAI Whisper speech-to-text, encoder-decoder ASR, multilingual transcription, local inference, and Whisper tradeoffs on Mac.',
     },
     {
+      title: 'Medical Dictation for Mac',
+      path: '/medical-dictation-mac',
+      url: 'https://muesli.works/medical-dictation-mac',
+      description: 'A healthcare dictation guide for doctors and medical professionals on Mac who want privacy-focused local speech-to-text before clinical notes move into EHR workflows.',
+    },
+    {
       title: 'Local Meeting Transcription for Mac',
       path: '/local-meeting-transcription-mac',
       url: 'https://muesli.works/local-meeting-transcription-mac',
@@ -237,6 +243,11 @@ export const siteData = {
       title: 'OpenAI Whisper speech-to-text guide · Muesli',
       canonical: 'https://muesli.works/whisper-speech-to-text',
       description: 'OpenAI Whisper speech-to-text explained: encoder-decoder ASR, multilingual transcription, local inference on Mac, and when Whisper is the right model choice.',
+    },
+    '/medical-dictation-mac': {
+      title: 'Medical dictation for Mac and healthcare transcription · Muesli',
+      canonical: 'https://muesli.works/medical-dictation-mac',
+      description: 'Medical dictation for doctors and healthcare professionals on Mac: local speech-to-text on Apple Silicon, privacy-focused drafts, and how Muesli compares with Dragon, Abridge, Suki, Nabla, DeepScribe, Augmedix, and Freed.',
     },
     '/local-meeting-transcription-mac': {
       title: 'Local meeting transcription for Mac and macOS · Muesli',
