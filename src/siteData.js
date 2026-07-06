@@ -15,6 +15,7 @@ export const siteData = {
   youtubeUrl: 'https://www.youtube.com/@MuesliHQ',
   logoUrl: 'https://muesli.works/icon.png',
   ogImageUrl: 'https://muesli.works/og-muesli.jpg',
+  homebrewOgImageUrl: 'https://muesli.works/og-muesli-brew.jpg?v=20260706-1',
   operatingSystem: 'macOS',
   softwareRequirements: 'Apple Silicon Mac',
   applicationCategory: 'ProductivityApplication',
@@ -175,6 +176,7 @@ export const siteData = {
       title: 'Muesli - open-source Mac dictation and local speech-to-text',
       canonical: 'https://muesli.works/',
       description: 'Muesli is an open-source Mac app for local speech-to-text, dictation, and meeting transcription on Apple Silicon with Parakeet and Whisper.',
+      ogDescription: 'Local speech-to-text, AI dictation, and meeting transcription for Mac. Run ASR on-device with Parakeet, Whisper, and Apple Silicon.',
     },
     '/privacy': {
       title: 'Privacy Policy · Muesli',
