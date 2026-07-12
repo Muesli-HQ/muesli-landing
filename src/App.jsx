@@ -51,6 +51,7 @@ import solarpunkGranolaVsMuesliUrl from './assets/solarpunk-granola-vs-muesli.we
 import solarpunkWisprFlowAlternativeUrl from './assets/solarpunk-wispr-flow-alternative.webp';
 import solarpunkOtterAiAlternativeUrl from './assets/solarpunk-otter-ai-alternative.webp';
 import solarpunkFirefliesAiAlternativeUrl from './assets/solarpunk-fireflies-ai-alternative.webp';
+import solarpunkMedicalDictationMacUrl from './assets/solarpunk-medical-dictation-mac.png';
 import asrArchitecturesHeaderUrl from './assets/asr-architectures-header.webp';
 import nvidiaParakeetSpeechToTextHeaderUrl from './assets/nvidia-parakeet-speech-to-text-header.webp';
 import whisperSpeechToTextHeaderUrl from './assets/whisper-speech-to-text-header.webp';
@@ -1244,6 +1245,88 @@ const speechToTextGuideConfigs = {
       ['Whisper paper', 'https://arxiv.org/abs/2212.04356'],
     ],
   },
+  '/medical-dictation-mac': {
+    breadcrumb: 'Medical Dictation for Mac',
+    image: solarpunkMedicalDictationMacUrl,
+    imageAlt: 'Solarpunk medical dictation workspace on a MacBook with local transcript notes, a microphone, private on-device processing, and no visible human faces',
+    kicker: 'Medical dictation for Mac',
+    headline: 'The best medical dictation tool might be the one that starts on your own Mac.',
+    subcopy: 'Doctors have been dictating notes forever. The part that changed is the privacy question: should every first draft, patient instruction, and clinical thought start in a cloud transcription pipeline?',
+    articleHeadline: 'Medical dictation for Mac with local speech-to-text',
+    factsEyebrow: 'Quick answer',
+    tableEyebrow: 'Which tool fits?',
+    sourceHeading: 'Product sources and healthcare AI references',
+    ctaTitle: 'Keep the first draft of clinical speech on your own Mac.',
+    ctaBody: 'Muesli is open-source, Mac-native, and built around local ASR models for privacy-focused dictation and meeting transcription on Apple Silicon.',
+    lede: [
+      'Medical transcription is not a new AI category. It is one of the oldest reasons people cared about speech-to-text in the first place. Doctors dictated notes because typing after a full clinic day is miserable, because the phrasing matters, and because the fastest interface for clinical thought is still speech.',
+      'What feels new in 2026 is not that clinicians want less paperwork. That part was obvious. The new question is where the audio goes before it becomes text. Muesli’s answer is intentionally narrow: if you are a doctor, therapist, dentist, nurse practitioner, clinic operator, or healthcare professional using a MacBook with Apple Silicon, the first draft should be able to start locally on your own machine.',
+    ],
+    factsTitle: 'What is the right solution for medical dictation on Mac?',
+    facts: [
+      ['If you need full EHR workflow', 'Look at Dragon Medical One, Dragon Copilot, Abridge, Suki, Nabla, DeepScribe, Augmedix, or Freed. They are built for clinical documentation systems, ambient scribing, coding, and health-system deployment.'],
+      ['If you need private first drafts', 'Use a local speech layer. Muesli is strongest when you want referral drafts, patient instructions, chart-adjacent notes, or internal summaries to begin on your Mac before they move anywhere else.'],
+      ['If you care about patient data minimization', 'Local transcription is the cleanest default. Audio becomes text on-device instead of starting as another cloud upload, vendor workspace item, or ambient recording pipeline.'],
+      ['If you use Apple Silicon', 'Modern local ASR models such as Parakeet, Whisper, and Qwen3 ASR make private Mac dictation much more practical than the old “local models are toys” story.'],
+      ['If you need clinical compliance sign-off', 'Treat Muesli as software your organization still needs to evaluate. Local-first architecture helps the privacy story, but it is not a replacement for policy, consent, BAA review, or clinical documentation controls.'],
+      ['If you want the honest answer', 'Muesli is not trying to be Epic. It is trying to be the local speech-to-text layer before Epic, email, notes, documents, or your approved clinical system.'],
+    ],
+    sections: [
+      {
+        eyebrow: 'Question',
+        title: 'What is the right solution for a medical dictation scribe?',
+        body: ['The right solution depends on what you are actually buying. If you want an ambient scribe that sits inside the clinical workflow, writes SOAP notes, stages codes, and integrates with the EHR, then you should evaluate the healthcare-native tools. Dragon, Abridge, Suki, Nabla, DeepScribe, Augmedix, Freed, and the newer Microsoft clinical workflow products exist for that reason.', 'But not every clinician speech workflow needs to become an enterprise AI scribe. A lot of the day is rough drafting: a patient instruction, a referral note, a message to staff, a pre-charting thought, a handoff summary, a personal note before the official note. For that layer, Muesli is the sharper answer: private local dictation on the Mac you already use.'],
+      },
+      {
+        eyebrow: 'Question',
+        title: 'Why should healthcare dictation run locally when possible?',
+        body: ['Because medical speech is not normal office speech. It can contain names, symptoms, diagnoses, medications, lab results, insurance context, family history, and the messy clinical reasoning that never belongs in a marketing demo.', 'Cloud systems can be appropriate when they are approved, contracted, audited, and integrated. The mistake is making cloud upload the default for every spoken draft. Local speech-to-text gives healthcare professionals a simpler starting point: say the thing, get the text, review it, then decide where it belongs.'],
+      },
+      {
+        eyebrow: 'Question',
+        title: 'How is Muesli different from Dragon Medical One, Abridge, Suki, Nabla, DeepScribe, Augmedix, and Freed?',
+        body: ['Those products are competing to own more of the clinical documentation workflow. That can be useful. Dragon Medical One is the obvious speech-recognition incumbent. Abridge, Suki, Nabla, DeepScribe, Augmedix, Freed, and Dragon Copilot are closer to ambient clinical AI: listen to the encounter, structure the note, push toward EHR-ready documentation, and help healthcare teams move faster through paperwork.', 'Muesli is not trying to out-enterprise the enterprise products. It is trying to make the first transcript local. That is a different bet. You can still paste the reviewed output wherever your workflow allows, but the raw speech-to-text pass does not need to begin in someone else’s workspace.'],
+      },
+      {
+        eyebrow: 'Question',
+        title: 'Is local speech-to-text accurate enough for healthcare notes?',
+        body: ['For final clinical documentation, the answer should always include review. Review medication names. Review dosages. Review negations. Review anything that could affect care. That is true whether the transcript came from a cloud medical scribe or a local ASR model.', 'The more practical question is whether local transcription is good enough for first drafts. For many clear English dictation workflows, modern local models are now good enough to be useful. They are especially compelling for notes that need to become text quickly but do not need an ambient cloud scribe sitting over the whole encounter.'],
+      },
+      {
+        eyebrow: 'Question',
+        title: 'Can doctors use Muesli as a privacy-focused medical transcription app?',
+        body: ['Yes, with the right boundary. Muesli is a strong fit when a healthcare professional wants local dictation, local meeting transcription, and private drafts on a Mac. It is not a certified EHR, billing product, autonomous medical scribe, or substitute for organizational compliance review.', 'That is exactly why the positioning matters. Muesli is privacy-focused by architecture: open-source, Mac-native, and built so the default speech-to-text path can run on-device. In healthcare, that is not the whole answer. But it is a much better starting point than pretending every rough clinical thought needs to become a cloud recording first.'],
+      },
+    ],
+    table: {
+      title: 'What is the best medical dictation option for each workflow?',
+      aria: 'Medical dictation and healthcare transcription comparison',
+      columns: ['Tool category', 'Best fit', 'Tradeoff'],
+      rows: [
+        ['Dragon Medical One', 'Classic medical speech recognition and mature clinical documentation workflows.', 'Best for the managed clinical documentation lane, not for open-source local-first Mac transcription.'],
+        ['Abridge / Suki / Nabla', 'Ambient clinical documentation, EHR integrations, coding support, and health-system rollout.', 'Great when the goal is enterprise workflow coverage; heavier when you just want a private first draft.'],
+        ['DeepScribe / Augmedix / Freed', 'AI medical scribe workflows, SOAP-note drafting, specialty templates, and practice-level documentation help.', 'Useful clinical-note products, but still not the same as keeping the first transcript local on your own Mac.'],
+        ['Muesli', 'Doctors and healthcare professionals on Mac who want local dictation, private drafts, open-source software, and transcript ownership before text moves elsewhere.', 'Not an EHR or billing system. The clinician still reviews everything and follows the organization’s privacy and documentation rules.'],
+      ],
+    },
+    relatedLinks: [
+      ['Mac dictation app', '/mac-dictation-app', 'How Muesli works as a local speech-to-text layer across everyday Mac apps.'],
+      ['Offline dictation for Mac', '/offline-dictation-mac', 'Why local ASR matters when you do not want every spoken draft to start with a cloud upload.'],
+      ['Apple Neural Engine speech-to-text on Mac', '/apple-neural-engine-speech-to-text-mac', 'How Apple Silicon changes the latency and privacy tradeoffs for local transcription.'],
+      ['Local speech-to-text glossary', '/local-speech-to-text-glossary', 'Definitions for ASR, local inference, diarization, neural AEC, Parakeet, Whisper, Qwen3 ASR, and CoreML.'],
+      ['Bot-free meeting notes', '/bot-free-meeting-notes', 'For care-team discussions where the Mac already in the call can capture notes without adding a meeting bot.'],
+    ],
+    sources: [
+      ['Microsoft Dragon Medical One', 'https://www.microsoft.com/en-us/health-solutions/clinical-workflow/dragon-medical-one'],
+      ['Microsoft Dragon Copilot', 'https://www.microsoft.com/en-us/health-solutions/clinical-workflow/dragon-copilot'],
+      ['Abridge clinical conversations platform', 'https://www.abridge.com/product'],
+      ['Suki AI assistant for clinicians', 'https://www.suki.ai/clinicians/'],
+      ['Nabla ambient AI and dictation', 'https://www.nabla.com/'],
+      ['DeepScribe AI medical scribe', 'https://www.deepscribe.ai/'],
+      ['Augmedix ambient AI documentation', 'https://www.augmedix.com/'],
+      ['Freed AI medical scribe', 'https://www.getfreed.ai/'],
+    ],
+  },
 };
 
 const alternativePageConfigs = {
@@ -2097,7 +2180,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2343,6 +2426,7 @@ const footerDirectoryColumns = [
       ['ASR architectures', '/asr-architectures'],
       ['NVIDIA Parakeet STT', '/nvidia-parakeet-speech-to-text'],
       ['Whisper speech-to-text', '/whisper-speech-to-text'],
+      ['Medical dictation for Mac', '/medical-dictation-mac'],
       ['Local meeting transcription', '/local-meeting-transcription-mac'],
       ['Bot-free meeting notes', '/bot-free-meeting-notes'],
     ],
@@ -4217,7 +4301,7 @@ function SpeechToTextGuidePage({ route }) {
 
         <section className="seo-article-section">
           <div className="seo-section-heading">
-            <span>Model map</span>
+            <span>{config.factsEyebrow || 'Model map'}</span>
             <h2>{config.factsTitle}</h2>
           </div>
           <div className="seo-card-grid seo-guide-fact-grid">
@@ -4244,7 +4328,7 @@ function SpeechToTextGuidePage({ route }) {
 
         <section className="seo-article-section seo-comparison-section">
           <div className="seo-section-heading">
-            <span>Comparison</span>
+            <span>{config.tableEyebrow || 'Comparison'}</span>
             <h2>{config.table.title}</h2>
           </div>
           <div className="seo-comparison-table" role="table" aria-label={config.table.aria}>
@@ -4295,7 +4379,7 @@ function SpeechToTextGuidePage({ route }) {
         <section className="seo-article-section">
           <div className="seo-section-heading">
             <span>Sources</span>
-            <h2>Primary sources and model references</h2>
+            <h2>{config.sourceHeading || 'Primary sources and model references'}</h2>
           </div>
           <ul className="seo-source-list">
             {config.sources.map(([title, href]) => (
@@ -4309,8 +4393,8 @@ function SpeechToTextGuidePage({ route }) {
         <footer className="seo-article-cta">
           <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <div>
-            <h2>Want the speech-to-text layer to start on your own Mac?</h2>
-            <p>Muesli is open-source, Mac-native, and built around local ASR models for dictation and meeting transcription on Apple Silicon.</p>
+            <h2>{config.ctaTitle || 'Want the speech-to-text layer to start on your own Mac?'}</h2>
+            <p>{config.ctaBody || 'Muesli is open-source, Mac-native, and built around local ASR models for dictation and meeting transcription on Apple Silicon.'}</p>
           </div>
           <a className="primary-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
@@ -5337,7 +5421,7 @@ export function App({ pathname = '/' }) {
     return <LocalSpeechToTextGlossaryPage />;
   }
 
-  if (path === '/asr-architectures' || path === '/nvidia-parakeet-speech-to-text' || path === '/whisper-speech-to-text') {
+  if (speechToTextGuideConfigs[path]) {
     return <SpeechToTextGuidePage route={path} />;
   }
 

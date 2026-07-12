@@ -74,6 +74,10 @@
       "destination": "/whisper-speech-to-text/index.html"
     },
     {
+      "source": "/medical-dictation-mac",
+      "destination": "/medical-dictation-mac/index.html"
+    },
+    {
       "source": "/local-meeting-transcription-mac",
       "destination": "/local-meeting-transcription-mac/index.html"
     },

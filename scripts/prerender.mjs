@@ -10,13 +10,45 @@ const template = await readFile(templatePath, 'utf8');
 const { prerenderRoutes, render, getMeta } = await import(pathToFileURL(serverEntry).href);
 const { generateAgentFiles } = await import(pathToFileURL(path.join(root, 'src', 'agentFiles.js')).href);
 
+function escapeHtmlAttribute(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeRegExp(value = '') {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function replaceMetaContent(html, selector, content) {
+  const escapedContent = escapeHtmlAttribute(content);
+  const [attribute, value] = selector;
+  const pattern = new RegExp(
+    `<meta(?=[^>]*\\s${attribute}="${escapeRegExp(value)}")[^>]*\\scontent="[^"]*"[^>]*>`,
+    'g'
+  );
+  return html.replace(pattern, `<meta ${attribute}="${value}" content="${escapedContent}" />`);
+}
+
 function withHeadMeta(html, meta) {
   let next = html.replace(/<title>.*?<\/title>/, `<title>${meta.title}</title>`);
 
   next = next.replace(
     /<meta\s+name="description"\s+content="[^"]*"\s*\/>/,
-    `<meta name="description" content="${meta.description}" />`
+    `<meta name="description" content="${escapeHtmlAttribute(meta.description)}" />`
   );
+
+  next = replaceMetaContent(next, ['property', 'og:url'], meta.ogUrl);
+  next = replaceMetaContent(next, ['property', 'og:title'], meta.ogTitle);
+  next = replaceMetaContent(next, ['property', 'og:description'], meta.ogDescription);
+  next = replaceMetaContent(next, ['property', 'og:image'], meta.ogImage);
+  next = replaceMetaContent(next, ['property', 'og:image:secure_url'], meta.ogImage);
+  next = replaceMetaContent(next, ['property', 'og:image:alt'], meta.ogImageAlt);
+  next = replaceMetaContent(next, ['name', 'twitter:title'], meta.ogTitle);
+  next = replaceMetaContent(next, ['name', 'twitter:description'], meta.ogDescription);
+  next = replaceMetaContent(next, ['name', 'twitter:image'], meta.ogImage);
 
   const canonical = `<link rel="canonical" href="${meta.canonical}" />`;
   next = next.includes('rel="canonical"')
