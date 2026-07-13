@@ -159,10 +159,10 @@ export const siteData = {
       description: 'A practical Superwhisper alternative guide for Mac users who want local-first dictation, meeting transcription, open-source code, and offline speech-to-text on Apple Silicon.',
     },
     {
-      title: 'Wispr Flow Alternative',
+      title: 'Best Wispr Flow Alternatives for Mac',
       path: '/wispr-flow-alternative',
       url: 'https://muesli.works/wispr-flow-alternative',
-      description: 'A practical Wispr Flow alternative guide for Mac and macOS users who want local-first dictation, offline speech models, and more ownership of voice-to-text.',
+      description: 'A practical 2026 comparison of the best Wispr Flow alternatives for Mac, including Muesli, Superwhisper, VoiceInk, Apple Dictation, and offline open-source speech-to-text options.',
     },
     {
       title: 'Otter.ai Alternative',
@@ -286,9 +286,9 @@ export const siteData = {
       description: 'A practical Superwhisper alternative for Mac users who want local-first dictation, meeting transcription, open-source code, and offline speech-to-text on Apple Silicon.',
     },
     '/wispr-flow-alternative': {
-      title: 'Wispr Flow alternative for local Mac dictation · Muesli',
+      title: 'Best Wispr Flow Alternatives for Mac in 2026 · Muesli',
       canonical: 'https://muesli.works/wispr-flow-alternative',
-      description: 'A Wispr Flow alternative for Mac and macOS users who want fast voice-to-text, local speech models, open-source software, and dictation they own instead of renting every spoken draft from the cloud.',
+      description: 'The best Wispr Flow alternatives for Mac in 2026, compared by price, platform, offline support, privacy, and workflow. Muesli is the open-source local-first pick for Apple Silicon.',
     },
     '/otter-ai-alternative': {
       title: 'Otter.ai alternative for Mac meeting notes without a bot · Muesli',

@@ -848,24 +848,24 @@ const granolaVsMuesliFaqItems = [
 
 const wisprFlowAlternativeFaqItems = [
   {
-    question: 'Is Muesli a Wispr Flow alternative?',
-    answer: 'Yes. Muesli can be a Wispr Flow alternative for Mac users who want local-first dictation, offline speech-to-text models, and open-source software. It is not a cross-platform voice keyboard; it is focused on macOS and Apple Silicon.',
+    question: 'What is the best Wispr Flow alternative for Mac?',
+    answer: 'For Mac users who want local speech-to-text, offline-capable models, and open-source software, Muesli is the strongest fit. Superwhisper and VoiceInk are worth comparing when you want dedicated dictation products with different workflow and pricing choices.',
   },
   {
-    question: 'Does Muesli work on macOS?',
-    answer: 'Yes. Muesli is a native macOS app for Apple Silicon Macs. It supports dictation from the menu bar and can paste cleaned text back into the app you were already using.',
+    question: 'Is there a free Wispr Flow alternative?',
+    answer: 'Yes. Muesli is open source and available as a native Mac app. Its normal local speech-to-text path does not require a hosted speech API after the models are installed, while optional cloud summaries remain a separate choice.',
   },
   {
-    question: 'Does Muesli use offline models such as Parakeet and Whisper?',
-    answer: 'Yes. Muesli supports local ASR options including Parakeet and Whisper, with other model paths available for different accuracy and latency tradeoffs.',
+    question: 'Is there an offline Wispr Flow alternative for Mac?',
+    answer: 'Muesli is built around local ASR models such as Parakeet and Whisper on Apple Silicon. Dictation can continue without a network connection after the model is installed, although downloads, updates, and optional integrations still need the internet.',
   },
   {
-    question: 'Is Muesli better than Wispr Flow for privacy?',
-    answer: 'Muesli is better for users who want the normal speech-to-text path to start locally on their Mac. That is different from claiming every feature is always offline. Optional integrations and cloud summarization are separate choices.',
+    question: 'Is Muesli open source?',
+    answer: 'Yes. Muesli is open-source Mac software, so the application and its local-first approach are inspectable in a way a closed hosted voice layer is not. Open source is not a magic privacy guarantee, but it makes the product easier to understand and debug.',
   },
   {
-    question: 'Should I switch from Wispr Flow to Muesli?',
-    answer: 'Switch if your priority is local-first Mac dictation, transcript ownership, open-source software, and offline-capable speech-to-text. Stay with Wispr Flow if you want polished cross-platform dictation across desktop and mobile.',
+    question: 'Can Muesli replace Wispr Flow?',
+    answer: 'For Mac dictation, often yes. Muesli supports hold-to-talk capture, paste at the cursor, local ASR, and meeting transcription. Wispr Flow remains the better fit if you specifically need a polished cross-platform voice keyboard across desktop and mobile.',
   },
 ];
 
@@ -1661,65 +1661,75 @@ const alternativePageConfigs = {
     ctaBody: 'Download Muesli for Mac and keep meeting capture, transcripts, and notes closer to the machine you control.',
   },
   '/wispr-flow-alternative': {
-    breadcrumb: 'Wispr Flow Alternative',
+    breadcrumb: 'Best Wispr Flow Alternatives for Mac',
     faqItems: wisprFlowAlternativeFaqItems,
     image: impressionistWhisperUrl,
     imageAlt: 'Original Impressionist-inspired salon painting of one person whispering an observation to another in a sunlit room',
-    kicker: 'Wispr Flow alternative',
-    headline: 'A Wispr Flow alternative for people who want to own their voice-to-text workflow.',
-    subcopy: 'Wispr Flow is a polished AI voice keyboard for speaking into apps across Mac, Windows, iPhone, and Android. Muesli is for Mac and macOS users who want dictation to start locally, stay inspectable, and turn speech into text without renting every spoken draft back from the cloud.',
+    kicker: 'Wispr Flow alternatives for Mac in 2026',
+    headline: 'The best Wispr Flow alternatives for Mac in 2026.',
+    subcopy: 'Muesli is the strongest fit for Mac users who want a free, open-source, offline-capable alternative to Wispr Flow. Compare the serious options by platform, privacy, local speech-to-text, and how much of your voice workflow you actually get to own.',
     secondaryHref: '/mac-dictation-app/',
     secondaryText: 'Read the Mac dictation guide',
-    articleHeadline: 'A Wispr Flow alternative for local Mac dictation',
+    articleHeadline: 'The best Wispr Flow alternatives for Mac in 2026',
     lede: [
-      'The best voice-to-text app is not always the one with the most magic. Sometimes it is the one you can understand.',
-      'If your dictation contains private drafts, prompts, emails, notes, code comments, or unfinished thinking, the place where speech becomes text matters. Muesli is built around a simpler default: hold a hotkey, speak, release, and let local speech-to-text models such as Parakeet and Whisper transcribe on your Mac.',
+      'If you are looking for Wispr Flow alternatives, the real choice is not just which app has the nicest writing polish. It is where speech becomes text, which platforms you need, and whether your everyday dictation should begin with a cloud upload.',
+      'For Mac users who want local speech-to-text, open-source software, and a workflow that stays close to the machine they control, Muesli is the clear recommendation. It is a native Apple Silicon app for dictation and meeting transcription, with local models such as Parakeet and Whisper.',
     ],
     sections: [
       {
-        eyebrow: 'Positioning',
-        title: 'What is Wispr Flow good at?',
-        body: ['Wispr Flow is strong when you want a polished cross-platform voice keyboard. It works across common writing apps, emphasizes fast voice-to-text, and uses AI formatting to turn natural speech into cleaner writing.', 'Muesli takes the Mac-first side instead: local models, open-source code, and a workflow where the rough spoken draft does not have to leave your machine before it becomes text.'],
+        eyebrow: 'Quick answer',
+        title: 'What is the best Wispr Flow alternative for Mac?',
+        body: ['Muesli is the best fit when your priority is local-first Mac dictation. It runs speech-to-text on Apple Silicon, supports offline-capable models, keeps the software open source, and also handles meeting transcription without forcing you into a separate hosted workspace.', 'Wispr Flow is still a strong choice when you want a polished cross-platform voice keyboard across Mac, Windows, iPhone, and Android. Superwhisper, VoiceInk, and Apple Dictation are useful alternatives for different budgets and levels of control.'],
       },
       {
-        eyebrow: 'Ownership',
+        eyebrow: 'Why switch',
         title: 'Why look for a Wispr Flow alternative on Mac?',
-        body: ['The question is not whether Wispr Flow is useful. The question is whether your everyday dictation should depend on a hosted speech pipeline. Some Mac users want their rough thoughts, customer replies, AI prompts, and private notes to start on the machine they control.', 'Muesli is built for that preference: local-first dictation on Apple Silicon, open-source software, and a workflow that keeps the transcript close to the cursor.'],
+        body: ['Wispr Flow is useful. The reason to compare it is ownership. Your dictation can contain private drafts, customer replies, research notes, AI prompts, code comments, and unfinished thinking. Some Mac users would rather not make a hosted speech pipeline the default place where all of that begins.', 'Muesli is built for that preference: hold a hotkey, speak, release, and let local speech-to-text put the words back into the app you were already using.'],
       },
       {
-        eyebrow: 'Local-first',
-        title: 'What changes when dictation runs locally on macOS?',
-        body: ['Local dictation changes the default path. Instead of sending each utterance away before text comes back, the speech-to-text step can run on Apple Silicon.', 'That does not make every feature offline or every workflow private by magic. It does make the normal dictation path narrower, easier to reason about, and less dependent on a cloud service for every sentence.'],
+        eyebrow: 'Offline speech-to-text',
+        title: 'Is there an offline Wispr Flow alternative for Mac?',
+        body: ['Yes. Muesli supports local ASR models such as Parakeet and Whisper, so normal dictation can run on Apple Silicon after the model is installed. The speech-to-text path does not need to upload every sentence to a hosted API.', 'That does not make every feature offline by magic. Downloads, updates, calendar sync, and optional cloud summarization still need the internet. The difference is that cloud transcription is no longer the automatic starting point for every spoken draft.'],
       },
       {
-        eyebrow: 'Scope',
-        title: 'Is Muesli a Wispr Flow clone?',
-        body: ['No. Wispr Flow is a broad AI voice keyboard. Muesli is a Mac-native speech workspace for dictation and meeting transcription.', 'The overlap is voice-to-text; the philosophy is different. Muesli is better suited to people who care about local models, open-source code, raw transcript ownership, and keeping workday memory under their control.'],
+        eyebrow: 'Open source',
+        title: 'Why is Muesli different from other Wispr Flow alternatives?',
+        body: ['Muesli is not trying to be another closed voice layer with a slightly different polish. It is a Mac-native speech workspace for dictation and meeting transcription, built around local models and open-source code.', 'That makes the product easier to inspect and debug. You can understand the model path, permissions, storage, and optional cloud layers instead of treating the entire speech workflow as a black box.'],
       },
       {
-        eyebrow: 'When not',
+        eyebrow: 'Tradeoffs',
         title: 'When might Wispr Flow still be the better choice?',
-        body: ['Choose Wispr Flow if cross-platform coverage matters more than the local speech path.', 'Choose Muesli if you are on Mac and want the stronger default: dictation and meeting transcription starting from the machine you control, with source code and transcripts you can inspect.'],
+        body: ['Choose Wispr Flow if cross-platform coverage, account sync, and a polished hosted writing layer matter more than local ownership. That is a reasonable tradeoff for people who move between Mac, Windows, iPhone, and Android.', 'Choose Muesli if you are on Apple Silicon and want the stronger local default: dictation and meeting transcription starting from the machine you control, with source code and transcripts you can inspect.'],
       },
     ],
     comparison: {
-      title: 'Should I use Wispr Flow or Muesli for macOS dictation?',
-      aria: 'Wispr Flow vs Muesli comparison',
+      title: 'Which Wispr Flow alternative should I choose?',
+      aria: 'Wispr Flow alternatives comparison',
       rows: [
-        ['Wispr Flow', 'Polished cross-platform AI dictation for Mac, Windows, iPhone, and Android.', 'Best if you want a hosted, highly finished voice keyboard across devices.'],
-        ['Apple Dictation', 'Free and already built into macOS.', 'Best for quick snippets, but less flexible for model choice, cleanup, and longer work sessions.'],
-        ['Muesli', 'Local-first Mac dictation with offline models such as Parakeet and Whisper.', 'Best if you want speech-to-text to begin on your Mac and remain inspectable.'],
+        ['Muesli', 'Best for local-first Mac dictation, offline-capable ASR, open-source software, and meeting transcription.', 'Mac and Apple Silicon focused. Optional summaries and integrations are separate from local transcription.'],
+        ['Wispr Flow', 'Best for polished AI dictation across Mac, Windows, iPhone, and Android.', 'A hosted product is the right tradeoff if cross-platform convenience matters more than owning the speech layer.'],
+        ['Superwhisper', 'Best for a refined dedicated dictation app with local and cloud model choices.', 'Compare its pricing, model behavior, and workflow against your preference for open-source software.'],
+        ['VoiceInk', 'Best for another privacy-focused Mac dictation option with local transcription.', 'A narrower dictation product if you also want local meeting capture and notes in the same app.'],
+        ['Apple Dictation', 'Best for quick free voice typing with nothing to install.', 'Less control over model choice, workflow, and the surrounding transcript experience.'],
       ],
     },
-    fitTitle: 'When is Muesli the better Wispr Flow alternative?',
+    fitTitle: 'Which Wispr Flow alternative is best for each use case?',
     fitCards: [
-      ['Do you want offline dictation on Mac?', 'Use Muesli when your preferred dictation path should keep working after local models are installed, even when Wi-Fi is unreliable or cloud transcription is not the right default.'],
-      ['Do you dictate private drafts or AI prompts?', 'Use Muesli when spoken drafts include sensitive notes, customer context, research prompts, or unfinished thinking that should not need a hosted transcription step.'],
-      ['Do you want open-source Mac software?', 'Use Muesli when inspectability matters. The app is open source, Mac-native, and built around local speech-to-text rather than an opaque voice layer.'],
+      ['Best open-source alternative: Muesli', 'Muesli is the pick when inspectability matters. It is open-source, Mac-native, and built around local speech-to-text rather than an opaque voice layer.'],
+      ['Best offline alternative: Muesli', 'Use Muesli when your preferred dictation path should keep working after local models are installed, even when Wi-Fi is unreliable or cloud transcription is not the right default.'],
+      ['Best cross-platform alternative: Wispr Flow', 'Wispr Flow remains the obvious fit when you need the same polished voice keyboard across Mac, Windows, iPhone, and Android.'],
+      ['Best built-in alternative: Apple Dictation', 'Apple Dictation is the simplest free option when you only need occasional voice typing and do not need model choice or a separate meeting workflow.'],
+    ],
+    relatedLinks: [
+      ['Best dictation apps for Mac', '/best-dictation-apps-mac', 'Compare Muesli with Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and other Mac voice-to-text options.'],
+      ['Best offline dictation apps for Mac', '/best-offline-dictation-apps-mac', 'See how local models such as Parakeet and Whisper change the offline dictation tradeoff.'],
+      ['Offline dictation for Mac', '/offline-dictation-mac', 'A practical guide to running speech-to-text without making a cloud upload the default.'],
+      ['On-device dictation', '/on-device-dictation', 'Use a hotkey to speak naturally and paste clean local speech-to-text into the app already in front of you.'],
+      ['Local meeting transcription for Mac', '/local-meeting-transcription-mac', 'Use the same local-first Mac workflow for meeting capture, transcripts, and notes.'],
     ],
     faqTitle: 'What do people ask about Wispr Flow alternatives?',
-    ctaTitle: 'Want voice-to-text that starts on your own Mac?',
-    ctaBody: 'Muesli gives Mac users a local-first dictation workflow for everyday writing, prompts, notes, and replies, without making every spoken draft depend on a cloud speech pipeline.',
+    ctaTitle: 'Choose the Wispr Flow alternative that starts on your Mac.',
+    ctaBody: 'Download Muesli for a free, open-source, local-first dictation workflow for everyday writing, prompts, notes, replies, and meetings.',
   },
   '/otter-ai-alternative': {
     breadcrumb: 'Otter.ai Alternative',
@@ -2007,12 +2017,12 @@ const blogPostEntries = [
   },
   {
     path: '/wispr-flow-alternative',
-    title: 'A Wispr Flow alternative for local Mac dictation',
-    excerpt: 'Why some users want the speed of voice-to-text without renting the entire writing workflow from a hosted product.',
+    title: 'The best Wispr Flow alternatives for Mac in 2026',
+    excerpt: 'A practical comparison of Wispr Flow alternatives by platform, privacy, offline speech-to-text, open-source software, and the workflows Muesli is built to own.',
     category: 'Comparisons',
     tags: ['Comparisons', 'Dictation', 'Privacy'],
-    date: '2026-06-20',
-    readTime: '9 min read',
+    date: '2026-07-13',
+    readTime: '10 min read',
     image: impressionistWhisperUrl,
     imageAlt: 'Original Impressionist-inspired salon painting of one person whispering an observation to another in a sunlit room',
   },
@@ -2944,7 +2954,13 @@ function ArticleShareBar({ route, title }) {
           <LinkedInLogo />
           <b>LinkedIn</b>
         </a>
-        <button type="button" onClick={copyLink} aria-label="Copy article link">
+        <button
+          type="button"
+          className={copied ? 'is-copied' : undefined}
+          onClick={copyLink}
+          aria-label={copied ? 'Article link copied' : 'Copy article link'}
+          title={copied ? 'Article link copied' : 'Copy article link'}
+        >
           {copied ? <Check size={15} /> : <Link2 size={15} />}
           <b>{copied ? 'Copied' : 'Copy link'}</b>
         </button>
@@ -3365,7 +3381,9 @@ function BestDictationAppsMacPage() {
           <p>
             This guide is not a fake leaderboard. Apple Dictation, Muesli, Superwhisper, Wispr Flow, VoiceInk, and
             Otter.ai solve different problems. The real question is whether you want a built-in default, a polished
-            cloud-connected writing assistant, a local-first Mac tool, or a meeting transcription system.
+            cloud-connected writing assistant, a local-first Mac tool, or a meeting transcription system. For the
+            narrower search, read our guide to the{' '}
+            <a href="/wispr-flow-alternative/">best Wispr Flow alternatives for Mac</a>.
           </p>
         </section>
 
@@ -3904,7 +3922,8 @@ function OfflineDictationMacPage() {
           <p>
             Offline dictation is not only about working without Wi-Fi. It is about removing the default cloud step
             from the shortest path between speech and text. If the model can run locally, a quick note or reply does
-            not need to become an audio upload first.
+            not need to become an audio upload first. That is also why Muesli is the leading{' '}
+            <a href="/wispr-flow-alternative/">offline Wispr Flow alternative for Mac</a>.
           </p>
           <p>
             Muesli is built around that narrower default. Hold a hotkey, speak normally, release, and the text lands

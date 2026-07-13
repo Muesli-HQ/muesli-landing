@@ -1660,10 +1660,25 @@ h3 {
   background: rgba(250, 255, 242, 0.9);
 }
 
-.article-share-actions svg {
+.article-share-actions a svg {
   width: 15px;
   height: 15px;
   fill: currentColor;
+}
+
+.article-share-actions button svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.article-share-actions button.is-copied {
+  border-color: rgba(40, 95, 76, 0.34);
+  background: rgba(224, 245, 222, 0.86);
 }
 
 .blog-page {
