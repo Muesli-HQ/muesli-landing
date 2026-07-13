@@ -184,6 +184,12 @@ export const siteData = {
       description: 'Muesli is an open-source Mac app for local speech-to-text, dictation, and meeting transcription on Apple Silicon with Parakeet and Whisper.',
       ogDescription: 'Local speech-to-text, AI dictation, and meeting transcription for Mac. Run ASR on-device with Parakeet, Whisper, and Apple Silicon.',
     },
+    '/blog': {
+      title: 'Muesli field notes: local speech-to-text, dictation, and privacy',
+      canonical: 'https://muesli.works/blog',
+      description: 'Muesli field notes on local speech-to-text, Mac dictation, meeting transcription, privacy, ASR model architecture, and practical comparisons.',
+      ogDescription: 'Practical writing on local ASR, Mac dictation, private meeting notes, and the tools that shape how speech becomes text.',
+    },
     '/privacy': {
       title: 'Privacy Policy · Muesli',
       canonical: 'https://muesli.works/privacy',

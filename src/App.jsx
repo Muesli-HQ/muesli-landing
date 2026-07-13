@@ -3,6 +3,7 @@ import {
   ArrowLeft,
   ArrowRight,
   BotOff,
+  Check,
   CalendarDays,
   ChevronDown,
   Clipboard,
@@ -15,14 +16,17 @@ import {
   History,
   Github,
   HardDrive,
+  Link2,
   Keyboard,
   LockKeyhole,
   Mic2,
   MousePointer2,
+  Share2,
   ShieldCheck,
   Sparkles,
   Star,
   Stars,
+  Tag,
   Wand2,
 } from 'lucide-react';
 import './styles.css';
@@ -55,6 +59,10 @@ import solarpunkMedicalDictationMacUrl from './assets/solarpunk-medical-dictatio
 import asrArchitecturesHeaderUrl from './assets/asr-architectures-header.webp';
 import nvidiaParakeetSpeechToTextHeaderUrl from './assets/nvidia-parakeet-speech-to-text-header.webp';
 import whisperSpeechToTextHeaderUrl from './assets/whisper-speech-to-text-header.webp';
+import dutchWhisperUrl from './assets/historical-whispers/dutch-whisper.webp';
+import renaissanceWhisperUrl from './assets/historical-whispers/renaissance-whisper.webp';
+import impressionistWhisperUrl from './assets/historical-whispers/impressionist-whisper.webp';
+import edoWhisperUrl from './assets/historical-whispers/edo-whisper.webp';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -91,6 +99,14 @@ function formatReleaseDate(value) {
     day: 'numeric',
     year: 'numeric',
   }).format(new Date(value));
+}
+
+function formatBlogDate(value) {
+  return new Intl.DateTimeFormat('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(new Date(`${value}T12:00:00`));
 }
 
 function cleanReleaseText(value) {
@@ -1401,8 +1417,8 @@ const alternativePageConfigs = {
   '/superwhisper-alternative': {
     breadcrumb: 'Superwhisper Alternative',
     faqItems: superwhisperAlternativeFaqItems,
-    image: solarpunkWisprFlowAlternativeUrl,
-    imageAlt: 'A solarpunk Mac voice-to-text workspace with an unbranded laptop, microphone, local transcript notes, and no visible human face',
+    image: renaissanceWhisperUrl,
+    imageAlt: 'Original Renaissance-inspired painting of a scholar whispering a private message to another scholar beside a letter',
     kicker: 'Superwhisper alternative for Mac',
     headline: 'Stop renting your voice-to-text workflow from someone else’s cloud.',
     subcopy: 'Superwhisper is polished. Muesli is for the Mac user who wants the speech layer to belong to their own machine: local ASR, open-source code, dictation, and meeting transcription on Apple Silicon.',
@@ -1647,8 +1663,8 @@ const alternativePageConfigs = {
   '/wispr-flow-alternative': {
     breadcrumb: 'Wispr Flow Alternative',
     faqItems: wisprFlowAlternativeFaqItems,
-    image: solarpunkWisprFlowAlternativeUrl,
-    imageAlt: 'A solarpunk Mac writing workspace with an unbranded laptop, notebook, microphone, and no visible human face',
+    image: impressionistWhisperUrl,
+    imageAlt: 'Original Impressionist-inspired salon painting of one person whispering an observation to another in a sunlit room',
     kicker: 'Wispr Flow alternative',
     headline: 'A Wispr Flow alternative for people who want to own their voice-to-text workflow.',
     subcopy: 'Wispr Flow is a polished AI voice keyboard for speaking into apps across Mac, Windows, iPhone, and Android. Muesli is for Mac and macOS users who want dictation to start locally, stay inspectable, and turn speech into text without renting every spoken draft back from the cloud.',
@@ -1708,8 +1724,8 @@ const alternativePageConfigs = {
   '/otter-ai-alternative': {
     breadcrumb: 'Otter.ai Alternative',
     faqItems: otterAiAlternativeFaqItems,
-    image: solarpunkOtterAiAlternativeUrl,
-    imageAlt: 'A solarpunk meeting-notes workspace with an unbranded laptop, organized transcript pages, and no visible human face',
+    image: edoWhisperUrl,
+    imageAlt: 'Original Edo-period-inspired painting of two people whispering beside a writing desk and a moss garden',
     kicker: 'Otter.ai alternative',
     headline: 'An Otter.ai alternative for Mac meeting notes without a bot.',
     subcopy: 'Otter.ai is built for cloud transcription, meeting bots, and shared team notes. Muesli is for Mac and macOS users who want meeting audio captured from their own computer, local-first transcripts, and meeting memory closer to the machine they control.',
@@ -1822,6 +1838,207 @@ const alternativePageConfigs = {
     ctaBody: 'Muesli is open-source, Mac-native, and built for people who want meeting transcription to start on the machine they control.',
   },
 };
+
+const blogPostEntries = [
+  {
+    path: '/medical-dictation-mac',
+    title: 'The best medical dictation tool might start on your own Mac',
+    excerpt: 'A privacy-first look at medical dictation, clinical scribes, and the local speech-to-text layer doctors can control before notes enter an approved system.',
+    category: 'Healthcare',
+    tags: ['Healthcare', 'Privacy', 'Local AI'],
+    date: '2026-07-06',
+    readTime: '9 min read',
+    image: solarpunkMedicalDictationMacUrl,
+    imageAlt: 'Solarpunk medical workspace with a Mac, microphone, local transcript, and plants, with no visible human face',
+  },
+  {
+    path: '/asr-architectures',
+    title: 'Common speech-to-text architectures, explained without the fog',
+    excerpt: 'CTC, RNN-T, TDT, Conformer encoders, encoder-decoder Transformers, and the surrounding systems that make local ASR useful.',
+    category: 'Model Guides',
+    tags: ['Model Guides', 'Local AI'],
+    date: '2026-06-30',
+    readTime: '11 min read',
+    image: asrArchitecturesHeaderUrl,
+    imageAlt: 'Abstract speech-to-text architecture diagram with audio waves flowing through multiple local ASR model paths',
+  },
+  {
+    path: '/nvidia-parakeet-speech-to-text',
+    title: 'NVIDIA Parakeet makes local English speech-to-text feel practical',
+    excerpt: 'Why Parakeet matters for fast local English ASR, and why a clear sentence from your Mac should not need a cloud round trip.',
+    category: 'Model Guides',
+    tags: ['Model Guides', 'Local AI', 'Dictation'],
+    date: '2026-06-30',
+    readTime: '8 min read',
+    image: nvidiaParakeetSpeechToTextHeaderUrl,
+    imageAlt: 'Abstract green and charcoal Parakeet speech-to-text model header with local inference blocks and token streams',
+  },
+  {
+    path: '/whisper-speech-to-text',
+    title: 'OpenAI Whisper speech-to-text: where it still shines locally',
+    excerpt: 'A practical guide to Whisper’s encoder-decoder design, multilingual strengths, local inference tradeoffs, and where it fits in Muesli.',
+    category: 'Model Guides',
+    tags: ['Model Guides', 'Local AI', 'Dictation'],
+    date: '2026-06-30',
+    readTime: '9 min read',
+    image: whisperSpeechToTextHeaderUrl,
+    imageAlt: 'Abstract dark Whisper speech-to-text header with Muesli and OpenAI marks, audio waves, and local model paths',
+  },
+  {
+    path: '/granola-vs-muesli',
+    title: 'Granola has the sugar. Muesli keeps your transcript safe and healthy.',
+    excerpt: 'Why local speech-to-text has advanced far enough that every meeting transcript does not need to begin in someone else’s cloud.',
+    category: 'Comparisons',
+    tags: ['Comparisons', 'Privacy', 'Meeting Notes'],
+    date: '2026-06-30',
+    readTime: '10 min read',
+    image: solarpunkGranolaVsMuesliUrl,
+    imageAlt: 'Watercolor solarpunk garden workspace comparing a sugary granola bowl with raw muesli beside a Mac and local transcript notebook',
+  },
+  {
+    path: '/best-offline-dictation-apps-mac',
+    title: 'The best offline dictation app for Mac should not treat local speech as an afterthought',
+    excerpt: 'A practical comparison of offline dictation apps for Mac, from built-in Apple Dictation to local model workflows on Apple Silicon.',
+    category: 'Dictation',
+    tags: ['Dictation', 'Privacy', 'Local AI'],
+    date: '2026-06-25',
+    readTime: '12 min read',
+    image: solarpunkOfflineDictationUrl,
+    imageAlt: 'Warm Mac writing workspace with a microphone, local speech model notes, and an unbranded laptop running offline dictation',
+  },
+  {
+    path: '/bot-free-meeting-notes',
+    title: 'Meeting notes without adding another guest to the call',
+    excerpt: 'What changes when your Mac captures the meeting instead of a bot joining Zoom, Meet, or Teams on your behalf.',
+    category: 'Meeting Notes',
+    tags: ['Meeting Notes', 'Privacy', 'Local AI'],
+    date: '2026-06-25',
+    readTime: '8 min read',
+    image: solarpunkLocalMeetingTranscriptionUrl,
+    imageAlt: 'Solarpunk local meeting transcription workspace with a Mac, notebook, microphone, and no visible human face',
+  },
+  {
+    path: '/apple-dictation-alternative',
+    title: 'Apple Dictation is a feature. Muesli is a speech workspace.',
+    excerpt: 'When built-in voice typing stops being enough: local model choice, transcript history, meeting transcription, and a workflow you control.',
+    category: 'Dictation',
+    tags: ['Dictation', 'Local AI', 'Privacy'],
+    date: '2026-06-25',
+    readTime: '9 min read',
+    image: solarpunkParkSpeechLawnUrl,
+    imageAlt: 'Mac dictation workspace with an unbranded laptop, microphone, transcript notes, and no visible human face',
+  },
+  {
+    path: '/local-speech-to-text-glossary',
+    title: 'The local speech-to-text glossary for Mac',
+    excerpt: 'ASR, VAD, diarization, neural AEC, CoreML, Apple Neural Engine, Parakeet, Whisper, and the terms behind a local speech stack.',
+    category: 'Model Guides',
+    tags: ['Model Guides', 'Local AI'],
+    date: '2026-06-21',
+    readTime: '10 min read',
+    image: solarpunkLocalSpeechGlossaryUrl,
+    imageAlt: 'Solarpunk technical library workspace for local speech-to-text terms with a Mac, diagrams, and no visible human face',
+  },
+  {
+    path: '/apple-neural-engine-speech-to-text-mac',
+    title: 'What Apple Silicon changes about speech-to-text on Mac',
+    excerpt: 'How CoreML and the Apple Neural Engine change the latency, power, and privacy equation for local dictation and transcription.',
+    category: 'Local AI',
+    tags: ['Local AI', 'Model Guides', 'Dictation'],
+    date: '2026-06-21',
+    readTime: '9 min read',
+    image: solarpunkAppleNeuralEngineSpeechUrl,
+    imageAlt: 'Solarpunk Mac workspace illustrating local speech-to-text on Apple Silicon with a microphone and no visible human face',
+  },
+  {
+    path: '/mac-dictation-app',
+    title: 'What should a Mac dictation app actually do?',
+    excerpt: 'A practical guide to local voice typing, paste-at-cursor workflows, model choice, privacy, and where Muesli fits.',
+    category: 'Dictation',
+    tags: ['Dictation', 'Local AI', 'Privacy'],
+    date: '2026-06-19',
+    readTime: '9 min read',
+    image: solarpunkParkSpeechLawnUrl,
+    imageAlt: 'Solarpunk park workspace with a laptop, microphone, gardens, and local speech-to-text notes',
+  },
+  {
+    path: '/local-meeting-transcription-mac',
+    title: 'How local meeting transcription works on Mac',
+    excerpt: 'Capture microphone and system audio from the Mac already in the call, then keep the transcript close before you decide what to share.',
+    category: 'Meeting Notes',
+    tags: ['Meeting Notes', 'Privacy', 'Local AI'],
+    date: '2026-06-20',
+    readTime: '9 min read',
+    image: solarpunkLocalMeetingTranscriptionUrl,
+    imageAlt: 'Solarpunk local meeting transcription workspace with a Mac, notebook, microphone, and no visible human face',
+  },
+  {
+    path: '/offline-dictation-mac',
+    title: 'Offline dictation on Mac is finally a real everyday workflow',
+    excerpt: 'What offline means in practice, how local ASR models fit, and why the useful path is still speak, release, and get text where your cursor is.',
+    category: 'Dictation',
+    tags: ['Dictation', 'Privacy', 'Local AI'],
+    date: '2026-06-20',
+    readTime: '8 min read',
+    image: solarpunkOfflineDictationUrl,
+    imageAlt: 'Solarpunk writing studio with plants, solar structures, an unbranded laptop, and offline dictation notes',
+  },
+  {
+    path: '/granola-alternative',
+    title: 'A local Granola alternative for Mac meeting notes',
+    excerpt: 'For people who want Granola-style meeting memory without making a hosted workspace the default home for every transcript.',
+    category: 'Comparisons',
+    tags: ['Comparisons', 'Meeting Notes', 'Privacy'],
+    date: '2026-06-20',
+    readTime: '9 min read',
+    image: dutchWhisperUrl,
+    imageAlt: 'Original Dutch Golden Age-inspired painting of two people whispering beside books and a writing desk',
+  },
+  {
+    path: '/superwhisper-alternative',
+    title: 'A Superwhisper alternative for people who want the speech layer on their Mac',
+    excerpt: 'A practical comparison of polished AI dictation and Muesli’s open-source local-first path for dictation and meeting transcription.',
+    category: 'Comparisons',
+    tags: ['Comparisons', 'Dictation', 'Privacy'],
+    date: '2026-06-25',
+    readTime: '9 min read',
+    image: renaissanceWhisperUrl,
+    imageAlt: 'Original Renaissance-inspired painting of a scholar whispering a private message to another scholar beside a letter',
+  },
+  {
+    path: '/wispr-flow-alternative',
+    title: 'A Wispr Flow alternative for local Mac dictation',
+    excerpt: 'Why some users want the speed of voice-to-text without renting the entire writing workflow from a hosted product.',
+    category: 'Comparisons',
+    tags: ['Comparisons', 'Dictation', 'Privacy'],
+    date: '2026-06-20',
+    readTime: '9 min read',
+    image: impressionistWhisperUrl,
+    imageAlt: 'Original Impressionist-inspired salon painting of one person whispering an observation to another in a sunlit room',
+  },
+  {
+    path: '/otter-ai-alternative',
+    title: 'An Otter.ai alternative for meeting notes without a bot',
+    excerpt: 'A Mac-first comparison for people who want meeting capture and local speech-to-text without inviting another participant into every call.',
+    category: 'Comparisons',
+    tags: ['Comparisons', 'Meeting Notes', 'Privacy'],
+    date: '2026-06-20',
+    readTime: '9 min read',
+    image: edoWhisperUrl,
+    imageAlt: 'Original Edo-period-inspired painting of two people whispering beside a writing desk and a moss garden',
+  },
+  {
+    path: '/fireflies-ai-alternative',
+    title: 'A Fireflies.ai alternative for local-first meeting notes',
+    excerpt: 'What it looks like when meeting transcription starts on the Mac already in the call instead of with a hosted meeting assistant.',
+    category: 'Comparisons',
+    tags: ['Comparisons', 'Meeting Notes', 'Privacy'],
+    date: '2026-06-20',
+    readTime: '9 min read',
+    image: solarpunkFirefliesAiAlternativeUrl,
+    imageAlt: 'Solarpunk local meeting workspace with a Mac, microphone, transcript notes, and no visible human face',
+  },
+];
 
 const meetingSteps = [
   {
@@ -2180,7 +2397,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2448,6 +2665,7 @@ const footerDirectoryColumns = [
     links: [
       ['Help', '/help'],
       ['Changelog', '/changelog'],
+      ['Blog', '/blog'],
       ['GitHub', 'https://github.com/pHequals7/muesli'],
       ['llms.txt', '/llms.txt'],
       ['facts.json', '/facts.json'],
@@ -2687,6 +2905,7 @@ function ProductPageNav() {
       <div className="product-nav-links">
         <a href="/#notes">Product</a>
         <a href="/#privacy">Privacy</a>
+        <a href="/blog/">Blog</a>
         <a href="/changelog">Releases</a>
         <a className="product-nav-cta" href={downloadUrl}>
           <Download size={17} />
@@ -2694,6 +2913,186 @@ function ProductPageNav() {
         </a>
       </div>
     </nav>
+  );
+}
+
+function ArticleShareBar({ route, title }) {
+  const [copied, setCopied] = useState(false);
+  const shareUrl = `${siteData.siteUrl}${route}`;
+  const encodedUrl = encodeURIComponent(shareUrl);
+  const encodedTitle = encodeURIComponent(title);
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <div className="article-share-bar" aria-label="Share this article">
+      <span><Share2 size={15} /> Share this field note</span>
+      <div className="article-share-actions">
+        <a href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noreferrer" aria-label="Share this article on X">
+          <XLogo />
+          <b>X</b>
+        </a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noreferrer" aria-label="Share this article on LinkedIn">
+          <LinkedInLogo />
+          <b>LinkedIn</b>
+        </a>
+        <button type="button" onClick={copyLink} aria-label="Copy article link">
+          {copied ? <Check size={15} /> : <Link2 size={15} />}
+          <b>{copied ? 'Copied' : 'Copy link'}</b>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function BlogPage() {
+  const [activeTag, setActiveTag] = useState('All');
+  const tags = ['All', 'Healthcare', 'Privacy', 'Local AI', 'Dictation', 'Meeting Notes', 'Model Guides', 'Comparisons'];
+  const visiblePosts = activeTag === 'All'
+    ? blogPostEntries
+    : blogPostEntries.filter((post) => post.tags.includes(activeTag));
+  const featuredPost = visiblePosts[0];
+  const archivePosts = visiblePosts.slice(1);
+
+  useEffect(() => {
+    const meta = routeMeta['/blog'];
+    document.title = meta.title;
+    setCanonicalUrl('/blog');
+  }, []);
+
+  const structuredData = baseStructuredData('/blog', [
+    pageBreadcrumb('/blog', 'Blog'),
+    {
+      '@type': 'CollectionPage',
+      '@id': `${routeMeta['/blog'].canonical}#collection`,
+      url: routeMeta['/blog'].canonical,
+      name: routeMeta['/blog'].title,
+      description: routeMeta['/blog'].description,
+      hasPart: blogPostEntries.map((post) => ({
+        '@type': 'Article',
+        headline: post.title,
+        url: `${siteData.siteUrl}${post.path}`,
+        image: `${siteData.siteUrl}${post.image}`,
+        datePublished: post.date,
+        articleSection: post.category,
+      })),
+    },
+  ]);
+
+  return (
+    <main className="product-page article-page blog-page">
+      <JsonLd data={structuredData} />
+      <ProductPageNav />
+
+      <section className="blog-hero">
+        <div className="blog-hero-copy">
+          <p className="seo-article-kicker"><Sparkles size={15} /> Muesli field notes</p>
+          <h1>Speech-to-text should be something you can understand, run, and own.</h1>
+          <p>
+            Notes on local ASR, Mac dictation, meeting capture, privacy, model architecture, and the tools
+            that shape how speech becomes part of your workday.
+          </p>
+        </div>
+        <div className="blog-hero-signal" aria-label="Muesli blog focus">
+          <span>LOCAL-FIRST RESEARCH</span>
+          <strong>less cloud<br />more control</strong>
+          <small>Practical writing for people who want to know where their transcript went.</small>
+        </div>
+      </section>
+
+      <section className="blog-taxonomy" aria-label="Filter articles by topic">
+          <span className="blog-taxonomy-label"><Tag /> Browse by topic</span>
+        <div className="blog-tag-list">
+          {tags.map((tag) => (
+            <button
+              type="button"
+              className={`blog-tag${activeTag === tag ? ' is-active' : ''}`}
+              aria-pressed={activeTag === tag}
+              onClick={() => setActiveTag(tag)}
+              key={tag}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {featuredPost ? (
+        <section className="blog-featured" aria-label="Featured article">
+          <a className="blog-featured-image" href={`${featuredPost.path}/`}>
+            <img src={featuredPost.image} alt={featuredPost.imageAlt} />
+          </a>
+          <div className="blog-featured-copy">
+            <div className="blog-post-meta">
+              <span className="blog-post-category">{featuredPost.category}</span>
+              <span><time dateTime={featuredPost.date}>{formatBlogDate(featuredPost.date)}</time> <i>•</i> {featuredPost.readTime}</span>
+            </div>
+            <h2><a href={`${featuredPost.path}/`}>{featuredPost.title}</a></h2>
+            <p>{featuredPost.excerpt}</p>
+            <a className="blog-read-link" href={`${featuredPost.path}/`}>Read the field note <ArrowRight size={16} /></a>
+          </div>
+        </section>
+      ) : (
+        <p className="blog-empty">No field notes have this tag yet.</p>
+      )}
+
+      {archivePosts.length > 0 ? (
+        <section className="blog-archive" aria-label="All articles">
+          <div className="blog-section-heading">
+            <div>
+              <span>THE ARCHIVE</span>
+              <h2>Useful things to know before you rent out your voice.</h2>
+            </div>
+            <p>{visiblePosts.length} field notes</p>
+          </div>
+          <div className="blog-card-grid">
+            {archivePosts.map((post) => (
+              <article className="blog-card" key={post.path}>
+                <a className="blog-card-image" href={`${post.path}/`}>
+                  <img src={post.image} alt={post.imageAlt} loading="lazy" />
+                </a>
+                <div className="blog-card-body">
+                  <div className="blog-post-meta">
+                    <span className="blog-post-category">{post.category}</span>
+                    <span><time dateTime={post.date}>{formatBlogDate(post.date)}</time> <i>•</i> {post.readTime}</span>
+                  </div>
+                  <h3><a href={`${post.path}/`}>{post.title}</a></h3>
+                  <p>{post.excerpt}</p>
+                  <div className="blog-card-footer">
+                    <div className="blog-card-tags">
+                      {post.tags.slice(0, 2).map((tag) => <span key={tag}>{tag}</span>)}
+                    </div>
+                    <a className="blog-card-arrow" href={`${post.path}/`} aria-label={`Read ${post.title}`}><ArrowRight size={17} /></a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="blog-cta">
+        <div>
+          <span className="blog-cta-kicker">TAKE THE SPEECH LAYER HOME</span>
+          <h2>Read the source. Run the app. Keep the transcript close.</h2>
+          <p>Muesli is open-source Mac dictation and meeting transcription built for local ASR on Apple Silicon.</p>
+        </div>
+        <div className="blog-cta-actions">
+          <a className="primary-cta" href={downloadUrl}><Download size={18} /> Download for macOS</a>
+          <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer"><Github size={18} /> <Star size={15} /> Star Muesli on GitHub</a>
+        </div>
+      </section>
+
+      <SiteFooterDirectory compact />
+    </main>
   );
 }
 
@@ -2749,6 +3148,7 @@ function MacDictationAppPage() {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route="/mac-dictation-app" title="A Mac dictation app that keeps your speech on your Mac" />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -2953,6 +3353,7 @@ function BestDictationAppsMacPage() {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route="/best-dictation-apps-mac" title="Best dictation apps for Mac in 2026" />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -3141,6 +3542,7 @@ function AppleNeuralEngineSpeechPage() {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route="/apple-neural-engine-speech-to-text-mac" title="Apple Neural Engine speech-to-text on Mac" />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -3322,6 +3724,7 @@ function LocalSpeechToTextGlossaryPage() {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route="/local-speech-to-text-glossary" title="Local speech-to-text glossary for Mac" />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -3494,6 +3897,7 @@ function OfflineDictationMacPage() {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route="/offline-dictation-mac" title="Offline dictation for Mac without a cloud speech pipeline" />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -3695,6 +4099,7 @@ function LocalMeetingTranscriptionMacPage() {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route="/local-meeting-transcription-mac" title="Local meeting transcription for Mac without a meeting bot" />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -3891,7 +4296,7 @@ function GranolaAlternativePage() {
 
       <article className="seo-article">
         <figure className="seo-article-image">
-          <img src={solarpunkGranolaAlternativeUrl} alt="A solarpunk breakfast workspace with a bowl of muesli, an unbranded laptop, a microphone, and no visible human face" />
+          <img src={dutchWhisperUrl} alt="Original Dutch Golden Age-inspired painting of two people whispering beside books and a writing desk" />
         </figure>
 
         <header className="seo-article-hero">
@@ -3911,6 +4316,7 @@ function GranolaAlternativePage() {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route="/granola-alternative" title="A local Granola alternative for the healthier version of your workday meeting notes" />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -4113,6 +4519,7 @@ function AlternativeComparisonPage({ route }) {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route={route} title={config.articleHeadline} />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -4291,6 +4698,7 @@ function SpeechToTextGuidePage({ route }) {
               <ArrowRight size={18} />
             </a>
           </div>
+          <ArticleShareBar route={route} title={config.articleHeadline} />
         </header>
 
         <section className="seo-article-section seo-article-lede">
@@ -5067,6 +5475,7 @@ function LandingPage() {
           </details>
           <a href="#privacy">Privacy</a>
           <a href="/changelog">Changelog</a>
+          <a href="/blog">Blog</a>
           <a href="/help">Help</a>
           <a className="github-pill" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
             <Github size={17} />
@@ -5391,6 +5800,10 @@ export function App({ pathname = '/' }) {
 
   if (path === '/changelog') {
     return <ChangelogPage />;
+  }
+
+  if (path === '/blog') {
+    return <BlogPage />;
   }
 
   if (path === '/on-device-dictation') {
