@@ -26,6 +26,14 @@
   ],
   "rewrites": [
     {
+      "source": "/ios",
+      "destination": "/ios/index.html"
+    },
+    {
+      "source": "/help/ios",
+      "destination": "/help/ios/index.html"
+    },
+    {
       "source": "/privacy",
       "destination": "/privacy/index.html"
     },

@@ -29,6 +29,7 @@ export function generateAgentFiles() {
     },
     operatingSystem: siteData.operatingSystem,
     softwareRequirements: siteData.softwareRequirements,
+    iosProduct: siteData.iosProduct,
     keyFacts: siteData.keyFacts,
     technicalFacts: siteData.technicalFacts,
     featurePages: siteData.featurePages,
@@ -50,6 +51,7 @@ ${siteData.description}
 - Product overview: ${siteData.siteUrl}/
 ${pageList()}
 - Help: ${siteData.siteUrl}/help
+- iPhone help: ${siteData.iosSupportUrl}
 - Changelog: ${siteData.siteUrl}/changelog
 - GitHub: ${siteData.repositoryUrl}
 
@@ -58,6 +60,11 @@ ${lines(siteData.keyFacts)}
 
 ## Technical Facts
 ${lines(siteData.technicalFacts || [])}
+
+## Muesli for iPhone
+- Product page: ${siteData.iosUrl}
+- Support page: ${siteData.iosSupportUrl}
+${lines(siteData.iosProduct.keyFacts)}
 
 ## Social Links
 ${sameAsLinks.map((url) => `- ${url}`).join('\n')}
@@ -78,13 +85,17 @@ ${changelogLinks.map((link) => `- ${link.title}: ${link.url} - ${link.body}`).jo
 
   const aiContext = `# ${siteData.name} AI Context
 
-${siteData.name} is a native macOS app for local-first speech workflows.
+${siteData.name} is native local-first speech software for macOS and iPhone. The homepage remains focused on the Mac app; the iPhone product has its own canonical page.
 
 ## What It Does
 ${lines(siteData.keyFacts)}
 
 ## Technical Facts
 ${lines(siteData.technicalFacts || [])}
+
+## Muesli for iPhone
+- Requires ${siteData.iosProduct.operatingSystem}.
+${lines(siteData.iosProduct.keyFacts)}
 
 ## Best Pages To Cite
 ${pageList()}

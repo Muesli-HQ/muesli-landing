@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import {
+  AudioWaveform,
   ArrowLeft,
   ArrowRight,
   BotOff,
+  BookOpen,
   Check,
   CalendarDays,
   ChevronDown,
   Clipboard,
   ClipboardCheck,
   CloudOff,
+  Cloud,
   Coffee,
   Cpu,
+  Database,
   Download,
   FileText,
   History,
@@ -24,6 +28,7 @@ import {
   Share2,
   ShieldCheck,
   Sparkles,
+  Smartphone,
   Star,
   Stars,
   Tag,
@@ -63,6 +68,12 @@ import dutchWhisperUrl from './assets/historical-whispers/dutch-whisper.webp';
 import renaissanceWhisperUrl from './assets/historical-whispers/renaissance-whisper.webp';
 import impressionistWhisperUrl from './assets/historical-whispers/impressionist-whisper.webp';
 import edoWhisperUrl from './assets/historical-whispers/edo-whisper.webp';
+import iosLiveVoiceNoteUrl from './assets/ios/live-voice-note.png';
+import iosLiveMeetingUrl from './assets/ios/live-meeting.png';
+import iosKeyboardUrl from './assets/ios/muesli-keyboard.png';
+import iosLocalControlUrl from './assets/ios/local-control.png';
+import iosDictionaryUrl from './assets/ios/personal-dictionary.png';
+import iosVoiceNotesHomeUrl from './assets/ios/voice-notes-home.png';
 import spotifyLogoSvg from './assets/company-wordmarks/spotify.svg?raw';
 import atlassianLogoSvg from './assets/company-wordmarks/atlassian.svg?raw';
 import goldmanSachsLogoSvg from './assets/company-wordmarks/goldmansachs.svg?raw';
@@ -2215,29 +2226,144 @@ const speechSamples = [
   'Turn that into action items.',
 ];
 
+const iosProductFaqItems = [
+  {
+    question: 'How does local speech-to-text work on iPhone?',
+    answer: 'You choose and download a Parakeet or Whisper model, then Muesli runs core transcription on the iPhone. The first model download and preparation need an internet connection; ordinary transcription can run locally afterward.',
+  },
+  {
+    question: 'Can I record and transcribe voice notes offline?',
+    answer: 'Yes. After a local model is installed, voice note recording and core transcription can work without an internet connection. Model downloads, optional iCloud sync, and optional AI summaries still need a connection.',
+  },
+  {
+    question: 'Can Muesli transcribe in-person meetings?',
+    answer: 'Yes. Muesli records an in-person meeting from the iPhone microphone, builds the transcript with the selected local model, and keeps the recording and transcript on the phone by default. You are responsible for obtaining any consent required before recording another person.',
+  },
+  {
+    question: 'How does the Muesli keyboard dictate into other apps?',
+    answer: 'The keyboard creates a dictation request and opens the Muesli app. The main app handles microphone access, recording, and local transcription, then returns the result through the shared App Group so the keyboard can insert it into the original text field.',
+  },
+  {
+    question: 'What does Full Access allow the keyboard to do?',
+    answer: 'Full Access lets the keyboard extension exchange the dictation request, status, and finished text with the Muesli app through the shared App Group. The keyboard extension does not record audio itself, and Muesli does not use Full Access to collect everything you type.',
+  },
+  {
+    question: 'What information stays on my iPhone?',
+    answer: 'Voice recordings, downloaded speech models, transcript history, meeting records, and personal dictionary data stay on the iPhone by default. You can delete saved content and remove downloaded models from the app.',
+  },
+  {
+    question: 'Which features optionally use iCloud or another provider?',
+    answer: 'Private iCloud sync can copy text history between your iPhone and Mac; audio and speech models are not synced. If you request an AI summary, transcript text is sent to the OpenRouter or ChatGPT provider you connected. TelemetryDeck receives anonymized, privacy-preserving aggregate telemetry about app interactions and health.',
+  },
+];
+
+const iosFeaturePillars = [
+  [Mic2, 'Private voice notes', 'Capture quick thoughts or longer recordings, keep the original audio locally, and revisit a searchable transcript.'],
+  [AudioWaveform, 'In-person meetings', 'Record the room from your iPhone microphone and keep the transcript available beneath any optional summary.'],
+  [Keyboard, 'Dictation keyboard', 'Start a request from another app, record and transcribe in Muesli, then insert the result back where you were writing.'],
+  [BookOpen, 'Personal dictionary', 'Teach Muesli names, brands, acronyms, and phrase corrections that matter to the way you speak.'],
+  [Cpu, 'Local model choice', 'Choose Parakeet or Whisper based on language, accuracy, speed, and storage needs.'],
+  [Sparkles, 'Optional summaries', 'Connect OpenRouter or ChatGPT only when you want a meeting summary from a transcript you already control.'],
+];
+
+const iosProcessingRows = [
+  ['Voice recording', 'On device'],
+  ['Core transcription', 'On device'],
+  ['Transcript history', 'Local storage'],
+  ['Personal dictionary', 'Local storage'],
+  ['iCloud text sync', 'Optional Apple service'],
+  ['AI summaries', 'Optional provider'],
+  ['Product analytics', 'Anonymized aggregate telemetry'],
+];
+
+const iosScreens = [
+  [iosLiveVoiceNoteUrl, 'Voice note recording', 'Record a thought, keep the audio close, and use the scratchpad while you speak.'],
+  [iosLiveMeetingUrl, 'Live in-person meeting', 'Capture a room from the iPhone microphone without inviting a meeting bot.'],
+  [iosKeyboardUrl, 'Muesli keyboard', 'Bring local dictation into the text field inside another iPhone app.'],
+  [iosLocalControlUrl, 'Local model selection', 'Pick the on-device model that matches your language, speed, and storage needs.'],
+  [iosDictionaryUrl, 'Personal dictionary', 'Correct names, acronyms, and phrases the way you actually use them.'],
+  [iosVoiceNotesHomeUrl, 'Voice note history', 'Keep recent recordings and transcripts organized on the phone.'],
+];
+
+const iosHelpSections = [
+  ['Getting started with Muesli on iPhone', 'Open Muesli, complete onboarding, allow microphone access, and download a local transcription model. Core voice notes and meeting transcription do not require an account.'],
+  ['Allowing microphone access', 'Choose Allow when iOS asks for microphone access. If you denied it, open Settings > Privacy & Security > Microphone and enable Muesli, then return to the app.'],
+  ['Downloading a transcription model', 'Open Settings > Models and choose a Parakeet or Whisper model. Keep Muesli open and connected during the first download and preparation. Available choices range from lighter models around 153 MB to larger models around 1.5 GB.'],
+  ['Using transcription without an internet connection', 'Download and prepare a model before going offline. Recording and core transcription can then run locally. iCloud sync, model downloads, and optional AI summaries still require a network connection.'],
+  ['Recording and recovering a voice note', 'Start a Voice Note, speak, then stop to save and transcribe it. Long recordings save audio locally as they progress. If transcription is interrupted, reopen Muesli and check Recent Voice Notes for the saved recording or pending result.'],
+  ['Recording an in-person meeting', 'Open Meetings, give the session a title, and start recording. Keep the iPhone near the people speaking and leave Muesli active. Obtain any notice or consent required where you are recording.'],
+  ['Installing the Muesli keyboard', 'Open iOS Settings > General > Keyboard > Keyboards > Add New Keyboard, choose Muesli, then select Muesli in the keyboard list. Return to a text field and switch keyboards with the globe key.'],
+  ['Enabling Full Access', 'In iOS Settings > General > Keyboard > Keyboards > Muesli, enable Allow Full Access. This lets the keyboard and main app exchange a request and finished result through their shared App Group.'],
+  ['Understanding the keyboard-to-app handoff', 'The keyboard extension does not record audio. Tapping its microphone creates a request and opens Muesli, where microphone access, recording, and local transcription are handled. The result is returned through the shared App Group and inserted by the keyboard.'],
+  ['Managing saved audio and transcripts', 'Voice notes, meeting recordings, transcripts, and history are stored locally by default. Use the delete controls in the relevant detail screen to remove content. Audio is not included in optional iCloud text sync.'],
+  ['Using the personal dictionary', 'Open Settings > Dictionary to add names, brands, acronyms, and phrase corrections. You can also configure filler-word removal. Dictionary data stays in local app storage by default.'],
+  ['Enabling optional iCloud sync', 'Open Settings > Sync and turn on private iCloud sync while signed in to iCloud. Muesli can sync voice-note text, meeting transcripts, notes, and summaries between iPhone and Mac. Audio and downloaded models are not synced.'],
+  ['Connecting optional summary providers', 'Open Settings > Summaries. Add an OpenRouter API key or sign in with ChatGPT. A provider receives transcript text only when you ask Muesli to generate a summary. Local recording and transcription do not need a summary provider.'],
+  ['Troubleshooting model downloads', 'Check available device storage and network access, keep Muesli in the foreground, and retry from Settings > Models. If a partial model remains, remove it from the model manager and start the download again.'],
+  ['Troubleshooting missing transcripts', 'Confirm a local model shows as ready, then check the relevant Voice Note or Meeting detail. If the recording exists, reconnect power if needed and reopen Muesli so a pending local transcription can resume.'],
+  ['Troubleshooting keyboard handoff', 'Confirm Muesli Keyboard is selected, Full Access is enabled, and Muesli can open from the keyboard. If the result does not return, switch back to Muesli, finish the request, then return to the original text field and select the Muesli keyboard again.'],
+  ['Contacting support', 'Email pranav@muesli.works with your iOS version, iPhone model, selected transcription model, and the step that failed. Do not send private recordings or transcripts unless you intentionally choose to share them.'],
+];
+
 const legalPages = {
   privacy: {
     title: 'Privacy Policy',
-    updated: 'May 25, 2026',
-    intro: 'Muesli is local-first speech software for macOS. Dictation and speech-to-text transcription run on your Mac using on-device models. Audio is not sent to Muesli servers for transcription.',
+    updated: 'July 14, 2026',
+    intro: 'This policy covers Muesli for macOS, Muesli for iPhone, the Muesli keyboard, muesli.works, and optional connected features. Core speech transcription runs locally on your device after a model is installed. Connected features are optional and are described separately below.',
     sections: [
       {
-        title: 'What Muesli Does',
+        title: 'Scope of This Policy',
         body: [
-          'Muesli is a native macOS app for dictation, meeting transcription, and meeting notes. It uses CoreML and Apple Silicon acceleration to convert speech to text locally on your device.',
+          'Muesli provides dictation, voice notes, meeting transcription, and meeting notes on macOS and iOS. The Mac app records dictation and computer-based meetings. The iPhone app records voice notes and in-person meetings and can return dictated text to other apps through the optional Muesli keyboard.',
         ],
       },
       {
-        title: 'Data That Stays on Your Device',
+        title: 'What Muesli Processes Locally',
         body: [
-          'Muesli stores application data locally on your Mac unless you explicitly enable an optional connected service.',
+          'Muesli stores application data locally on your Mac or iPhone unless you explicitly enable an optional connected service. The default speech-to-text path does not send recordings to Muesli servers.',
         ],
         bullets: [
-          'Audio captured for dictation and meetings',
-          'Transcripts, dictations, and meeting notes stored in a local SQLite database',
-          'Configuration and preferences stored in a local JSON file',
+          'Voice recordings captured for dictation, voice notes, and meetings',
+          'Transcripts, dictation history, meeting records, notes, and personal dictionary entries',
+          'Configuration and preferences stored in local application storage',
           'Downloaded speech models cached on your device',
-          'OAuth tokens and connected-service credentials stored in macOS Keychain where applicable',
+          'OAuth tokens and connected-service credentials stored in Apple Keychain where applicable',
+        ],
+      },
+      {
+        title: 'Voice Recordings and Transcripts',
+        body: [
+          'Recordings and transcripts stay in Muesli’s local application storage by default. On iPhone, you can choose whether original voice-note audio is retained. Meeting recordings and transcripts remain local unless you deliberately export, share, sync eligible text through iCloud, or request a summary from a connected provider.',
+        ],
+      },
+      {
+        title: 'Local Model Downloads',
+        body: [
+          'Muesli downloads speech model assets from their distribution hosts when you select a model. The provider can receive ordinary network information associated with that download, such as an IP address. Once prepared, the model runs locally for core transcription. Models can be removed from the app to reclaim storage.',
+        ],
+      },
+      {
+        title: 'Muesli Keyboard and Full Access',
+        body: [
+          'The iOS keyboard extension does not record audio. It creates a dictation request and opens the Muesli app, where microphone access, recording, and local transcription are handled. Full Access lets the extension exchange that request, status, and finished text with the containing app through a shared App Group. Muesli does not use Full Access to collect everything you type.',
+        ],
+      },
+      {
+        title: 'Shared App Group Storage',
+        body: [
+          'The Muesli iPhone app and Muesli keyboard use an Apple App Group container for the minimum data needed to coordinate a dictation handoff, including request state and the completed result. This storage is accessible to the Muesli app and its keyboard extension, not to unrelated apps.',
+        ],
+      },
+      {
+        title: 'Camera Access and Setup QR Codes',
+        body: [
+          'On iPhone, camera access is optional and used only to scan a setup QR code shown by Muesli on your Mac. The QR code starts setup; eligible text sync then uses your private iCloud account. Muesli does not use the camera to record meetings.',
+        ],
+      },
+      {
+        title: 'Optional iCloud and CloudKit Sync',
+        body: [
+          'If you enable private iCloud sync, Muesli can sync voice-note text, meeting transcripts, notes, and summaries through the iCloud account signed in on your Apple devices. Voice recordings and downloaded speech models are not synced. Apple processes the synced data under its own terms and privacy policy.',
         ],
       },
       {
@@ -2258,22 +2384,40 @@ const legalPages = {
         ],
       },
       {
-        title: 'macOS Permissions',
+        title: 'Device Permissions',
         body: [
-          'Muesli requests macOS permissions only for product features you use.',
+          'Muesli requests platform permissions only for product features you use.',
         ],
         bullets: [
-          'Microphone for dictation and meeting microphone audio',
-          'Screen Recording or Screen & System Audio Recording for system audio capture during meetings',
-          'Accessibility for pasting text and optional screen context capture',
-          'Input Monitoring for global hotkey detection',
-          'Calendar for local macOS calendar events',
+          'Microphone for Mac dictation, iPhone voice notes, and meeting audio',
+          'Screen Recording or Screen & System Audio Recording for Mac system audio capture during meetings',
+          'Accessibility and Input Monitoring for Mac paste and global hotkey behavior',
+          'Calendar for optional upcoming-meeting features on Mac',
+          'Camera on iPhone for optional Mac setup QR scanning',
         ],
       },
       {
-        title: 'Anonymous Usage Analytics',
+        title: 'Privacy-Preserving Aggregate Telemetry',
         body: [
-          'Muesli may use privacy-focused analytics to understand broad feature usage and app health. Analytics never include audio, transcripts, meeting notes, calendar content, screen content, or other personal text.',
+          'Muesli uses TelemetryDeck to understand broad feature usage, device compatibility, failures, and app health. Events can include app version, iOS version, device family or model, feature state, and sanitized error categories. Analytics do not include audio, transcripts, meeting notes, dictionary content, calendar content, screen content, or other personal text.',
+        ],
+      },
+      {
+        title: 'Data Retention and Deletion',
+        body: [
+          'Local content remains on your device until you delete it, remove the app and its data, or use a platform storage control. Connected providers and Apple may retain data according to their own policies. Deleting local content does not automatically delete a copy you previously exported, shared, synced, or sent to a summary provider.',
+        ],
+      },
+      {
+        title: 'Tracking and Advertising',
+        body: [
+          'Muesli does not sell personal information and does not use recordings or transcript content for advertising. Muesli does not use cross-app tracking for targeted advertising.',
+        ],
+      },
+      {
+        title: 'Security',
+        body: [
+          'Muesli reduces exposure by keeping core transcription and local content on the device by default and by storing credentials in Apple Keychain where applicable. No software or storage system can guarantee absolute security. Keep your devices, Apple account, provider accounts, and backups protected.',
         ],
       },
       {
@@ -2304,8 +2448,8 @@ const legalPages = {
   },
   terms: {
     title: 'Terms of Service',
-    updated: 'May 25, 2026',
-    intro: 'Muesli is open-source macOS software. These terms cover your use of the application, website, downloads, and optional connected services.',
+    updated: 'July 14, 2026',
+    intro: 'These terms cover Muesli for macOS and iOS, the Muesli keyboard, muesli.works, downloads, local model assets, and optional connected services.',
     sections: [
       {
         title: 'Acceptance of Terms',
@@ -2314,15 +2458,27 @@ const legalPages = {
         ],
       },
       {
-        title: 'Description of Service',
+        title: 'Muesli for macOS and iOS',
         body: [
-          'Muesli provides local-first dictation, meeting transcription, and meeting notes on macOS. Optional integrations may connect to third-party services such as OpenAI, OpenRouter, ChatGPT, and Google Calendar.',
+          'Muesli provides local-first dictation, voice notes, meeting transcription, and meeting notes on supported Apple devices. Platform features differ: the Mac app can capture computer audio, while the iPhone app records from its microphone and can coordinate dictation with the Muesli keyboard.',
         ],
       },
       {
-        title: 'License',
+        title: 'Eligibility',
+        body: [
+          'You must be legally able to accept these terms. If you use Muesli for an organization, you represent that you have authority to do so and that your use follows the organization’s rules.',
+        ],
+      },
+      {
+        title: 'License and Open-Source Components',
         body: [
           'Muesli is distributed under the MIT License. The source code is available on GitHub. Your rights to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the software are governed by that license.',
+        ],
+      },
+      {
+        title: 'User Content and Ownership',
+        body: [
+          'You retain ownership of recordings, transcripts, notes, dictionary entries, and other content you create with Muesli. You grant only the permissions needed for features you deliberately use, such as processing eligible text through iCloud or sending transcript text to a summary provider.',
         ],
       },
       {
@@ -2332,9 +2488,39 @@ const legalPages = {
         ],
         bullets: [
           'Comply with laws that apply to recording conversations, meetings, calls, system audio, and other people’s speech in your jurisdiction.',
-          'Obtain any required knowledge, notice, or consent from participants before recording or transcribing.',
+          'Obtain any consent required before recording or transcribing another person.',
           'Review generated transcripts and summaries before relying on them as records.',
           'Secure your device and the local data stored by Muesli.',
+        ],
+      },
+      {
+        title: 'Recording Consent and Local Laws',
+        body: [
+          'You are responsible for obtaining any consent required before recording or transcribing another person. Recording and wiretap laws vary by jurisdiction and context. Muesli does not determine whether a particular recording is lawful for you.',
+        ],
+      },
+      {
+        title: 'On-Device Models and Downloaded Assets',
+        body: [
+          'Speech models and related assets can be large, may come from third-party repositories, and may have their own license terms. Model availability, accuracy, storage size, hardware compatibility, and performance can change. You are responsible for the network and device storage used to download them.',
+        ],
+      },
+      {
+        title: 'iCloud and Apple Services',
+        body: [
+          'Optional iCloud sync, App Groups, Keychain, App Store distribution, and other Apple services are governed by Apple’s terms and availability. Muesli cannot guarantee that Apple services will be uninterrupted or that every platform feature will remain available on every operating-system version.',
+        ],
+      },
+      {
+        title: 'Purchases and Future Paid Features',
+        body: [
+          'Muesli does not promise a particular future pricing model. If a paid feature, purchase, or subscription is offered, its price and additional terms will be shown before you buy it through the applicable purchase flow.',
+        ],
+      },
+      {
+        title: 'Acceptable Use',
+        body: [
+          'Do not use Muesli to violate law, infringe rights, bypass consent requirements, distribute malware, interfere with the service, or access another person’s device, account, recordings, or content without authorization.',
         ],
       },
       {
@@ -2362,7 +2548,7 @@ const legalPages = {
         ],
       },
       {
-        title: 'Updates and Changes',
+        title: 'Availability, Updates, and Compatibility',
         body: [
           'Muesli may change, remove, rename, limit, or stop maintaining features, models, integrations, release channels, downloads, documentation, or update mechanisms at any time.',
         ],
@@ -2398,6 +2584,12 @@ const legalPages = {
         ],
       },
       {
+        title: 'Governing Law',
+        body: [
+          'These terms are governed by applicable law without regard to conflict-of-law principles. Mandatory consumer protections and rights that apply where you live are not excluded by these terms.',
+        ],
+      },
+      {
         title: 'Contact',
         body: [
           'For questions about these terms, email pranav@muesli.works.',
@@ -2407,7 +2599,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = ['/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2468,6 +2660,24 @@ function organizationSchema() {
 
 function softwareSchema(path = '/') {
   const meta = routeMeta[path] || routeMeta['/'];
+
+  if (path === '/ios' || path === '/help/ios') {
+    return {
+      '@type': 'SoftwareApplication',
+      '@id': `${siteData.siteUrl}/ios#software`,
+      name: siteData.iosProduct.name,
+      applicationCategory: siteData.iosProduct.applicationCategory,
+      operatingSystem: siteData.iosProduct.operatingSystem,
+      softwareRequirements: siteData.iosProduct.operatingSystem,
+      url: siteData.iosUrl,
+      codeRepository: siteData.iosRepositoryUrl,
+      image: siteData.logoUrl,
+      description: routeMeta['/ios'].description,
+      featureList: siteData.iosProduct.keyFacts,
+      publisher: { '@id': `${siteData.siteUrl}/#organization` },
+    };
+  }
+
   return {
     '@type': 'SoftwareApplication',
     '@id': `${siteData.siteUrl}/#software`,
@@ -2635,6 +2845,7 @@ const footerDirectoryColumns = [
   {
     title: 'Product',
     links: [
+      ['Muesli for iPhone', '/ios'],
       ['On-device dictation', '/on-device-dictation'],
       ['Meeting notes', '/meeting-notes'],
       ['Local-first AI', '/local-first-ai'],
@@ -2674,6 +2885,7 @@ const footerDirectoryColumns = [
     title: 'Resources',
     links: [
       ['Help', '/help'],
+      ['iPhone help', '/help/ios'],
       ['Changelog', '/changelog'],
       ['Blog', '/blog'],
       ['GitHub', 'https://github.com/pHequals7/muesli'],
@@ -2778,6 +2990,242 @@ function LegalPage({ page, path }) {
       <footer className="legal-footer">
         <span>muesli · local-first · open source</span>
         <a href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">GitHub</a>
+      </footer>
+      <SiteFooterDirectory compact />
+    </main>
+  );
+}
+
+function IosNav({ active = 'ios' } = {}) {
+  return (
+    <nav className="ios-nav">
+      <a className="brand" href="/" aria-label="Muesli home">
+        <img src={iconUrl} alt="Muesli app icon" />
+        <span>muesli</span>
+      </a>
+      <div className="ios-nav-links">
+        <a href="/">Mac</a>
+        <a href="/ios" aria-current={active === 'ios' ? 'page' : undefined}>iPhone</a>
+        <a href="/help/ios" aria-current={active === 'help' ? 'page' : undefined}>iOS help</a>
+        <a className="ios-nav-cta" href="mailto:pranav@muesli.works?subject=Muesli%20for%20iPhone%20availability">
+          Coming soon
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+function IosPage() {
+  useEffect(() => {
+    document.title = routeMeta['/ios'].title;
+    setCanonicalUrl('/ios');
+  }, []);
+
+  const structuredData = baseStructuredData('/ios', [
+    pageBreadcrumb('/ios', 'Muesli for iPhone'),
+    faqSchema('/ios', iosProductFaqItems),
+  ]);
+
+  return (
+    <main className="ios-page">
+      <JsonLd data={structuredData} />
+      <IosNav />
+
+      <section className="ios-hero">
+        <div className="ios-hero-copy">
+          <div className="ios-kicker"><Smartphone size={17} /> Muesli for iPhone</div>
+          <h1>Private speech-to-text that stays close to your iPhone.</h1>
+          <p>
+            Record voice notes, capture in-person meetings, and dictate into other apps. Core transcription runs on
+            your device after the local model is installed.
+          </p>
+          <div className="ios-hero-actions">
+            <a className="ios-primary-cta" href="mailto:pranav@muesli.works?subject=Muesli%20for%20iPhone%20availability">
+              Notify me when available <ArrowRight size={18} />
+            </a>
+            <a className="ios-text-link" href="/help/ios">Read iPhone setup help</a>
+          </div>
+          <div className="ios-proof-row" aria-label="Muesli for iPhone product facts">
+            <span><Cpu size={16} /> Local models</span>
+            <span><CloudOff size={16} /> Offline after setup</span>
+            <span><LockKeyhole size={16} /> No account required</span>
+          </div>
+        </div>
+
+        <div className="ios-hero-device-stack" aria-label="Muesli for iPhone voice note, meeting, and keyboard screens">
+          <figure className="ios-device ios-device-back ios-device-left">
+            <img src={iosLiveMeetingUrl} alt="Muesli recording an in-person meeting on iPhone" />
+          </figure>
+          <figure className="ios-device ios-device-main">
+            <img src={iosLiveVoiceNoteUrl} alt="Muesli recording a private voice note on iPhone" />
+          </figure>
+          <figure className="ios-device ios-device-back ios-device-right">
+            <img src={iosKeyboardUrl} alt="Muesli keyboard ready to dictate into another iPhone app" />
+          </figure>
+          <div className="ios-local-badge"><span /> transcription happens here</div>
+        </div>
+      </section>
+
+      <section className="ios-statement">
+        <p>Voice is not raw material for another cloud account.</p>
+        <h2>Your phone already has the microphone and the compute. Muesli keeps the first transcript there.</h2>
+      </section>
+
+      <section className="ios-screenshot-section" aria-labelledby="ios-product-proof">
+        <div className="ios-section-heading">
+          <span>Product proof</span>
+          <h2 id="ios-product-proof">Six useful surfaces. One local speech layer.</h2>
+          <p>Real dark-mode screens from the iPhone app, ordered from capture to control.</p>
+        </div>
+        <div className="ios-screen-gallery">
+          {iosScreens.map(([image, title, body], index) => (
+            <figure className="ios-screen-card" key={title}>
+              <div className="ios-screen-number">0{index + 1}</div>
+              <img src={image} alt={`${title} in Muesli for iPhone`} loading={index > 1 ? 'lazy' : undefined} />
+              <figcaption>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section className="ios-feature-section">
+        <div className="ios-section-heading ios-section-heading-light">
+          <span>What it does</span>
+          <h2>A pocket-sized speech workspace, not a thin recorder.</h2>
+        </div>
+        <div className="ios-feature-grid">
+          {iosFeaturePillars.map(([Icon, title, body]) => (
+            <article key={title}>
+              <Icon size={22} />
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="ios-local-section">
+        <div className="ios-local-copy">
+          <span>Local versus connected</span>
+          <h2>Privacy is a map, not a slogan.</h2>
+          <p>
+            Recording and core transcription stay on the device. iCloud text sync and AI summaries are separate,
+            visible choices. Analytics describe interactions and app health without carrying your words.
+          </p>
+        </div>
+        <div className="ios-processing-table" role="table" aria-label="Where Muesli for iPhone features are processed">
+          <div className="ios-processing-row ios-processing-head" role="row">
+            <strong>Feature</strong><strong>Default processing</strong>
+          </div>
+          {iosProcessingRows.map(([feature, processing]) => (
+            <div className="ios-processing-row" role="row" key={feature}>
+              <span>{feature}</span><strong>{processing}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="ios-keyboard-section">
+        <div className="ios-keyboard-image">
+          <img src={iosKeyboardUrl} alt="Muesli keyboard dictation handoff inside an iPhone app" loading="lazy" />
+        </div>
+        <div className="ios-keyboard-copy">
+          <span>Keyboard handoff</span>
+          <h2>The keyboard asks. The app listens.</h2>
+          <p>
+            The keyboard extension never records audio. It opens Muesli with a request; the main app handles microphone
+            access and local transcription, then the shared App Group carries the result back for insertion.
+          </p>
+          <ol>
+            <li><b>01</b><span>Tap the Muesli microphone in any text field.</span></li>
+            <li><b>02</b><span>Record and transcribe locally in the Muesli app.</span></li>
+            <li><b>03</b><span>Return to the field and insert the finished text.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section className="ios-requirements-section">
+        <div>
+          <span>Device requirements</span>
+          <h2>Prepare once. Transcribe wherever the day goes.</h2>
+        </div>
+        <div className="ios-requirement-grid">
+          <article><Smartphone size={21} /><h3>iOS 17 or later</h3><p>The current build supports iPhone on iOS 17 and newer.</p></article>
+          <article><Database size={21} /><h3>Local storage</h3><p>Model choices range from about 153 MB to 1.5 GB, plus space for recordings you keep.</p></article>
+          <article><Cloud size={21} /><h3>Internet for setup</h3><p>Download a model first. Core recording and transcription can work offline afterward.</p></article>
+        </div>
+      </section>
+
+      <section className="ios-faq-section">
+        <div className="ios-section-heading">
+          <span>Questions, answered plainly</span>
+          <h2>What should you know before trusting Muesli with a microphone?</h2>
+        </div>
+        <div className="faq-list ios-faq-list">
+          {iosProductFaqItems.map((item, index) => (
+            <details className="faq-item" open={index === 0} key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="ios-final-cta">
+        <img src={iconUrl} alt="Muesli app icon" />
+        <span>Coming soon</span>
+        <h2>Muesli for iPhone is coming soon.</h2>
+        <p>The app is currently under App Store review. There is no public App Store listing yet.</p>
+        <a className="ios-primary-cta" href="mailto:pranav@muesli.works?subject=Muesli%20for%20iPhone%20availability">
+          Notify me when available <ArrowRight size={18} />
+        </a>
+      </section>
+      <SiteFooterDirectory compact />
+    </main>
+  );
+}
+
+function IosHelpPage() {
+  useEffect(() => {
+    document.title = routeMeta['/help/ios'].title;
+    setCanonicalUrl('/help/ios');
+  }, []);
+
+  const helpFaq = iosHelpSections.map(([question, answer]) => ({ question, answer }));
+  const structuredData = baseStructuredData('/help/ios', [
+    pageBreadcrumb('/help/ios', 'Muesli for iPhone help'),
+    faqSchema('/help/ios', helpFaq),
+  ]);
+
+  return (
+    <main className="legal-page utility-page ios-help-page">
+      <JsonLd data={structuredData} />
+      <IosNav active="help" />
+      <article className="legal-document">
+        <div className="ios-help-kicker"><Smartphone size={17} /> iPhone support</div>
+        <h1>Muesli for iPhone help</h1>
+        <p className="legal-intro">
+          Set up local transcription, record voice notes and in-person meetings, install the keyboard, understand Full
+          Access, and fix the handoff when text does not come back where you expect it.
+        </p>
+        <nav className="ios-help-index" aria-label="iPhone help topics">
+          {iosHelpSections.map(([title], index) => (
+            <a href={`#ios-help-${index + 1}`} key={title}>{title}</a>
+          ))}
+        </nav>
+        {iosHelpSections.map(([title, body], index) => (
+          <section className="legal-section" id={`ios-help-${index + 1}`} key={title}>
+            <h2>{title}</h2>
+            <p>{body}</p>
+          </section>
+        ))}
+      </article>
+      <footer className="legal-footer">
+        <span>Still stuck? Include your iOS version and iPhone model.</span>
+        <a href="mailto:pranav@muesli.works">pranav@muesli.works</a>
       </footer>
       <SiteFooterDirectory compact />
     </main>
@@ -2914,6 +3362,7 @@ function ProductPageNav() {
       </a>
       <div className="product-nav-links">
         <a href="/#notes">Product</a>
+        <a href="/ios">iPhone</a>
         <a href="/#privacy">Privacy</a>
         <a href="/blog/">Blog</a>
         <a href="/changelog">Releases</a>
@@ -5483,13 +5932,17 @@ function LandingPage() {
         <div className="nav-links">
           <details className="nav-feature-menu">
             <summary>
-              Features
+              Product
               <ChevronDown size={15} aria-hidden="true" />
             </summary>
             <div className="nav-dropdown">
               <a href="/on-device-dictation/">On-device Dictation</a>
               <a href="/meeting-notes/">Meeting Notes</a>
               <a href="/local-first-ai/">Local-first AI</a>
+              <a className="nav-dropdown-coming-soon" href="/ios">
+                <span>Muesli for iPhone</span>
+                <small>Coming soon</small>
+              </a>
             </div>
           </details>
           <a href="#privacy">Privacy</a>
@@ -5811,6 +6264,14 @@ export function App({ pathname = '/' }) {
 
   if (legalKey) {
     return <LegalPage page={legalPages[legalKey]} path={path} />;
+  }
+
+  if (path === '/ios') {
+    return <IosPage />;
+  }
+
+  if (path === '/help/ios') {
+    return <IosHelpPage />;
   }
 
   if (path === '/help') {

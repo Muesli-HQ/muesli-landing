@@ -236,7 +236,7 @@ main.no-graphics .trust-grid {
   top: calc(100% + 12px);
   left: -12px;
   display: grid;
-  min-width: 220px;
+  min-width: 270px;
   padding: 8px;
   border: 1px solid rgba(74, 52, 27, 0.14);
   border-radius: 8px;
@@ -271,6 +271,27 @@ main.no-graphics .trust-grid {
 .nav-dropdown a:hover {
   background: rgba(40, 95, 76, 0.1);
   color: var(--fern);
+}
+
+.nav-dropdown .nav-dropdown-coming-soon {
+  justify-content: space-between;
+  margin-top: 3px;
+  border-top: 1px solid rgba(74, 52, 27, 0.1);
+  border-radius: 0 0 7px 7px;
+  padding-top: 3px;
+}
+
+.nav-dropdown-coming-soon small {
+  padding: 3px 6px;
+  border: 1px solid rgba(40, 95, 76, 0.18);
+  border-radius: 999px;
+  background: rgba(40, 95, 76, 0.08);
+  color: var(--fern);
+  font-size: 0.56rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .nav-links a {
@@ -5451,6 +5472,555 @@ h3 {
     gap: 6px;
     text-align: center;
   }
+}
+
+/* Muesli for iPhone */
+.ios-page {
+  --ios-night: #0d1016;
+  --ios-surface: #171c26;
+  --ios-blue: #6ea8ff;
+  --ios-mint: #53d6c7;
+  --ios-paper: #f6f1e6;
+  color: #f7f8fb;
+  background: var(--ios-night);
+}
+
+.ios-nav {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  z-index: 20;
+  width: min(1180px, calc(100vw - 40px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateX(-50%);
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(18, 22, 30, 0.76);
+  backdrop-filter: blur(20px);
+  color: #fff;
+}
+
+.ios-nav .brand img {
+  border-radius: 9px;
+}
+
+.ios-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 0.88rem;
+}
+
+.ios-nav-links a {
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.ios-nav-links a:hover,
+.ios-nav-links a[aria-current="page"] {
+  color: #fff;
+}
+
+.ios-nav-links .ios-nav-cta {
+  padding: 9px 14px;
+  border-radius: 11px;
+  background: #fff;
+  color: #10131a;
+}
+
+.ios-hero {
+  position: relative;
+  min-height: 940px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(520px, 1.14fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 88px);
+  padding: 144px max(30px, calc((100vw - 1180px) / 2)) 92px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 28%, rgba(65, 124, 217, 0.34), transparent 34%),
+    radial-gradient(circle at 20% 78%, rgba(64, 203, 186, 0.12), transparent 31%),
+    linear-gradient(150deg, #0a0d12 0%, #121722 55%, #0c1119 100%);
+}
+
+.ios-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: repeating-linear-gradient(112deg, transparent 0 13px, rgba(255, 255, 255, 0.025) 13px 14px);
+}
+
+.ios-hero-copy,
+.ios-hero-device-stack {
+  position: relative;
+  z-index: 1;
+}
+
+.ios-kicker,
+.ios-help-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: var(--ios-mint);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ios-hero h1 {
+  max-width: 670px;
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 6.3vw, 7rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.ios-hero-copy > p {
+  max-width: 590px;
+  margin: 30px 0 0;
+  color: rgba(244, 247, 252, 0.72);
+  font-size: clamp(1.04rem, 1.5vw, 1.25rem);
+  line-height: 1.7;
+}
+
+.ios-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.ios-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 50px;
+  padding: 0 20px;
+  border-radius: 14px;
+  background: var(--ios-blue);
+  color: #07101e;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 14px 36px rgba(66, 121, 218, 0.26);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.ios-primary-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(66, 121, 218, 0.38);
+}
+
+.ios-text-link {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-underline-offset: 5px;
+}
+
+.ios-proof-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 34px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.ios-proof-row span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ios-hero-device-stack {
+  min-height: 720px;
+}
+
+.ios-device {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(335px, 42vw);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 48px;
+  background: #101318;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.48);
+}
+
+.ios-device img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ios-device-main {
+  z-index: 3;
+  transform: translate(-50%, -50%) rotate(-1.5deg);
+  animation: ios-device-enter 760ms cubic-bezier(.2,.7,.2,1) both;
+}
+
+.ios-device-back {
+  width: min(275px, 34vw);
+  opacity: 0.74;
+  filter: saturate(0.8) brightness(0.72);
+}
+
+.ios-device-left {
+  z-index: 1;
+  transform: translate(-105%, -46%) rotate(-9deg);
+}
+
+.ios-device-right {
+  z-index: 2;
+  transform: translate(5%, -43%) rotate(8deg);
+}
+
+.ios-local-badge {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 15px;
+  border: 1px solid rgba(83, 214, 199, 0.32);
+  border-radius: 999px;
+  background: rgba(10, 17, 24, 0.82);
+  color: #dffbf6;
+  font-size: 0.75rem;
+  font-weight: 750;
+  backdrop-filter: blur(14px);
+}
+
+.ios-local-badge span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ios-mint);
+  box-shadow: 0 0 0 5px rgba(83, 214, 199, 0.12);
+}
+
+@keyframes ios-device-enter {
+  from { opacity: 0; transform: translate(-50%, -43%) rotate(3deg) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) rotate(-1.5deg) scale(1); }
+}
+
+.ios-statement {
+  padding: 110px max(30px, calc((100vw - 980px) / 2));
+  background: var(--ios-paper);
+  color: #171c25;
+  text-align: center;
+}
+
+.ios-statement p {
+  margin: 0 0 18px;
+  color: #416b62;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ios-statement h2 {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5vw, 5.1rem);
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+}
+
+.ios-screenshot-section,
+.ios-faq-section,
+.ios-requirements-section {
+  padding: 110px max(30px, calc((100vw - 1180px) / 2));
+  background: #f8f3e9;
+  color: #1b2029;
+}
+
+.ios-section-heading {
+  max-width: 760px;
+  margin-bottom: 50px;
+}
+
+.ios-section-heading > span,
+.ios-local-copy > span,
+.ios-keyboard-copy > span,
+.ios-requirements-section > div:first-child > span {
+  color: #4c776e;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ios-section-heading h2,
+.ios-local-copy h2,
+.ios-keyboard-copy h2,
+.ios-requirements-section h2 {
+  margin: 12px 0 14px;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 4.8vw, 5rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.ios-section-heading p,
+.ios-local-copy p,
+.ios-keyboard-copy p {
+  color: #616873;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.ios-screen-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 52px 22px;
+}
+
+.ios-screen-card {
+  position: relative;
+  margin: 0;
+}
+
+.ios-screen-card img {
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(21, 29, 41, 0.14);
+  border-radius: 34px;
+  background: #12151b;
+  box-shadow: 0 24px 52px rgba(37, 42, 51, 0.16);
+}
+
+.ios-screen-number {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(14, 18, 25, 0.82);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(8px);
+}
+
+.ios-screen-card figcaption {
+  padding: 20px 6px 0;
+}
+
+.ios-screen-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.06rem;
+}
+
+.ios-screen-card p {
+  margin: 0;
+  color: #6a6f78;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.ios-feature-section {
+  padding: 110px max(30px, calc((100vw - 1180px) / 2));
+  background: #17202d;
+}
+
+.ios-section-heading-light > span { color: var(--ios-mint); }
+.ios-section-heading-light h2 { color: #fff; }
+
+.ios-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ios-feature-grid article {
+  min-height: 235px;
+  padding: 30px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ios-feature-grid svg { color: var(--ios-blue); }
+.ios-feature-grid h3 { margin: 48px 0 10px; color: #fff; font-size: 1.15rem; }
+.ios-feature-grid p { margin: 0; color: rgba(255, 255, 255, 0.58); font-size: 0.9rem; line-height: 1.65; }
+
+.ios-local-section,
+.ios-keyboard-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(460px, 1.2fr);
+  gap: clamp(50px, 8vw, 120px);
+  align-items: center;
+  padding: 120px max(30px, calc((100vw - 1180px) / 2));
+  background: #dcebd9;
+  color: #17221d;
+}
+
+.ios-processing-table {
+  overflow: hidden;
+  border: 1px solid rgba(33, 64, 55, 0.16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.ios-processing-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 17px 20px;
+  border-bottom: 1px solid rgba(33, 64, 55, 0.11);
+  font-size: 0.88rem;
+}
+
+.ios-processing-row:last-child { border-bottom: 0; }
+.ios-processing-row strong { color: #294d43; }
+.ios-processing-head { background: #244b40; color: #fff; }
+.ios-processing-head strong { color: #fff; }
+
+.ios-keyboard-section {
+  grid-template-columns: minmax(380px, 0.8fr) minmax(0, 1fr);
+  background: #0f131a;
+  color: #fff;
+}
+
+.ios-keyboard-image {
+  max-height: 720px;
+  overflow: hidden;
+  border-radius: 42px;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.45);
+}
+
+.ios-keyboard-image img {
+  display: block;
+  width: 100%;
+}
+
+.ios-keyboard-copy > span { color: var(--ios-mint); }
+.ios-keyboard-copy p { color: rgba(255, 255, 255, 0.62); }
+.ios-keyboard-copy ol { padding: 0; margin: 34px 0 0; list-style: none; }
+.ios-keyboard-copy li { display: grid; grid-template-columns: 42px 1fr; gap: 10px; align-items: center; padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.12); }
+.ios-keyboard-copy li b { color: var(--ios-blue); font-size: 0.73rem; }
+.ios-keyboard-copy li span { color: rgba(255,255,255,0.8); font-size: 0.92rem; }
+
+.ios-requirements-section {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 70px;
+}
+
+.ios-requirement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.ios-requirement-grid article {
+  padding: 25px;
+  border: 1px solid rgba(25, 32, 43, 0.12);
+  border-radius: 18px;
+  background: #fffaf1;
+}
+
+.ios-requirement-grid svg { color: #406d61; }
+.ios-requirement-grid h3 { margin: 48px 0 8px; font-size: 1rem; }
+.ios-requirement-grid p { margin: 0; color: #6a6f77; font-size: 0.82rem; line-height: 1.6; }
+
+.ios-faq-section { padding-top: 34px; }
+.ios-faq-list { max-width: 900px; }
+.ios-faq-list .faq-item { background: rgba(255, 255, 255, 0.56); }
+
+.ios-final-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 110px 24px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(86, 141, 226, 0.25), transparent 42%),
+    #0d1118;
+  text-align: center;
+}
+
+.ios-final-cta > img { width: 64px; height: 64px; border-radius: 16px; }
+.ios-final-cta > span { margin-top: 24px; color: var(--ios-mint); font-size: 0.72rem; font-weight: 850; letter-spacing: 0.14em; text-transform: uppercase; }
+.ios-final-cta h2 { max-width: 760px; margin: 14px 0; color: #fff; font-family: var(--font-display); font-size: clamp(3rem, 5.4vw, 5.5rem); letter-spacing: -0.05em; line-height: 0.98; }
+.ios-final-cta p { max-width: 590px; margin: 0 0 28px; color: rgba(255,255,255,0.58); line-height: 1.7; }
+.ios-page > .site-footer-directory { width: 100%; max-width: none; margin: 0; padding: 48px max(30px, calc((100vw - 1180px) / 2)); border-color: rgba(255,255,255,0.12); background: #0d1118; color: #fff; }
+.ios-page > .site-footer-directory .site-footer-column a,
+.ios-page > .site-footer-directory .site-footer-column p { color: rgba(255,255,255,0.5); }
+.ios-page > .site-footer-directory .site-footer-column h3 { color: rgba(255,255,255,0.84); }
+
+.ios-help-page {
+  padding-top: 116px;
+  background: linear-gradient(180deg, #10151d 0 390px, #e0eedc 390px 100%);
+}
+
+.ios-help-page .ios-nav { position: absolute; }
+.ios-help-page .legal-document { max-width: 980px; }
+.ios-help-page .ios-help-kicker { color: #3f6f64; margin-bottom: 18px; }
+.ios-help-index { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 22px; margin: 38px 0 28px; padding: 24px; border: 1px solid rgba(43, 71, 63, 0.14); border-radius: 16px; background: #e6f0df; }
+.ios-help-index a { color: #345f55; font-size: 0.82rem; font-weight: 700; line-height: 1.45; text-decoration: none; }
+.ios-help-index a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.ios-help-page .legal-section { scroll-margin-top: 28px; }
+
+@media (max-width: 1020px) {
+  .ios-hero { grid-template-columns: 1fr; min-height: auto; padding-top: 150px; text-align: center; }
+  .ios-hero-copy { margin: 0 auto; }
+  .ios-hero h1, .ios-hero-copy > p { margin-left: auto; margin-right: auto; }
+  .ios-hero-actions, .ios-proof-row { justify-content: center; }
+  .ios-hero-device-stack { min-height: 680px; }
+  .ios-screen-gallery { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ios-local-section, .ios-keyboard-section, .ios-requirements-section { grid-template-columns: 1fr; }
+  .ios-keyboard-image { max-width: 480px; max-height: 620px; margin: 0 auto; }
+}
+
+@media (max-width: 700px) {
+  .ios-nav { top: 10px; width: calc(100vw - 20px); }
+  .ios-nav-links { gap: 10px; }
+  .ios-nav-links > a:not(.ios-nav-cta):first-child,
+  .ios-nav-links > a:not(.ios-nav-cta):nth-child(3) { display: none; }
+  .ios-nav-links .ios-nav-cta { padding: 8px 10px; font-size: 0.76rem; }
+  .ios-hero { padding: 128px 18px 54px; }
+  .ios-hero h1 { font-size: clamp(3.5rem, 15vw, 5rem); }
+  .ios-proof-row { gap: 12px; }
+  .ios-hero-device-stack { min-height: 540px; margin-top: 16px; }
+  .ios-device-main { width: 260px; }
+  .ios-device-back { width: 210px; }
+  .ios-local-badge { right: 50%; bottom: 0; transform: translateX(50%); white-space: nowrap; }
+  .ios-statement, .ios-screenshot-section, .ios-feature-section, .ios-local-section, .ios-keyboard-section, .ios-requirements-section, .ios-faq-section { padding: 76px 18px; }
+  .ios-screen-gallery { display: flex; width: calc(100vw + 18px); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 32px 24px 0; }
+  .ios-screen-card { flex: 0 0 78vw; scroll-snap-align: start; }
+  .ios-feature-grid { grid-template-columns: 1fr; }
+  .ios-feature-grid article { min-height: 195px; }
+  .ios-feature-grid h3 { margin-top: 34px; }
+  .ios-processing-row { grid-template-columns: 0.9fr 1.1fr; padding: 15px; }
+  .ios-keyboard-image { max-height: 520px; border-radius: 30px; }
+  .ios-requirement-grid { grid-template-columns: 1fr; }
+  .ios-requirement-grid article { min-height: 180px; }
+  .ios-requirement-grid h3 { margin-top: 34px; }
+  .ios-help-page { padding-top: 98px; }
+  .ios-help-index { grid-template-columns: 1fr; padding: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -10,6 +10,9 @@ export const siteData = {
   repositoryUrl: 'https://github.com/pHequals7/muesli',
   releasesUrl: 'https://github.com/pHequals7/muesli/releases',
   latestReleaseUrl: 'https://github.com/pHequals7/muesli/releases/latest',
+  iosUrl: 'https://muesli.works/ios',
+  iosSupportUrl: 'https://muesli.works/help/ios',
+  iosRepositoryUrl: 'https://github.com/Muesli-HQ/muesli-ios',
   xUrl: 'https://x.com/fastspeech2text',
   linkedinUrl: 'https://www.linkedin.com/company/mueslios/',
   youtubeUrl: 'https://www.youtube.com/@MuesliHQ',
@@ -19,6 +22,22 @@ export const siteData = {
   operatingSystem: 'macOS',
   softwareRequirements: 'Apple Silicon Mac',
   applicationCategory: 'ProductivityApplication',
+  iosProduct: {
+    name: 'Muesli for iPhone',
+    operatingSystem: 'iOS 17 or later',
+    applicationCategory: 'ProductivityApplication',
+    availability: 'Coming soon — App Store review in progress',
+    keyFacts: [
+      'Records voice notes and in-person meetings from the iPhone microphone.',
+      'Runs core speech-to-text locally after a transcription model is downloaded.',
+      'Supports local Parakeet and Whisper model choices with different language, speed, and storage tradeoffs.',
+      'Stores recordings, transcripts, history, and personal dictionary data locally by default.',
+      'The optional Muesli keyboard hands recording to the main app, then receives the result through a shared App Group.',
+      'Optional iCloud sync covers text history; audio and downloaded speech models are not synced.',
+      'Optional OpenRouter or ChatGPT providers can receive transcript text when the user requests an AI summary.',
+      'TelemetryDeck receives anonymized, privacy-preserving aggregate telemetry about app interactions and health, not recordings or transcript text.',
+    ],
+  },
   keyFacts: [
     'Runs local speech-to-text on Apple Silicon with model paths such as Parakeet and Whisper.',
     'Dictate across Mac apps and paste clean text at the cursor.',
@@ -42,6 +61,12 @@ export const siteData = {
     'Optional summarization providers are separate from the local transcription path.',
   ],
   featurePages: [
+    {
+      title: 'Muesli for iPhone',
+      path: '/ios',
+      url: 'https://muesli.works/ios',
+      description: 'Private voice notes, in-person meeting transcription, and a dictation keyboard with local speech-to-text on iPhone.',
+    },
     {
       title: 'On-device Dictation',
       path: '/on-device-dictation',
@@ -193,12 +218,23 @@ export const siteData = {
     '/privacy': {
       title: 'Privacy Policy · Muesli',
       canonical: 'https://muesli.works/privacy',
-      description: 'Privacy policy for Muesli, a local-first macOS app for on-device dictation and meeting transcription.',
+      description: 'Privacy policy for Muesli on macOS and iOS, including local transcription, optional iCloud sync, keyboard handoff, summaries, and analytics.',
     },
     '/terms': {
       title: 'Terms of Service · Muesli',
       canonical: 'https://muesli.works/terms',
-      description: 'Terms of Service for Muesli, a local-first macOS app for dictation, meeting transcription, and private meeting notes.',
+      description: 'Terms of Service for Muesli on macOS and iOS, including local models, recordings, optional providers, iCloud, and platform services.',
+    },
+    '/ios': {
+      title: 'Muesli for iPhone | Private voice notes and local transcription',
+      canonical: 'https://muesli.works/ios',
+      description: 'Muesli is a private, local-first speech-to-text app for iPhone. Record voice notes and meetings, transcribe on device, and dictate into other apps with the Muesli keyboard.',
+      ogDescription: 'Private voice notes, in-person meeting transcription, and dictation across iPhone apps with local speech-to-text.',
+    },
+    '/help/ios': {
+      title: 'Muesli for iPhone help and support',
+      canonical: 'https://muesli.works/help/ios',
+      description: 'Set up and troubleshoot Muesli for iPhone, including microphone access, local models, offline transcription, meetings, keyboard Full Access, iCloud sync, and summaries.',
     },
     '/on-device-dictation': {
       title: 'On-device dictation for Mac · Muesli',
