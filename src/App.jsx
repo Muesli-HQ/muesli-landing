@@ -5948,7 +5948,7 @@ function LandingPage() {
           <a href="#privacy">Privacy</a>
           <a href="/changelog">Changelog</a>
           <a href="/blog">Blog</a>
-          <a href="/help">Help</a>
+          <a className="nav-help" href="/help">Help</a>
           <a className="github-pill" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
             <Github size={17} />
             <span>Open source</span>
