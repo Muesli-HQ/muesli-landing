@@ -1141,7 +1141,7 @@ h3 {
   outline-offset: 4px;
 }
 
-.feature svg {
+.feature > svg {
   color: var(--fern);
   margin-bottom: 54px;
 }
@@ -4734,7 +4734,7 @@ h3 {
     min-height: 0;
   }
 
-  .feature svg {
+  .feature > svg {
     margin-bottom: 28px;
   }
 
