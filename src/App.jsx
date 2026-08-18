@@ -95,7 +95,7 @@ import { changelogLinks, sameAsLinks, siteData, supportFaqItems } from './siteDa
 const downloadUrl = '/download/';
 const brewCommand = siteData.homebrewCommand;
 const githubReleasesUrl = siteData.releasesUrl;
-const githubReleasesApiUrl = 'https://api.github.com/repos/pHequals7/muesli/releases';
+const githubReleasesApiUrl = 'https://api.github.com/repos/Muesli-HQ/muesli/releases';
 
 function formatStars(count) {
   if (count == null) return 'Stars';
@@ -255,7 +255,7 @@ function ReleaseFeed({ releases, releaseStatus, maxVisible = 3 }) {
       <div className="changelog-shell changelog-loading" aria-live="polite">
         <span />
         <strong>Loading releases from GitHub...</strong>
-        <p>Fetching the current release history for pHequals7/muesli.</p>
+        <p>Fetching the current release history for Muesli-HQ/muesli.</p>
       </div>
     );
   }
@@ -2888,7 +2888,7 @@ const footerDirectoryColumns = [
       ['iPhone help', '/help/ios'],
       ['Changelog', '/changelog'],
       ['Blog', '/blog'],
-      ['GitHub', 'https://github.com/pHequals7/muesli'],
+      ['GitHub', 'https://github.com/Muesli-HQ/muesli'],
       ['llms.txt', '/llms.txt'],
       ['facts.json', '/facts.json'],
     ],
@@ -2989,7 +2989,7 @@ function LegalPage({ page, path }) {
 
       <footer className="legal-footer">
         <span>muesli · local-first · open source</span>
-        <a href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer">GitHub</a>
       </footer>
       <SiteFooterDirectory compact />
     </main>
@@ -3552,7 +3552,7 @@ function BlogPage() {
         </div>
         <div className="blog-cta-actions">
           <a className="primary-cta" href={downloadUrl}><Download size={18} /> Download for macOS</a>
-          <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer"><Github size={18} /> <Star size={15} /> Star Muesli on GitHub</a>
+          <a className="secondary-cta" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer"><Github size={18} /> <Star size={15} /> Star Muesli on GitHub</a>
         </div>
       </section>
 
@@ -5313,7 +5313,7 @@ function OnDeviceDictationPage() {
               <Download size={19} />
               Download for macOS
             </a>
-            <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
+            <a className="secondary-cta" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer">
               <Github size={18} />
               Read the source
             </a>
@@ -5532,7 +5532,7 @@ function MeetingNotesPage() {
               <Download size={19} />
               Download for macOS
             </a>
-            <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
+            <a className="secondary-cta" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer">
               <Github size={18} />
               Read the source
             </a>
@@ -5722,7 +5722,7 @@ function LocalFirstPage() {
               <Download size={19} />
               Download for macOS
             </a>
-            <a className="secondary-cta" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
+            <a className="secondary-cta" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer">
               <Github size={18} />
               Read the source
             </a>
@@ -5872,7 +5872,7 @@ function LandingPage() {
   }, []);
 
   useEffect(() => {
-    fetch('https://api.github.com/repos/pHequals7/muesli')
+    fetch('https://api.github.com/repos/Muesli-HQ/muesli')
       .then((response) => response.ok ? response.json() : null)
       .then((data) => {
         if (data?.stargazers_count != null) setStars(data.stargazers_count);
@@ -5949,7 +5949,7 @@ function LandingPage() {
           <a href="/changelog">Changelog</a>
           <a href="/blog">Blog</a>
           <a className="nav-help" href="/help">Help</a>
-          <a className="github-pill" href="https://github.com/pHequals7/muesli" target="_blank" rel="noreferrer">
+          <a className="github-pill" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer">
             <Github size={17} />
             <span>Open source</span>
             <b><Star size={14} /> {formatStars(stars)}</b>
