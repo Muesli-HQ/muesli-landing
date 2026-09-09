@@ -1,3 +1,5 @@
+import { searchGuides } from './searchGuides.js';
+
 export const siteData = {
   siteUrl: 'https://muesli.works',
   name: 'Muesli',
@@ -100,10 +102,10 @@ export const siteData = {
       description: 'A fair 2026 guide to the best dictation apps for Mac and macOS, including Apple Dictation, Muesli, Superwhisper, Wispr Flow, VoiceInk, and other voice-to-text options.',
     },
     {
-      title: 'Best Offline Dictation Apps for Mac',
+      title: searchGuides['/best-offline-dictation-apps-mac'].label,
       path: '/best-offline-dictation-apps-mac',
       url: 'https://muesli.works/best-offline-dictation-apps-mac',
-      description: 'A practical comparison of offline dictation apps for Mac, including Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and Muesli with local models such as Parakeet, Whisper, and Qwen3 ASR.',
+      description: searchGuides['/best-offline-dictation-apps-mac'].description,
     },
     {
       title: 'Offline Dictation for Mac',
@@ -130,10 +132,10 @@ export const siteData = {
       description: 'A practical guide to common speech-to-text architectures, including CTC, RNN-T, TDT, Conformer encoders, encoder-decoder Transformers, and streaming ASR.',
     },
     {
-      title: 'NVIDIA Parakeet Speech-to-Text',
+      title: searchGuides['/nvidia-parakeet-speech-to-text'].label,
       path: '/nvidia-parakeet-speech-to-text',
       url: 'https://muesli.works/nvidia-parakeet-speech-to-text',
-      description: 'A model guide to NVIDIA Parakeet speech-to-text, local English ASR, TDT and CTC model paths, and why Parakeet matters for fast Mac transcription.',
+      description: searchGuides['/nvidia-parakeet-speech-to-text'].description,
     },
     {
       title: 'Whisper Speech-to-Text',
@@ -148,10 +150,10 @@ export const siteData = {
       description: 'A healthcare dictation guide for doctors and medical professionals on Mac who want privacy-focused local speech-to-text before clinical notes move into EHR workflows.',
     },
     {
-      title: 'Local Meeting Transcription for Mac',
+      title: searchGuides['/local-meeting-transcription-mac'].label,
       path: '/local-meeting-transcription-mac',
       url: 'https://muesli.works/local-meeting-transcription-mac',
-      description: 'A practical guide to local meeting transcription on Mac and macOS, meeting notes without a bot, and what can stay on your own computer.',
+      description: searchGuides['/local-meeting-transcription-mac'].description,
     },
     {
       title: 'Bot-Free Meeting Notes',
@@ -166,10 +168,10 @@ export const siteData = {
       description: 'An Apple Dictation alternative guide for Mac users who want local-first dictation, offline speech-to-text models, open-source software, and meeting transcription on Apple Silicon.',
     },
     {
-      title: 'Granola Alternative',
+      title: searchGuides['/granola-alternative'].label,
       path: '/granola-alternative',
       url: 'https://muesli.works/granola-alternative',
-      description: 'A local Granola alternative guide for people who want local-first meeting notes, open-source software, and more ownership of their workday memory.',
+      description: searchGuides['/granola-alternative'].description,
     },
     {
       title: 'Granola vs Muesli',
@@ -184,10 +186,10 @@ export const siteData = {
       description: 'A practical Superwhisper alternative guide for Mac users who want local-first dictation, meeting transcription, open-source code, and offline speech-to-text on Apple Silicon.',
     },
     {
-      title: 'Best Wispr Flow Alternatives for Mac',
+      title: searchGuides['/wispr-flow-alternative'].label,
       path: '/wispr-flow-alternative',
       url: 'https://muesli.works/wispr-flow-alternative',
-      description: 'A practical 2026 comparison of the best Wispr Flow alternatives for Mac, including Muesli, Superwhisper, VoiceInk, Apple Dictation, and offline open-source speech-to-text options.',
+      description: searchGuides['/wispr-flow-alternative'].description,
     },
     {
       title: 'Otter.ai Alternative',
@@ -252,9 +254,9 @@ export const siteData = {
       description: 'A practical 2026 comparison of the best dictation apps for Mac and macOS, including local-first voice-to-text, offline speech models, Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and Muesli.',
     },
     '/best-offline-dictation-apps-mac': {
-      title: 'Best offline dictation apps for Mac · Muesli',
+      title: searchGuides['/best-offline-dictation-apps-mac'].title,
       canonical: 'https://muesli.works/best-offline-dictation-apps-mac',
-      description: 'A practical comparison of offline dictation apps for Mac, including Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and Muesli with local models such as Parakeet, Whisper, and Qwen3 ASR.',
+      description: searchGuides['/best-offline-dictation-apps-mac'].description,
     },
     '/offline-dictation-mac': {
       title: 'Offline dictation for Mac · Muesli',
@@ -277,9 +279,9 @@ export const siteData = {
       description: 'Common speech-to-text architectures explained: CTC, RNN-T, TDT, Conformer encoders, encoder-decoder Transformers, streaming ASR, and how model shape changes local transcription.',
     },
     '/nvidia-parakeet-speech-to-text': {
-      title: 'NVIDIA Parakeet speech-to-text guide · Muesli',
+      title: searchGuides['/nvidia-parakeet-speech-to-text'].title,
       canonical: 'https://muesli.works/nvidia-parakeet-speech-to-text',
-      description: 'NVIDIA Parakeet speech-to-text explained for local English ASR, TDT and CTC model paths, fast Mac transcription, and Muesli’s local-first model strategy.',
+      description: searchGuides['/nvidia-parakeet-speech-to-text'].description,
     },
     '/whisper-speech-to-text': {
       title: 'OpenAI Whisper speech-to-text guide · Muesli',
@@ -292,9 +294,9 @@ export const siteData = {
       description: 'Medical dictation for doctors and healthcare professionals on Mac: local speech-to-text on Apple Silicon, privacy-focused drafts, and how Muesli compares with Dragon, Abridge, Suki, Nabla, DeepScribe, Augmedix, and Freed.',
     },
     '/local-meeting-transcription-mac': {
-      title: 'Local meeting transcription for Mac and macOS · Muesli',
+      title: searchGuides['/local-meeting-transcription-mac'].title,
       canonical: 'https://muesli.works/local-meeting-transcription-mac',
-      description: 'Local meeting transcription on Mac and macOS for people who want meeting notes without a bot, with audio captured from their own computer.',
+      description: searchGuides['/local-meeting-transcription-mac'].description,
     },
     '/bot-free-meeting-notes': {
       title: 'Bot-free meeting notes for Mac · Muesli',
@@ -307,9 +309,9 @@ export const siteData = {
       description: 'An Apple Dictation alternative for Mac users who want local-first dictation, offline speech-to-text models, open-source software, and meeting transcription on Apple Silicon.',
     },
     '/granola-alternative': {
-      title: 'Local Granola alternative for Mac meeting notes · Muesli',
+      title: searchGuides['/granola-alternative'].title,
       canonical: 'https://muesli.works/granola-alternative',
-      description: 'A local Granola alternative for Mac users who want local-first meeting transcription, open-source software, and meeting notes they own instead of renting workday memory from the cloud.',
+      description: searchGuides['/granola-alternative'].description,
     },
     '/granola-vs-muesli': {
       title: 'Granola vs Muesli for local meeting notes · Muesli',
@@ -322,9 +324,9 @@ export const siteData = {
       description: 'A practical Superwhisper alternative for Mac users who want local-first dictation, meeting transcription, open-source code, and offline speech-to-text on Apple Silicon.',
     },
     '/wispr-flow-alternative': {
-      title: 'Best Wispr Flow Alternatives for Mac in 2026 · Muesli',
+      title: searchGuides['/wispr-flow-alternative'].title,
       canonical: 'https://muesli.works/wispr-flow-alternative',
-      description: 'The best Wispr Flow alternatives for Mac in 2026, compared by price, platform, offline support, privacy, and workflow. Muesli is the open-source local-first pick for Apple Silicon.',
+      description: searchGuides['/wispr-flow-alternative'].description,
     },
     '/otter-ai-alternative': {
       title: 'Otter.ai alternative for Mac meeting notes without a bot · Muesli',

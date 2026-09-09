@@ -35,6 +35,7 @@ import {
   Wand2,
 } from 'lucide-react';
 import './styles.css';
+import { searchGuides, searchGuideSources } from './searchGuides.js';
 import iconUrl from '../docs/icon.png';
 import zoomUrl from '../assets/zoom-app.png';
 import meetUrl from '../assets/Google_Meet_icon_(2020).svg.png';
@@ -731,101 +732,6 @@ const offlineDictationFaqItems = [
   },
 ];
 
-const localMeetingTranscriptionUseCases = [
-  {
-    title: 'Can I transcribe Zoom, Google Meet, and Teams calls on macOS?',
-    body: 'A local Mac recorder can capture the meeting audio from your own machine, which makes the workflow useful across browser calls and desktop meeting apps.',
-  },
-  {
-    title: 'Can I keep meeting notes without adding a bot?',
-    body: 'Bot-free transcription is useful when you do not want another attendee in the room, another service receiving the call, or another permission conversation before the meeting starts.',
-  },
-  {
-    title: 'Can local meeting transcription help after the call ends?',
-    body: 'The transcript becomes a local record you can search, review, summarize, and export instead of relying only on memory or scattered action items.',
-  },
-];
-
-const localMeetingTranscriptionComparisonRows = [
-  ['Meeting bot', 'Easy to invite and often works across hosted meeting platforms.', 'A third-party participant joins the call, and the meeting record starts outside your Mac.'],
-  ['Cloud recorder', 'Can be convenient when the organization has already approved the service.', 'Audio or transcript processing usually depends on a hosted pipeline.'],
-  ['Muesli local transcription', 'Captures mic and system audio from your Mac, then keeps the transcript close to your workspace.', 'You need macOS permissions for microphone and system audio, and optional summaries are a separate choice.'],
-];
-
-const localMeetingTranscriptionFaqItems = [
-  {
-    question: 'What is local meeting transcription on Mac?',
-    answer: 'Local meeting transcription means the meeting audio is captured from your own Mac and turned into a transcript without requiring a meeting bot to join the call. In Muesli, transcription starts from the device you control.',
-  },
-  {
-    question: 'Does local meeting transcription work on macOS?',
-    answer: 'Yes. Muesli is a macOS app built for Apple Silicon Macs. It uses normal macOS permissions for microphone access and system audio capture so meetings can be recorded from the computer already in the call.',
-  },
-  {
-    question: 'Is a meeting bot required?',
-    answer: 'No. Muesli is designed for meeting notes without a bot. It records from your Mac instead of joining Zoom, Google Meet, Teams, FaceTime, or browser calls as another participant.',
-  },
-  {
-    question: 'Can Muesli create AI meeting notes from a local transcript?',
-    answer: 'Yes. Muesli can keep the transcript and then generate structured notes through the summarization backend you choose. The local transcript and optional summary step are separate parts of the workflow.',
-  },
-  {
-    question: 'What macOS permissions are needed for meeting transcription?',
-    answer: 'Meeting transcription uses microphone access for your side of the call and system audio capture for the other side. Calendar access is optional and helps with upcoming meeting detection and join links.',
-  },
-];
-
-const granolaAlternativeComparisonRows = [
-  ['Granola', 'A polished AI notepad for meetings, summaries, templates, and searchable meeting memory.', 'Hosted product posture; best when you want a managed AI workspace around meetings.'],
-  ['Muesli', 'Local-first Mac meeting transcription, raw transcript review, exports, and open-source inspectability.', 'Mac-first and more explicit about local capture and optional cloud features.'],
-];
-
-const granolaAlternativeFitCards = [
-  {
-    title: 'Do you want a local Granola alternative?',
-    body: 'Muesli records from the Mac already in the call, then keeps the transcript available before any optional summary layer gets involved.',
-  },
-  {
-    title: 'Do you want open-source meeting software?',
-    body: 'Muesli is inspectable on GitHub, so the product can earn trust through source code, release history, and a clearer local-first architecture.',
-  },
-  {
-    title: 'Do you want to own the transcript?',
-    body: 'The transcript is a source record you can review and export, not just a generated summary inside a cloud knowledge layer.',
-  },
-];
-
-const granolaAlternativeFaqItems = [
-  {
-    question: 'Is there a local Granola alternative?',
-    answer: 'Yes. Muesli is a local Granola alternative for Mac users who want meeting transcription to start on their own computer, with open-source software and a transcript they can review before any optional summary layer is involved.',
-  },
-  {
-    question: 'Is Muesli a Granola alternative?',
-    answer: 'Yes, if you are looking for Mac meeting notes with local-first transcription, open-source software, and a workflow that starts from the computer already in the meeting. It is not a clone of Granola; it makes different tradeoffs.',
-  },
-  {
-    question: 'What is Granola good at?',
-    answer: 'Granola is a polished AI meeting notepad for people who want hosted meeting notes, summaries, templates, and searchable meeting context. Muesli is better framed as the local-first alternative for people who want more ownership of capture and transcripts.',
-  },
-  {
-    question: 'Does Muesli send a bot into meetings?',
-    answer: 'No. Muesli records from your Mac instead of joining Zoom, Google Meet, Teams, or browser calls as another attendee.',
-  },
-  {
-    question: 'Can meeting transcription run locally on a Mac?',
-    answer: 'Yes. Muesli is built for local-first meeting transcription on Apple Silicon Macs. It captures meeting audio from the Mac in the call and keeps the transcript close before you decide whether to summarize, export, or share it.',
-  },
-  {
-    question: 'Is Muesli open source?',
-    answer: 'Yes. Muesli is open source and available on GitHub, which makes it a better fit for people who want to inspect the software they trust with speech and meeting records.',
-  },
-  {
-    question: 'When should I still choose Granola?',
-    answer: 'Choose Granola if you specifically want a polished hosted AI notepad and team knowledge workspace. Choose Muesli if you think the source transcript should start on your own Mac, stay inspectable, and not become another cloud memory layer by default.',
-  },
-];
-
 const granolaVsMuesliFaqItems = [
   {
     question: 'What is the difference between Granola and Muesli?',
@@ -854,29 +760,6 @@ const granolaVsMuesliFaqItems = [
   {
     question: 'Does local-first mean Muesli never uses the cloud?',
     answer: 'No. Local-first means the transcription path starts on your Mac. Optional summarization providers, calendar sync, downloads, and updates may still use the internet, but they are separate from the default speech-to-text path.',
-  },
-];
-
-const wisprFlowAlternativeFaqItems = [
-  {
-    question: 'What is the best Wispr Flow alternative for Mac?',
-    answer: 'For Mac users who want local speech-to-text, offline-capable models, and open-source software, Muesli is the strongest fit. Superwhisper and VoiceInk are worth comparing when you want dedicated dictation products with different workflow and pricing choices.',
-  },
-  {
-    question: 'Is there a free Wispr Flow alternative?',
-    answer: 'Yes. Muesli is open source and available as a native Mac app. Its normal local speech-to-text path does not require a hosted speech API after the models are installed, while optional cloud summaries remain a separate choice.',
-  },
-  {
-    question: 'Is there an offline Wispr Flow alternative for Mac?',
-    answer: 'Muesli is built around local ASR models such as Parakeet and Whisper on Apple Silicon. Dictation can continue without a network connection after the model is installed, although downloads, updates, and optional integrations still need the internet.',
-  },
-  {
-    question: 'Is Muesli open source?',
-    answer: 'Yes. Muesli is open-source Mac software, so the application and its local-first approach are inspectable in a way a closed hosted voice layer is not. Open source is not a magic privacy guarantee, but it makes the product easier to understand and debug.',
-  },
-  {
-    question: 'Can Muesli replace Wispr Flow?',
-    answer: 'For Mac dictation, often yes. Muesli supports hold-to-talk capture, paste at the cursor, local ASR, and meeting transcription. Wispr Flow remains the better fit if you specifically need a polished cross-platform voice keyboard across desktop and mobile.',
   },
 ];
 
@@ -996,37 +879,6 @@ const appleDictationAlternativeFaqItems = [
   },
 ];
 
-const bestOfflineDictationAppsMacFaqItems = [
-  {
-    question: 'What is the best offline dictation app for Mac?',
-    answer: 'For local-first Mac users, Muesli is the strongest answer. Apple Dictation is the easiest default, and Superwhisper or VoiceInk are worth comparing, but Muesli is built around offline-capable models such as Parakeet, Whisper, and Qwen3 ASR, plus open-source software you can inspect.',
-  },
-  {
-    question: 'Can speech-to-text work offline on a Mac?',
-    answer: 'Yes, if the app has a local speech model installed and does not require a cloud transcription request for normal dictation. In Muesli, everyday dictation can run locally on Apple Silicon after setup.',
-  },
-  {
-    question: 'Does Muesli send dictation audio to the cloud?',
-    answer: 'Normal dictation runs on the Mac. Model downloads, updates, calendar sync, and optional cloud summarization providers are separate networked choices.',
-  },
-  {
-    question: 'Which local speech models does Muesli support?',
-    answer: 'Muesli supports local ASR paths including Parakeet, Whisper, and Qwen3 ASR, with different latency, accuracy, language, and hardware tradeoffs.',
-  },
-  {
-    question: 'Is Apple Dictation enough?',
-    answer: 'Apple Dictation is enough for quick snippets. It stops being enough when speech becomes part of your actual workday. Muesli is for model choice, hold-to-talk capture, open-source visibility, local-first defaults, and meeting transcription in the same Mac workflow.',
-  },
-  {
-    question: 'Do I need Apple Silicon for Muesli?',
-    answer: 'Muesli is built for Apple Silicon Macs. Local transcription performance depends on the model and runtime path, including CoreML and Apple Neural Engine-capable acceleration where supported.',
-  },
-  {
-    question: 'Is offline dictation automatically private?',
-    answer: 'No. Offline dictation is a stronger default because audio does not need to start with a cloud upload, but privacy also depends on app permissions, local storage, optional integrations, updates, and any services you choose to connect.',
-  },
-];
-
 const botFreeMeetingNotesFaqItems = [
   {
     question: 'What are bot-free meeting notes?',
@@ -1132,76 +984,7 @@ const speechToTextGuideConfigs = {
       ['Whisper: Robust Speech Recognition via Large-Scale Weak Supervision', 'https://arxiv.org/abs/2212.04356'],
     ],
   },
-  '/nvidia-parakeet-speech-to-text': {
-    breadcrumb: 'NVIDIA Parakeet Speech-to-Text',
-    image: nvidiaParakeetSpeechToTextHeaderUrl,
-    imageAlt: 'Abstract green and charcoal speech-to-text header with audio waves, fast local inference blocks, and token streams for NVIDIA Parakeet ASR',
-    logoPair: {
-      aria: 'Muesli loves NVIDIA Parakeet for local speech-to-text on Mac',
-      left: { src: iconUrl, alt: 'Muesli local speech-to-text app icon' },
-      right: { src: nvidiaUrl, alt: 'NVIDIA logo' },
-    },
-    kicker: 'NVIDIA Parakeet speech-to-text',
-    headline: 'Parakeet is the model family that makes local English STT feel practical.',
-    subcopy: 'NVIDIA Parakeet is interesting because it is not only another ASR benchmark name. For Mac users, it points toward fast, local, English speech-to-text that can make cloud transcription feel less inevitable.',
-    articleHeadline: 'NVIDIA Parakeet speech-to-text for local ASR',
-    lede: [
-      'Parakeet matters because it sits close to the Muesli thesis: modern local ASR can be fast enough and accurate enough for everyday English dictation and meeting transcription.',
-      'The important question is not whether cloud ASR still has a place. It does. The question is why a clear English sentence from your own Mac should need a cloud round trip before it becomes text.',
-    ],
-    factsTitle: 'What should I know about NVIDIA Parakeet?',
-    facts: [
-      ['Maker', 'Parakeet is an NVIDIA ASR model family published through NVIDIA NeMo and Hugging Face model releases.'],
-      ['Architecture', 'Parakeet releases include modern CTC and TDT-style ASR variants, which makes it relevant to both efficient decoding and transducer-style transcription.'],
-      ['Best wedge', 'Fast English speech-to-text is the obvious wedge: short dictation, notes, prompts, and meetings where local inference is good enough.'],
-      ['Muesli use', 'Muesli treats Parakeet as one of the local ASR paths that can make transcription start on the Mac instead of a hosted STT API.'],
-      ['Tradeoff', 'Parakeet is not a universal multilingual answer. It should be evaluated by language, accent, audio quality, and workflow.'],
-      ['Why it matters', 'When local English STT feels fast, the default argument for cloud transcription gets weaker.'],
-    ],
-    sections: [
-      {
-        eyebrow: 'Model fit',
-        title: 'Why is NVIDIA Parakeet good for local speech-to-text?',
-        body: ['Parakeet is useful because it makes the speed side of ASR feel real. If you are dictating a sentence, filing a Linear ticket, writing an email, or capturing a meeting note, latency changes whether speech-to-text becomes a habit.', 'A model that runs locally and returns text quickly changes the product shape. You do not need to rent a cloud transcription path for every short utterance if the Mac can do the job itself.'],
-      },
-      {
-        eyebrow: 'Architecture',
-        title: 'What architecture does Parakeet use?',
-        body: ['Parakeet is not one single architecture label. NVIDIA has released Parakeet variants around efficient ASR architectures such as CTC and TDT. The practical point is that Parakeet belongs to the family of models built for serious transcription speed and accuracy, not only offline research demos.', 'For users, architecture matters only when it changes behavior: fast local inference, acceptable accuracy, and fewer cases where the app feels like it is waiting on a remote service.'],
-      },
-      {
-        eyebrow: 'English ASR',
-        title: 'Is Parakeet strong enough for everyday English transcription?',
-        body: ['For many clear English dictation and meeting workflows, yes. Audio quality still matters. Accent, background noise, microphone choice, and meeting overlap still matter. But the floor has moved: local English ASR is no longer a toy category.', 'That is why Muesli can take a stronger position. The transcript can start on the Mac, and cloud summarization can remain an optional layer rather than the default speech-to-text path.'],
-      },
-      {
-        eyebrow: 'Muesli',
-        title: 'Why does Muesli care about Parakeet?',
-        body: ['Muesli is built around the belief that local speech-to-text should be the first option when it is good enough. Parakeet is one of the model families that makes that belief practical for English workflows.', 'The product experience is what matters: hold a hotkey, speak, release, and get useful text without turning every spoken thought into a hosted API request.'],
-      },
-    ],
-    table: {
-      title: 'Where does Parakeet fit among local ASR models?',
-      aria: 'Parakeet speech-to-text comparison',
-      columns: ['Model path', 'Best fit', 'Tradeoff'],
-      rows: [
-        ['NVIDIA Parakeet', 'Fast local English speech-to-text, short dictation, and practical meeting transcription paths.', 'Not the only answer for every language or noisy meeting.'],
-        ['OpenAI Whisper', 'Robust multilingual transcription and broadly understood encoder-decoder ASR behavior.', 'Can be slower for short dictation depending on model size and runtime.'],
-        ['Qwen3 ASR', 'Useful open model path for broader ASR experimentation and local model choice.', 'Latency and language behavior depend heavily on runtime and setup.'],
-      ],
-    },
-    relatedLinks: [
-      ['Common ASR architectures', '/asr-architectures', 'How CTC, RNN-T, TDT, Conformer, and encoder-decoder models differ.'],
-      ['Whisper speech-to-text', '/whisper-speech-to-text', 'Why Whisper became the reference point for robust multilingual ASR.'],
-      ['Apple Neural Engine speech-to-text on Mac', '/apple-neural-engine-speech-to-text-mac', 'How local inference hardware changes latency and power use for STT.'],
-      ['Best offline dictation apps for Mac', '/best-offline-dictation-apps-mac', 'Where local ASR models fit into actual Mac dictation workflows.'],
-    ],
-    sources: [
-      ['NVIDIA Parakeet collection on Hugging Face', 'https://huggingface.co/collections/nvidia/parakeet-66c3ff4f80a86fbe20e5e1b3'],
-      ['NVIDIA Parakeet TDT 0.6B v2 model card', 'https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2'],
-      ['NVIDIA NeMo ASR documentation', 'https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/intro.html'],
-    ],
-  },
+
   '/whisper-speech-to-text': {
     breadcrumb: 'Whisper Speech-to-Text',
     image: whisperSpeechToTextHeaderUrl,
@@ -1547,69 +1330,7 @@ const alternativePageConfigs = {
     ctaTitle: 'Want Mac dictation that feels like your software?',
     ctaBody: 'Muesli gives Apple Silicon Mac users a local-first dictation and meeting transcription workflow with open-source code, offline ASR models, and transcripts they can inspect.',
   },
-  '/best-offline-dictation-apps-mac': {
-    breadcrumb: 'Best Offline Dictation Apps for Mac',
-    faqItems: bestOfflineDictationAppsMacFaqItems,
-    image: solarpunkOfflineDictationUrl,
-    imageAlt: 'A warm Mac writing workspace with a microphone, local speech model notes, and an unbranded laptop running offline dictation',
-    kicker: 'Offline Mac dictation',
-    headline: 'The best offline dictation app for Mac should not treat local speech as an afterthought.',
-    subcopy: 'Offline dictation is not just about planes and bad Wi-Fi. It is about where speech becomes text, who owns the workflow, and whether your Mac can do the work before a cloud service gets involved. That is the lane Muesli is built for.',
-    secondaryHref: '/offline-dictation-mac/',
-    secondaryText: 'Read the offline dictation guide',
-    articleHeadline: 'Best offline dictation apps for Mac',
-    lede: [
-      'If you are searching for the best offline dictation apps for Mac, separate two questions: can the app transcribe without a network after setup, and is the surrounding workflow actually good enough to use every day?',
-      'Muesli is built for the second question and takes a clear side: speech-to-text should start on the Mac you own whenever it reasonably can. It is a local-first Mac app for hold-to-talk dictation, meeting transcription, and private speech-to-text on Apple Silicon, with local model paths such as Parakeet, Whisper, and Qwen3 ASR.',
-    ],
-    sections: [
-      {
-        eyebrow: 'Best offline dictation apps for Mac',
-        title: 'What should I compare before choosing an offline Mac dictation app?',
-        body: ['Look past the word offline. A useful dictation app needs capture, speech recognition, cleanup, paste behavior, permissions, storage, and a model strategy you can understand.', 'Apple Dictation is the simplest default. Superwhisper, Wispr Flow, and VoiceInk are worth comparing if you want a dedicated voice-to-text workflow. Muesli is the one I would bet on when you want local-first Mac dictation with inspectable software, offline-capable models, and ownership of the transcript path.'],
-      },
-      {
-        eyebrow: 'Offline speech-to-text Mac',
-        title: 'Can offline speech-to-text on Mac be practical for everyday work?',
-        body: ['Yes, but only if the app returns text to the place you were already working. Offline ASR by itself is not the product. The useful flow is: hold a hotkey, speak, release, and get text into Notes, Gmail, Notion, Slack, Linear, Cursor, ChatGPT, Google Docs, or a browser field.', 'Muesli is built around that Mac workflow. The model can run locally after setup, and the app uses macOS permissions to paste the result back into the active cursor.'],
-      },
-      {
-        eyebrow: 'Local dictation Mac',
-        title: 'Why does local dictation on Mac matter?',
-        body: ['Local dictation changes the default trust boundary. Instead of uploading every spoken draft before text comes back, the speech-to-text step can run on Apple Silicon using local model paths.', 'That does not mean every feature is always offline. Model downloads, updates, calendar sync, and optional cloud summaries still need network access. The important part is narrower and more useful: normal dictation does not need to begin with a hosted transcription request.'],
-      },
-      {
-        eyebrow: 'Dictation app Mac offline',
-        title: 'Which Mac dictation apps can make sense offline?',
-        body: ['Apple Dictation is the built-in baseline. It is convenient, but gives you less control over model choice and the surrounding workflow.', 'Superwhisper and VoiceInk are dedicated dictation apps with local/offline options worth comparing. Wispr Flow is polished for voice-to-text, though its main appeal is the finished AI writing flow rather than local-first ownership. Muesli is for Mac users who want offline-capable speech-to-text, open-source code, and a workflow designed around local models.'],
-      },
-      {
-        eyebrow: 'Parakeet Whisper Qwen Mac',
-        title: 'Why do Parakeet, Whisper, and Qwen3 ASR matter on Apple Silicon?',
-        body: ['Model choice matters because speech-to-text is a tradeoff, not a single magic score. Parakeet is useful for fast everyday dictation. Whisper is a familiar local ASR family with its own strengths. Qwen3 ASR gives another local path for different language and recognition tradeoffs.', 'Muesli routes these through Apple Silicon-oriented runtimes such as CoreML, WhisperKit, FluidAudio, Metal, and Apple Neural Engine-capable paths where supported. The point is not to claim one model wins every sentence. The point is to keep the speech layer close to the Mac you own.'],
-      },
-    ],
-    comparison: {
-      title: 'Best offline dictation apps for Mac: quick comparison',
-      aria: 'Offline Mac dictation app comparison',
-      rows: [
-        ['Apple Dictation', 'Built into macOS and easy to try for quick voice typing.', 'Less control over model choice, local model behavior, formatting, and workflow ownership.'],
-        ['Superwhisper', 'Polished voice-to-text with offline and cloud recognition options.', 'Best if you want a mature dictation product and are comfortable with its app model and pricing.'],
-        ['Wispr Flow', 'Fast, opinionated voice-to-text focused on turning natural speech into polished writing.', 'Better fit for AI writing flow than for users who primarily want an inspectable local-first Mac stack.'],
-        ['VoiceInk', 'Privacy-focused macOS dictation with local transcription and open-source visibility.', 'Worth comparing if you want a local Mac dictation app and prefer its workflow.'],
-        ['Muesli', 'Local-first Mac dictation with Parakeet, Whisper, Qwen3 ASR, CoreML/ANE paths, open-source code, and paste into the current app.', 'The strongest fit for Apple Silicon users who want ownership of everyday speech-to-text rather than another rented cloud pipeline.'],
-      ],
-    },
-    fitTitle: 'When does local or offline dictation matter most?',
-    fitCards: [
-      ['Private drafts and unfinished thinking', 'Use local dictation when spoken notes include customer context, personal writing, prompts, code comments, hiring notes, or rough ideas that should not need a cloud transcription step.'],
-      ['Unreliable networks and travel', 'Offline-capable dictation helps on planes, trains, shared office Wi-Fi, hotel networks, and any place where a cloud round trip makes short writing feel fragile.'],
-      ['Owning the speech workflow', 'Local-first software matters when you want to reason about the app, the model path, the transcript storage, and the optional cloud layers instead of treating voice-to-text as a black box.'],
-    ],
-    faqTitle: 'What do people ask about offline dictation apps for Mac?',
-    ctaTitle: 'Use dictation that starts on your own Mac.',
-    ctaBody: 'Muesli gives Apple Silicon users a local-first dictation workflow with offline-capable models, open-source code, and text that lands back where they were already working.',
-  },
+
   '/bot-free-meeting-notes': {
     breadcrumb: 'Bot-Free Meeting Notes',
     faqItems: botFreeMeetingNotesFaqItems,
@@ -1671,77 +1392,7 @@ const alternativePageConfigs = {
     ctaTitle: 'Take meeting notes from the Mac already in the call.',
     ctaBody: 'Download Muesli for Mac and keep meeting capture, transcripts, and notes closer to the machine you control.',
   },
-  '/wispr-flow-alternative': {
-    breadcrumb: 'Best Wispr Flow Alternatives for Mac',
-    faqItems: wisprFlowAlternativeFaqItems,
-    image: impressionistWhisperUrl,
-    imageAlt: 'Original Impressionist-inspired salon painting of one person whispering an observation to another in a sunlit room',
-    kicker: 'Wispr Flow alternatives for Mac in 2026',
-    headline: 'The best Wispr Flow alternatives for Mac in 2026.',
-    subcopy: 'Muesli is the strongest fit for Mac users who want a free, open-source, offline-capable alternative to Wispr Flow. Compare the serious options by platform, privacy, local speech-to-text, and how much of your voice workflow you actually get to own.',
-    secondaryHref: '/mac-dictation-app/',
-    secondaryText: 'Read the Mac dictation guide',
-    articleHeadline: 'The best Wispr Flow alternatives for Mac in 2026',
-    lede: [
-      'If you are looking for Wispr Flow alternatives, the real choice is not just which app has the nicest writing polish. It is where speech becomes text, which platforms you need, and whether your everyday dictation should begin with a cloud upload.',
-      'For Mac users who want local speech-to-text, open-source software, and a workflow that stays close to the machine they control, Muesli is the clear recommendation. It is a native Apple Silicon app for dictation and meeting transcription, with local models such as Parakeet and Whisper.',
-    ],
-    sections: [
-      {
-        eyebrow: 'Quick answer',
-        title: 'What is the best Wispr Flow alternative for Mac?',
-        body: ['Muesli is the best fit when your priority is local-first Mac dictation. It runs speech-to-text on Apple Silicon, supports offline-capable models, keeps the software open source, and also handles meeting transcription without forcing you into a separate hosted workspace.', 'Wispr Flow is still a strong choice when you want a polished cross-platform voice keyboard across Mac, Windows, iPhone, and Android. Superwhisper, VoiceInk, and Apple Dictation are useful alternatives for different budgets and levels of control.'],
-      },
-      {
-        eyebrow: 'Why switch',
-        title: 'Why look for a Wispr Flow alternative on Mac?',
-        body: ['Wispr Flow is useful. The reason to compare it is ownership. Your dictation can contain private drafts, customer replies, research notes, AI prompts, code comments, and unfinished thinking. Some Mac users would rather not make a hosted speech pipeline the default place where all of that begins.', 'Muesli is built for that preference: hold a hotkey, speak, release, and let local speech-to-text put the words back into the app you were already using.'],
-      },
-      {
-        eyebrow: 'Offline speech-to-text',
-        title: 'Is there an offline Wispr Flow alternative for Mac?',
-        body: ['Yes. Muesli supports local ASR models such as Parakeet and Whisper, so normal dictation can run on Apple Silicon after the model is installed. The speech-to-text path does not need to upload every sentence to a hosted API.', 'That does not make every feature offline by magic. Downloads, updates, calendar sync, and optional cloud summarization still need the internet. The difference is that cloud transcription is no longer the automatic starting point for every spoken draft.'],
-      },
-      {
-        eyebrow: 'Open source',
-        title: 'Why is Muesli different from other Wispr Flow alternatives?',
-        body: ['Muesli is not trying to be another closed voice layer with a slightly different polish. It is a Mac-native speech workspace for dictation and meeting transcription, built around local models and open-source code.', 'That makes the product easier to inspect and debug. You can understand the model path, permissions, storage, and optional cloud layers instead of treating the entire speech workflow as a black box.'],
-      },
-      {
-        eyebrow: 'Tradeoffs',
-        title: 'When might Wispr Flow still be the better choice?',
-        body: ['Choose Wispr Flow if cross-platform coverage, account sync, and a polished hosted writing layer matter more than local ownership. That is a reasonable tradeoff for people who move between Mac, Windows, iPhone, and Android.', 'Choose Muesli if you are on Apple Silicon and want the stronger local default: dictation and meeting transcription starting from the machine you control, with source code and transcripts you can inspect.'],
-      },
-    ],
-    comparison: {
-      title: 'Which Wispr Flow alternative should I choose?',
-      aria: 'Wispr Flow alternatives comparison',
-      rows: [
-        ['Muesli', 'Best for local-first Mac dictation, offline-capable ASR, open-source software, and meeting transcription.', 'Mac and Apple Silicon focused. Optional summaries and integrations are separate from local transcription.'],
-        ['Wispr Flow', 'Best for polished AI dictation across Mac, Windows, iPhone, and Android.', 'A hosted product is the right tradeoff if cross-platform convenience matters more than owning the speech layer.'],
-        ['Superwhisper', 'Best for a refined dedicated dictation app with local and cloud model choices.', 'Compare its pricing, model behavior, and workflow against your preference for open-source software.'],
-        ['VoiceInk', 'Best for another privacy-focused Mac dictation option with local transcription.', 'A narrower dictation product if you also want local meeting capture and notes in the same app.'],
-        ['Apple Dictation', 'Best for quick free voice typing with nothing to install.', 'Less control over model choice, workflow, and the surrounding transcript experience.'],
-      ],
-    },
-    fitTitle: 'Which Wispr Flow alternative is best for each use case?',
-    fitCards: [
-      ['Best open-source alternative: Muesli', 'Muesli is the pick when inspectability matters. It is open-source, Mac-native, and built around local speech-to-text rather than an opaque voice layer.'],
-      ['Best offline alternative: Muesli', 'Use Muesli when your preferred dictation path should keep working after local models are installed, even when Wi-Fi is unreliable or cloud transcription is not the right default.'],
-      ['Best cross-platform alternative: Wispr Flow', 'Wispr Flow remains the obvious fit when you need the same polished voice keyboard across Mac, Windows, iPhone, and Android.'],
-      ['Best built-in alternative: Apple Dictation', 'Apple Dictation is the simplest free option when you only need occasional voice typing and do not need model choice or a separate meeting workflow.'],
-    ],
-    relatedLinks: [
-      ['Best dictation apps for Mac', '/best-dictation-apps-mac', 'Compare Muesli with Apple Dictation, Superwhisper, Wispr Flow, VoiceInk, and other Mac voice-to-text options.'],
-      ['Best offline dictation apps for Mac', '/best-offline-dictation-apps-mac', 'See how local models such as Parakeet and Whisper change the offline dictation tradeoff.'],
-      ['Offline dictation for Mac', '/offline-dictation-mac', 'A practical guide to running speech-to-text without making a cloud upload the default.'],
-      ['On-device dictation', '/on-device-dictation', 'Use a hotkey to speak naturally and paste clean local speech-to-text into the app already in front of you.'],
-      ['Local meeting transcription for Mac', '/local-meeting-transcription-mac', 'Use the same local-first Mac workflow for meeting capture, transcripts, and notes.'],
-    ],
-    faqTitle: 'What do people ask about Wispr Flow alternatives?',
-    ctaTitle: 'Choose the Wispr Flow alternative that starts on your Mac.',
-    ctaBody: 'Download Muesli for a free, open-source, local-first dictation workflow for everyday writing, prompts, notes, replies, and meetings.',
-  },
+
   '/otter-ai-alternative': {
     breadcrumb: 'Otter.ai Alternative',
     faqItems: otterAiAlternativeFaqItems,
@@ -1885,12 +1536,12 @@ const blogPostEntries = [
   },
   {
     path: '/nvidia-parakeet-speech-to-text',
-    title: 'NVIDIA Parakeet makes local English speech-to-text feel practical',
-    excerpt: 'Why Parakeet matters for fast local English ASR, and why a clear sentence from your Mac should not need a cloud round trip.',
+    title: searchGuides['/nvidia-parakeet-speech-to-text'].headline,
+    excerpt: searchGuides['/nvidia-parakeet-speech-to-text'].description,
     category: 'Model Guides',
     tags: ['Model Guides', 'Local AI', 'Dictation'],
-    date: '2026-06-30',
-    readTime: '8 min read',
+    date: searchGuides['/nvidia-parakeet-speech-to-text'].reviewed,
+    readTime: '5 min read',
     image: nvidiaParakeetSpeechToTextHeaderUrl,
     imageAlt: 'Abstract green and charcoal Parakeet speech-to-text model header with local inference blocks and token streams',
   },
@@ -1918,12 +1569,12 @@ const blogPostEntries = [
   },
   {
     path: '/best-offline-dictation-apps-mac',
-    title: 'The best offline dictation app for Mac should not treat local speech as an afterthought',
-    excerpt: 'A practical comparison of offline dictation apps for Mac, from built-in Apple Dictation to local model workflows on Apple Silicon.',
+    title: searchGuides['/best-offline-dictation-apps-mac'].headline,
+    excerpt: searchGuides['/best-offline-dictation-apps-mac'].description,
     category: 'Dictation',
     tags: ['Dictation', 'Privacy', 'Local AI'],
-    date: '2026-06-25',
-    readTime: '12 min read',
+    date: searchGuides['/best-offline-dictation-apps-mac'].reviewed,
+    readTime: '5 min read',
     image: solarpunkOfflineDictationUrl,
     imageAlt: 'Warm Mac writing workspace with a microphone, local speech model notes, and an unbranded laptop running offline dictation',
   },
@@ -1984,12 +1635,12 @@ const blogPostEntries = [
   },
   {
     path: '/local-meeting-transcription-mac',
-    title: 'How local meeting transcription works on Mac',
-    excerpt: 'Capture microphone and system audio from the Mac already in the call, then keep the transcript close before you decide what to share.',
+    title: searchGuides['/local-meeting-transcription-mac'].headline,
+    excerpt: searchGuides['/local-meeting-transcription-mac'].description,
     category: 'Meeting Notes',
     tags: ['Meeting Notes', 'Privacy', 'Local AI'],
-    date: '2026-06-20',
-    readTime: '9 min read',
+    date: searchGuides['/local-meeting-transcription-mac'].reviewed,
+    readTime: '5 min read',
     image: solarpunkLocalMeetingTranscriptionUrl,
     imageAlt: 'Solarpunk local meeting transcription workspace with a Mac, notebook, microphone, and no visible human face',
   },
@@ -2006,12 +1657,12 @@ const blogPostEntries = [
   },
   {
     path: '/granola-alternative',
-    title: 'A local Granola alternative for Mac meeting notes',
-    excerpt: 'For people who want Granola-style meeting memory without making a hosted workspace the default home for every transcript.',
+    title: searchGuides['/granola-alternative'].headline,
+    excerpt: searchGuides['/granola-alternative'].description,
     category: 'Comparisons',
     tags: ['Comparisons', 'Meeting Notes', 'Privacy'],
-    date: '2026-06-20',
-    readTime: '9 min read',
+    date: searchGuides['/granola-alternative'].reviewed,
+    readTime: '5 min read',
     image: dutchWhisperUrl,
     imageAlt: 'Original Dutch Golden Age-inspired painting of two people whispering beside books and a writing desk',
   },
@@ -2028,12 +1679,12 @@ const blogPostEntries = [
   },
   {
     path: '/wispr-flow-alternative',
-    title: 'The best Wispr Flow alternatives for Mac in 2026',
-    excerpt: 'A practical comparison of Wispr Flow alternatives by platform, privacy, offline speech-to-text, open-source software, and the workflows Muesli is built to own.',
+    title: searchGuides['/wispr-flow-alternative'].headline,
+    excerpt: searchGuides['/wispr-flow-alternative'].description,
     category: 'Comparisons',
     tags: ['Comparisons', 'Dictation', 'Privacy'],
-    date: '2026-07-13',
-    readTime: '10 min read',
+    date: searchGuides['/wispr-flow-alternative'].reviewed,
+    readTime: '5 min read',
     image: impressionistWhisperUrl,
     imageAlt: 'Original Impressionist-inspired salon painting of one person whispering an observation to another in a sunlit room',
   },
@@ -4515,420 +4166,142 @@ function OfflineDictationMacPage() {
   );
 }
 
-function LocalMeetingTranscriptionMacPage() {
-  useEffect(() => {
-    const meta = routeMeta['/local-meeting-transcription-mac'];
-    document.title = meta.title;
-    setCanonicalUrl('/local-meeting-transcription-mac');
-  }, []);
+const searchGuideImages = {
+  granola: dutchWhisperUrl,
+  meeting: solarpunkLocalMeetingTranscriptionUrl,
+  wispr: impressionistWhisperUrl,
+  offline: solarpunkOfflineDictationUrl,
+  parakeet: nvidiaParakeetSpeechToTextHeaderUrl,
+};
 
-  const localMeetingStructuredData = baseStructuredData('/local-meeting-transcription-mac', [
-    pageBreadcrumb('/local-meeting-transcription-mac', 'Local Meeting Transcription for Mac'),
-    faqSchema('/local-meeting-transcription-mac', localMeetingTranscriptionFaqItems),
+function SearchGuidePage({ route }) {
+  const guide = searchGuides[route];
+  const image = searchGuideImages[guide.image];
+  const faqs = guide.faqs.map(([question, answer]) => ({ question, answer }));
+
+  useEffect(() => {
+    document.title = routeMeta[route].title;
+    setCanonicalUrl(route);
+  }, [route]);
+
+  const structuredData = baseStructuredData(route, [
+    pageBreadcrumb(route, guide.label),
+    faqSchema(route, faqs),
     {
       '@type': 'Article',
-      '@id': `${routeMeta['/local-meeting-transcription-mac'].canonical}#article`,
-      headline: 'Local meeting transcription for Mac without a meeting bot',
-      description: routeMeta['/local-meeting-transcription-mac'].description,
-      image: siteData.ogImageUrl,
-      author: {
-        '@type': 'Organization',
-        name: siteData.name,
-      },
+      '@id': `${routeMeta[route].canonical}#article`,
+      headline: guide.headline,
+      description: guide.description,
+      image: `${siteData.siteUrl}${image}`,
+      dateModified: guide.reviewed,
+      author: { '@type': 'Organization', name: siteData.name },
       publisher: { '@id': `${siteData.siteUrl}/#organization` },
-      mainEntityOfPage: { '@id': `${routeMeta['/local-meeting-transcription-mac'].canonical}#webpage` },
+      mainEntityOfPage: { '@id': `${routeMeta[route].canonical}#webpage` },
     },
   ]);
 
   return (
-    <main className="product-page article-page local-meeting-transcription-page">
-      <JsonLd data={localMeetingStructuredData} />
+    <main className="product-page article-page search-guide-page">
+      <JsonLd data={structuredData} />
       <ProductPageNav />
-
       <article className="seo-article">
         <figure className="seo-article-image">
-          <img src={solarpunkLocalMeetingTranscriptionUrl} alt="A solarpunk meeting workspace with plants, an unbranded laptop, a notebook, and no visible human face" />
+          <img src={image} alt={guide.imageAlt} />
         </figure>
-
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">Local meeting transcription guide</div>
-          <h1>Local meeting transcription for Mac without a meeting bot.</h1>
-          <p>
-            Muesli records meetings from your own macOS workspace, so the transcript can start on the Mac already in
-            the call.
-          </p>
+          <div className="seo-article-kicker">{guide.label}</div>
+          <h1>{guide.headline}</h1>
+          <p>{guide.intro}</p>
           <div className="seo-article-actions">
             <a className="primary-cta" href={downloadUrl}>
-              <Download size={19} />
-              Download for macOS
+              <Download size={19} /> Download for macOS
             </a>
-            <a className="secondary-cta" href="/meeting-notes/">
-              Read the meeting notes page
-              <ArrowRight size={18} />
+            <a className="secondary-cta" href={`#${guide.sections[0].id}`}>
+              Read the guide <ArrowRight size={18} />
             </a>
           </div>
-          <ArticleShareBar route="/local-meeting-transcription-mac" title="Local meeting transcription for Mac without a meeting bot" />
+          <ArticleShareBar route={route} title={guide.headline} />
         </header>
+        <div className="guide-review">
+          <p>Updated <time dateTime={guide.reviewed}>{new Date(`${guide.reviewed}T00:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time></p>
+          <p>{guide.note}</p>
+        </div>
+        <nav className="guide-contents" aria-label="On this page">
+          <span>On this page</span>
+          <ul>
+            {guide.sections.map((section) => (
+              <li key={section.id}><a href={`#${section.id}`}>{section.title}</a></li>
+            ))}
+          </ul>
+        </nav>
 
-        <section className="seo-article-section seo-article-lede">
-          <p>
-            Most meeting transcription tools start by adding another participant to the call or sending the recording
-            into a hosted pipeline. That can be acceptable for some teams, but it is not the only shape meeting notes
-            should take on macOS.
-          </p>
-          <p>
-            Local meeting transcription starts closer to the source. Muesli captures microphone and system audio from
-            your Mac, builds a transcript you can keep, and lets optional AI notes sit on top of that record rather than
-            replacing it.
-          </p>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Local basics</span>
-            <h2>What is local meeting transcription on Mac and macOS?</h2>
-          </div>
-          <p>
-            Local meeting transcription means the capture begins on your own machine. Instead of inviting a bot into the
-            meeting, the Mac records the audio it can hear: your microphone for your side, and system audio for the
-            other side of the call.
-          </p>
-          <p>
-            That difference matters because meeting notes are usually not just generic content. They include names,
-            plans, customer details, hiring discussions, product decisions, and unfinished thoughts that should not move
-            through more systems than necessary.
-          </p>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Capture</span>
-            <h2>How can a Mac transcribe meeting audio without a bot?</h2>
-          </div>
-          <p>
-            A Mac can capture both sides of a meeting when the app has the right macOS permissions. Microphone access
-            handles your voice. System audio capture handles the meeting audio playing through the computer.
-          </p>
-          <p>
-            Muesli uses that local capture path so the transcript starts from the device already participating in the
-            meeting. The app does not need to appear as another attendee in Zoom, Google Meet, Teams, FaceTime, or a
-            browser call.
-          </p>
-        </section>
-
-        <section className="seo-article-section seo-comparison-section">
-          <div className="seo-section-heading">
-            <span>Comparison</span>
-            <h2>Should I use a meeting bot, cloud transcription, or local Mac transcription?</h2>
-          </div>
-          <div className="seo-comparison-table" role="table" aria-label="Local meeting transcription comparison">
-            <div className="seo-comparison-row seo-comparison-head" role="row">
-              <strong>Option</strong>
-              <strong>Where it helps</strong>
-              <strong>Tradeoff</strong>
-            </div>
-            {localMeetingTranscriptionComparisonRows.map(([option, helps, tradeoff]) => (
-              <div className="seo-comparison-row" role="row" key={option}>
-                <strong>{option}</strong>
-                <span>{helps}</span>
-                <span>{tradeoff}</span>
+        {guide.sections.map((section) => (
+          <section className="seo-article-section" id={section.id} key={section.id}>
+            <div className="seo-section-heading"><h2>{section.title}</h2></div>
+            {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {section.table && (
+              <p className="guide-table-hint">Scroll the table sideways to compare all columns.</p>
+            )}
+            {section.table && (
+              <div className="guide-table-scroll" role="region" aria-label={section.title} tabIndex={0}>
+                <table className="guide-table">
+                  <caption>{section.title}</caption>
+                  <thead><tr>{section.table.columns.map((column) => <th scope="col" key={column}>{column}</th>)}</tr></thead>
+                  <tbody>
+                    {section.table.rows.map(([label, ...cells]) => (
+                      <tr key={label}>
+                        <th scope="row">{label}</th>
+                        {cells.map((cell, index) => <td key={index}>{cell}</td>)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Where it fits</span>
-            <h2>When is local meeting transcription useful on macOS?</h2>
-          </div>
-          <div className="seo-card-grid">
-            {localMeetingTranscriptionUseCases.map((item) => (
-              <article key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Notes</span>
-            <h2>Can local meeting transcription become AI meeting notes?</h2>
-          </div>
-          <p>
-            A transcript is the durable record. AI meeting notes are a layer on top. That separation is useful because a
-            summary can be wrong, too compressed, or missing a decision, while the transcript remains available for
-            review.
-          </p>
-          <p>
-            Muesli can generate structured notes from the transcript using the summarization backend you choose. The
-            important part is that the capture and transcript do not require a meeting bot as the starting point.
-          </p>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Privacy</span>
-            <h2>Is local meeting transcription more private than a meeting bot?</h2>
-          </div>
-          <p>
-            Local transcription gives you a narrower default. The meeting record begins on the Mac in front of you
-            rather than in a third-party participant or hosted recorder. That does not remove every trust decision, but
-            it reduces the number of systems involved in creating the transcript.
-          </p>
-          <p>
-            Optional cloud summarization, calendar access, and connected services are separate choices. They should be
-            evaluated separately from the basic question of where the meeting audio is captured.
-          </p>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Exports</span>
-            <h2>Can I export meeting transcripts and notes from a Mac app?</h2>
-          </div>
-          <p>
-            Meeting notes are more useful when they can leave the app in ordinary formats. Muesli can keep the meeting
-            record locally and export notes or transcripts as Markdown or PDF when you need to share, archive, or review
-            them elsewhere.
-          </p>
-          <p>
-            That makes the app useful for people who want a private capture path but still need practical follow-up:
-            action items, customer notes, research calls, team syncs, and decision logs.
-          </p>
-        </section>
-
+            )}
+            {section.steps && (
+              <ol className="guide-steps">
+                {section.steps.map(([title, body]) => (
+                  <li key={title}><h3>{title}</h3><p>{body}</p></li>
+                ))}
+              </ol>
+            )}
+            {section.example && (
+              <figure className="guide-example">
+                <figcaption>{section.example.label}</figcaption>
+                <pre><code>{section.example.text}</code></pre>
+                {section.example.href && <a href={section.example.href} download>Download the illustrative Markdown file</a>}
+              </figure>
+            )}
+            {section.sources && (
+              <div className="guide-sources">
+                <span>Sources</span>
+                <ul>{section.sources.map((key) => (
+                  <li key={key}><a href={searchGuideSources[key][1]}>{searchGuideSources[key][0]}</a></li>
+                ))}</ul>
+              </div>
+            )}
+          </section>
+        ))}
         <section className="seo-article-section seo-faq-section">
-          <div className="seo-section-heading">
-            <span>FAQ</span>
-            <h2>What do people ask about local meeting transcription on Mac?</h2>
-          </div>
+          <div className="seo-section-heading"><h2>Frequently asked questions</h2></div>
           <div className="faq-list dictation-faq-list">
-            {localMeetingTranscriptionFaqItems.map((item, index) => (
+            {faqs.map((item, index) => (
               <details className="faq-item" open={index === 0} key={item.question}>
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
+                <summary>{item.question}</summary><p>{item.answer}</p>
               </details>
             ))}
           </div>
         </section>
-
+        <section className="seo-article-section">
+          <div className="seo-section-heading"><h2>Related guides</h2></div>
+          <ul className="seo-source-list">
+            {guide.related.map(([title, href]) => <li key={href}><a href={href}>{title}</a></li>)}
+          </ul>
+        </section>
         <footer className="seo-article-cta">
-          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
-          <div>
-            <h2>Want meeting notes without sending a bot into the room?</h2>
-            <p>Open-source, Mac-native, and built for local meeting transcription on Apple Silicon.</p>
-          </div>
-          <a className="primary-cta" href={downloadUrl}>
-            <span className="apple-mark" aria-hidden="true"></span>
-            Download Muesli
-          </a>
-        </footer>
-      </article>
-      <SiteFooterDirectory compact />
-    </main>
-  );
-}
-
-function GranolaAlternativePage() {
-  useEffect(() => {
-    const meta = routeMeta['/granola-alternative'];
-    document.title = meta.title;
-    setCanonicalUrl('/granola-alternative');
-  }, []);
-
-  const granolaStructuredData = baseStructuredData('/granola-alternative', [
-    pageBreadcrumb('/granola-alternative', 'Granola Alternative'),
-    faqSchema('/granola-alternative', granolaAlternativeFaqItems),
-    {
-      '@type': 'Article',
-      '@id': `${routeMeta['/granola-alternative'].canonical}#article`,
-      headline: 'A local Granola alternative for Mac meeting notes',
-      description: routeMeta['/granola-alternative'].description,
-      image: siteData.ogImageUrl,
-      author: {
-        '@type': 'Organization',
-        name: siteData.name,
-      },
-      publisher: { '@id': `${siteData.siteUrl}/#organization` },
-      mainEntityOfPage: { '@id': `${routeMeta['/granola-alternative'].canonical}#webpage` },
-    },
-  ]);
-
-  return (
-    <main className="product-page article-page granola-alternative-page">
-      <JsonLd data={granolaStructuredData} />
-      <ProductPageNav />
-
-      <article className="seo-article">
-        <figure className="seo-article-image">
-          <img src={dutchWhisperUrl} alt="Original Dutch Golden Age-inspired painting of two people whispering beside books and a writing desk" />
-        </figure>
-
-        <header className="seo-article-hero">
-          <div className="seo-article-kicker">Local Granola alternative</div>
-          <h1>A local Granola alternative for the healthier version of your workday meeting notes.</h1>
-          <p>
-            Muesli is for Mac users who want local-first meeting transcription, open-source software, and notes they
-            can own instead of renting their workday memory from the cloud.
-          </p>
-          <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
-              <Download size={19} />
-              Download for macOS
-            </a>
-            <a className="secondary-cta" href="/local-meeting-transcription-mac/">
-              Read the local transcription guide
-              <ArrowRight size={18} />
-            </a>
-          </div>
-          <ArticleShareBar route="/granola-alternative" title="A local Granola alternative for the healthier version of your workday meeting notes" />
-        </header>
-
-        <section className="seo-article-section seo-article-lede">
-          <p>
-            If you are looking for a local Granola alternative, Muesli is the Mac-native path: capture meeting audio
-            from your own computer, keep the transcript reviewable, and choose what to summarize or export after the
-            source record exists.
-          </p>
-          <p>
-            Granola is a polished AI notepad for back-to-back meetings. It makes sense for people who want a managed,
-            hosted place for meeting notes, summaries, templates, and searchable context.
-          </p>
-          <p>
-            Muesli is a different choice. It starts with the Mac already in the call, captures meeting audio locally,
-            keeps the transcript reviewable, and treats AI notes as a layer on top rather than the only record you get
-            back.
-          </p>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Positioning</span>
-            <h2>What is Granola good at?</h2>
-          </div>
-          <p>
-            Granola is strongest when you want a polished meeting notepad that sits alongside your calendar and turns
-            meetings into AI-written notes. It is designed around convenience, meeting memory, templates, and a smooth
-            hosted product experience.
-          </p>
-          <p>
-            Muesli makes the opposite bet. The source record should begin on the computer you control, not inside
-            another cloud workspace that turns your workday memory into something you rent back later.
-          </p>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Ownership</span>
-            <h2>Why look for a local Granola alternative?</h2>
-          </div>
-          <p>
-            The reason is not that every hosted meeting-notes product is bad. The reason is ownership. Meetings contain
-            customer context, hiring decisions, product strategy, personal judgment, and unfinished thinking. Renting
-            that memory back from the cloud is a real tradeoff.
-          </p>
-          <p>
-            Muesli is built for people who want the stronger default: capture from the Mac, keep the transcript close,
-            export ordinary files, and choose optional AI summarization deliberately instead of letting the cloud become
-            the owner of the meeting record.
-          </p>
-        </section>
-
-        <section className="seo-article-section seo-comparison-section">
-          <div className="seo-section-heading">
-            <span>Comparison</span>
-            <h2>Granola vs Muesli: what changes for local meeting notes?</h2>
-          </div>
-          <div className="seo-comparison-table" role="table" aria-label="Granola vs Muesli comparison">
-            <div className="seo-comparison-row seo-comparison-head" role="row">
-              <strong>Option</strong>
-              <strong>Best fit</strong>
-              <strong>Tradeoff</strong>
-            </div>
-            {granolaAlternativeComparisonRows.map(([option, fit, tradeoff]) => (
-              <div className="seo-comparison-row" role="row" key={option}>
-                <strong>{option}</strong>
-                <span>{fit}</span>
-                <span>{tradeoff}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Fit</span>
-            <h2>When is Muesli the better local Granola alternative?</h2>
-          </div>
-          <div className="seo-card-grid">
-            {granolaAlternativeFitCards.map((item) => (
-              <article key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Botless</span>
-            <h2>Can meeting notes work without adding a bot to the call?</h2>
-          </div>
-          <p>
-            Yes. Muesli records from your Mac rather than entering the meeting as another participant. Your microphone
-            captures your side of the conversation, and system audio captures what you hear from the call.
-          </p>
-          <p>
-            This is useful when a meeting bot would change the room, raise a permission discussion, or make the meeting
-            record feel like it started somewhere other than your own machine.
-          </p>
-        </section>
-
-        <section className="seo-article-section">
-          <div className="seo-section-heading">
-            <span>Open source</span>
-            <h2>Why does open-source meeting software matter?</h2>
-          </div>
-          <p>
-            Meeting notes ask for a lot of trust. Open source does not magically solve every privacy question, but it
-            changes the trust model. You can inspect the code, follow releases, and reason about the product without
-            treating the app as a black box.
-          </p>
-          <p>
-            That is the difference Muesli is trying to make: less mystery around the speech layer, more ownership of
-            the transcript, and fewer assumptions hidden inside a hosted workspace.
-          </p>
-        </section>
-
-        <section className="seo-article-section seo-faq-section">
-          <div className="seo-section-heading">
-            <span>FAQ</span>
-            <h2>What do people ask before choosing a Granola alternative?</h2>
-          </div>
-          <div className="faq-list dictation-faq-list">
-            {granolaAlternativeFaqItems.map((item, index) => (
-              <details className="faq-item" open={index === 0} key={item.question}>
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        <footer className="seo-article-cta">
-          <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
-          <div>
-            <h2>Switch to the healthier version of your workday morning cereal.</h2>
-            <p>Local-first meeting notes, open-source software, and a transcript you can keep.</p>
-          </div>
-          <a className="primary-cta" href={downloadUrl}>
-            <span className="apple-mark" aria-hidden="true"></span>
-            Download Muesli
-          </a>
+          <img src={iconUrl} alt="Muesli app icon" />
+          <div><h2>{guide.cta}</h2><p>{guide.ctaBody}</p></div>
+          <a className="primary-cta" href={downloadUrl}><Download size={19} /> Download Muesli</a>
         </footer>
       </article>
       <SiteFooterDirectory compact />
@@ -6286,6 +5659,10 @@ export function App({ pathname = '/' }) {
     return <BlogPage />;
   }
 
+  if (searchGuides[path]) {
+    return <SearchGuidePage route={path} />;
+  }
+
   if (path === '/on-device-dictation') {
     return <OnDeviceDictationPage />;
   }
@@ -6296,10 +5673,6 @@ export function App({ pathname = '/' }) {
 
   if (path === '/best-dictation-apps-mac') {
     return <BestDictationAppsMacPage />;
-  }
-
-  if (path === '/best-offline-dictation-apps-mac') {
-    return <AlternativeComparisonPage route={path} />;
   }
 
   if (path === '/offline-dictation-mac') {
@@ -6318,10 +5691,6 @@ export function App({ pathname = '/' }) {
     return <SpeechToTextGuidePage route={path} />;
   }
 
-  if (path === '/local-meeting-transcription-mac') {
-    return <LocalMeetingTranscriptionMacPage />;
-  }
-
   if (path === '/bot-free-meeting-notes') {
     return <AlternativeComparisonPage route={path} />;
   }
@@ -6330,11 +5699,7 @@ export function App({ pathname = '/' }) {
     return <AlternativeComparisonPage route={path} />;
   }
 
-  if (path === '/granola-alternative') {
-    return <GranolaAlternativePage />;
-  }
-
-  if (path === '/granola-vs-muesli' || path === '/superwhisper-alternative' || path === '/wispr-flow-alternative' || path === '/otter-ai-alternative' || path === '/fireflies-ai-alternative') {
+  if (path === '/granola-vs-muesli' || path === '/superwhisper-alternative' || path === '/otter-ai-alternative' || path === '/fireflies-ai-alternative') {
     return <AlternativeComparisonPage route={path} />;
   }
 
