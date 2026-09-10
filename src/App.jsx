@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   AudioWaveform,
   ArrowLeft,
@@ -1848,6 +1848,7 @@ const localFirstFaqItems = [
 ];
 
 const tweetTestimonials = [
+  'https://twitter.com/dbreunig/status/2098070473062109425',
   'https://twitter.com/anshulbhide/status/2053999514101714944',
   'https://twitter.com/FracSlap/status/2053622908073730179',
   'https://twitter.com/azrulrhm/status/2053997949987041647',
@@ -1856,6 +1857,95 @@ const tweetTestimonials = [
   'https://twitter.com/anirudhamudan/status/2036855462180876616',
   'https://twitter.com/arcane_bloom/status/2036775141351547080',
 ];
+
+function TweetWall() {
+  const wallRef = useRef(null);
+
+  useEffect(() => {
+    const wall = wallRef.current;
+    const cards = [...wall.children];
+    let frame;
+    const layout = () => {
+      const width = wall.clientWidth;
+      const columns = width >= 1000 ? 3 : width >= 640 ? 2 : 1;
+      const gap = 10;
+      const cardWidth = (width - gap * (columns - 1)) / columns;
+      wall.classList.add('tweet-wall-packed');
+      cards.forEach((card) => { card.style.width = `${cardWidth}px`; });
+      const sizes = cards.map((card) => card.getBoundingClientRect().height + gap);
+      const heights = Array(columns).fill(0);
+      const assignments = sizes.map((size) => {
+        const column = heights.indexOf(Math.min(...heights));
+        heights[column] += size;
+        return column;
+      });
+
+      // Improve the whole wall after greedy placement, including its bottom edge.
+      // Moves and swaps preserve complete embeds and order within each column.
+      let improved = true;
+      while (improved && columns > 1) {
+        improved = false;
+        for (let i = 0; i < cards.length; i += 1) {
+          for (let j = i + 1; j < cards.length + columns; j += 1) {
+            const from = assignments[i];
+            const to = j < cards.length ? assignments[j] : j - cards.length;
+            if (from === to) continue;
+            const transfer = sizes[i] - (j < cards.length ? sizes[j] : 0);
+            const before = heights[from] ** 2 + heights[to] ** 2;
+            const after = (heights[from] - transfer) ** 2 + (heights[to] + transfer) ** 2;
+            if (after >= before - 1) continue;
+            heights[from] -= transfer;
+            heights[to] += transfer;
+            assignments[i] = to;
+            if (j < cards.length) assignments[j] = from;
+            improved = true;
+          }
+        }
+      }
+      // Keep the featured tweet in the first column at every breakpoint.
+      const firstColumn = assignments[0];
+      const offsets = Array(columns).fill(0);
+      cards.forEach((card, index) => {
+        const assigned = assignments[index];
+        const column = assigned === firstColumn ? 0 : assigned === 0 ? firstColumn : assigned;
+        card.style.left = `${column * (cardWidth + gap)}px`;
+        card.style.top = `${offsets[column]}px`;
+        offsets[column] += sizes[index];
+      });
+      wall.style.height = `${Math.max(...heights) - gap}px`;
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(layout);
+    };
+    // X adjusts iframe heights after load and when quoted media becomes ready.
+    const observer = new ResizeObserver(schedule);
+    observer.observe(wall);
+    cards.forEach((card) => observer.observe(card));
+    schedule();
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+      wall.classList.remove('tweet-wall-packed');
+      wall.style.removeProperty('height');
+      cards.forEach((card) => {
+        for (const property of ['width', 'left', 'top']) card.style.removeProperty(property);
+      });
+    };
+  }, []);
+
+  return (
+    <div className="tweet-wall" ref={wallRef}>
+      {tweetTestimonials.map((tweetUrl) => (
+        <article className="tweet-card" key={tweetUrl}>
+          <blockquote className="twitter-tweet" data-dnt="true" data-theme="light">
+            <a href={tweetUrl}>View this post on X</a>
+          </blockquote>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 const faqItems = supportFaqItems;
 
@@ -5464,20 +5554,12 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="testimonials-section" aria-label="Muesli testimonials from X">
+      <section id="hall-of-fame" className="testimonials-section" aria-label="Muesli testimonials from X">
         <div className="testimonials-heading">
 
           <h2>People are already making speech feel local again.</h2>
         </div>
-        <div className="tweet-wall">
-          {tweetTestimonials.map((tweetUrl) => (
-            <article className="tweet-card" key={tweetUrl}>
-              <blockquote className="twitter-tweet" data-dnt="true" data-theme="light">
-                <a href={tweetUrl}>View this post on X</a>
-              </blockquote>
-            </article>
-          ))}
-        </div>
+        <TweetWall />
       </section>
 
       <section className="privacy-section" id="privacy">

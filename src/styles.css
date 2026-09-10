@@ -3350,7 +3350,7 @@ h3 {
   position: relative;
   isolation: isolate;
   width: min(1680px, calc(100vw - 32px));
-  margin-bottom: 110px;
+  margin-bottom: 48px;
   padding: 26px 0 8px;
 }
 
@@ -3379,7 +3379,7 @@ h3 {
 .tweet-wall {
   column-count: 3;
   column-gap: 10px;
-  max-width: none;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -3388,13 +3388,12 @@ h3 {
   width: 100%;
   min-width: 0;
   margin: 0 0 10px;
-  padding: 4px;
+  padding: 0;
+  vertical-align: top;
   break-inside: avoid;
   page-break-inside: avoid;
-  border: 1px solid rgba(74, 52, 27, 0.14);
-  border-radius: 8px;
-  background: rgba(250, 255, 242, 0.82);
-  box-shadow: 0 14px 38px rgba(90, 56, 22, 0.11);
+  border: 0;
+  background: transparent;
 }
 
 .tweet-card .twitter-tweet,
@@ -3402,7 +3401,7 @@ h3 {
   margin: 0 auto !important;
 }
 
-.tweet-card .twitter-tweet {
+.tweet-card blockquote.twitter-tweet {
   min-height: 180px;
   display: grid;
   place-items: center;
@@ -3412,7 +3411,7 @@ h3 {
   background: rgba(255, 249, 231, 0.62);
 }
 
-.tweet-card .twitter-tweet a {
+.tweet-card blockquote.twitter-tweet a {
   color: var(--fern);
   font-weight: 800;
 }
@@ -5383,7 +5382,7 @@ h3 {
 
   .testimonials-section {
     width: calc(100vw - 28px);
-    margin-bottom: 76px;
+    margin-bottom: 36px;
     padding-top: 18px;
   }
 
@@ -5451,8 +5450,8 @@ h3 {
   }
 
   .tweet-card {
-    margin-bottom: 12px;
-    padding: 6px;
+    margin-bottom: 10px;
+    padding: 0;
   }
 
   .ticker-logo {
@@ -6191,3 +6190,8 @@ h3 {
  .ending-wordmark span { font-size: 23vw; }
  .ending-wordmark img { width: 13vw; }
 }
+
+/* Keep the static column layout until the embeds can be measured. */
+.tweet-wall-packed { position: relative; column-count: auto; }
+.tweet-wall-packed .tweet-card { position: absolute; margin: 0; }
+#hall-of-fame { scroll-margin-top: 100px; }
