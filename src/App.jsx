@@ -12,12 +12,10 @@ import {
   ClipboardCheck,
   CloudOff,
   Cloud,
-  Coffee,
   Cpu,
   Database,
   Download,
   FileText,
-  History,
   Github,
   HardDrive,
   Link2,
@@ -30,9 +28,7 @@ import {
   Sparkles,
   Smartphone,
   Star,
-  Stars,
   Tag,
-  Wand2,
 } from 'lucide-react';
 import './styles.css';
 import { searchGuides, searchGuideSources } from './searchGuides.js';
@@ -2492,102 +2488,86 @@ function YouTubeLogo(props) {
   );
 }
 
+// Keep this curated list fixed in size. The full inventory belongs on /blog.
 const footerDirectoryColumns = [
-  {
-    title: 'Product',
-    links: [
-      ['Muesli for iPhone', '/ios'],
-      ['On-device dictation', '/on-device-dictation'],
-      ['Meeting notes', '/meeting-notes'],
-      ['Local-first AI', '/local-first-ai'],
-      ['Download', '/download/'],
-    ],
-  },
-  {
-    title: 'Guides',
-    links: [
-      ['Best dictation apps for Mac', '/best-dictation-apps-mac'],
-      ['Best offline dictation apps', '/best-offline-dictation-apps-mac'],
-      ['Mac dictation app', '/mac-dictation-app'],
-      ['Offline dictation for Mac', '/offline-dictation-mac'],
-      ['Apple Neural Engine speech-to-text', '/apple-neural-engine-speech-to-text-mac'],
-      ['Local speech-to-text glossary', '/local-speech-to-text-glossary'],
-      ['ASR architectures', '/asr-architectures'],
-      ['NVIDIA Parakeet STT', '/nvidia-parakeet-speech-to-text'],
-      ['Whisper speech-to-text', '/whisper-speech-to-text'],
-      ['Medical dictation for Mac', '/medical-dictation-mac'],
-      ['Local meeting transcription', '/local-meeting-transcription-mac'],
-      ['Bot-free meeting notes', '/bot-free-meeting-notes'],
-    ],
-  },
-  {
-    title: 'Compare',
-    links: [
-      ['Apple Dictation alternative', '/apple-dictation-alternative'],
-      ['Granola alternative', '/granola-alternative'],
-      ['Granola vs Muesli', '/granola-vs-muesli'],
-      ['Superwhisper alternative', '/superwhisper-alternative'],
-      ['Wispr Flow alternative', '/wispr-flow-alternative'],
-      ['Otter.ai alternative', '/otter-ai-alternative'],
-      ['Fireflies.ai alternative', '/fireflies-ai-alternative'],
-    ],
-  },
-  {
-    title: 'Resources',
-    links: [
-      ['Help', '/help'],
-      ['iPhone help', '/help/ios'],
-      ['Changelog', '/changelog'],
-      ['Blog', '/blog'],
-      ['GitHub', 'https://github.com/Muesli-HQ/muesli'],
-      ['llms.txt', '/llms.txt'],
-      ['facts.json', '/facts.json'],
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      ['X', 'https://x.com/fastspeech2text'],
-      ['LinkedIn', 'https://www.linkedin.com/company/mueslios/'],
-      ['YouTube', 'https://www.youtube.com/@MuesliHQ'],
-      ['Privacy', '/privacy'],
-      ['Terms', '/terms'],
-    ],
-  },
+  { title: 'Product', links: [
+    ['Dictation', '/on-device-dictation'],
+    ['Meeting notes', '/meeting-notes'],
+    ['Muesli for iPhone', '/ios'],
+    ['Download', '/download/'],
+  ] },
+  { title: 'Explore', links: [
+    ['All guides', '/blog/#guides'],
+    ['All comparisons', '/blog/#comparisons'],
+    ['Granola alternative', '/granola-alternative'],
+    ['Wispr Flow alternative', '/wispr-flow-alternative'],
+  ] },
+  { title: 'Resources', links: [
+    ['Help', '/help'],
+    ['iPhone help', '/help/ios'],
+    ['Releases', '/changelog'],
+    ['GitHub', 'https://github.com/Muesli-HQ/muesli'],
+  ] },
+  { title: 'Company', links: [
+    ['Privacy', '/privacy'],
+    ['Terms', '/terms'],
+    ['X', 'https://x.com/fastspeech2text'],
+    ['LinkedIn', 'https://www.linkedin.com/company/mueslios/'],
+  ] },
 ];
+
+function FooterSocialLinks() {
+  return (
+    <div className="ending-socials" aria-label="Muesli social links">
+      <a href={siteData.xUrl} aria-label="Muesli on X"><XLogo /></a>
+      <a href={siteData.linkedinUrl} aria-label="Muesli on LinkedIn"><LinkedInLogo /></a>
+      <a href="https://www.youtube.com/@MuesliHQ" aria-label="Muesli on YouTube"><YouTubeLogo /></a>
+      <a href={siteData.repositoryUrl} aria-label="Muesli on GitHub"><Github /></a>
+    </div>
+  );
+}
+
+function GardenDownload() {
+  return (
+    <section className="garden-download" aria-labelledby="garden-download-title">
+      <img className="garden-download-art" src="/images/muesli-footer-garden.webp" alt="" loading="lazy" />
+      <div className="garden-download-copy">
+
+        <h2 id="garden-download-title">Right to Free<br />Speech to Text</h2>
+        <p>Dictate your next idea. Keep a transcript of your next conversation. It all starts on your Mac.</p>
+        <a className="garden-download-button" href={downloadUrl}><img src={iconUrl} alt="" />Download Muesli <ArrowRight size={18} /></a>
+        <small>Free and open source · For Apple Silicon Macs</small>
+      </div>
+    </section>
+  );
+}
 
 function SiteFooterDirectory({ compact = false } = {}) {
   return (
-    <nav className={`site-footer-directory${compact ? ' site-footer-directory-compact' : ''}`} aria-label="Site footer">
-      {footerDirectoryColumns.map((column) => (
-        <div className="site-footer-column" key={column.title}>
-          <h3>{column.title}</h3>
-          {column.links.length > 0 && (
-            <ul>
-              {column.links.map(([label, href]) => {
-                const external = href.startsWith('http');
-
-                return (
-                  <li key={href}>
-                    <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>
-                      {label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-          {column.planned && (
-            <ul className="site-footer-planned" aria-label="Planned comparison pages">
-              {column.planned.map((label) => (
-                <li key={label}>{label}</li>
-              ))}
-            </ul>
-          )}
-          {column.note && <p>{column.note}</p>}
+    <footer className={`site-ending${compact ? ' site-ending-compact' : ''}`}>
+      <div className="ending-inner">
+        <div className="ending-topline">
+          <a className="brand ending-brand" href="/" aria-label="Muesli home"><img src={iconUrl} alt="" /><span>muesli</span></a>
+          <FooterSocialLinks />
         </div>
-      ))}
-    </nav>
+        <nav className="ending-navigation" aria-label="Site footer">
+          {footerDirectoryColumns.map((column) => (
+            <div className="site-footer-column" key={column.title}>
+              <h3>{column.title}</h3>
+              <ul>{column.links.map(([label, href]) => <li key={href}><a href={href}>{label}</a></li>)}</ul>
+            </div>
+          ))}
+        </nav>
+        <div className="ending-colophon">
+          <p>© 2026 Muesli. Made with care, in the open.</p>
+          <div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/blog/#guides">Explore the guides <ArrowRight size={13} /></a></div>
+        </div>
+      </div>
+      <div className="ending-landscape" aria-hidden="true">
+        <img className="ending-landscape-art" src="/images/muesli-footer-garden.webp" alt="" loading="lazy" />
+        <div className="ending-wordmark"><img src={iconUrl} alt="" /><span>muesli</span></div>
+      </div>
+    </footer>
   );
 }
 
@@ -2684,7 +2664,7 @@ function IosPage() {
 
       <section className="ios-hero">
         <div className="ios-hero-copy">
-          <div className="ios-kicker"><Smartphone size={17} /> Muesli for iPhone</div>
+
           <h1>Private speech-to-text that stays close to your iPhone.</h1>
           <p>
             Record voice notes, capture in-person meetings, and dictate into other apps. Core transcription runs on
@@ -2856,7 +2836,7 @@ function IosHelpPage() {
       <JsonLd data={structuredData} />
       <IosNav active="help" />
       <article className="legal-document">
-        <div className="ios-help-kicker"><Smartphone size={17} /> iPhone support</div>
+
         <h1>Muesli for iPhone help</h1>
         <p className="legal-intro">
           Set up local transcription, record voice notes and in-person meetings, install the keyboard, understand Full
@@ -3110,7 +3090,7 @@ function BlogPage() {
 
       <section className="blog-hero">
         <div className="blog-hero-copy">
-          <p className="seo-article-kicker"><Sparkles size={15} /> Muesli field notes</p>
+
           <h1>Speech-to-text should be something you can understand, run, and own.</h1>
           <p>
             Notes on local ASR, Mac dictation, meeting capture, privacy, model architecture, and the tools
@@ -3195,9 +3175,31 @@ function BlogPage() {
         </section>
       ) : null}
 
+      <section className="library-directory" aria-label="Guide and comparison directory">
+        {[
+          ['guides', 'All guides', false],
+          ['comparisons', 'All comparisons', true],
+        ].map(([id, title, comparison]) => (
+          <div id={id} key={id}>
+            <h2>{title}</h2>
+            <ul>
+              {siteData.guidePages
+                .filter((page) => /alternative|vs-muesli/.test(page.path) === comparison)
+                .map((page) => <li key={page.path}><a href={`${page.path}/`}>{page.title}</a></li>)}
+            </ul>
+          </div>
+        ))}
+        <div className="library-directory-more">
+          <a href="/local-first-ai">Local-first AI</a>
+          <a href="https://www.youtube.com/@MuesliHQ">YouTube</a>
+          <a href="/llms.txt">llms.txt</a>
+          <a href="/facts.json">Product facts</a>
+        </div>
+      </section>
+
       <section className="blog-cta">
         <div>
-          <span className="blog-cta-kicker">TAKE THE SPEECH LAYER HOME</span>
+
           <h2>Read the source. Run the app. Keep the transcript close.</h2>
           <p>Muesli is open-source Mac dictation and meeting transcription built for local ASR on Apple Silicon.</p>
         </div>
@@ -3248,7 +3250,7 @@ function MacDictationAppPage() {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">Mac dictation guide</div>
+
           <h1>A Mac dictation app that keeps your speech on your Mac.</h1>
           <p>
             Dictation is most useful when it stays close to the work. Muesli turns speech into text on Apple
@@ -3453,7 +3455,7 @@ function BestDictationAppsMacPage() {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">Mac dictation comparison</div>
+
           <h1>Best dictation apps for Mac in 2026.</h1>
           <p>
             The right Mac dictation app depends on what you are protecting: speed, privacy, polish, meeting memory, or
@@ -3642,7 +3644,7 @@ function AppleNeuralEngineSpeechPage() {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">Apple Silicon speech AI</div>
+
           <h1>Apple Neural Engine speech-to-text on Mac.</h1>
           <p>
             Local dictation is becoming practical because modern Macs can run speech recognition close to the place
@@ -3825,7 +3827,7 @@ function LocalSpeechToTextGlossaryPage() {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">Speech-to-text glossary</div>
+
           <h1>Local speech-to-text glossary for Mac.</h1>
           <p>
             A plain-English reference for the terms behind local dictation and meeting transcription: ASR, CoreML,
@@ -3999,7 +4001,7 @@ function OfflineDictationMacPage() {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">Offline dictation guide</div>
+
           <h1>Offline dictation for Mac without a cloud speech pipeline.</h1>
           <p>
             Muesli turns speech into text on Apple Silicon, so everyday dictation can keep working after the local
@@ -4209,7 +4211,7 @@ function SearchGuidePage({ route }) {
           <img src={image} alt={guide.imageAlt} />
         </figure>
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">{guide.label}</div>
+
           <h1>{guide.headline}</h1>
           <p>{guide.intro}</p>
           <div className="seo-article-actions">
@@ -4347,7 +4349,7 @@ function AlternativeComparisonPage({ route }) {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">{config.kicker}</div>
+
           <h1>{config.headline}</h1>
           <p>{config.subcopy}</p>
           <div className="seo-article-actions">
@@ -4372,7 +4374,6 @@ function AlternativeComparisonPage({ route }) {
         {config.sections.slice(0, 2).map((section) => (
           <section className="seo-article-section" key={section.title}>
             <div className="seo-section-heading">
-              <span>{section.eyebrow}</span>
               <h2>{section.title}</h2>
             </div>
             {section.body.map((paragraph) => (
@@ -4405,7 +4406,6 @@ function AlternativeComparisonPage({ route }) {
         {config.sections.slice(2).map((section) => (
           <section className="seo-article-section" key={section.title}>
             <div className="seo-section-heading">
-              <span>{section.eyebrow}</span>
               <h2>{section.title}</h2>
             </div>
             {section.body.map((paragraph) => (
@@ -4526,7 +4526,7 @@ function SpeechToTextGuidePage({ route }) {
         </figure>
 
         <header className="seo-article-hero">
-          <div className="seo-article-kicker">{config.kicker}</div>
+
           <h1>{config.headline}</h1>
           <p>{config.subcopy}</p>
           <div className="seo-article-actions">
@@ -4566,7 +4566,6 @@ function SpeechToTextGuidePage({ route }) {
         {config.sections.slice(0, 2).map((section) => (
           <section className="seo-article-section" key={section.title}>
             <div className="seo-section-heading">
-              <span>{section.eyebrow}</span>
               <h2>{section.title}</h2>
             </div>
             {section.body.map((paragraph) => (
@@ -4599,7 +4598,6 @@ function SpeechToTextGuidePage({ route }) {
         {config.sections.slice(2).map((section) => (
           <section className="seo-article-section" key={section.title}>
             <div className="seo-section-heading">
-              <span>{section.eyebrow}</span>
               <h2>{section.title}</h2>
             </div>
             {section.body.map((paragraph) => (
@@ -5333,7 +5331,7 @@ function LandingPage() {
       <section className="hero" id="top">
         <img className="hero-bg-art" src={presidioHeroBgUrl} alt="Muesli homepage hero showing a calm Mac speech-to-text workspace for dictation and meeting notes" />
         <div className="hero-copy">
-          <p className="eyebrow"><Stars size={16} /> local-first speech workspace</p>
+
           <h1>Your speech should belong to you.</h1>
           <p className="lede">
             Muesli is an open-source Mac app for local speech-to-text, AI dictation, and meeting
@@ -5365,7 +5363,7 @@ function LandingPage() {
       </section>
 
       <section className="notes-section" id="notes">
-        <div className="section-kicker"><Coffee size={17} /> a calmer way to capture work</div>
+
         <div className="notes-layout">
           <div>
             <h2>From a half-formed thought to text in the place you were already working.</h2>
@@ -5468,7 +5466,7 @@ function LandingPage() {
 
       <section className="testimonials-section" aria-label="Muesli testimonials from X">
         <div className="testimonials-heading">
-          <p className="section-kicker"><Sparkles size={17} /> from people trying muesli</p>
+
           <h2>People are already making speech feel local again.</h2>
         </div>
         <div className="tweet-wall">
@@ -5548,7 +5546,7 @@ function LandingPage() {
           </div>
         </div>
         <div className="privacy-copy">
-          <p className="section-kicker"><CloudOff size={17} /> open source, private by default</p>
+
           <h2>No guest in the meeting. No rented speech pipeline.</h2>
           <p>
             Muesli is personal, friendly, and local. The code is inspectable, the workflow is Mac-native,
@@ -5570,7 +5568,7 @@ function LandingPage() {
 
       <section className="changelog-section" id="changelog">
         <div className="changelog-heading">
-          <p className="section-kicker"><History size={17} /> changelog from github</p>
+
           <h2>Every release, pulled from the open-source repo.</h2>
           <p>
             Muesli ships in public. This section reads the GitHub Releases feed directly and shows only
@@ -5583,7 +5581,7 @@ function LandingPage() {
 
       <section className="faq" id="faq">
         <div>
-          <p className="section-kicker"><Wand2 size={17} /> faq</p>
+
           <h2>Common fixes for setup, permissions, and meeting capture.</h2>
         </div>
         <div className="faq-list">
@@ -5596,33 +5594,11 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="bottom-cta">
-        <img className="footer-bg-art" src={solarpunkBgUrl} alt="Solarpunk speech workspace representing Muesli local dictation and meeting transcription on Mac" />
-        <img className="bottom-icon" src={iconUrl} alt="Muesli local speech-to-text app icon" />
-        <h2>Open-source speech workspace for your working memory.</h2>
-        <p>Useful, local, and owned by the person doing the speaking.</p>
-        <a className="primary-cta" href={downloadUrl}>
-          <span className="apple-mark" aria-hidden="true"></span>
-          Try the Mac app
-        </a>
-        <div className="social-links" aria-label="Muesli social links">
-          <a href="https://x.com/fastspeech2text" target="_blank" rel="noreferrer" aria-label="Follow Muesli on X">
-            <XLogo />
-          </a>
-          <a href="https://www.linkedin.com/company/mueslios/" target="_blank" rel="noreferrer" aria-label="Follow Muesli on LinkedIn">
-            <LinkedInLogo />
-          </a>
-          <a href="https://www.youtube.com/@MuesliHQ" target="_blank" rel="noreferrer" aria-label="Subscribe to Muesli on YouTube">
-            <YouTubeLogo />
-          </a>
-        </div>
+      <div className="garden-ending-wrap">
+        <GardenDownload />
         <SiteFooterDirectory />
-        <p className="copyright">
-          © 2026 Muesli. Built with &lt;3 by{' '}
-          <a href="https://github.com/pHequals7" target="_blank" rel="noreferrer">pHequals7</a>
-          {' '}and 10+ contributors.
-        </p>
-      </section>
+      </div>
+
     </main>
   );
 }
