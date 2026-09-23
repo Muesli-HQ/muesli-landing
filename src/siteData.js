@@ -1,3 +1,4 @@
+import { docsPages } from './docsContent.js';
 import { searchGuides } from './searchGuides.js';
 
 export const siteData = {
@@ -51,6 +52,8 @@ export const siteData = {
     'Optional services such as OpenAI, OpenRouter, ChatGPT, and Google Calendar are explicit integrations, not the default transcription path.',
   ],
   technicalFacts: [
+    'The bundled muesli-cli lets shell-capable coding agents read meeting transcripts and dictations as JSON, transcribe local audio files, and replace formatted meeting notes.',
+    'Coding agents can analyze CLI transcripts using their own model; hosted agent providers may receive transcript text in their context.',
     'Muesli is a native macOS app built with Swift and AppKit, not Electron.',
     'Local speech-to-text runs on Apple Silicon through CoreML and Apple Neural Engine-capable model paths where supported.',
     'For short dictation, local Apple Silicon inference can reduce latency by avoiding the cloud upload, remote inference, response, and paste-back round trip.',
@@ -63,6 +66,7 @@ export const siteData = {
     'Optional summarization providers are separate from the local transcription path.',
   ],
   featurePages: [
+    ...Object.entries(docsPages).map(([path, page]) => ({title: page.title, path, url: `https://muesli.works${path}/`, description: page.description})),
     {
       title: 'Muesli for iPhone',
       path: '/ios',
@@ -205,6 +209,11 @@ export const siteData = {
     },
   ],
   routes: {
+    ...Object.fromEntries(Object.entries(docsPages).map(([path, page]) => [path, {
+      title: `${page.title} | Muesli Docs`,
+      description: page.description,
+      canonical: `https://muesli.works${path}/`,
+    }])),
     '/': {
       title: 'Muesli - open-source Mac dictation and local speech-to-text',
       canonical: 'https://muesli.works/',

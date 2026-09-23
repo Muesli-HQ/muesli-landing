@@ -29,8 +29,11 @@ import {
   Smartphone,
   Star,
   Tag,
+  Zap,
 } from 'lucide-react';
 import './styles.css';
+import DocsPage, { AgentFeature } from './DocsPage.jsx';
+import { docsPages, docsRoutes } from './docsContent.js';
 import { searchGuides, searchGuideSources } from './searchGuides.js';
 import iconUrl from '../docs/icon.png';
 import zoomUrl from '../assets/zoom-app.png';
@@ -2336,7 +2339,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = ['/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = [...docsRoutes, '/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2596,7 +2599,7 @@ const footerDirectoryColumns = [
     ['Help', '/help'],
     ['iPhone help', '/help/ios'],
     ['Releases', '/changelog'],
-    ['GitHub', 'https://github.com/Muesli-HQ/muesli'],
+    ['Agent CLI docs', '/docs/'],
   ] },
   { title: 'Company', links: [
     ['Privacy', '/privacy'],
@@ -3086,6 +3089,7 @@ function ProductPageNav() {
         <a href="/ios">iPhone</a>
         <a href="/#privacy">Privacy</a>
         <a href="/blog/">Blog</a>
+        <a href="/docs/">Docs</a>
         <a href="/changelog">Releases</a>
         <a className="product-nav-cta" href={downloadUrl}>
           <Download size={17} />
@@ -5323,7 +5327,7 @@ function LocalFirstPage() {
 }
 
 function LandingPage() {
-  const [stars, setStars] = useState(157);
+  const [stars, setStars] = useState(null);
   const [brewCopied, setBrewCopied] = useState(false);
   const { releases, releaseStatus } = useStableReleases();
 
@@ -5399,6 +5403,7 @@ function LandingPage() {
             <div className="nav-dropdown">
               <a href="/on-device-dictation/">On-device Dictation</a>
               <a href="/meeting-notes/">Meeting Notes</a>
+              <a href="/docs/agents/">For coding agents</a>
               <a href="/local-first-ai/">Local-first AI</a>
               <a className="nav-dropdown-coming-soon" href="/ios">
                 <span>Muesli for iPhone</span>
@@ -5409,11 +5414,14 @@ function LandingPage() {
           <a href="#privacy">Privacy</a>
           <a href="/changelog">Changelog</a>
           <a href="/blog">Blog</a>
-          <a className="nav-help" href="/help">Help</a>
-          <a className="github-pill" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer">
-            <Github size={17} />
-            <span>Open source</span>
-            <b><Star size={14} /> {formatStars(stars)}</b>
+          <a className="nav-help" href="/docs/">Docs</a>
+          <a className="github-stars" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer"
+            aria-label={stars == null ? 'Muesli on GitHub' : `Muesli on GitHub, ${stars.toLocaleString()} stars`}>
+            <svg className="github-stars-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .297a12 12 0 0 0-3.793 23.385c.6.111.82-.261.82-.577v-2.234c-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.334-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.323 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 2.042.138 3.003.404 2.291-1.553 3.297-1.23 3.297-1.23.654 1.652.243 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.625-5.479 5.922.43.372.823 1.102.823 2.222v3.293c0 .319.216.694.825.576A12.001 12.001 0 0 0 12 .297Z" />
+            </svg>
+            <Star className="github-stars-star" size={12} fill="currentColor" aria-hidden="true" />
+            <span>{formatStars(stars)}</span>
           </a>
         </div>
       </nav>
@@ -5423,30 +5431,27 @@ function LandingPage() {
         <div className="hero-copy">
 
           <h1>Your speech should belong to you.</h1>
-          <p className="lede">
-            Muesli is an open-source Mac app for local speech-to-text, AI dictation, and meeting
-            transcription. Speak naturally, paste clean text, and keep transcripts close instead of
-            renting out speech to the cloud.
-          </p>
+          <p className="lede hero-summary">Free dictation and meeting transcription for your Mac.</p>
+          <ul className="hero-benefits" aria-label="Muesli benefits">
+            <li><a href="/local-first-ai/"><Cpu size={21} aria-hidden="true" /><span>Local/On-device</span></a></li>
+            <li><a href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer"><Github size={21} aria-hidden="true" /><span>Open Source</span></a></li>
+            <li><a href="/on-device-dictation/"><Zap size={21} fill="currentColor" aria-hidden="true" /><span>Blazing fast</span></a></li>
+          </ul>
           <div className="cta-row">
             <a className="primary-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
-            </a>
-            <a className="secondary-cta" href="#notes">
-              Explore
-              <ArrowRight size={18} />
             </a>
           </div>
           <button
             className={`brew-pill${brewCopied ? ' is-copied' : ''}`}
             type="button"
             onClick={copyBrewCommand}
-            aria-label="Copy official Homebrew cask install command"
+            aria-label={brewCopied ? 'Homebrew command copied' : 'Copy Homebrew install command'}
           >
             {brewCopied ? <ClipboardCheck size={16} /> : <Clipboard size={16} />}
             <code>{brewCommand}</code>
-            <span>{brewCopied ? 'Copied' : 'Official cask'}</span>
+            {brewCopied && <span role="status">Copied</span>}
           </button>
         </div>
         <PixelGarden />
@@ -5553,6 +5558,8 @@ function LandingPage() {
           </div>
         </div>
       </section>
+
+      <AgentFeature />
 
       <section id="hall-of-fame" className="testimonials-section" aria-label="Muesli testimonials from X">
         <div className="testimonials-heading">
@@ -5695,6 +5702,10 @@ export function App({ pathname = '/' }) {
 
   if (legalKey) {
     return <LegalPage page={legalPages[legalKey]} path={path} />;
+  }
+
+  if (docsPages[path]) {
+    return <DocsPage route={path} />;
   }
 
   if (path === '/ios') {

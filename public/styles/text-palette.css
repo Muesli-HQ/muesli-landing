@@ -1,0 +1,9 @@
+/* Shared text roles for the website and standalone download page. */
+:root {
+  --ink: #080e16;
+  --muted: #526171;
+  --fern: #285f4c;
+  --text-inverse: #ffffff;
+  --text-inverse-muted: #c5ced8;
+  --text-danger: #b42318;
+}

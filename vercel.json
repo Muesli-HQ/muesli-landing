@@ -26,6 +26,18 @@
   ],
   "rewrites": [
     {
+      "source": "/docs",
+      "destination": "/docs/index.html"
+    },
+    {
+      "source": "/docs/agents",
+      "destination": "/docs/agents/index.html"
+    },
+    {
+      "source": "/docs/cli",
+      "destination": "/docs/cli/index.html"
+    },
+    {
       "source": "/ios",
       "destination": "/ios/index.html"
     },

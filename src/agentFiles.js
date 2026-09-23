@@ -1,3 +1,4 @@
+import { docsMarkdown } from './docsContent.js';
 import { changelogLinks, sameAsLinks, siteData, supportFaqItems } from './siteData.js';
 
 function lines(items) {
@@ -55,6 +56,9 @@ ${pageList()}
 - Changelog: ${siteData.siteUrl}/changelog
 - GitHub: ${siteData.repositoryUrl}
 
+## CLI Documentation
+- Complete CLI and coding-agent guide: ${siteData.siteUrl}/docs.txt
+
 ## Key Facts
 ${lines(siteData.keyFacts)}
 
@@ -110,6 +114,7 @@ ${support}
 `;
 
   return {
+    'docs.txt': docsMarkdown(),
     'llms.txt': llms,
     'llms-full.txt': llmsFull,
     'ai-context.md': aiContext,
