@@ -15,7 +15,7 @@ function CodeBlock({ children }) {
 
 export function AgentFeature() {
   return <section className="agent-feature" aria-labelledby="agent-feature-title">
-    <div><h2 id="agent-feature-title">Your next project starts in a conversation.</h2><p>Let your coding agent read the meeting. Muesli’s local CLI gives Codex, Claude Code, and other shell-capable agents access to transcripts and notes, so you can turn a discussion into a plan for your codebase.</p><a href="/docs/">Explore the agent CLI <ArrowRight size={18} /></a></div>
+    <div><h2 id="agent-feature-title">Your meeting notes are now accessible across Claude, ChatGPT, and more.</h2><p>Let your coding agent read the meeting. Muesli’s local CLI gives Codex, Claude Code, and other shell-capable agents access to transcripts and notes, so you can turn a discussion into a plan for your codebase.</p><a href="/docs/">Explore the agent CLI <ArrowRight size={18} /></a></div>
     <div className="agent-terminal"><div>muesli-cli</div><pre><code>{'# Find the conversation\nmuesli-cli meetings list --limit 5\n\n# Read a meeting using its returned ID\nmuesli-cli meetings get 42'}</code></pre><p>Structured JSON. Local meeting data. Your agent’s model.</p></div>
   </section>;
 }

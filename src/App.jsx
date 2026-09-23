@@ -1,3 +1,4 @@
+import { bodhanPosts } from './bodhanPosts.js';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   AudioWaveform,
@@ -1511,6 +1512,7 @@ const alternativePageConfigs = {
 };
 
 const blogPostEntries = [
+  ...bodhanPosts.map(post => ({ ...post, excerpt: post.description })),
   {
     path: '/medical-dictation-mac',
     title: 'The best medical dictation tool might start on your own Mac',
@@ -2339,7 +2341,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = [...docsRoutes, '/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = [...bodhanPosts.map(post => post.path), ...docsRoutes, '/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -3141,6 +3143,60 @@ function ArticleShareBar({ route, title }) {
       </div>
     </div>
   );
+}
+
+function ArticleInline({ text }) {
+  return text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\))/g).map((part, index) => {
+    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    return link ? <a key={index} href={link[2]}>{link[1]}</a> : part;
+  });
+}
+
+function BodhanArticle({ post }) {
+  const meta = routeMeta[post.path];
+  const schema = baseStructuredData(post.path, [pageBreadcrumb(post.path, post.title), {
+    '@type': 'BlogPosting', '@id': `${meta.canonical}#article`,
+    headline: post.title, description: post.description, url: meta.canonical,
+    mainEntityOfPage: meta.canonical, datePublished: post.date, dateModified: post.date,
+    inLanguage: 'en', articleSection: post.category,
+    author: { '@type': 'Organization', name: 'Muesli', url: siteData.siteUrl },
+    publisher: { '@id': `${siteData.siteUrl}/#organization` },
+    image: { '@type': 'ImageObject', url: meta.ogImage, width: post.imageWidth,
+      height: post.imageHeight, caption: post.imageAlt, creditText: 'Raja Ravi Varma / Wikimedia Commons',
+      creator: { '@type': 'Person', name: 'Raja Ravi Varma' },
+      license: 'https://creativecommons.org/publicdomain/mark/1.0/',
+      acquireLicensePage: post.artSource },
+  }]);
+  return <main className="product-page article-page bodhan-page">
+    <JsonLd data={schema} />
+    <ProductPageNav />
+    <article>
+      <header className="bodhan-hero">
+        <div>
+          <a className="bodhan-back" href="/blog/">← All articles</a>
+          <h1>{post.title}</h1>
+          <p>{post.description}</p>
+          <div className="bodhan-byline">Muesli · <time dateTime={post.date}>{formatBlogDate(post.date)}</time> · {post.readTime}</div>
+        </div>
+        <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} fetchPriority="high" />
+      </header>
+      <div className="bodhan-body">
+        {post.blocks.map((block, index) => block.type === 'heading'
+          ? <h2 key={index}>{block.text}</h2>
+          : block.type === 'list'
+            ? <ul key={index}>{block.items.map(item => <li key={item}><ArticleInline text={item} /></li>)}</ul>
+            : <p key={index}><ArticleInline text={block.text} /></p>)}
+        <aside className="bodhan-related" aria-label="Related Bodhan articles">
+          <h2>More on Bodhan</h2>
+          {bodhanPosts.filter(other => other.path !== post.path).map(other => <a key={other.path} href={`${other.path}/`}>{other.title} →</a>)}
+        </aside>
+        <footer className="bodhan-art-credit">
+          Cover: <cite>{post.artTitle}</cite> by Raja Ravi Varma. <a href={post.artSource}>Wikimedia Commons</a> · <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+        </footer>
+      </div>
+    </article>
+    <SiteFooterDirectory />
+  </main>;
 }
 
 function BlogPage() {
@@ -5326,6 +5382,49 @@ function LocalFirstPage() {
   );
 }
 
+function HeroBackdrop() {
+  const backdropRef = useRef(null);
+
+  useEffect(() => {
+    const backdrop = backdropRef.current;
+    const hero = backdrop.closest('.hero');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reset = () => {
+      backdrop.style.setProperty('--scene-x', '0px');
+      backdrop.style.setProperty('--scene-y', '0px');
+    };
+    const move = (event) => {
+      if (motion.matches || !pointer.matches) return;
+      const bounds = hero.getBoundingClientRect();
+      backdrop.style.setProperty('--scene-x', `${(event.clientX - bounds.left - bounds.width / 2) / bounds.width * -18}px`);
+      backdrop.style.setProperty('--scene-y', `${(event.clientY - bounds.top - bounds.height / 2) / bounds.height * -12}px`);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      backdrop.dataset.visible = String(entry.isIntersecting);
+    });
+    observer.observe(hero);
+    hero.addEventListener('pointermove', move);
+    hero.addEventListener('pointerleave', reset);
+    motion.addEventListener('change', reset);
+    reset();
+    return () => {
+      observer.disconnect();
+      hero.removeEventListener('pointermove', move);
+      hero.removeEventListener('pointerleave', reset);
+      motion.removeEventListener('change', reset);
+    };
+  }, []);
+
+  return (
+    <div ref={backdropRef} className="hero-motion" aria-hidden="true">
+      <div className="hero-motion-parallax">
+        <img className="hero-motion-image" src={presidioHeroBgUrl} alt="" fetchPriority="high" />
+      </div>
+    </div>
+  );
+}
+
 function LandingPage() {
   const [stars, setStars] = useState(null);
   const [brewCopied, setBrewCopied] = useState(false);
@@ -5427,7 +5526,7 @@ function LandingPage() {
       </nav>
 
       <section className="hero" id="top">
-        <img className="hero-bg-art" src={presidioHeroBgUrl} alt="Muesli homepage hero showing a calm Mac speech-to-text workspace for dictation and meeting notes" />
+        <HeroBackdrop />
         <div className="hero-copy">
 
           <h1>Your speech should belong to you.</h1>
@@ -5723,6 +5822,9 @@ export function App({ pathname = '/' }) {
   if (path === '/changelog') {
     return <ChangelogPage />;
   }
+
+  const bodhanPost = bodhanPosts.find(post => post.path === path);
+  if (bodhanPost) return <BodhanArticle post={bodhanPost} />;
 
   if (path === '/blog') {
     return <BlogPage />;

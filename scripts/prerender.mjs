@@ -40,6 +40,9 @@ function withHeadMeta(html, meta) {
     `<meta name="description" content="${escapeHtmlAttribute(meta.description)}" />`
   );
 
+  next = replaceMetaContent(next, ['property', 'og:type'], meta.ogType || 'website');
+  next = replaceMetaContent(next, ['property', 'og:image:width'], meta.ogImageWidth || 1200);
+  next = replaceMetaContent(next, ['property', 'og:image:height'], meta.ogImageHeight || 630);
   next = replaceMetaContent(next, ['property', 'og:url'], meta.ogUrl);
   next = replaceMetaContent(next, ['property', 'og:title'], meta.ogTitle);
   next = replaceMetaContent(next, ['property', 'og:description'], meta.ogDescription);
@@ -49,6 +52,17 @@ function withHeadMeta(html, meta) {
   next = replaceMetaContent(next, ['name', 'twitter:title'], meta.ogTitle);
   next = replaceMetaContent(next, ['name', 'twitter:description'], meta.ogDescription);
   next = replaceMetaContent(next, ['name', 'twitter:image'], meta.ogImage);
+
+  const extraMeta = [
+    ['name', 'twitter:image:alt', meta.ogImageAlt],
+    ['name', 'author', meta.author],
+    ['property', 'article:published_time', meta.publishedTime],
+    ['property', 'article:modified_time', meta.modifiedTime],
+    ['property', 'article:section', meta.articleSection],
+  ].filter(([, , value]) => value).map(([attribute, key, value]) =>
+    `<meta ${attribute}="${key}" content="${escapeHtmlAttribute(value)}" />`
+  ).join('\n    ');
+  next = next.replace('</head>', `    ${extraMeta}\n  </head>`);
 
   const canonical = `<link rel="canonical" href="${meta.canonical}" />`;
   next = next.includes('rel="canonical"')

@@ -26,6 +26,18 @@
   ],
   "rewrites": [
     {
+      "source": "/blog/bodhan-indic-transcription-mac",
+      "destination": "/blog/bodhan-indic-transcription-mac/index.html"
+    },
+    {
+      "source": "/blog/indian-language-dictation-mac",
+      "destination": "/blog/indian-language-dictation-mac/index.html"
+    },
+    {
+      "source": "/blog/bodhan-coreml-mlx-apple-silicon",
+      "destination": "/blog/bodhan-coreml-mlx-apple-silicon/index.html"
+    },
+    {
       "source": "/docs",
       "destination": "/docs/index.html"
     },

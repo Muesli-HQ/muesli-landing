@@ -1,3 +1,4 @@
+import { bodhanPosts } from './bodhanPosts.js';
 import { docsPages } from './docsContent.js';
 import { searchGuides } from './searchGuides.js';
 
@@ -209,6 +210,15 @@ export const siteData = {
     },
   ],
   routes: {
+    ...Object.fromEntries(bodhanPosts.map(post => [post.path, {
+      title: `${post.title} · Muesli`, description: post.description,
+      canonical: `https://muesli.works${post.path}/`,
+      ogType: 'article', ogTitle: post.title, ogDescription: post.description,
+      ogImage: `https://muesli.works${post.image}`, ogImageAlt: post.imageAlt,
+      ogImageWidth: post.imageWidth, ogImageHeight: post.imageHeight,
+      author: 'Muesli', publishedTime: post.date, modifiedTime: post.date,
+      articleSection: post.category,
+    }])),
     ...Object.fromEntries(Object.entries(docsPages).map(([path, page]) => [path, {
       title: `${page.title} | Muesli Docs`,
       description: page.description,
