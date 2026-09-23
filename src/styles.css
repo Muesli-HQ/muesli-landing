@@ -1239,6 +1239,11 @@ h3 {
     linear-gradient(180deg, #bfe4df 0%, #dff4e8 34%, #dcefd1 76%, #fff6dd 100%);
 }
 
+/* The closing illustration should meet the bottom edge of the page. */
+.product-page:has(> .site-ending:last-child) {
+  padding-bottom: 0;
+}
+
 .product-nav {
   position: fixed;
   top: 16px;
