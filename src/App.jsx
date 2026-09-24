@@ -3162,8 +3162,8 @@ function BodhanArticle({ post }) {
     author: { '@type': 'Organization', name: 'Muesli', url: siteData.siteUrl },
     publisher: { '@id': `${siteData.siteUrl}/#organization` },
     image: { '@type': 'ImageObject', url: meta.ogImage, width: post.imageWidth,
-      height: post.imageHeight, caption: post.imageAlt, creditText: 'Raja Ravi Varma / Wikimedia Commons',
-      creator: { '@type': 'Person', name: 'Raja Ravi Varma' },
+      height: post.imageHeight, caption: post.imageAlt, creditText: `${post.artArtist || 'Raja Ravi Varma'} / ${post.artCollection || 'Wikimedia Commons'}`,
+      creator: (post.artArtists || [post.artArtist || 'Raja Ravi Varma']).map(name => ({ '@type': 'Person', name })),
       license: 'https://creativecommons.org/publicdomain/mark/1.0/',
       acquireLicensePage: post.artSource },
   }]);
@@ -3191,7 +3191,7 @@ function BodhanArticle({ post }) {
           {bodhanPosts.filter(other => other.path !== post.path).map(other => <a key={other.path} href={`${other.path}/`}>{other.title} →</a>)}
         </aside>
         <footer className="bodhan-art-credit">
-          Cover: <cite>{post.artTitle}</cite> by Raja Ravi Varma. <a href={post.artSource}>Wikimedia Commons</a> · <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+          Cover: <cite>{post.artTitle}</cite>{post.artDate ? ` (${post.artDate})` : ''} by {post.artArtist || 'Raja Ravi Varma'}. <a href={post.artSource}>{post.artCollection || 'Wikimedia Commons'}</a> · <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
         </footer>
       </div>
     </article>

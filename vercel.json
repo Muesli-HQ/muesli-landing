@@ -26,6 +26,14 @@
   ],
   "rewrites": [
     {
+      "source": "/blog/hinglish-indic-meeting-notes-mac",
+      "destination": "/blog/hinglish-indic-meeting-notes-mac/index.html"
+    },
+    {
+      "source": "/blog/hinglish-dictation-mac",
+      "destination": "/blog/hinglish-dictation-mac/index.html"
+    },
+    {
       "source": "/blog/bodhan-indic-transcription-mac",
       "destination": "/blog/bodhan-indic-transcription-mac/index.html"
     },

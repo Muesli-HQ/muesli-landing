@@ -211,7 +211,7 @@ export const siteData = {
   ],
   routes: {
     ...Object.fromEntries(bodhanPosts.map(post => [post.path, {
-      title: `${post.title} · Muesli`, description: post.description,
+      title: post.title.endsWith('Muesli') ? post.title : `${post.title} · Muesli`, description: post.description,
       canonical: `https://muesli.works${post.path}/`,
       ogType: 'article', ogTitle: post.title, ogDescription: post.description,
       ogImage: `https://muesli.works${post.image}`, ogImageAlt: post.imageAlt,

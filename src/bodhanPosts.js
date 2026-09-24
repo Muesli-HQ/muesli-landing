@@ -1,6 +1,307 @@
 // Bodhan articles and their shared page/social metadata.
 export const bodhanPosts = [
   {
+    "path": "/blog/hinglish-indic-meeting-notes-mac",
+    "title": "Hinglish and Indic language meeting notes on Mac with Muesli",
+    "description": "Create meeting notes from Hinglish, English, and Indic conversations on Mac. Use Bodhan for local transcription in Muesli, then review summaries and action items.",
+    "date": "2026-09-24",
+    "category": "Meeting Notes",
+    "tags": [
+      "Meeting Notes",
+      "Model Guides",
+      "Local AI"
+    ],
+    "readTime": "4 min read",
+    "image": "/images/bodhan/udaipur-jagniwas-1767.jpg",
+    "imageAlt": "Maharana Ari Singh and his courtiers at the Jagniwas Water Palace in Udaipur, painted in 1767",
+    "artTitle": "Maharana Ari Singh with His Courtiers Being Entertained at the Jagniwas Water Palace",
+    "artArtist": "Bhima, Kesu Ram, Bhopa, and Nathu",
+    "artArtists": [
+      "Bhima",
+      "Kesu Ram",
+      "Bhopa",
+      "Nathu"
+    ],
+    "artDate": "1767",
+    "artCollection": "The Metropolitan Museum of Art",
+    "artSource": "https://www.metmuseum.org/art/collection/search/38007",
+    "imageWidth": 1200,
+    "imageHeight": 962,
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Muesli can turn a Hinglish or Indic-language meeting into a local transcript using Bodhan Core or Flex on an Apple Silicon Mac. You can then generate structured meeting notes with your configured summarization model. Bodhan support starts with Muesli 0.8.4 and requires macOS 15 or later. [Muesli’s versioned model and meeting guide](https://github.com/Muesli-HQ/muesli/blob/v0.8.4/README.md)"
+      },
+      {
+        "type": "paragraph",
+        "text": "The speech recognition models are developed by [Bodhan AI](https://bodhan.ai/). Read the team’s [Indic-Transcribe research article](https://bodhan.ai/research/blogs/indic-transcribe) for the model family, language coverage, and output modes. Muesli adapts Core and Flex for local use on Apple Silicon."
+      },
+      {
+        "type": "heading",
+        "text": "Keep the Hindi, English, and decisions together"
+      },
+      {
+        "type": "paragraph",
+        "text": "A project discussion may move from Hindi explanations to English product names, deadlines, and technical details. A Tamil or Bengali conversation can follow the same pattern. Useful meeting notes need to retain the decision, who owns the next step, and when it is due, whichever language carried that information."
+      },
+      {
+        "type": "paragraph",
+        "text": "Start with the transcript as the record of what was said. Then review the summary against it. A short, polished action item can still contain the wrong name or date if an earlier transcription error passes through."
+      },
+      {
+        "type": "heading",
+        "text": "Choose Bodhan for the meeting transcript"
+      },
+      {
+        "type": "paragraph",
+        "text": "Muesli offers Core for native-script output and Flex for mixed-script output. For a Hindi-English meeting, Flex is a practical first model to try: Hindi appears in Devanagari while English terms can remain in Latin letters. Muesli 0.8.4 does not expose Flex’s upstream Romanized-output mode as an app setting."
+      },
+      {
+        "type": "paragraph",
+        "text": "Both models cover India’s 22 scheduled languages. Core supports 25 languages in total and Flex supports 27, including English. Choose the main language of the discussion or evaluate automatic detection on a short sample. Coverage does not guarantee equal results for every accent, overlapping conversation, or combination of languages. [Bodhan Core](https://huggingface.co/bodhan-ai/indic-transcribe-core) and [Flex](https://huggingface.co/bodhan-ai/indic-transcribe-flex) model cards describe the upstream models."
+      },
+      {
+        "type": "heading",
+        "text": "Set up a Hinglish or Indic-language meeting"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Download and prepare Bodhan Core or Flex in Muesli’s Models tab. Choose the language and FP16 or INT8 variant you want to use.",
+          "Select Bodhan as the meeting transcription model. Check which model is responsible for the final transcript if you also use a live-transcript mode.",
+          "Check microphone and system-audio capture with a short call. Confirm that both your voice and the remote participant’s voice appear in the saved transcript.",
+          "Let participants know you are recording, start a meeting recording in Muesli, and use your usual call app.",
+          "After the meeting, review the transcript before sharing the notes. Check names, quantities, deadlines, and any words spoken while people were talking over one another."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Muesli captures microphone and system audio on your Mac. It does not need a separate meeting bot to join the call. Bodhan is a final-transcription model in Muesli; selecting it does not provide a Bodhan-powered streaming caption mode. See the [meeting transcription overview](https://muesli.works/meeting-notes/) for the recording workflow."
+      },
+      {
+        "type": "heading",
+        "text": "Turn the transcript into meeting notes"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bodhan handles speech recognition. Muesli’s configured summary model creates the meeting notes from the transcript. Available summary options include OpenAI, OpenRouter, a ChatGPT subscription connection, and local Ollama models. Choose a summary model that handles the languages in your discussion, then use a built-in or custom meeting template."
+      },
+      {
+        "type": "paragraph",
+        "text": "Decide how your team wants to read the notes: English, an Indic language, or a mixture that preserves the original terminology. You can include that preference in a custom template. Treat the following as a suggested instruction to evaluate with your chosen summary model:"
+      },
+      {
+        "type": "paragraph",
+        "text": "“Write the meeting notes in English. Preserve people’s names, product names, and quoted Hindi or other Indic phrases. List decisions, open questions, and action items with an owner and due date only when the transcript states them. Mark unclear details for review.”"
+      },
+      {
+        "type": "paragraph",
+        "text": "For Hindi notes, change the requested output language to Hindi and specify how English technical terms should appear. The result depends on the summarization model and the quality of the transcript. Review the notes alongside the original conversation before assigning work."
+      },
+      {
+        "type": "heading",
+        "text": "A short Hindi-English meeting to test"
+      },
+      {
+        "type": "paragraph",
+        "text": "Try a two-person practice call with a task, an owner, and a deadline. One person could say, “Riya design update Thursday ko bhejegi.” The other could add, “English summary mein pending questions bhi include karna.” These are sample prompts for your own evaluation, rather than recorded benchmark results."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Confirm that Riya is attached to the design update and Thursday remains the deadline.",
+          "Check that the request to include pending questions survives in the notes.",
+          "Read English feature names and Hindi phrasing against the recording.",
+          "Try a second sample with the Indic language and vocabulary your team uses most often."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "What stays on your Mac?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bodhan transcription runs locally after its assets are downloaded and prepared. Hosted summary providers receive the transcript text used to generate notes. If you want local summarization too, configure a local Ollama model and test its ability to handle your meeting’s languages. Review optional sync and processing settings as part of that setup."
+      },
+      {
+        "type": "heading",
+        "text": "Can I export or use the notes with coding agents?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Muesli supports PDF and Markdown export for meeting notes and transcripts. Its bundled CLI also lets local coding agents read saved meeting records and write updated notes. A useful workflow is to review a Hinglish technical discussion, then ask your agent to turn the confirmed action items into an implementation plan. Hosted agents may receive the text you provide. See the [coding-agent documentation](https://muesli.works/docs/agents/)."
+      },
+      {
+        "type": "paragraph",
+        "text": "[Download Muesli](https://muesli.works/download/) to try a short meeting with Bodhan. For individual messages and documents, read [Hinglish and Indic language dictation on Mac with Muesli](https://muesli.works/blog/hinglish-dictation-mac/)."
+      }
+    ]
+  },
+  {
+    "path": "/blog/hinglish-dictation-mac",
+    "title": "Hinglish and Indic language dictation on Mac with Muesli",
+    "description": "Dictate in Hinglish, English, and Indic languages on Mac with Muesli and Bodhan. Set up local speech-to-text and compare native and mixed-script output.",
+    "date": "2026-09-24",
+    "category": "Model Guides",
+    "tags": [
+      "Model Guides",
+      "Dictation",
+      "Local AI"
+    ],
+    "readTime": "5 min read",
+    "image": "/images/bodhan/taj-mahal-1880.jpg",
+    "imageAlt": "A View of the Taj Mahal, an 1880 watercolor by Koodrutoollah",
+    "artTitle": "A View of the Taj Mahal",
+    "artSource": "https://www.metmuseum.org/art/collection/search/910558",
+    "imageWidth": 1200,
+    "imageHeight": 899,
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Muesli brings local Hindi-English dictation to Apple Silicon Macs through Bodhan Core and Flex. For Hinglish speech, start with Bodhan Flex: Muesli uses its mixed-script mode, which writes Hindi in Devanagari and keeps English terms in Latin letters. Bodhan support is available from Muesli 0.8.4 and requires macOS 15 or later. [Muesli 0.8.4 model guide](https://github.com/Muesli-HQ/muesli/blob/v0.8.4/README.md)"
+      },
+      {
+        "type": "paragraph",
+        "text": "The speech recognition models are developed by [Bodhan AI](https://bodhan.ai/). Read the team’s [Indic-Transcribe research article](https://bodhan.ai/research/blogs/indic-transcribe) for the model family, language coverage, and output modes. Muesli adapts Core and Flex for local use on Apple Silicon."
+      },
+      {
+        "type": "paragraph",
+        "text": "A message to a teammate might start in Hindi, include English product names, and end with a deadline in English. Muesli lets you try that Hindi-English workflow in the text field where you already write. Check that the transcript preserves both languages and the details that make the message useful."
+      },
+      {
+        "type": "heading",
+        "text": "What does Hindi-English dictation need to capture?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hinglish combines Hindi and English within a conversation or sentence. You might explain a task in Hindi and use English for a software feature, a project name, or an entire reply. When choosing a Hindi-English dictation app, try the vocabulary you actually use: colleagues, amounts, dates, and English technical terms."
+      },
+      {
+        "type": "paragraph",
+        "text": "The written result matters too. Some readers prefer Hindi in Devanagari with English words left in Latin letters. Others write the whole message using the Latin alphabet. Decide which form you want before judging a transcript."
+      },
+      {
+        "type": "heading",
+        "text": "Choosing Bodhan Flex for Hindi and English in Muesli"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bodhan AI describes Flex as supporting code-mixed speech, including Hinglish. Its upstream model offers native-script, mixed-script, and Romanized output. [Bodhan Flex model card](https://huggingface.co/bodhan-ai/indic-transcribe-flex)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Muesli 0.8.4 selects mixed-script output for Flex and native-script output for Core. Flex is a useful starting point for a Hindi message that includes English software names or workplace vocabulary. Core is another option to evaluate when you prefer native-script writing. [Versioned Bodhan backend](https://github.com/Muesli-HQ/muesli/blob/v0.8.4/native/MuesliNative/Sources/MuesliNativeApp/BodhanBackend.swift)"
+      },
+      {
+        "type": "paragraph",
+        "text": "For example, “आज design review है” illustrates Devanagari mixed with Latin letters. “Aaj design review hai” illustrates fully Romanized Hinglish. These are written examples of the two formats, not measured transcription results. Muesli 0.8.4 does not expose a Romanized output selector; its Flex integration uses mixed script."
+      },
+      {
+        "type": "heading",
+        "text": "Dictation in other Indic languages"
+      },
+      {
+        "type": "paragraph",
+        "text": "The same Muesli workflow supports Bengali, Tamil, Telugu, Marathi, Malayalam, Gujarati, Kannada, and the other languages covered by Bodhan. Choose the language you plan to speak, then try a short message with the English names and technical terms you normally use. Core writes native-script text; Flex uses mixed-script output. Test your own language combination before using it for a longer document."
+      },
+      {
+        "type": "heading",
+        "text": "Set up Hindi-English speech-to-text on your Mac"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Install Muesli 0.8.4 or later on an Apple Silicon Mac running macOS 15 or later. Complete the microphone, hotkey, and paste-permission steps in onboarding.",
+          "Open Models, find Bodhan Flex, and choose an FP16 or INT8 variant. Download the model and wait for preparation to finish.",
+          "Select Hindi for a Hindi-led message containing English words. Automatic language detection is also available; compare it with an explicit selection using your own speech.",
+          "Place your cursor in the text field where you want to write. Hold your configured dictation hotkey, speak a short message, and release it.",
+          "Review the inserted text. Check names, English terms, numbers, and the Hindi wording before sending."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "For the broader language setup, see our [Indian-language dictation guide](https://muesli.works/blog/indian-language-dictation-mac/). The [Bodhan release article](https://muesli.works/blog/bodhan-indic-transcription-mac/) covers both model choices and their language coverage."
+      },
+      {
+        "type": "heading",
+        "text": "Five Hindi-English phrases to try with your own voice"
+      },
+      {
+        "type": "paragraph",
+        "text": "These original prompts are a small evaluation checklist. They are written in Latin letters so you can read them aloud; Flex output in Muesli may contain Devanagari. We have not benchmarked these sentences or compared their output across apps."
+      },
+      {
+        "type": "list",
+        "items": [
+          "“Aaj design review ke baad updated mockup bhej dena.” Check whether design review and mockup remain recognizable.",
+          "“Neha ko Friday tak invoice bhejna hai.” Check the person’s name and the deadline.",
+          "“Is order mein 12 notebooks aur 3 pens hain.” Check both quantities against what you said.",
+          "“Login ho raha hai, lekin export button kaam nahi kar raha.” Check that the problem with the export button is preserved.",
+          "“Pehle Hindi mein explain karunga, then we can discuss the implementation.” Check the transition into a longer English phrase."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Use the same microphone and a quiet room for the first pass. Then try a typical recording environment. Note how many corrections each message needs and how long it takes to become ready to send. That gives you a practical measure of whether dictation helps your writing."
+      },
+      {
+        "type": "heading",
+        "text": "Local transcription and optional AI processing"
+      },
+      {
+        "type": "paragraph",
+        "text": "After the model assets are downloaded and prepared, Bodhan speech recognition runs on your Mac. Muesli uses a CoreML encoder and an MLX Swift decoder. You can dictate with Bodhan without a hosted speech-to-text service. See [how the Apple Silicon integration works](https://muesli.works/blog/bodhan-coreml-mlx-apple-silicon/)."
+      },
+      {
+        "type": "paragraph",
+        "text": "Optional cleanup and meeting summaries have separate model settings. A hosted provider can receive transcript text when you enable it. For your first Hinglish test, turn off optional cleanup so you can review the recognition output directly. If you later enable cleanup, check that it preserves your language mix and preferred script."
+      },
+      {
+        "type": "heading",
+        "text": "Can I use Bodhan for Hindi-English meetings?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bodhan is also available for [meeting transcription in Muesli](https://muesli.works/meeting-notes/). Try a short discussion before relying on it for a longer meeting. Review speaker changes, overlapping speech, and action items, especially when a deadline or quantity matters. A dictation test with one speaker does not establish accuracy for a group conversation."
+      },
+      {
+        "type": "heading",
+        "text": "Is Hinglish dictation free in Muesli?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Muesli is a free, open-source app. Local Bodhan transcription requires a model download and a compatible Mac. Any hosted service you choose for optional cleanup or summaries has its own access requirements and costs."
+      },
+      {
+        "type": "heading",
+        "text": "Can Muesli write Hinglish entirely in English letters?"
+      },
+      {
+        "type": "paragraph",
+        "text": "In version 0.8.4, Flex uses mixed-script output and Core uses native-script output. There is no in-app selector for fully Romanized Hinglish. If Latin-only writing is essential to your workflow, evaluate that requirement separately before choosing your dictation setup."
+      },
+      {
+        "type": "heading",
+        "text": "Does Bodhan cover other Indian languages?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Both Bodhan models cover India’s 22 scheduled languages. Core supports 25 languages in total and Flex supports 27. Availability for a language does not establish accuracy for every accent or English-mixed conversation. Try a sample in the language combination you use. [Bodhan Core model card](https://huggingface.co/bodhan-ai/indic-transcribe-core)"
+      },
+      {
+        "type": "paragraph",
+        "text": "[Download Muesli](https://muesli.works/download/), choose Bodhan Flex, and try a short Hindi-English message in your usual writing app."
+      },
+      {
+        "type": "paragraph",
+        "text": "For team conversations, see [Hinglish and Indic language meeting notes on Mac with Muesli](https://muesli.works/blog/hinglish-indic-meeting-notes-mac/)."
+      }
+    ],
+    "artArtist": "Koodrutoollah",
+    "artDate": "1880",
+    "artCollection": "The Metropolitan Museum of Art"
+  },
+  {
     "path": "/blog/bodhan-indic-transcription-mac",
     "title": "Bodhan comes to Mac: Indic speech-to-text in Muesli 0.8.4",
     "description": "Use Bodhan Core and Flex locally on your Mac with Muesli 0.8.4, with support for India's 22 scheduled languages and English.",
