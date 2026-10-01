@@ -3161,9 +3161,10 @@ function BodhanArticle({ post }) {
     inLanguage: 'en', articleSection: post.category,
     author: { '@type': 'Organization', name: 'Muesli', url: siteData.siteUrl },
     publisher: { '@id': `${siteData.siteUrl}/#organization` },
-    image: { '@type': 'ImageObject', url: meta.ogImage, width: post.imageWidth,
+    image: { '@type': 'ImageObject', name: post.artTitle, url: meta.ogImage, contentUrl: meta.ogImage, width: post.imageWidth,
       height: post.imageHeight, caption: post.imageAlt, creditText: `${post.artArtist || 'Raja Ravi Varma'} / ${post.artCollection || 'Wikimedia Commons'}`,
       creator: (post.artArtists || [post.artArtist || 'Raja Ravi Varma']).map(name => ({ '@type': 'Person', name })),
+      copyrightNotice: 'Public domain',
       license: 'https://creativecommons.org/publicdomain/mark/1.0/',
       acquireLicensePage: post.artSource },
   }]);
