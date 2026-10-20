@@ -1,4 +1,4 @@
-// Bodhan articles and their shared page/social metadata.
+// Articles and shared page/social metadata.
 export const bodhanPosts = [
   {
     "path": "/blog/hinglish-indic-meeting-notes-mac",
@@ -139,8 +139,8 @@ export const bodhanPosts = [
   },
   {
     "path": "/blog/hinglish-dictation-mac",
-    "title": "Hinglish and Indic language dictation on Mac with Muesli",
-    "description": "Dictate in Hinglish, English, and Indic languages on Mac with Muesli and Bodhan. Set up local speech-to-text and compare native and mixed-script output.",
+    "title": "Hinglish Dictation on Mac: Hindi-English Voice Typing with Muesli",
+    "description": "Type Hindi-English speech on Mac with Muesli and Bodhan Flex. Set up free, on-device Hinglish dictation with Native, Mixed, or Romanized output.",
     "date": "2026-09-24",
     "category": "Model Guides",
     "tags": [
@@ -158,7 +158,7 @@ export const bodhanPosts = [
     "blocks": [
       {
         "type": "paragraph",
-        "text": "Muesli brings local Hindi-English dictation to Apple Silicon Macs through Bodhan Core and Flex. For Hinglish speech, start with Bodhan Flex: Muesli uses its mixed-script mode, which writes Hindi in Devanagari and keeps English terms in Latin letters. Bodhan support is available from Muesli 0.8.4 and requires macOS 15 or later. [Muesli 0.8.4 model guide](https://github.com/Muesli-HQ/muesli/blob/v0.8.4/README.md)"
+        "text": "Muesli is a free, open-source Hinglish dictation app for Apple Silicon Macs. Bodhan Flex transcribes Hindi-English speech on your Mac and offers Native, Mixed, or Romanized output. Choose Romanized to write Hindi words in Latin letters, or Mixed for Hindi in Devanagari alongside English terms. Script selection is available from Muesli 0.8.5; Bodhan requires macOS 15 or later. [Muesli 0.8.5](https://github.com/Muesli-HQ/muesli/releases/tag/v0.8.5)"
       },
       {
         "type": "paragraph",
@@ -190,11 +190,23 @@ export const bodhanPosts = [
       },
       {
         "type": "paragraph",
-        "text": "Muesli 0.8.4 selects mixed-script output for Flex and native-script output for Core. Flex is a useful starting point for a Hindi message that includes English software names or workplace vocabulary. Core is another option to evaluate when you prefer native-script writing. [Versioned Bodhan backend](https://github.com/Muesli-HQ/muesli/blob/v0.8.4/native/MuesliNative/Sources/MuesliNativeApp/BodhanBackend.swift)"
+        "text": "In Muesli 0.8.5 and later, open Models → Dictation → Bodhan Flex and choose Native, Mixed, or Romanized output. The setting uses the same downloaded Flex model. Bodhan Core produces native-script output. [Versioned Bodhan output modes](https://github.com/Muesli-HQ/muesli/blob/v0.8.5/native/MuesliNative/Sources/MuesliNativeApp/BodhanBackend.swift)"
       },
       {
         "type": "paragraph",
-        "text": "For example, “आज design review है” illustrates Devanagari mixed with Latin letters. “Aaj design review hai” illustrates fully Romanized Hinglish. These are written examples of the two formats, not measured transcription results. Muesli 0.8.4 does not expose a Romanized output selector; its Flex integration uses mixed script."
+        "text": "For example, “आज design review है” illustrates mixed-script writing. “Aaj design review hai” illustrates Romanized Hinglish, which represents Hindi words in Latin letters rather than translating them into English. These are format illustrations, not measured Muesli transcription results."
+      },
+      {
+        "type": "heading",
+        "text": "Which output script should I choose?"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Native: choose native-script output when you want Indic-language writing in its own script.",
+          "Mixed: start here for Hindi in Devanagari with English words in Latin letters.",
+          "Romanized: choose this for Hindi-English messages written with the Latin alphabet. Romanization changes the script; it does not translate the message into English."
+        ]
       },
       {
         "type": "heading",
@@ -202,7 +214,7 @@ export const bodhanPosts = [
       },
       {
         "type": "paragraph",
-        "text": "The same Muesli workflow supports Bengali, Tamil, Telugu, Marathi, Malayalam, Gujarati, Kannada, and the other languages covered by Bodhan. Choose the language you plan to speak, then try a short message with the English names and technical terms you normally use. Core writes native-script text; Flex uses mixed-script output. Test your own language combination before using it for a longer document."
+        "text": "Bodhan also supports Bengali, Tamil, Telugu, Marathi, Malayalam, Gujarati, Kannada, and the other languages covered by its models. Choose the language you plan to speak, then try a short message with the English names and technical terms you normally use. Flex provides script choices; Core writes native-script text. Test your language combination before using it for a longer document."
       },
       {
         "type": "heading",
@@ -211,8 +223,9 @@ export const bodhanPosts = [
       {
         "type": "list",
         "items": [
-          "Install Muesli 0.8.4 or later on an Apple Silicon Mac running macOS 15 or later. Complete the microphone, hotkey, and paste-permission steps in onboarding.",
+          "Install Muesli 0.8.5 or later on an Apple Silicon Mac running macOS 15 or later. Complete the microphone, hotkey, and paste-permission steps in onboarding.",
           "Open Models, find Bodhan Flex, and choose an FP16 or INT8 variant. Download the model and wait for preparation to finish.",
+          "In Models → Dictation → Bodhan Flex, choose Romanized for Hindi in Latin letters, Mixed for Hindi and English in their respective scripts, or Native for native-script output.",
           "Select Hindi for a Hindi-led message containing English words. Automatic language detection is also available; compare it with an explicit selection using your own speech.",
           "Place your cursor in the text field where you want to write. Hold your configured dictation hotkey, speak a short message, and release it.",
           "Review the inserted text. Check names, English terms, numbers, and the Hindi wording before sending."
@@ -228,7 +241,7 @@ export const bodhanPosts = [
       },
       {
         "type": "paragraph",
-        "text": "These original prompts are a small evaluation checklist. They are written in Latin letters so you can read them aloud; Flex output in Muesli may contain Devanagari. We have not benchmarked these sentences or compared their output across apps."
+        "text": "These original phrases are a practice checklist, not a published accuracy benchmark. Read them aloud in your usual voice and compare the actual output in Mixed and Romanized modes. Check script choice separately from whether the words, names, and numbers are correct."
       },
       {
         "type": "list",
@@ -258,6 +271,14 @@ export const bodhanPosts = [
       },
       {
         "type": "heading",
+        "text": "Why is my Hinglish transcript in the wrong script?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Check that Bodhan Flex is selected and inspect its output setting. Choose Romanized for Latin letters or Mixed for Devanagari alongside English. Disable optional cleanup while testing: a cleanup model can rewrite text after speech recognition. If you cannot see the script choices, update to Muesli 0.8.5 or later."
+      },
+      {
+        "type": "heading",
         "text": "Can I use Bodhan for Hindi-English meetings?"
       },
       {
@@ -278,7 +299,7 @@ export const bodhanPosts = [
       },
       {
         "type": "paragraph",
-        "text": "In version 0.8.4, Flex uses mixed-script output and Core uses native-script output. There is no in-app selector for fully Romanized Hinglish. If Latin-only writing is essential to your workflow, evaluate that requirement separately before choosing your dictation setup."
+        "text": "Yes. In Muesli 0.8.5 or later, select Bodhan Flex and choose Romanized under its output settings. Hindi is written in Latin letters, which is useful for everyday Hinglish messages. If the option is missing, update Muesli and confirm that Flex is selected; Bodhan Core uses native-script output."
       },
       {
         "type": "heading",
@@ -299,7 +320,9 @@ export const bodhanPosts = [
     ],
     "artArtist": "Koodrutoollah",
     "artDate": "1880",
-    "artCollection": "The Metropolitan Museum of Art"
+    "artCollection": "The Metropolitan Museum of Art",
+    "seoTitle": "Hinglish Dictation on Mac: Hindi-English Voice Typing | Muesli",
+    "modifiedDate": "2026-10-20"
   },
   {
     "path": "/blog/bodhan-indic-transcription-mac",
@@ -331,6 +354,10 @@ export const bodhanPosts = [
       {
         "type": "heading",
         "text": "Two models in the Models tab"
+      },
+      {
+        "type": "paragraph",
+        "text": "Update, October 20, 2026: Current Muesli builds include a Bodhan output setting for Flex, including Romanized output. Use Core for native-script transcription, or choose Flex for mixed-script or Romanized text. The release details below describe the original 0.8.4 integration. [Current Muesli Bodhan backend](https://github.com/Muesli-HQ/muesli/blob/main/native/MuesliNative/Sources/MuesliNativeApp/BodhanBackend.swift)"
       },
       {
         "type": "paragraph",

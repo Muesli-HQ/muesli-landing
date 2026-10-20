@@ -3157,7 +3157,7 @@ function BodhanArticle({ post }) {
   const schema = baseStructuredData(post.path, [pageBreadcrumb(post.path, post.title), {
     '@type': 'BlogPosting', '@id': `${meta.canonical}#article`,
     headline: post.title, description: post.description, url: meta.canonical,
-    mainEntityOfPage: meta.canonical, datePublished: post.date, dateModified: post.date,
+    mainEntityOfPage: meta.canonical, datePublished: post.date, dateModified: post.modifiedDate || post.date,
     inLanguage: 'en', articleSection: post.category,
     author: { '@type': 'Organization', name: 'Muesli', url: siteData.siteUrl },
     publisher: { '@id': `${siteData.siteUrl}/#organization` },
@@ -3177,7 +3177,7 @@ function BodhanArticle({ post }) {
           <a className="bodhan-back" href="/blog/">← All articles</a>
           <h1>{post.title}</h1>
           <p>{post.description}</p>
-          <div className="bodhan-byline">Muesli · <time dateTime={post.date}>{formatBlogDate(post.date)}</time> · {post.readTime}</div>
+          <div className="bodhan-byline">Muesli · <time dateTime={post.date}>{formatBlogDate(post.date)}</time> · {post.readTime}{post.modifiedDate && <> · Updated <time dateTime={post.modifiedDate}>{formatBlogDate(post.modifiedDate)}</time></>}</div>
         </div>
         <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} fetchPriority="high" />
       </header>
@@ -5431,7 +5431,6 @@ function HeroBackdrop() {
 function LandingPage() {
   const [stars, setStars] = useState(null);
   const [brewCopied, setBrewCopied] = useState(false);
-  const { releases, releaseStatus } = useStableReleases();
 
   useEffect(() => {
     document.title = 'Muesli - open-source Mac dictation and local speech-to-text';
@@ -5761,17 +5760,23 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="changelog-section" id="changelog">
+      <section className="changelog-section indic-feature" id="indic-transcription" aria-labelledby="indic-title">
         <div className="changelog-heading">
-
-          <h2>Every release, pulled from the open-source repo.</h2>
+          <h2 id="indic-title">Hinglish and 22 Indian languages. On your Mac.</h2>
           <p>
-            Muesli ships in public. This section reads the GitHub Releases feed directly and shows only
-            stable public builds.
+            Dictate messages and transcribe meetings with Muesli’s on-device Bodhan models.
+            Speak Hindi, Tamil, Bengali, Telugu, Marathi, and more, including Hindi-English conversations.
+            Choose native-script text or Romanized output with Bodhan Flex.
           </p>
         </div>
-
-        <ReleaseFeed releases={releases} releaseStatus={releaseStatus} />
+        <ul className="indic-highlights" aria-label="Indic transcription features">
+          <li>22 Indian languages</li>
+          <li>Native and Romanized scripts</li>
+          <li>On-device transcription</li>
+        </ul>
+        <a className="indic-guide-link" href="/blog/hinglish-dictation-mac/">
+          Set up Hinglish dictation on Mac <ArrowRight size={18} aria-hidden="true" />
+        </a>
       </section>
 
       <section className="faq" id="faq">

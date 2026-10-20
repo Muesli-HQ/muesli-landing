@@ -211,12 +211,12 @@ export const siteData = {
   ],
   routes: {
     ...Object.fromEntries(articlePosts.map(post => [post.path, {
-      title: post.title.endsWith('Muesli') ? post.title : `${post.title} · Muesli`, description: post.description,
+      title: post.seoTitle || (post.title.endsWith('Muesli') ? post.title : `${post.title} · Muesli`), description: post.description,
       canonical: `https://muesli.works${post.path}/`,
       ogType: 'article', ogTitle: post.title, ogDescription: post.description,
       ogImage: `https://muesli.works${post.image}`, ogImageAlt: post.imageAlt,
       ogImageWidth: post.imageWidth, ogImageHeight: post.imageHeight,
-      author: 'Muesli', publishedTime: post.date, modifiedTime: post.date,
+      author: 'Muesli', publishedTime: post.date, modifiedTime: post.modifiedDate || post.date,
       articleSection: post.category,
     }])),
     ...Object.fromEntries(Object.entries(docsPages).map(([path, page]) => [path, {
