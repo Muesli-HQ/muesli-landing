@@ -1,4 +1,4 @@
-import { bodhanPosts } from './bodhanPosts.js';
+import { articlePosts } from './articlePosts.js';
 import { docsMarkdown } from './docsContent.js';
 import { changelogLinks, sameAsLinks, siteData, supportFaqItems } from './siteData.js';
 
@@ -7,7 +7,7 @@ function lines(items) {
 }
 
 function pageList() {
-  return [...siteData.featurePages, ...(siteData.guidePages || []), ...bodhanPosts.map(post => ({title: post.title, url: `${siteData.siteUrl}${post.path}/`, description: post.description}))]
+  return [...siteData.featurePages, ...(siteData.guidePages || []), ...articlePosts.map(post => ({title: post.title, url: `${siteData.siteUrl}${post.path}/`, description: post.description}))]
     .map((page) => `- ${page.title}: ${page.url} - ${page.description}`)
     .join('\n');
 }

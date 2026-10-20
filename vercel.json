@@ -26,6 +26,10 @@
   ],
   "rewrites": [
     {
+      "source": "/blog/muesli-chatgpt-codex-plugin",
+      "destination": "/blog/muesli-chatgpt-codex-plugin/index.html"
+    },
+    {
       "source": "/blog/hinglish-indic-meeting-notes-mac",
       "destination": "/blog/hinglish-indic-meeting-notes-mac/index.html"
     },

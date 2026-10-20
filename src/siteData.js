@@ -1,4 +1,4 @@
-import { bodhanPosts } from './bodhanPosts.js';
+import { articlePosts } from './articlePosts.js';
 import { docsPages } from './docsContent.js';
 import { searchGuides } from './searchGuides.js';
 
@@ -210,7 +210,7 @@ export const siteData = {
     },
   ],
   routes: {
-    ...Object.fromEntries(bodhanPosts.map(post => [post.path, {
+    ...Object.fromEntries(articlePosts.map(post => [post.path, {
       title: post.title.endsWith('Muesli') ? post.title : `${post.title} · Muesli`, description: post.description,
       canonical: `https://muesli.works${post.path}/`,
       ogType: 'article', ogTitle: post.title, ogDescription: post.description,

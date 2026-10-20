@@ -1,4 +1,4 @@
-import { bodhanPosts } from './bodhanPosts.js';
+import { articlePosts } from './articlePosts.js';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   AudioWaveform,
@@ -1512,7 +1512,7 @@ const alternativePageConfigs = {
 };
 
 const blogPostEntries = [
-  ...bodhanPosts.map(post => ({ ...post, excerpt: post.description })),
+  ...articlePosts.map(post => ({ ...post, excerpt: post.description })),
   {
     path: '/medical-dictation-mac',
     title: 'The best medical dictation tool might start on your own Mac',
@@ -2341,7 +2341,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = [...bodhanPosts.map(post => post.path), ...docsRoutes, '/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = [...articlePosts.map(post => post.path), ...docsRoutes, '/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -3161,12 +3161,12 @@ function BodhanArticle({ post }) {
     inLanguage: 'en', articleSection: post.category,
     author: { '@type': 'Organization', name: 'Muesli', url: siteData.siteUrl },
     publisher: { '@id': `${siteData.siteUrl}/#organization` },
-    image: { '@type': 'ImageObject', name: post.artTitle, url: meta.ogImage, contentUrl: meta.ogImage, width: post.imageWidth,
+    image: post.artSource ? { '@type': 'ImageObject', name: post.artTitle, url: meta.ogImage, contentUrl: meta.ogImage, width: post.imageWidth,
       height: post.imageHeight, caption: post.imageAlt, creditText: `${post.artArtist || 'Raja Ravi Varma'} / ${post.artCollection || 'Wikimedia Commons'}`,
       creator: (post.artArtists || [post.artArtist || 'Raja Ravi Varma']).map(name => ({ '@type': 'Person', name })),
       copyrightNotice: 'Public domain',
       license: 'https://creativecommons.org/publicdomain/mark/1.0/',
-      acquireLicensePage: post.artSource },
+      acquireLicensePage: post.artSource } : meta.ogImage,
   }]);
   return <main className="product-page article-page bodhan-page">
     <JsonLd data={schema} />
@@ -3184,16 +3184,18 @@ function BodhanArticle({ post }) {
       <div className="bodhan-body">
         {post.blocks.map((block, index) => block.type === 'heading'
           ? <h2 key={index}>{block.text}</h2>
+          : block.type === 'quote'
+            ? <blockquote key={index}>{block.text}</blockquote>
           : block.type === 'list'
             ? <ul key={index}>{block.items.map(item => <li key={item}><ArticleInline text={item} /></li>)}</ul>
             : <p key={index}><ArticleInline text={block.text} /></p>)}
-        <aside className="bodhan-related" aria-label="Related Bodhan articles">
-          <h2>More on Bodhan</h2>
-          {bodhanPosts.filter(other => other.path !== post.path).map(other => <a key={other.path} href={`${other.path}/`}>{other.title} →</a>)}
+        <aside className="bodhan-related" aria-label="Related articles">
+          <h2>{post.artSource ? "More on Bodhan" : "More guides"}</h2>
+          {articlePosts.filter(other => other.path !== post.path && (!post.artSource || other.artSource)).map(other => <a key={other.path} href={`${other.path}/`}>{other.title} →</a>)}
         </aside>
-        <footer className="bodhan-art-credit">
+        {post.artSource && <footer className="bodhan-art-credit">
           Cover: <cite>{post.artTitle}</cite>{post.artDate ? ` (${post.artDate})` : ''} by {post.artArtist || 'Raja Ravi Varma'}. <a href={post.artSource}>{post.artCollection || 'Wikimedia Commons'}</a> · <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
-        </footer>
+        </footer>}
       </div>
     </article>
     <SiteFooterDirectory />
@@ -3202,7 +3204,7 @@ function BodhanArticle({ post }) {
 
 function BlogPage() {
   const [activeTag, setActiveTag] = useState('All');
-  const tags = ['All', 'Healthcare', 'Privacy', 'Local AI', 'Dictation', 'Meeting Notes', 'Model Guides', 'Comparisons'];
+  const tags = ['All', 'Healthcare', 'Privacy', 'Local AI', 'Dictation', 'Meeting Notes', 'Model Guides', 'Agent Guides', 'Comparisons'];
   const visiblePosts = activeTag === 'All'
     ? blogPostEntries
     : blogPostEntries.filter((post) => post.tags.includes(activeTag));
@@ -5487,7 +5489,11 @@ function LandingPage() {
   const landingStructuredData = baseStructuredData('/');
 
   return (
-    <main className="no-graphics">
+    <main className="no-graphics has-plugin-announcement">
+      <a className="plugin-announcement" href="/blog/muesli-chatgpt-codex-plugin/">
+        <span>Muesli is now on ChatGPT</span>
+        <span className="plugin-announcement-link">Read the guide <ArrowRight size={14} aria-hidden="true" /></span>
+      </a>
       <JsonLd data={landingStructuredData} />
       <nav className="nav">
         <a className="brand" href="#top" aria-label="Muesli home">
@@ -5824,7 +5830,7 @@ export function App({ pathname = '/' }) {
     return <ChangelogPage />;
   }
 
-  const bodhanPost = bodhanPosts.find(post => post.path === path);
+  const bodhanPost = articlePosts.find(post => post.path === path);
   if (bodhanPost) return <BodhanArticle post={bodhanPost} />;
 
   if (path === '/blog') {

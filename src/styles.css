@@ -6312,3 +6312,28 @@ main.no-graphics .hero-summary {
   .bodhan-hero { grid-template-columns: 1fr; padding-top: 112px; gap: 28px; }
   .bodhan-hero > img { height: 360px; }
 }
+
+/* A quiet, single-link announcement above the home navigation. */
+.plugin-announcement {
+  position: relative;
+  z-index: 41;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 36px;
+  padding: 7px 16px;
+  background: #080e16;
+  color: #f5f7fa;
+  font-size: 13px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.plugin-announcement-link { display: inline-flex; align-items: center; gap: 5px; color: #b8d2f8; }
+.plugin-announcement:hover .plugin-announcement-link { text-decoration: underline; text-underline-offset: 3px; }
+.plugin-announcement:focus-visible { outline: 2px solid #80b5ff; outline-offset: -4px; }
+.has-plugin-announcement > .nav { top: 52px; }
+.bodhan-body blockquote { margin: 28px 0; padding: 20px 24px; border-left: 3px solid #659be5; background: #edf2f5; color: #080e16; border-radius: 0 8px 8px 0; line-height: 1.8; }
+@media (max-width: 480px) {
+  .plugin-announcement { gap: 8px; font-size: 11px; }
+}
