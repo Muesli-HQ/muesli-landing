@@ -47,6 +47,9 @@ function withHeadMeta(html, meta) {
   next = replaceMetaContent(next, ['property', 'og:title'], meta.ogTitle);
   next = replaceMetaContent(next, ['property', 'og:description'], meta.ogDescription);
   next = replaceMetaContent(next, ['property', 'og:image'], meta.ogImage);
+  const imageExtension = new URL(meta.ogImage).pathname.split('.').pop().toLowerCase();
+  const imageType = { png: 'image/png', webp: 'image/webp', jpg: 'image/jpeg', jpeg: 'image/jpeg' }[imageExtension] || 'image/jpeg';
+  next = replaceMetaContent(next, ['property', 'og:image:type'], imageType);
   next = replaceMetaContent(next, ['property', 'og:image:secure_url'], meta.ogImage);
   next = replaceMetaContent(next, ['property', 'og:image:alt'], meta.ogImageAlt);
   next = replaceMetaContent(next, ['name', 'twitter:title'], meta.ogTitle);

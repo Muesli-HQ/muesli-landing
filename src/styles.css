@@ -6344,3 +6344,15 @@ main.no-graphics .hero-summary {
 .indic-guide-link { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 800; text-underline-offset: 5px; }
 .indic-guide-link:hover { text-decoration-thickness: 2px; }
 .indic-guide-link:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+
+.bodhan-hero.article-guide-hero { max-width: 712px; grid-template-columns: 1fr; padding-bottom: 28px; }
+.article-guide-image { margin: 28px 0; }
+.article-guide-image img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.article-guide-image figcaption { margin-top: 10px; color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+.blog-featured-image img[src="/images/granola-export-guide.png"],
+.blog-card-image img[src="/images/granola-export-guide.png"] { object-fit: contain; background: #1c1e1e; }
+
+.article-tweet { margin: 28px 0; }
+.article-tweet .twitter-tweet { margin: 0 auto !important; }
+.article-tweet iframe { max-width: 100%; }
+.article-tweet blockquote p { margin-bottom: 12px; }

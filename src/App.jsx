@@ -3146,13 +3146,34 @@ function ArticleShareBar({ route, title }) {
 }
 
 function ArticleInline({ text }) {
-  return text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\))/g).map((part, index) => {
+  return text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\)|\*\*[^*]+\*\*)/g).map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) return <strong key={index}>{part.slice(2, -2)}</strong>;
     const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
     return link ? <a key={index} href={link[2]}>{link[1]}</a> : part;
   });
 }
 
 function BodhanArticle({ post }) {
+  const articleRef = useRef(null);
+  useEffect(() => {
+    if (!post.blocks.some(block => block.type === 'tweet')) return;
+    const loadTweets = () => {
+      if (articleRef.current) window.twttr?.widgets?.load(articleRef.current);
+    };
+    if (window.twttr?.widgets) {
+      loadTweets();
+      return;
+    }
+    let script = document.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
+    if (!script) {
+      script = document.createElement('script');
+      script.src = 'https://platform.twitter.com/widgets.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    script.addEventListener('load', loadTweets);
+    return () => script.removeEventListener('load', loadTweets);
+  }, [post]);
   const meta = routeMeta[post.path];
   const schema = baseStructuredData(post.path, [pageBreadcrumb(post.path, post.title), {
     '@type': 'BlogPosting', '@id': `${meta.canonical}#article`,
@@ -3172,20 +3193,26 @@ function BodhanArticle({ post }) {
     <JsonLd data={schema} />
     <ProductPageNav />
     <article>
-      <header className="bodhan-hero">
+      <header className={`bodhan-hero${post.imageInBody ? ' article-guide-hero' : ''}`}>
         <div>
           <a className="bodhan-back" href="/blog/">← All articles</a>
           <h1>{post.title}</h1>
           <p>{post.description}</p>
           <div className="bodhan-byline">Muesli · <time dateTime={post.date}>{formatBlogDate(post.date)}</time> · {post.readTime}{post.modifiedDate && <> · Updated <time dateTime={post.modifiedDate}>{formatBlogDate(post.modifiedDate)}</time></>}</div>
         </div>
-        <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} fetchPriority="high" />
+        {!post.imageInBody && <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} fetchPriority="high" />}
       </header>
-      <div className="bodhan-body">
+      <div className="bodhan-body" ref={articleRef}>
         {post.blocks.map((block, index) => block.type === 'heading'
           ? <h2 key={index}>{block.text}</h2>
           : block.type === 'quote'
             ? <blockquote key={index}>{block.text}</blockquote>
+          : block.type === 'tweet'
+            ? <div className="article-tweet" key={block.url}><blockquote className="twitter-tweet" data-dnt="true" data-conversation="none" data-theme="light"><p>{block.text}</p><a href={block.url}>{block.author} · {block.date}</a></blockquote></div>
+          : block.type === 'image'
+            ? <figure className="article-guide-image" key={index}><a href={block.src} target="_blank" rel="noreferrer" aria-label="Open the three-step export guide at full size"><img src={block.src} alt={block.alt} width={block.width} height={block.height} loading="lazy" /></a><figcaption>Granola’s official export. Select the image to view it at full size.</figcaption></figure>
+          : block.type === 'orderedList'
+            ? <ol key={index}>{block.items.map(item => <li key={item}><ArticleInline text={item} /></li>)}</ol>
           : block.type === 'list'
             ? <ul key={index}>{block.items.map(item => <li key={item}><ArticleInline text={item} /></li>)}</ul>
             : <p key={index}><ArticleInline text={block.text} /></p>)}
