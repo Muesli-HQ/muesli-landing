@@ -6356,3 +6356,9 @@ main.no-graphics .hero-summary {
 .article-tweet .twitter-tweet { margin: 0 auto !important; }
 .article-tweet iframe { max-width: 100%; }
 .article-tweet blockquote p { margin-bottom: 12px; }
+
+.bodhan-hero.article-banner-hero { grid-template-columns: 1fr; gap: 32px; }
+.article-banner-hero > div { width: 100%; max-width: 712px; margin: 0 auto; }
+.bodhan-hero.article-banner-hero > img { height: auto; border-radius: 16px; }
+.blog-featured-image img[src="/images/muesli-hugging-face-banner.webp"],
+.blog-card-image img[src="/images/muesli-hugging-face-banner.webp"] { object-fit: contain; background: #fcf8ed; }

@@ -3193,7 +3193,7 @@ function BodhanArticle({ post }) {
     <JsonLd data={schema} />
     <ProductPageNav />
     <article>
-      <header className={`bodhan-hero${post.imageInBody ? ' article-guide-hero' : ''}`}>
+      <header className={`bodhan-hero${post.imageInBody ? ' article-guide-hero' : post.imageBanner ? ' article-banner-hero' : ''}`}>
         <div>
           <a className="bodhan-back" href="/blog/">← All articles</a>
           <h1>{post.title}</h1>

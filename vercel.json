@@ -26,6 +26,10 @@
   ],
   "rewrites": [
     {
+      "source": "/blog/muesli-models-hugging-face",
+      "destination": "/blog/muesli-models-hugging-face/index.html"
+    },
+    {
       "source": "/blog/import-granola-notes",
       "destination": "/blog/import-granola-notes/index.html"
     },
