@@ -6332,7 +6332,7 @@ main.no-graphics .hero-summary {
 .plugin-announcement-link { display: inline-flex; align-items: center; gap: 5px; color: #b8d2f8; }
 .plugin-announcement:hover .plugin-announcement-link { text-decoration: underline; text-underline-offset: 3px; }
 .plugin-announcement:focus-visible { outline: 2px solid #80b5ff; outline-offset: -4px; }
-.has-plugin-announcement > .nav { top: 52px; }
+.has-plugin-announcement > .nav { --announcement-offset: 36px; }
 .bodhan-body blockquote { margin: 28px 0; padding: 20px 24px; border-left: 3px solid #659be5; background: #edf2f5; color: #080e16; border-radius: 0 8px 8px 0; line-height: 1.8; }
 @media (max-width: 480px) {
   .plugin-announcement { gap: 8px; font-size: 11px; }
@@ -6362,3 +6362,29 @@ main.no-graphics .hero-summary {
 .bodhan-hero.article-banner-hero > img { height: auto; border-radius: 16px; }
 .blog-featured-image img[src="/images/muesli-hugging-face-banner.webp"],
 .blog-card-image img[src="/images/muesli-hugging-face-banner.webp"] { object-fit: contain; background: #fcf8ed; }
+
+/* Compact floating navigation, shared by the home and article pages. */
+.floating-nav {
+  top: calc(16px + var(--announcement-offset, 0px));
+  width: min(1120px, calc(100vw - 48px));
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(255, 252, 239, 0.97);
+  border-color: rgba(18, 54, 91, 0.15);
+  box-shadow: 0 4px 18px rgba(8, 14, 22, 0.08);
+  transition: transform 200ms ease;
+}
+.floating-nav.nav-hidden:not(:focus-within) {
+  transform: translate(-50%, calc(-100% - 24px - var(--announcement-offset, 0px)));
+}
+@media (max-width: 680px) {
+  .floating-nav {
+    top: calc(10px + var(--announcement-offset, 0px));
+    width: calc(100vw - 24px);
+    padding: 9px 10px;
+    border-radius: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-nav { transition: none; }
+}

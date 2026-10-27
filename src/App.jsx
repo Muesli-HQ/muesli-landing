@@ -3079,9 +3079,52 @@ function ChangelogPage() {
   );
 }
 
+function FloatingNav({ className, children }) {
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    const announcement = nav.parentElement.querySelector('.plugin-announcement');
+    let lastY = Math.max(0, window.scrollY);
+    let travel = 0;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const y = Math.max(0, window.scrollY);
+      const delta = y - lastY;
+      travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
+      lastY = y;
+      const announcementOffset = announcement ? Math.max(0, announcement.getBoundingClientRect().bottom) : 0;
+      nav.style.setProperty('--announcement-offset', `${announcementOffset}px`);
+      const interacting = nav.contains(document.activeElement) || nav.querySelector('details[open]');
+      if (y < 96 || interacting || travel < -12) {
+        nav.classList.remove('nav-hidden');
+      } else if (travel > 24) {
+        nav.classList.add('nav-hidden');
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    nav.addEventListener('focusin', schedule);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      nav.removeEventListener('focusin', schedule);
+    };
+  }, []);
+
+  return <nav ref={navRef} className={`${className} floating-nav`}>{children}</nav>;
+}
+
 function ProductPageNav() {
   return (
-    <nav className="product-nav">
+    <FloatingNav className="product-nav">
       <a className="brand" href="/" aria-label="Muesli home">
         <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <span>muesli</span>
@@ -3098,7 +3141,7 @@ function ProductPageNav() {
           Download
         </a>
       </div>
-    </nav>
+    </FloatingNav>
   );
 }
 
@@ -5521,7 +5564,7 @@ function LandingPage() {
         <span className="plugin-announcement-link">Read the guide <ArrowRight size={14} aria-hidden="true" /></span>
       </a>
       <JsonLd data={landingStructuredData} />
-      <nav className="nav">
+      <FloatingNav className="nav">
         <a className="brand" href="#top" aria-label="Muesli home">
           <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
           <span>muesli</span>
@@ -5556,7 +5599,7 @@ function LandingPage() {
             <span>{formatStars(stars)}</span>
           </a>
         </div>
-      </nav>
+      </FloatingNav>
 
       <section className="hero" id="top">
         <HeroBackdrop />
