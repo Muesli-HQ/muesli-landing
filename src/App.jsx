@@ -1,4 +1,5 @@
 import { granolaComparison, superwhisperComparison, muesliSources, reviewed } from './evidenceComparisons.js';
+import githubStats from './githubStats.json';
 import { articlePosts } from './articlePosts.js';
 import React, { useEffect, useRef, useState } from 'react';
 import {
@@ -5356,7 +5357,7 @@ function HeroBackdrop() {
 }
 
 function LandingPage() {
-  const [stars, setStars] = useState(null);
+  const [stars, setStars] = useState(githubStats.stars);
   const [brewCopied, setBrewCopied] = useState(false);
 
   useEffect(() => {
@@ -5365,12 +5366,16 @@ function LandingPage() {
   }, []);
 
   useEffect(() => {
-    fetch('https://api.github.com/repos/Muesli-HQ/muesli')
+    const controller = new AbortController();
+    fetch('https://api.github.com/repos/Muesli-HQ/muesli', { signal: controller.signal })
       .then((response) => response.ok ? response.json() : null)
       .then((data) => {
-        if (data?.stargazers_count != null) setStars(data.stargazers_count);
+        if (Number.isInteger(data?.stargazers_count) && data.stargazers_count >= 0) {
+          setStars(data.stargazers_count);
+        }
       })
       .catch(() => {});
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
