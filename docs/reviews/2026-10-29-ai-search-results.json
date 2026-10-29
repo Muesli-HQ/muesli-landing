@@ -1,0 +1,287 @@
+{
+  "date": "2026-10-29",
+  "engine": "Exa web_search_exa",
+  "mode": "ranked web retrieval; not Google positions or independent AI answer citations",
+  "numResults": 5,
+  "queries": [
+    {
+      "query": "best offline dictation for Apple Silicon",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "The best offline speech-to-text apps for Mac · Sayburst",
+          "url": "https://sayburst.com/blog/best-offline-speech-to-text-mac"
+        },
+        {
+          "rank": 2,
+          "title": "OpenWhisp — Realtime local dictation for macOS, and a voice for your AI agents",
+          "url": "https://openwhisp.app/"
+        },
+        {
+          "rank": 3,
+          "title": "Best Offline Dictation Apps for Mac (2026): 11 Compared",
+          "url": "https://www.speakmac.app/blog/best-offline-dictation-mac-2026"
+        },
+        {
+          "rank": 4,
+          "title": "OpenQuack — Local-first voice dictation for macOS | openquack",
+          "url": "https://larryxiao.github.io/openquack/"
+        },
+        {
+          "rank": 5,
+          "title": "8 Best Offline Voice Dictation Apps for Mac in 2026",
+          "url": "https://www.yaps.ai/blog/best-offline-voice-dictation-mac"
+        }
+      ]
+    },
+    {
+      "query": "free open-source Wispr Flow alternative",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "OpenWhispr/openwhispr",
+          "url": "https://github.com/OpenWhispr/openwhispr/"
+        },
+        {
+          "rank": 2,
+          "title": "kstonekuan/tambourine-voice",
+          "url": "https://github.com/kstonekuan/tambourine-voice/"
+        },
+        {
+          "rank": 3,
+          "title": "Robj1925/open-flow",
+          "url": "http://github.com/Robj1925/open-flow"
+        },
+        {
+          "rank": 4,
+          "title": "altic-dev/FluidVoice",
+          "url": "https://github.com/altic-dev/fluidvoice"
+        },
+        {
+          "rank": 5,
+          "title": "zachlatta/freeflow",
+          "url": "https://github.com/zachlatta/freeflow"
+        }
+      ]
+    },
+    {
+      "query": "private meeting notes without a bot",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "Granola — The AI Notepad for back-to-back meetings",
+          "url": "https://www.granola.so/"
+        },
+        {
+          "rank": 2,
+          "title": "AI notepad for private meetings.",
+          "url": "https://anarlog.so/"
+        },
+        {
+          "rank": 3,
+          "title": "Oats: free, private meeting notes on your Mac",
+          "url": "https://oatsnote.com/"
+        },
+        {
+          "rank": 4,
+          "title": "Harknotes — Private Meeting Transcription. No Bot. Open Source.",
+          "url": "https://loosewire.dev/harknotes/"
+        },
+        {
+          "rank": 5,
+          "title": "Takku: private AI meeting notes for Mac and Obsidian",
+          "url": "https://takku.app/"
+        }
+      ]
+    },
+    {
+      "query": "Granola alternative keeping transcripts local",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "fastrepl/anarlog",
+          "url": "https://github.com/fastrepl/anarlog/"
+        },
+        {
+          "rank": 2,
+          "title": "talat - the local transcription app for meetings, dictation, and recordings",
+          "url": "https://talat.app/"
+        },
+        {
+          "rank": 3,
+          "title": "st-imdev/oatmeal-meeting-notes",
+          "url": "https://github.com/st-imdev/oatmeal-meeting-notes"
+        },
+        {
+          "rank": 4,
+          "title": "yuvrajadhikari/oats",
+          "url": "https://github.com/yuvrajadhikari/oats"
+        },
+        {
+          "rank": 5,
+          "title": "Meetily vs Granola: Local Transcription & Privacy First",
+          "url": "https://meetily.ai/vs/granola"
+        }
+      ]
+    },
+    {
+      "query": "local AI autocomplete across Mac apps",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "Typeahead — AI autocomplete for your entire Mac",
+          "url": "https://www.typeahead.ai/"
+        },
+        {
+          "rank": 2,
+          "title": "System-wide AI autocomplete for Mac — Typeahead",
+          "url": "https://www.typeahead.ai/features/system-wide"
+        },
+        {
+          "rank": 3,
+          "title": "MacAutocomplete — system-wide autocomplete for macOS",
+          "url": "https://macautocomplete.com/"
+        },
+        {
+          "rank": 4,
+          "title": "WeType: AI Autocomplete for Mac That Runs On-Device",
+          "url": "https://www.wetype.tech/"
+        },
+        {
+          "rank": 5,
+          "title": "Autocomplete for Mac that works in every app | FlowIn",
+          "url": "https://flowin.so/autocomplete-for-mac"
+        }
+      ]
+    },
+    {
+      "query": "letting Claude Code use meeting notes",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "Circleback Plugin | Claude by Anthropic",
+          "url": "https://claude.com/plugins/circleback"
+        },
+        {
+          "rank": 2,
+          "title": "Meeting Notes Claude Code Skill - Free Setup Guide | Claude Code Club",
+          "url": "https://www.claudecodeclub.ai/free-resources/skill-meeting-notes"
+        },
+        {
+          "rank": 3,
+          "title": "How to work with your meeting notes in Claude using an MCP",
+          "url": "https://www.supernormal.com/blog/meeting-notes-in-claude-mcp"
+        },
+        {
+          "rank": 4,
+          "title": "nord342/claude-meeting-notes",
+          "url": "https://github.com/nord342/claude-meeting-notes"
+        },
+        {
+          "rank": 5,
+          "title": "Claude for Meeting Notes: Prompts and an MCP Server | Trippi Notes",
+          "url": "https://gettrippi.app/notes/en/claude-meeting-notes/"
+        }
+      ]
+    },
+    {
+      "query": "voice-controlled computer automation for Mac",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "Verba, the Mac Voice Agent | Private Dictation that Acts",
+          "url": "https://verba.run/"
+        },
+        {
+          "rank": 2,
+          "title": "Cursor Voice — talk to your Mac",
+          "url": "https://cursorvoice.app/"
+        },
+        {
+          "rank": 3,
+          "title": "Rocky — a voice-first companion for your Mac",
+          "url": "https://rocky.so/"
+        },
+        {
+          "rank": 4,
+          "title": "Use Voice Control commands to interact with your Mac",
+          "url": "https://support.apple.com/guide/mac-help/use-voice-control-commands-mh40719/mac"
+        },
+        {
+          "rank": 5,
+          "title": "Peeky — control your Mac by voice",
+          "url": "https://getpeeky.ai/"
+        }
+      ]
+    },
+    {
+      "query": "Superwhisper alternative offline open source Mac",
+      "muesliPresent": false,
+      "results": [
+        {
+          "rank": 1,
+          "title": "OpenWhispr/openwhispr",
+          "url": "https://github.com/OpenWhispr/openwhispr/"
+        },
+        {
+          "rank": 2,
+          "title": "jurczykpawel/voicetype",
+          "url": "https://github.com/jurczykpawel/voicetype"
+        },
+        {
+          "rank": 3,
+          "title": "VocaHQ/vocamac",
+          "url": "https://github.com/VocaHQ/vocamac"
+        },
+        {
+          "rank": 4,
+          "title": "OpenWispr — local, open-source dictation for macOS",
+          "url": "https://seeknull.github.io/openwispr/"
+        },
+        {
+          "rank": 5,
+          "title": "charle-com/voxprompt",
+          "url": "https://github.com/charle-com/voxprompt"
+        }
+      ]
+    },
+    {
+      "query": "Granola vs Muesli meeting notes",
+      "muesliPresent": true,
+      "results": [
+        {
+          "rank": 1,
+          "title": "Granola vs Muesli for local meeting notes · Muesli",
+          "url": "https://muesli.works/granola-vs-muesli"
+        },
+        {
+          "rank": 2,
+          "title": "Local Granola alternative for Mac meeting notes · Muesli",
+          "url": "https://muesli.works/granola-alternative"
+        },
+        {
+          "rank": 3,
+          "title": "Muesli-HQ/muesli",
+          "url": "https://github.com/Muesli-HQ/muesli/"
+        },
+        {
+          "rank": 4,
+          "title": "README.md",
+          "url": "https://github.com/shivankoctupie/muesli/blob/main/README.md"
+        },
+        {
+          "rank": 5,
+          "title": "Export Granola Notes to Muesli | Muesli 0.8.6",
+          "url": "https://muesli.works/blog/import-granola-notes/"
+        }
+      ]
+    }
+  ]
+}
