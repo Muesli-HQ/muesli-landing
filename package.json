@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prebuild": "node scripts/update-github-stats.mjs",
     "dev": "vite --host 127.0.0.1",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist/server && node scripts/prerender.mjs",
     "preview": "vite preview --host 127.0.0.1"
