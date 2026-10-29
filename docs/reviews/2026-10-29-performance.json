@@ -1,0 +1,97 @@
+{
+  "setup": {
+    "date": "2026-10-29",
+    "browser": "Chrome via DevTools",
+    "viewport": "390x844 DPR 1 mobile touch",
+    "cpu": "4x slowdown",
+    "network": "Fast 4G",
+    "cache": "ignoreCache=true on each trace reload",
+    "server": "Python http.server, localhost; before :4182, after :4183; no compression/CDN",
+    "baselineCommit": "8ae32136417262c15f7d3377e658fb0876bd0d39",
+    "limitations": "Lab only, single host; 2 runs per comparison, 1 per dictation. Not field Web Vitals or stable causal estimates. No standardized interactions, so INP excluded."
+  },
+  "runs": [
+    {
+      "stage": "before",
+      "page": "dictation",
+      "run": 1,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 4671 ms, event: (eventKey: r-62276, ts: 1746885918765), nodeId: 17\n  - LCP breakdown:\n    - TTFB: 7 ms, bounds: {min: 1746881247266µs, max: 1746881254727µs}\n    - Load delay: 197 ms, bounds: {min: 1746881254727µs, max: 1746881451627µs}\n    - Load duration: 4,444 ms, bounds: {min: 1746881451627µs, max: 1746885896094µs}\n    - Render delay: 23 ms, bounds: {min: 1746885896094µs, max: 1746885918765µs}\n  - CLS: 0.00, event: (eventKey: c-18994, ts: 1746882853570)\n"
+      ]
+    },
+    {
+      "stage": "before",
+      "page": "granola",
+      "run": 1,
+      "metrics": [
+        "Metrics (lab / observed):\n  - CLS: 0.00\n",
+        "Metrics (lab / observed):\n  - LCP: 1516 ms, event: (eventKey: r-15723, ts: 1746920764354), nodeId: 157\n  - LCP breakdown:\n    - TTFB: 15 ms, bounds: {min: 1746919248816µs, max: 1746919263372µs}\n    - Load delay: 189 ms, bounds: {min: 1746919263372µs, max: 1746919452144µs}\n    - Load duration: 1,296 ms, bounds: {min: 1746919452144µs, max: 1746920748202µs}\n    - Render delay: 16 ms, bounds: {min: 1746920748202µs, max: 1746920764354µs}\n  - CLS: 0.01, event: (eventKey: c-14983, ts: 1746920678681)\n"
+      ]
+    },
+    {
+      "stage": "before",
+      "page": "granola",
+      "run": 2,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 1792 ms, event: (eventKey: r-16335, ts: 1747325436739), nodeId: 157\n  - LCP breakdown:\n    - TTFB: 101 ms, bounds: {min: 1747323644501µs, max: 1747323745584.0002µs}\n    - Load delay: 130 ms, bounds: {min: 1747323745584.0002µs, max: 1747323876048µs}\n    - Load duration: 1,486 ms, bounds: {min: 1747323876048µs, max: 1747325362205µs}\n    - Render delay: 75 ms, bounds: {min: 1747325362205µs, max: 1747325436739µs}\n  - CLS: 0.00\n"
+      ]
+    },
+    {
+      "stage": "before",
+      "page": "superwhisper",
+      "run": 1,
+      "metrics": [
+        "Metrics (lab / observed):\n  - CLS: 0.00\n",
+        "Metrics (lab / observed):\n  - LCP: 858 ms, event: (eventKey: r-19294, ts: 1746957359911), nodeId: 146\n  - LCP breakdown:\n    - TTFB: 6 ms, bounds: {min: 1746956501996µs, max: 1746956508351.9998µs}\n    - Load delay: 191 ms, bounds: {min: 1746956508351.9998µs, max: 1746956699541µs}\n    - Load duration: 460 ms, bounds: {min: 1746956699541µs, max: 1746957159064µs}\n    - Render delay: 201 ms, bounds: {min: 1746957159064µs, max: 1746957359911µs}\n  - CLS: 0.00, event: (eventKey: c-35903, ts: 1746958248681)\n"
+      ]
+    },
+    {
+      "stage": "before",
+      "page": "superwhisper",
+      "run": 2,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 1231 ms, event: (eventKey: r-11539, ts: 1747241241366), nodeId: 146\n  - LCP breakdown:\n    - TTFB: 46 ms, bounds: {min: 1747240010800µs, max: 1747240057056.0002µs}\n    - Load delay: 190 ms, bounds: {min: 1747240057056.0002µs, max: 1747240246735µs}\n    - Load duration: 459 ms, bounds: {min: 1747240246735µs, max: 1747240706124µs}\n    - Render delay: 535 ms, bounds: {min: 1747240706124µs, max: 1747241241366µs}\n  - CLS: 0.00\n"
+      ]
+    },
+    {
+      "stage": "after",
+      "page": "dictation",
+      "run": 1,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 4812 ms, event: (eventKey: r-67887, ts: 1747183383384), nodeId: 17\n  - LCP breakdown:\n    - TTFB: 12 ms, bounds: {min: 1747178571395µs, max: 1747178583791µs}\n    - Load delay: 198 ms, bounds: {min: 1747178583791µs, max: 1747178781483µs}\n    - Load duration: 4,494 ms, bounds: {min: 1747178781483µs, max: 1747183275412µs}\n    - Render delay: 108 ms, bounds: {min: 1747183275412µs, max: 1747183383384µs}\n  - INP: 36 ms, event: (eventKey: s-213752, ts: 1747185855648)\n  - CLS: 0.00, event: (eventKey: c-18268, ts: 1747180106286)\n"
+      ]
+    },
+    {
+      "stage": "after",
+      "page": "granola",
+      "run": 1,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 1742 ms, event: (eventKey: r-28882, ts: 1747099042260), nodeId: 144\n  - LCP breakdown:\n    - TTFB: 46 ms, bounds: {min: 1747097299959µs, max: 1747097345702.9998µs}\n    - Load delay: 280 ms, bounds: {min: 1747097345702.9998µs, max: 1747097625230µs}\n    - Load duration: 1,367 ms, bounds: {min: 1747097625230µs, max: 1747098992705µs}\n    - Render delay: 50 ms, bounds: {min: 1747098992705µs, max: 1747099042260µs}\n  - CLS: 0.00\n"
+      ]
+    },
+    {
+      "stage": "after",
+      "page": "granola",
+      "run": 2,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 1832 ms, event: (eventKey: r-13205, ts: 1747384198929), nodeId: 144\n  - LCP breakdown:\n    - TTFB: 235 ms, bounds: {min: 1747382367135µs, max: 1747382602244µs}\n    - Load delay: 216 ms, bounds: {min: 1747382602244µs, max: 1747382817884µs}\n    - Load duration: 1,256 ms, bounds: {min: 1747382817884µs, max: 1747384073637µs}\n    - Render delay: 125 ms, bounds: {min: 1747384073637µs, max: 1747384198929µs}\n  - CLS: 0.00\n"
+      ]
+    },
+    {
+      "stage": "after",
+      "page": "superwhisper",
+      "run": 1,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 1038 ms, event: (eventKey: r-11096, ts: 1747046434264), nodeId: 142\n  - LCP breakdown:\n    - TTFB: 18 ms, bounds: {min: 1747045396557µs, max: 1747045415045µs}\n    - Load delay: 214 ms, bounds: {min: 1747045415045µs, max: 1747045628815µs}\n    - Load duration: 500 ms, bounds: {min: 1747045628815µs, max: 1747046128492µs}\n    - Render delay: 306 ms, bounds: {min: 1747046128492µs, max: 1747046434264µs}\n  - CLS: 0.00\n"
+      ]
+    },
+    {
+      "stage": "after",
+      "page": "superwhisper",
+      "run": 2,
+      "metrics": [
+        "Metrics (lab / observed):\n  - LCP: 948 ms, event: (eventKey: r-9838, ts: 1747295449395), nodeId: 142\n  - LCP breakdown:\n    - TTFB: 8 ms, bounds: {min: 1747294501065µs, max: 1747294508991µs}\n    - Load delay: 196 ms, bounds: {min: 1747294508991µs, max: 1747294704540µs}\n    - Load duration: 460 ms, bounds: {min: 1747294704540µs, max: 1747295164385µs}\n    - Render delay: 285 ms, bounds: {min: 1747295164385µs, max: 1747295449395µs}\n  - CLS: 0.00\n"
+      ]
+    }
+  ]
+}

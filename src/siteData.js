@@ -24,7 +24,7 @@ export const siteData = {
   ogImageUrl: 'https://muesli.works/og-muesli.jpg',
   homebrewOgImageUrl: 'https://muesli.works/og-muesli-brew.jpg?v=20260706-1',
   operatingSystem: 'macOS',
-  softwareRequirements: 'Apple Silicon Mac',
+  softwareRequirements: 'Apple Silicon Mac, macOS 14.2 or later; some models require newer macOS versions',
   applicationCategory: 'ProductivityApplication',
   iosProduct: {
     name: 'Muesli for iPhone',
@@ -50,7 +50,7 @@ export const siteData = {
     'Stores dictations, transcripts, and meeting notes locally by default.',
     'Open-source and inspectable on GitHub.',
     'No cloud speech-to-text API is required for the default local transcription path after models are installed.',
-    'Optional services such as OpenAI, OpenRouter, ChatGPT, and Google Calendar are explicit integrations, not the default transcription path.',
+    'Optional hosted dictation sends audio; hosted cleanup and summaries send text or meeting content to the selected provider. Optional iCloud sync transfers text and sync metadata, never audio.',
   ],
   technicalFacts: [
     'The bundled muesli-cli lets shell-capable coding agents read meeting transcripts and dictations as JSON, transcribe local audio files, and replace formatted meeting notes.',
@@ -335,12 +335,12 @@ export const siteData = {
     '/granola-vs-muesli': {
       title: 'Granola vs Muesli for local meeting notes · Muesli',
       canonical: 'https://muesli.works/granola-vs-muesli',
-      description: 'Granola vs Muesli for Mac users comparing hosted AI meeting notes with open-source local-first transcription, raw transcript ownership, and fewer cloud defaults.',
+      description: 'Compare Granola and Muesli for meeting notes: local and hosted processing, exports, platform requirements and team workflows. Includes dated primary sources.',
     },
     '/superwhisper-alternative': {
       title: 'Superwhisper alternative for Mac local dictation · Muesli',
       canonical: 'https://muesli.works/superwhisper-alternative',
-      description: 'A practical Superwhisper alternative for Mac users who want local-first dictation, meeting transcription, open-source code, and offline speech-to-text on Apple Silicon.',
+      description: 'Compare Muesli and Superwhisper for offline Mac dictation and meetings. Free open-source software, local models, hosted options and current plan tradeoffs.',
     },
     '/wispr-flow-alternative': {
       title: searchGuides['/wispr-flow-alternative'].title,
