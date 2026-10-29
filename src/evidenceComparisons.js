@@ -6,27 +6,27 @@ export const muesliSources = [
 ];
 
 export const granolaComparison = {
-  headline: 'Granola vs Muesli: where your meeting transcript lives',
-  subcopy: 'Choose Muesli for free, open-source meeting transcription on your Apple Silicon Mac. Choose Granola for hosted notes and shared team workflows. Both capture meetings without a bot joining the call.',
+  headline: 'Granola vs Muesli: keep your meeting notes on your Mac',
+  subcopy: 'You were in the meeting. You should have the record. We built Muesli to transcribe calls on your Mac, keep your notes close, and let you take them anywhere. Free and open source.',
   articleHeadline: 'Granola vs Muesli for local-first meeting notes',
-  lede: ['For a customer call you need to keep locally, Muesli captures microphone and system audio, transcribes on your Mac, and lets you export the record as Markdown or PDF. Granola uses hosted transcription providers and stores notes and transcripts in its cloud.'],
+  lede: ['A customer call, a hiring conversation, the decision that changes your roadmap. These are records you will come back to. We think keeping them on the computer you own should be straightforward. With Muesli, you get a local transcript, notes you can export, and the code behind it all.'],
   sections: [
-    { title: 'What stays local in Muesli?', body: ['Meeting speech recognition runs on-device by default. Saved transcripts and notes are available locally. Download the model before working offline. If you choose a hosted summary provider, meeting content is sent to that provider. Optional iCloud sync transfers text and sync metadata, not audio.', 'The Mac app requires Apple Silicon and macOS 14.2 or later. Individual models may require a newer OS. Check model availability during setup, and get participants’ permission before recording.'] },
-    { title: 'What does Granola offer?', body: ['Granola captures device audio without adding a meeting participant. Its security page describes external transcription and AI providers, cloud storage encrypted in transit and at rest, and no retained meeting audio recordings.', 'Granola supports shared folders and hosted meeting search. Its Basic plan includes limited history; Business adds unlimited history and advanced integrations. Check the current plan details if a team integration is essential.'] },
-    { title: 'Try one meeting before switching', body: ['In Muesli, grant microphone and system-audio permissions, choose a downloaded meeting model, and record a short call with consent. Review both sides of the transcript, correct important names, then use Export Transcript or Export Full Meeting to save Markdown or PDF.', 'Open the exported file in your editor and verify that it contains the decisions you need. Test your own accents, microphones and overlapping speakers. This comparison does not establish an accuracy winner.'] },
+    { title: 'Put your Mac to work', body: ['Your Apple Silicon Mac can handle the transcription. Muesli captures your microphone and the audio from your call, runs speech recognition locally, and saves the transcript on your machine. Once the model is downloaded, that workflow works offline. No Muesli transcription subscription.', 'You need an Apple Silicon Mac with macOS 14.2 or later. Some models need a newer OS. For summaries, you choose the provider: a hosted provider receives the meeting content you ask it to summarize. Optional iCloud sync moves text and sync metadata between devices; audio stays out of sync.'] },
+    { title: 'What changes when you leave Granola?', body: ['Both apps capture meetings without a bot. Granola uses external transcription providers and stores your notes in its encrypted cloud; it does not retain meeting audio recordings. With Muesli, the transcript starts on your Mac and is there for you to read, search and export.', 'Granola’s shared folders and team integrations may be part of your day. Account for those when switching. If what you need is a record of your own meetings, Muesli gives you local transcription and file exports for free. You can keep the transcript in your project folder, open it in your editor, or hand it to your coding agent.'] },
+    { title: 'Make your next meeting a Muesli meeting', body: ['Install Muesli, download a meeting model, and allow microphone and system-audio access. Let everyone know you are recording, then capture your next call. You will have both sides of the conversation in one transcript.', 'Open the transcript, check the names and decisions, and choose Export Transcript or Export Full Meeting. Save it as Markdown or PDF. That file is yours to work with in the tools you already use.'] },
   ],
   comparison: {
-    title: 'Which workflow fits?', aria: 'Granola and Muesli workflow comparison',
+    title: 'What you get with Muesli', aria: 'Granola and Muesli workflow comparison',
     rows: [
       ['Muesli', 'Local meeting transcripts, file exports and open-source Mac software.', 'Requires Apple Silicon and model downloads. Hosted summaries and optional sync have separate data boundaries.'],
       ['Granola', 'Hosted notes, shared folders and team integrations.', 'Uses external transcription providers and cloud storage. History and integrations depend on the plan.'],
     ],
   },
-  fitTitle: 'Choose around the record you need',
+  fitTitle: 'Keep more of your work in your hands',
   fitCards: [
-    ['Local files', 'Use Muesli when you want to review and export a meeting transcript on your Mac.'],
-    ['Team workspace', 'Keep Granola if shared folders and its integrations are central to your team’s workflow.'],
-    ['Dictation too', 'Muesli also pastes dictated text into the active Mac app using a configurable hotkey.'],
+    ['Local files', 'Take your transcript into a project folder, your editor or your archive. Markdown and PDF travel well.'],
+    ['Open code', 'We publish the application source. Read how capture and storage work, follow a change, or make one yourself.'],
+    ['Dictation too', 'The same app handles your email drafts, messages and prompts. Hold your hotkey, speak, and paste at the cursor.'],
   ],
   relatedLinks: [
     ['Granola alternative guide', '/granola-alternative', 'A feature-by-feature comparison of capture, storage and export.'],
@@ -39,8 +39,8 @@ export const granolaComparison = {
     { question: 'Does Muesli work offline?', answer: 'Local meeting transcription works after a model is downloaded. Hosted summaries require a connection and send meeting content to your selected provider. iCloud sync is optional.' },
     { question: 'Can I get the transcript out?', answer: 'Muesli exports transcripts and notes as Markdown or PDF. Granola also provides transcript access and export options; check its documentation for the current workflow.' },
   ],
-  ctaTitle: 'Keep a meeting transcript on your Mac.',
-  ctaBody: 'Download Muesli, choose a local model, and try a short meeting before moving your workflow.',
+  ctaTitle: 'Your next meeting deserves a local copy.',
+  ctaBody: 'Get Muesli for free. Record the call, keep the transcript, and take your notes wherever your work goes.',
   sources: [...muesliSources,
     ['Granola security and storage', 'https://www.granola.ai/security'],
     ['Granola plans and history limits', 'https://www.granola.ai/pricing'],
@@ -49,27 +49,28 @@ export const granolaComparison = {
 };
 
 export const superwhisperComparison = {
-  headline: 'A free, open-source Superwhisper alternative for Mac',
-  subcopy: 'Muesli offers local dictation and meeting transcription on Apple Silicon. Superwhisper also supports offline transcription and meetings. Choose Muesli when free access and inspectable application code matter to your workflow.',
+  headline: 'Switch from Superwhisper to free, open-source dictation',
+  subcopy: 'Superwhisper’s free plan limits local dictation to Whisper. Muesli gives you 7+ local ASR models optimized for Apple Silicon, with choices for speed, accuracy and the languages you actually speak. Free, with open-source application code.',
   articleHeadline: 'Choosing between Superwhisper and Muesli',
-  lede: ['Both apps can turn speech into text locally. Muesli combines dictation, meeting capture and file exports in a free Mac app. Superwhisper offers local and cloud models, configurable writing modes, and paid features. Compare the model and workflow you will actually use.'],
+  lede: ['We want speaking to your Mac to feel as ordinary as typing. Open a draft, hold a key, say what you mean. Muesli puts the text at your cursor. When a meeting starts, use the same app to capture the conversation and keep a transcript.'],
   sections: [
-    { title: 'Offline dictation is available in both apps', body: ['Superwhisper documents local models that work after a download, plus optional cloud models. Its free plan includes local Whisper dictation; Pro adds further models and AI modes. Offline speech recognition is not an exclusive Muesli feature.', 'Muesli runs dictation locally by default after setup. Choose a local speech model and local cleanup, or turn cleanup off, for an offline workflow. Selecting hosted dictation uploads audio; hosted cleanup sends text to the selected provider.'] },
-    { title: 'Try an email draft on your Mac', body: ['Muesli requires an Apple Silicon Mac running macOS 14.2 or later; some models need newer macOS versions. Install a model, grant microphone, hotkey and Accessibility permissions, then open an email draft. Hold your configured hotkey, speak two sentences, and release to paste.', 'Review names and punctuation before sending. Compare both apps with the same microphone and text, using local models in each. This page does not claim a measured speed or accuracy advantage.'] },
-    { title: 'Both apps can help with meetings', body: ['Superwhisper advertises meeting recording, summaries and speaker separation. Check its current plan for meeting access. Muesli captures microphone and system audio, creates a local transcript, and exports notes or transcripts as Markdown or PDF.', 'In Muesli, a hosted summary provider receives meeting content when selected. Optional iCloud sync transfers text and sync metadata, not audio. Record with participants’ permission.'] },
+    { title: 'Why we built a free alternative', body: ['Superwhisper’s ongoing free plan offers only Whisper for local dictation. Parakeet and Cohere Transcribe require Pro after the trial. We give you 7+ local ASR models in the free Muesli app: Parakeet, Whisper, Qwen3 ASR, Cohere Transcribe, Nemotron, SenseVoice and Bodhan. Pick for speed, accuracy, language support and the memory available on your Mac. Switching models should be part of finding your setup.', 'Download a local speech model in Muesli and start dictating. Use local cleanup or turn cleanup off to work offline. If you prefer a hosted model, that is your choice: hosted dictation sends audio, and hosted cleanup sends text to the provider you select. External providers may charge for their service.'] },
+    { title: 'Hinglish mein bolte ho? Aise hi likho.', body: ['Try saying: “Kal ki meeting ke action items mujhe Slack pe bhej do.” That is how plenty of us speak at work. We want Muesli to work with that, too.', 'Choose Bodhan Flex and select Romanized output to write Indic speech in Latin letters. Prefer the original script? Choose Native. Want Indic script alongside English terms? Choose Mixed. These output modes run locally on Apple Silicon with macOS 15 or later. Your language deserves a place in your dictation app.'] },
+    { title: 'Give your keyboard a break', body: ['Install Muesli on an Apple Silicon Mac running macOS 14.2 or later. Download a model, finish the guided permissions setup, and open the email you have been putting off. Hold your hotkey, speak the first paragraph, and release. Your words land in the draft.', 'Use it for a message, a bug report, or a prompt for your coding agent. Check the text before sending, just as you would a typed draft. Some models need newer macOS versions; choose one supported by your Mac.'] },
+    { title: 'Keep the conversation after the call', body: ['Muesli captures your microphone and system audio, transcribes locally, and lets you export notes or the full transcript as Markdown or PDF. Meeting transcription is included in the free app. Superwhisper also offers meetings, with access tied to its current plan.', 'Let participants know you are recording. After the call, read the transcript or generate notes with your chosen provider. Hosted summaries send meeting content to that provider. Optional iCloud sync carries text and sync metadata, never audio.'] },
   ],
   comparison: {
-    title: 'Muesli and Superwhisper tradeoffs', aria: 'Muesli and Superwhisper workflow comparison',
+    title: 'What you are switching to', aria: 'Muesli and Superwhisper workflow comparison',
     rows: [
-      ['Muesli', 'Free dictation, meeting transcription and MIT-licensed application code.', 'Apple Silicon Mac required. You download local models; optional hosted providers can charge separately.'],
-      ['Superwhisper', 'Local Whisper dictation on its free plan, with additional models and AI modes on Pro.', 'Check paid-plan access for the models, meeting features and writing modes you need.'],
+      ['Muesli', '7+ local ASR models, dictation and meeting transcription in the free app. MIT-licensed application code.', 'Apple Silicon Mac required. You download local models; optional hosted providers can charge separately.'],
+      ['Superwhisper', 'Only Whisper for local dictation on the ongoing free plan. Parakeet, Cohere Transcribe and AI modes require Pro after the trial.', 'Check paid-plan access for the models, meeting features and writing modes you need.'],
     ],
   },
-  fitTitle: 'Reasons to try Muesli',
+  fitTitle: 'Built for the way you work',
   fitCards: [
-    ['Inspect the app', 'Read the public source to understand model routing, permissions and storage.'],
-    ['Keep ordinary files', 'Export a meeting transcript as Markdown or PDF for your editor or archive.'],
-    ['Choose each data path', 'Use local models for speech and review hosted-provider settings before enabling them.'],
+    ['Inspect the app', 'The application code is public and MIT-licensed. See how it works, report a bug, or build on it.'],
+    ['Keep ordinary files', 'Your meeting transcript can live beside your project files. Export Markdown or PDF and keep working.'],
+    ['Speak your language', 'Use Bodhan Flex for Indic speech with Native, Mixed or Romanized output. Choose the script you want to read.'],
   ],
   relatedLinks: [
     ['On-device dictation', '/on-device-dictation', 'Setup, model tradeoffs and local versus hosted processing.'],
@@ -78,12 +79,12 @@ export const superwhisperComparison = {
   ],
   faqTitle: 'Superwhisper alternative questions',
   faqItems: [
-    { question: 'Does Superwhisper work offline?', answer: 'Yes. Superwhisper supports local speech models and also offers cloud options. Muesli is another local option, with free access and open-source application code.' },
+    { question: 'Does Superwhisper work offline?', answer: 'Yes. Its ongoing free plan includes local Whisper models; Parakeet and Cohere Transcribe require Pro after the trial. Muesli gives you 7+ local ASR models in the free app, including options for Indic speech and romanized output.' },
     { question: 'Can both apps transcribe meetings?', answer: 'Yes. Both offer meeting features. Check Superwhisper’s current plan limits. Muesli includes local meeting transcription and Markdown or PDF export.' },
     { question: 'Does Muesli always keep data on the Mac?', answer: 'Local models process speech on the Mac. Optional hosted dictation sends audio, hosted cleanup sends text, and hosted summaries send meeting content. Optional iCloud sync transfers text and sync metadata.' },
   ],
-  ctaTitle: 'Try local dictation with Muesli.',
-  ctaBody: 'Download the free Mac app and test it with a draft you would normally type.',
+  ctaTitle: 'Start speaking. Muesli will do the typing.',
+  ctaBody: 'Free dictation. Local meeting transcription. Open-source code. Download Muesli and put your Mac to work.',
   sources: [...muesliSources,
     ['Superwhisper offline transcription', 'https://superwhisper.com/offline-transcription'],
     ['Superwhisper meeting features', 'https://superwhisper.com/'],

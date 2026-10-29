@@ -60,3 +60,9 @@ Asset evidence: client JS 614,592 → 610,864 bytes (gzip 177,052 → 176,723); 
 ## Reference limits
 
 [Discovered Labs' Granola case study](https://discoveredlabs.com/case-studies/granola) describes a combined content, technical SEO and off-site program. Its results are vendor-reported context and do not isolate the effect of any one page edit. The [inspiration tweet](https://x.com/wespreadjam/status/2115568290307469548) returned HTTP 403 through web retrieval; no claims were inferred from it. This draft makes no ranking-lift promise and adds no analytics, tracking, monitoring or external outreach.
+
+## Editorial revision, 30 October 2026
+
+Rewrote the two comparisons in Muesli’s first-person product voice. Superwhisper now leads with its ongoing free plan being limited to Whisper for local dictation, versus 7+ local ASR choices in Muesli. Rechecked https://superwhisper.com/docs/billing/plans on 30 October: Parakeet and Cohere Transcribe require Pro after trial access. The Muesli 0.8.5 model catalog documents Parakeet, Whisper, Qwen3 ASR, Cohere Transcribe, Nemotron, SenseVoice and Bodhan, plus Bodhan Flex Native/Mixed/Romanized output on macOS 15+. The Hinglish sentence is a suggested input, not a recorded benchmark result. No claim that Superwhisper cannot transcribe Hinglish is made.
+
+Production build and generated-page checks rerun successfully after the copy revision. Performance numbers above describe the initial 29 October draft, before this editorial revision; they were not remeasured for the copy-only update.
