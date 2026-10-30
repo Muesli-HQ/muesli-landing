@@ -210,6 +210,13 @@ export const siteData = {
     },
   ],
   routes: {
+    '/brand': {
+      title: 'Muesli brand assets: logos, wordmarks, and social images',
+      description: 'Download official Muesli logos, black and white variants, wordmarks, and Open Graph images. Includes an asset index with direct URLs for AI agents.',
+      canonical: 'https://muesli.works/brand',
+      ogImage: 'https://muesli.works/og-muesli.jpg',
+      ogImageAlt: 'Muesli local dictation and meeting transcription for Mac',
+    },
     ...Object.fromEntries(articlePosts.map(post => [post.path, {
       title: post.seoTitle || (post.title.endsWith('Muesli') ? post.title : `${post.title} · Muesli`), description: post.description,
       canonical: `https://muesli.works${post.path}/`,

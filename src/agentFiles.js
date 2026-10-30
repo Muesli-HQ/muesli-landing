@@ -24,6 +24,7 @@ export function generateAgentFiles() {
     downloadUrl: siteData.downloadUrl,
     repositoryUrl: siteData.repositoryUrl,
     releasesUrl: siteData.releasesUrl,
+    brandAssets: { page: 'https://muesli.works/brand', manifest: 'https://muesli.works/brand/assets.json', download: 'https://muesli.works/brand/muesli-brand-kit.zip' },
     socialLinks: {
       x: siteData.xUrl,
       linkedin: siteData.linkedinUrl,
@@ -48,6 +49,10 @@ export function generateAgentFiles() {
   const llms = `# ${siteData.name}
 
 ${siteData.description}
+
+## Brand Assets
+- Official logos, wordmarks, and social images: https://muesli.works/brand
+- Machine-readable asset index: https://muesli.works/brand/assets.json
 
 ## Primary Pages
 - Product overview: ${siteData.siteUrl}/
