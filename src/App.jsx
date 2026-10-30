@@ -1,3 +1,4 @@
+import { BrandPage } from './BrandPage.jsx';
 import { granolaComparison, superwhisperComparison, muesliSources, reviewed } from './evidenceComparisons.js';
 import githubStats from './githubStats.json';
 import { articlePosts } from './articlePosts.js';
@@ -2172,7 +2173,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = [...articlePosts.map(post => post.path), ...docsRoutes, '/', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = [...articlePosts.map(post => post.path), ...docsRoutes, '/', '/brand', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2484,7 +2485,7 @@ function SiteFooterDirectory({ compact = false } = {}) {
         </nav>
         <div className="ending-colophon">
           <p>© 2026 Muesli. Made with care, in the open.</p>
-          <div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/blog/#guides">Explore the guides <ArrowRight size={13} /></a></div>
+          <div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/brand">Brand</a><a href="/blog/#guides">Explore the guides <ArrowRight size={13} /></a></div>
         </div>
       </div>
       <div className="ending-landscape" aria-hidden="true">
@@ -5742,6 +5743,8 @@ export function App({ pathname = '/' }) {
     : path === '/terms'
       ? 'terms'
       : null;
+
+  if (path === '/brand') return <BrandPage nav={<ProductPageNav />} footer={<SiteFooterDirectory compact />} />;
 
   if (legalKey) {
     return <LegalPage page={legalPages[legalKey]} path={path} />;
