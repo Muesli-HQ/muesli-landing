@@ -89,18 +89,6 @@
   .docs-intro { font-size: 16px; margin-bottom: 28px; }
   .docs-next { grid-template-columns: 1fr; }
 }
-.agent-feature { width: min(1300px, calc(100% - 48px)); margin: 60px auto 90px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-.agent-feature h2 { font-size: clamp(30px, 3.4vw, 48px); line-height: 1.13; margin: 0 0 22px; }
-.agent-feature p { font-size: 18px; line-height: 1.7; }
-.agent-feature a { display: inline-flex; align-items: center; gap: 12px; color: var(--fern); font-weight: 800; margin-top: 12px; }
-.agent-terminal { min-width: 0; padding: 25px; background: var(--ink); color: var(--text-inverse); border-radius: 16px; }
-.agent-terminal > div { padding-bottom: 18px; border-bottom: 1px solid var(--mist); font-size: 14px; }
-.agent-terminal pre { overflow-x: auto; font-size: 14px; line-height: 1.9; padding: 12px 0; }
-.agent-terminal p { margin: 0; font-size: 13px; color: var(--text-inverse-muted); }
-.agent-feature { font-family: var(--font-sans); color: var(--ink); }
-.agent-feature h2 { font-family: var(--font-display); font-weight: var(--font-display-weight); }
-.agent-feature > div:first-child p { color: var(--muted); }
-@media (max-width: 800px) { .agent-feature { grid-template-columns: minmax(0, 1fr); gap: 26px; margin-block: 48px; } }
 @media (max-width: 600px) {
   .product-nav-links > a:not(.product-nav-cta):not([href="/docs/"]) { display: none; }
   .product-nav-links > a[href="/docs/"] { display: inline; }
