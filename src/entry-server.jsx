@@ -19,7 +19,7 @@ export function getMeta(pathname = '/') {
     ogTitle: meta.ogTitle || meta.title,
     ogDescription: meta.ogDescription || meta.description,
     ogUrl: meta.ogUrl || meta.canonical,
-    ogImage: meta.ogImage || (isHome ? `${siteData.ogImageUrl}?v=20260513-2` : siteData.homebrewOgImageUrl),
+    ogImage: meta.ogImage || (isHome ? siteData.ogImageUrl : siteData.homebrewOgImageUrl),
     ogImageAlt: meta.ogImageAlt || (isHome
       ? 'Muesli: Speech that is free. Speech that is yours.'
       : 'Muesli Homebrew install command over a watercolor Golden Gate Bridge scene.'),

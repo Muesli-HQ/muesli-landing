@@ -150,13 +150,13 @@
       "url": "https://muesli.works/og-muesli.jpg",
       "path": "/og-muesli.jpg",
       "group": "previews",
-      "description": "The main social sharing image for muesli.works.",
-      "alt": "Website preview for Muesli",
+      "description": "The main social sharing image for muesli.works Uses the approved Nunito Sans wordmark.",
+      "alt": "Muesli Nunito wordmark above a Golden Gate Bridge lawn scene",
       "tone": "light",
       "width": 1200,
       "height": 630,
       "format": "JPG",
-      "bytes": 144540
+      "bytes": 280860
     },
     {
       "id": "og-home-png",
@@ -164,13 +164,13 @@
       "url": "https://muesli.works/og-muesli.png",
       "path": "/og-muesli.png",
       "group": "previews",
-      "description": "PNG version of the main website preview.",
-      "alt": "Website preview \u00b7 PNG for Muesli",
+      "description": "PNG version of the main website preview Uses the approved Nunito Sans wordmark.",
+      "alt": "Muesli Nunito wordmark above a Golden Gate Bridge lawn scene",
       "tone": "light",
       "width": 1200,
       "height": 630,
       "format": "PNG",
-      "bytes": 1393918
+      "bytes": 1426696
     },
     {
       "id": "og-brew",
@@ -178,13 +178,13 @@
       "url": "https://muesli.works/og-muesli-brew.jpg",
       "path": "/og-muesli-brew.jpg",
       "group": "previews",
-      "description": "Social preview with the Homebrew installation command.",
-      "alt": "Homebrew preview for Muesli",
+      "description": "Social preview with the Homebrew installation command Uses the approved Nunito Sans wordmark.",
+      "alt": "Muesli Nunito wordmark and Homebrew installation command above the Golden Gate Bridge",
       "tone": "light",
       "width": 1200,
       "height": 630,
       "format": "JPG",
-      "bytes": 276277
+      "bytes": 335786
     },
     {
       "id": "og-repo",
@@ -192,13 +192,13 @@
       "url": "https://muesli.works/brand/repository-open-graph.png",
       "path": "/brand/repository-open-graph.png",
       "group": "previews",
-      "description": "The repository Open Graph artwork, copied from assets/repository-open-graph.png.",
-      "alt": "GitHub repository preview for Muesli",
+      "description": "Illustrated repository sharing card with the Nunito wordmark; matches the website and README artwork.",
+      "alt": "Muesli Nunito wordmark on the illustrated website, README, and GitHub sharing card",
       "tone": "light",
-      "width": 1280,
-      "height": 640,
+      "width": 1200,
+      "height": 630,
       "format": "PNG",
-      "bytes": 65674
+      "bytes": 1426696
     },
     {
       "id": "og-models",

@@ -47,19 +47,19 @@ Lowercase Muesli lettering, supplied as outlined paths so no font installation i
 
 Website preview
 https://muesli.works/og-muesli.jpg
-The main social sharing image for muesli.works.
+The main social sharing image for muesli.works Uses the approved Nunito Sans wordmark.
 
 Website preview · PNG
 https://muesli.works/og-muesli.png
-PNG version of the main website preview.
+PNG version of the main website preview Uses the approved Nunito Sans wordmark.
 
 Homebrew preview
 https://muesli.works/og-muesli-brew.jpg
-Social preview with the Homebrew installation command.
+Social preview with the Homebrew installation command Uses the approved Nunito Sans wordmark.
 
 GitHub repository preview
 https://muesli.works/brand/repository-open-graph.png
-The repository Open Graph artwork, copied from assets/repository-open-graph.png.
+Illustrated repository sharing card with the Nunito wordmark; matches the website and README artwork.
 
 Muesli on Hugging Face
 https://muesli.works/images/muesli-hugging-face-banner.webp
