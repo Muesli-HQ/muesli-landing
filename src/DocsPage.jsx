@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Check, Copy, Sun, Moon, Monitor, BookOpen, Terminal, Bot, Github } from 'lucide-react';
-import { docsPages, docsRoutes, docsMarkdown } from './docsContent.js';
+import { docsPages, docsRoutes, docsMarkdown, cliTopics } from './docsContent.js';
 import './docs.css';
 import iconUrl from '../docs/icon.png';
 
@@ -15,11 +15,13 @@ function CodeBlock({ children }) {
 
 export { default as AgentFeature } from './AgentConnections.jsx';
 
-const docLabels = { '/docs': 'Quickstart', '/docs/agents': 'Coding agents', '/docs/cli': 'CLI reference' };
+const docLabels = { '/docs': 'Quickstart', '/docs/agents': 'Coding agents', '/docs/cli': 'CLI reference', ...Object.fromEntries(cliTopics.map(topic => [topic.path, topic.label])) };
 const docIcons = { '/docs': BookOpen, '/docs/agents': Bot, '/docs/cli': Terminal };
 
 export default function DocsPage({ route }) {
   const page = docsPages[route];
+  const routeIndex = docsRoutes.indexOf(route);
+  const adjacentRoutes = [docsRoutes[routeIndex - 1], docsRoutes[routeIndex + 1]].filter(Boolean);
   const [theme, setTheme] = useState('system');
   const [active, setActive] = useState(page.sections[0].id);
   const [copyStatus, setCopyStatus] = useState('Copy page');
@@ -45,10 +47,10 @@ export default function DocsPage({ route }) {
     try { await navigator.clipboard.writeText(docsMarkdown([route])); setCopyStatus('Copied'); }
     catch { setCopyStatus('Use plain text link'); }
   }
-  const navigation = <nav aria-label="Documentation">{docsRoutes.map(path => {
+  const navigation = <nav aria-label="Documentation">{['/docs', '/docs/agents', '/docs/cli'].map(path => {
     const Icon = docIcons[path];
     return <a key={path} href={`${path}/`} aria-current={route === path ? 'page' : undefined}><Icon size={16} />{docLabels[path]}</a>;
-  })}</nav>;
+  })}<div className="docs-cli-nav">{cliTopics.map(topic => <a key={topic.path} href={`${topic.path}/`} aria-current={route === topic.path ? 'page' : undefined}>{topic.label}</a>)}</div></nav>;
   return <main className="docs-page" data-theme={theme}>
     <script type="application/ld+json">{JSON.stringify({
       '@context': 'https://schema.org', '@type': 'TechArticle',
@@ -65,10 +67,10 @@ export default function DocsPage({ route }) {
     <div className="docs-layout">
       <aside className="docs-sidebar"><p className="docs-nav-label">Documentation</p>{navigation}<div className="docs-sidebar-resources"><a href="/docs.txt">Plain-text docs ↗</a><a href="https://github.com/Muesli-HQ/muesli/tree/main/native/MuesliNative/Sources/MuesliCLI">View source ↗</a><a href="/help">App support ↗</a></div></aside>
       <details className="docs-mobile-nav"><summary>Documentation <span>{docLabels[route]}</span></summary>{navigation}</details>
-      <article className="docs-article" id="docs-content"><header><div className="docs-title-row"><h1>{docLabels[route]}</h1><button className="docs-copy-page" type="button" onClick={copyPage}><Copy size={14} /><span aria-live="polite">{copyStatus}</span></button></div><p className="docs-intro">{page.intro}</p></header>
+      <article className="docs-article" id="docs-content"><header>{route.startsWith('/docs/cli/') && <a className="docs-breadcrumb" href="/docs/cli/">CLI reference /</a>}<div className="docs-title-row"><h1>{docLabels[route]}</h1><button className="docs-copy-page" type="button" onClick={copyPage}><Copy size={14} /><span aria-live="polite">{copyStatus}</span></button></div><p className="docs-intro">{page.intro}</p></header>
         <details className="docs-mobile-toc"><summary>On this page</summary><nav aria-label="Page sections">{page.sections.map(section => <a href={`#${section.id}`} key={section.id}>{section.title}</a>)}</nav></details>
-        {page.sections.map(section => <section id={section.id} key={section.id}><h2><a href={`#${section.id}`}>{section.title}</a></h2>{section.text?.map(text => <p key={text}>{text}</p>)}{section.code && <CodeBlock>{section.code}</CodeBlock>}{section.after && <p>{section.after}</p>}{section.link && <a className="docs-text-link" href={section.link[0]}>{section.link[1]} <ArrowRight size={16} /></a>}</section>)}
-        <div className="docs-next">{docsRoutes.filter(path => path !== route).map(path => <a href={`${path}/`} key={path}>{docLabels[path]} <ArrowRight size={16} /></a>)}</div>
+        {page.sections.map(section => <section id={section.id} key={section.id}><h2><a href={`#${section.id}`}>{section.title}</a></h2>{section.code && <CodeBlock>{section.code}</CodeBlock>}{section.text?.map(text => <p key={text}>{text}</p>)}{section.items && <div className="docs-topic-grid">{section.items.map(item => <a className="docs-topic" id={item.id} href={`${item.path}/`} key={item.path}><strong>{item.label}<ArrowRight size={16} /></strong><span>{item.summary}</span></a>)}</div>}{section.after && <p>{section.after}</p>}{section.link && <a className="docs-text-link" href={section.link[0]}>{section.link[1]} <ArrowRight size={16} /></a>}</section>)}
+        <div className="docs-next">{adjacentRoutes.map(path => <a href={`${path}/`} key={path}>{docLabels[path]} <ArrowRight size={16} /></a>)}</div>
         <footer className="docs-footer"><span>© 2026 Muesli</span><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/">Back to Muesli ↗</a></div></footer>
       </article>
       <aside className="docs-toc"><p>On this page</p><nav aria-label="On this page">{page.sections.map(section => <a href={`#${section.id}`} key={section.id} aria-current={active === section.id ? 'location' : undefined}>{section.title}</a>)}</nav></aside>

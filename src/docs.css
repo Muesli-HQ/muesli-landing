@@ -40,6 +40,15 @@
 .docs-themes button[aria-pressed="true"] { background: var(--docs-selected); color: var(--docs-accent); }
 .docs-layout { max-width: 1440px; padding: 44px 32px 0; margin: auto; display: grid; grid-template-columns: 210px minmax(0, 740px) 190px; gap: 56px; align-items: start; }
 .docs-sidebar, .docs-toc { position: sticky; top: 108px; font-size: 14px; }
+.docs-sidebar { max-height: calc(100dvh - 132px); overflow-y: auto; }
+.docs-cli-nav { display: grid; margin: 2px 0 0 19px; padding-left: 10px; border-left: 1px solid var(--docs-line); }
+.docs-breadcrumb { display: inline-block; margin-bottom: 16px; font-size: 14px; color: var(--docs-muted); }
+.docs-topic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.docs-topic { display: grid; gap: 8px; border: 1px solid var(--docs-line); border-radius: 10px; padding: 18px; scroll-margin-top: 110px; }
+.docs-topic strong { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--docs-text); font-size: 16px; }
+.docs-topic span { font-size: 14px; line-height: 1.6; color: var(--docs-muted); }
+.docs-topic:hover, .docs-topic:focus-visible { background: var(--docs-selected); border-color: var(--docs-accent); }
+.docs-toc { max-height: calc(100dvh - 132px); overflow-y: auto; }
 .docs-nav-label { font-size: 13px; font-weight: 750; margin: 0 0 16px 12px; }
 .docs-sidebar nav, .docs-mobile-nav nav { display: grid; gap: 5px; }
 .docs-sidebar nav a, .docs-mobile-nav nav a { display: flex; align-items: center; gap: 11px; padding: 10px 12px; color: var(--docs-muted); border-radius: 7px; }
@@ -90,6 +99,7 @@
   .docs-next { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
+  .docs-topic-grid { grid-template-columns: 1fr; }
   .product-nav-links > a:not(.product-nav-cta):not([href="/docs/"]) { display: none; }
   .product-nav-links > a[href="/docs/"] { display: inline; }
 }

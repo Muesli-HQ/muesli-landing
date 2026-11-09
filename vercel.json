@@ -86,6 +86,54 @@
       "destination": "/docs/cli/index.html"
     },
     {
+      "source": "/docs/cli/meetings",
+      "destination": "/docs/cli/meetings/index.html"
+    },
+    {
+      "source": "/docs/cli/dictations",
+      "destination": "/docs/cli/dictations/index.html"
+    },
+    {
+      "source": "/docs/cli/time-turner",
+      "destination": "/docs/cli/time-turner/index.html"
+    },
+    {
+      "source": "/docs/cli/history",
+      "destination": "/docs/cli/history/index.html"
+    },
+    {
+      "source": "/docs/cli/vidshot",
+      "destination": "/docs/cli/vidshot/index.html"
+    },
+    {
+      "source": "/docs/cli/skills",
+      "destination": "/docs/cli/skills/index.html"
+    },
+    {
+      "source": "/docs/cli/transcribe",
+      "destination": "/docs/cli/transcribe/index.html"
+    },
+    {
+      "source": "/docs/cli/models",
+      "destination": "/docs/cli/models/index.html"
+    },
+    {
+      "source": "/docs/cli/dictionary",
+      "destination": "/docs/cli/dictionary/index.html"
+    },
+    {
+      "source": "/docs/cli/model-terms",
+      "destination": "/docs/cli/model-terms/index.html"
+    },
+    {
+      "source": "/docs/cli/output",
+      "destination": "/docs/cli/output/index.html"
+    },
+    {
+      "source": "/docs/cli/paths",
+      "destination": "/docs/cli/paths/index.html"
+    },
+    {
       "source": "/ios",
       "destination": "/ios/index.html"
     },

@@ -54,8 +54,8 @@ export const siteData = {
     'Optional hosted dictation sends audio; hosted cleanup and summaries send text or meeting content to the selected provider. Optional iCloud sync transfers text and sync metadata, never audio.',
   ],
   technicalFacts: [
-    'The bundled muesli-cli lets shell-capable coding agents read meeting transcripts and dictations as JSON, transcribe local audio files, and replace formatted meeting notes.',
-    'Coding agents can analyze CLI transcripts using their own model; hosted agent providers may receive transcript text in their context.',
+    'The bundled muesli-cli exposes meetings, dictations, Time Turner screen history, Vidshot captures, cross-app history, and task instructions to shell-capable coding agents. It also transcribes local audio files and replaces formatted meeting notes.',
+    'Coding agents analyze CLI context using their own model; hosted agent providers may receive the text and images the agent reads.',
     'Muesli is a native macOS app built with Swift and AppKit, not Electron.',
     'Local speech-to-text runs on Apple Silicon through CoreML and Apple Neural Engine-capable model paths where supported.',
     'For short dictation, local Apple Silicon inference can reduce latency by avoiding the cloud upload, remote inference, response, and paste-back round trip.',
