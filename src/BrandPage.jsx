@@ -32,7 +32,7 @@ export function BrandPage({ nav, footer }) {
       <header className="brand-intro">
         <h1>Make it muesli.</h1>
         <div><p>Our logos, wordmarks, and images. Ready for your next article, app listing, or something you’re building with us.</p>
-          <a className="brand-kit-download" href="/brand/muesli-brand-kit.zip" download><Download size={18} /> Download brand kit</a>
+          <a className="brand-kit-download download-cta" href="/brand/muesli-brand-kit.zip" download><Download size={18} /> Download brand kit</a>
         </div>
       </header>
       <div className="brand-cover"><img src="/brand/muesli-waveform-lockup-navy.svg" alt="Muesli deep blue waveform and lowercase wordmark" width="665" height="161" /><span>Right to Free Speech to Text</span></div>

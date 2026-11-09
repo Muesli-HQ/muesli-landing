@@ -76,7 +76,7 @@ export const searchGuides = {
     faqs: [
       ['Is Muesli a free Granola alternative?', 'Yes. The Mac app is free and open source under the MIT license. Local transcription has no Muesli subscription fee. Optional external AI services have their own pricing.'],
       ['Does Granola let me access the raw transcript?', 'Yes. Granola documents a transcript panel with a copy-all option. Muesli also exposes the transcript and offers Markdown and PDF file exports.'],
-      ['Can I import my Granola history?', 'This guide does not describe a direct Granola migration. Keep copies of existing notes and transcripts, and try Muesli with new meetings before changing your workflow.'],
+      ['Can I import my Granola history?', 'Yes. Muesli 0.8.6 and later can import Granola’s official ZIP or CSV exports, including the notes, summaries and transcripts they contain. Review your imported meetings and keep the original export as a backup.'],
       ['Does Muesli work on an Intel Mac?', 'The Mac app requires Apple Silicon and macOS 14.2 or later. Check the selected model for any additional requirements.'],
     ],
     related: [['Local meeting setup and troubleshooting', '/local-meeting-transcription-mac'], ['Detailed Granola vs Muesli comparison', '/granola-vs-muesli'], ['Meeting notes in Muesli', '/meeting-notes']],

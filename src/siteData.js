@@ -1,4 +1,5 @@
 import { articlePosts } from './articlePosts.js';
+import { newFeatures } from './featureData.js';
 import { docsPages } from './docsContent.js';
 import { searchGuides } from './searchGuides.js';
 
@@ -67,6 +68,7 @@ export const siteData = {
     'Optional summarization providers are separate from the local transcription path.',
   ],
   featurePages: [
+    ...Object.entries(newFeatures).map(([path, page]) => ({ title: page.title, path, url: `https://muesli.works${path}`, description: page.description })),
     ...Object.entries(docsPages).map(([path, page]) => ({title: page.title, path, url: `https://muesli.works${path}/`, description: page.description})),
     {
       title: 'Muesli for iPhone',
@@ -210,6 +212,7 @@ export const siteData = {
     },
   ],
   routes: {
+    ...Object.fromEntries(Object.entries(newFeatures).map(([path, page]) => [path, { title: page.meta, canonical: `https://muesli.works${path}`, description: page.description }])),
     '/brand': {
       title: 'Muesli brand assets: logos, wordmarks, and social images',
       description: 'Download official Muesli logos, black and white variants, wordmarks, and Open Graph images. Includes an asset index with direct URLs for AI agents.',

@@ -1,4 +1,6 @@
 import { BrandPage } from './BrandPage.jsx';
+import { ProductMenu, HomepageFeatures, FeaturePage, CoreFeatureVisual } from './featureShowcase.jsx';
+import { featureRoutes, newFeatures } from './featureData.js';
 import { granolaComparison, superwhisperComparison, muesliSources, reviewed } from './evidenceComparisons.js';
 import githubStats from './githubStats.json';
 import { articlePosts } from './articlePosts.js';
@@ -36,6 +38,7 @@ import {
   Zap,
 } from 'lucide-react';
 import './styles.css';
+import './featureShowcase.css';
 import DocsPage, { AgentFeature } from './DocsPage.jsx';
 import { docsPages, docsRoutes } from './docsContent.js';
 import { searchGuides, searchGuideSources } from './searchGuides.js';
@@ -153,7 +156,7 @@ function parseReleaseBody(body = '') {
         return;
       }
 
-      current = { title, bullets: [] };
+      current = { title, bullets: [], paragraphs: [] };
       sections.push(current);
       return;
     }
@@ -161,15 +164,16 @@ function parseReleaseBody(body = '') {
     const bulletMatch = line.match(/^[-*]\s+(.+)$/) || line.match(/^\d+\.\s+(.+)$/);
     if (bulletMatch) {
       if (!current) {
-        current = { title: 'Notes', bullets: [] };
+        current = { title: 'Notes', bullets: [], paragraphs: [] };
         sections.push(current);
       }
       current.bullets.push(cleanReleaseText(bulletMatch[1]));
       return;
     }
 
-    if (!summary && !line.startsWith('#')) {
-      summary = cleanReleaseText(line);
+    if (!line.startsWith('#')) {
+      if (current) current.paragraphs.push(cleanReleaseText(line));
+      else if (!summary) summary = cleanReleaseText(line);
     }
   });
 
@@ -178,10 +182,9 @@ function parseReleaseBody(body = '') {
     sections: sections
       .map((section) => ({
         ...section,
-        bullets: section.bullets.filter(Boolean).slice(0, 5),
+        bullets: section.bullets.filter(Boolean),
       }))
-      .filter((section) => section.bullets.length > 0)
-      .slice(0, 4),
+      .filter((section) => section.bullets.length > 0 || section.paragraphs.length > 0),
   };
 }
 
@@ -292,7 +295,7 @@ function ReleaseFeed({ releases, releaseStatus, maxVisible = 3 }) {
           <b>{latestRelease.date}</b>
         </div>
         <h3>{latestRelease.title}</h3>
-        <p>{latestRelease.summary || 'The newest public Muesli build is available from GitHub Releases.'}</p>
+        {latestRelease.summary && <p>{latestRelease.summary}</p>}
         {latestRelease.sections[0]?.bullets?.length > 0 && (
           <ul>
             {latestRelease.sections[0].bullets.slice(0, 4).map((item, itemIndex) => (
@@ -329,11 +332,12 @@ function ReleaseFeed({ releases, releaseStatus, maxVisible = 3 }) {
                 release.sections.map((section, sectionIndex) => (
                   <div className="release-section" key={`${release.id}-${section.title}-${sectionIndex}`}>
                     <h4>{section.title}</h4>
-                    <ul>
+                    {section.bullets.length > 0 && <ul>
                       {section.bullets.map((item, itemIndex) => (
                         <li key={`${release.id}-${sectionIndex}-${itemIndex}`}>{item}</li>
                       ))}
-                    </ul>
+                    </ul>}
+                    {section.paragraphs.map((paragraph, paragraphIndex) => <p key={`${release.id}-${sectionIndex}-p-${paragraphIndex}`}>{paragraph}</p>)}
                   </div>
                 ))
               ) : (
@@ -2173,7 +2177,7 @@ const legalPages = {
   },
 };
 
-export const prerenderRoutes = [...articlePosts.map(post => post.path), ...docsRoutes, '/', '/brand', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
+export const prerenderRoutes = [...featureRoutes, ...articlePosts.map(post => post.path), ...docsRoutes, '/', '/brand', '/ios', '/help/ios', '/privacy', '/terms', '/blog', '/on-device-dictation', '/mac-dictation-app', '/best-dictation-apps-mac', '/best-offline-dictation-apps-mac', '/offline-dictation-mac', '/apple-neural-engine-speech-to-text-mac', '/local-speech-to-text-glossary', '/asr-architectures', '/nvidia-parakeet-speech-to-text', '/whisper-speech-to-text', '/medical-dictation-mac', '/local-meeting-transcription-mac', '/bot-free-meeting-notes', '/apple-dictation-alternative', '/granola-alternative', '/granola-vs-muesli', '/superwhisper-alternative', '/wispr-flow-alternative', '/otter-ai-alternative', '/fireflies-ai-alternative', '/meeting-notes', '/local-first-ai', '/help', '/changelog'];
 
 export const routeMeta = siteData.routes;
 
@@ -2460,10 +2464,19 @@ function GardenDownload() {
 
         <h2 id="garden-download-title">Right to Free<br />Speech to Text</h2>
         <p>Dictate your next idea. Keep a transcript of your next conversation. It all starts on your Mac.</p>
-        <a className="garden-download-button" href={downloadUrl}><img src={iconUrl} alt="" />Download Muesli <ArrowRight size={18} /></a>
+        <a className="garden-download-button download-cta" href={downloadUrl}><img src={iconUrl} alt="" />Download Muesli <ArrowRight size={18} /></a>
         <small>Free and open source · For Apple Silicon Macs</small>
       </div>
     </section>
+  );
+}
+
+function SiteEnding() {
+  return (
+    <div className="garden-ending-wrap">
+      <GardenDownload />
+      <SiteFooterDirectory />
+    </div>
   );
 }
 
@@ -2960,13 +2973,13 @@ function ProductPageNav() {
         <span>muesli</span>
       </a>
       <div className="product-nav-links">
-        <a href="/#notes">Product</a>
+        <ProductMenu />
         <a href="/ios">iPhone</a>
         <a href="/#privacy">Privacy</a>
         <a href="/blog/">Blog</a>
         <a href="/docs/">Docs</a>
         <a href="/changelog">Releases</a>
-        <a className="product-nav-cta" href={downloadUrl}>
+        <a className="product-nav-cta download-cta" href={downloadUrl}>
           <Download size={17} />
           Download
         </a>
@@ -3257,7 +3270,7 @@ function BlogPage() {
           <p>Muesli is open-source Mac dictation and meeting transcription built for local ASR on Apple Silicon.</p>
         </div>
         <div className="blog-cta-actions">
-          <a className="primary-cta" href={downloadUrl}><Download size={18} /> Download for macOS</a>
+          <a className="primary-cta download-cta" href={downloadUrl}><Download size={18} /> Download for macOS</a>
           <a className="secondary-cta" href="https://github.com/Muesli-HQ/muesli" target="_blank" rel="noreferrer"><Github size={18} /> <Star size={15} /> Star Muesli on GitHub</a>
         </div>
       </section>
@@ -3310,7 +3323,7 @@ function MacDictationAppPage() {
             Silicon, then pastes it into the app you were already using.
           </p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -3461,7 +3474,7 @@ function MacDictationAppPage() {
             <h2>Want local dictation before adding another cloud speech service?</h2>
             <p>Open-source, Mac-native, and built for people who want speech-to-text to start on their own machine.</p>
           </div>
-          <a className="primary-cta" href={downloadUrl}>
+          <a className="primary-cta download-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
             Download Muesli
           </a>
@@ -3515,7 +3528,7 @@ function BestDictationAppsMacPage() {
             ownership of the speech-to-text workflow.
           </p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download Muesli
             </a>
@@ -3650,7 +3663,7 @@ function BestDictationAppsMacPage() {
             <h2>Try the local-first Mac dictation app on the list.</h2>
             <p>Open-source, Apple Silicon-native, and built for speech-to-text you can keep close to your own machine.</p>
           </div>
-          <a className="primary-cta" href={downloadUrl}>
+          <a className="primary-cta download-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
             Download Muesli
           </a>
@@ -3706,7 +3719,7 @@ function AppleNeuralEngineSpeechPage() {
             wait on upload, queueing, a remote response, and a trip back to the cursor.
           </p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download Muesli
             </a>
@@ -3833,7 +3846,7 @@ function AppleNeuralEngineSpeechPage() {
             <h2>Try local speech-to-text built for Apple Silicon.</h2>
             <p>Use Muesli when you want dictation and meeting transcription to start on your Mac.</p>
           </div>
-          <a className="primary-cta" href={downloadUrl}>
+          <a className="primary-cta download-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
             Download Muesli
           </a>
@@ -3888,7 +3901,7 @@ function LocalSpeechToTextGlossaryPage() {
             local-first transcription.
           </p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download Muesli
             </a>
@@ -4007,7 +4020,7 @@ function LocalSpeechToTextGlossaryPage() {
             <h2>Use the Mac app behind the glossary.</h2>
             <p>Muesli turns local speech-to-text terms into a working dictation and meeting notes workflow.</p>
           </div>
-          <a className="primary-cta" href={downloadUrl}>
+          <a className="primary-cta download-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
             Download Muesli
           </a>
@@ -4061,7 +4074,7 @@ function OfflineDictationMacPage() {
             model is installed.
           </p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -4210,7 +4223,7 @@ function OfflineDictationMacPage() {
             <h2>Want offline dictation that starts on your own Mac?</h2>
             <p>Open-source, Mac-native, and built around local speech-to-text instead of a default cloud upload.</p>
           </div>
-          <a className="primary-cta" href={downloadUrl}>
+          <a className="primary-cta download-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
             Download Muesli
           </a>
@@ -4268,7 +4281,7 @@ function SearchGuidePage({ route }) {
           <h1>{guide.headline}</h1>
           <p>{guide.intro}</p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} /> Download for macOS
             </a>
             <a className="secondary-cta" href={`#${guide.sections[0].id}`}>
@@ -4356,7 +4369,7 @@ function SearchGuidePage({ route }) {
         <footer className="seo-article-cta">
           <img src={iconUrl} alt="Muesli app icon" />
           <div><h2>{guide.cta}</h2><p>{guide.ctaBody}</p></div>
-          <a className="primary-cta" href={downloadUrl}><Download size={19} /> Download Muesli</a>
+          <a className="primary-cta download-cta" href={downloadUrl}><Download size={19} /> Download Muesli</a>
         </footer>
       </article>
       <SiteFooterDirectory compact />
@@ -4406,7 +4419,7 @@ function AlternativeComparisonPage({ route }) {
           <h1>{config.headline}</h1>
           <p>{config.subcopy}</p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -4525,7 +4538,7 @@ function AlternativeComparisonPage({ route }) {
             <h2>{config.ctaTitle}</h2>
             <p>{config.ctaBody}</p>
           </div>
-          <a className="primary-cta" href={downloadUrl}>
+          <a className="primary-cta download-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
             Download Muesli
           </a>
@@ -4586,7 +4599,7 @@ function SpeechToTextGuidePage({ route }) {
           <h1>{config.headline}</h1>
           <p>{config.subcopy}</p>
           <div className="seo-article-actions">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -4699,7 +4712,7 @@ function SpeechToTextGuidePage({ route }) {
             <h2>{config.ctaTitle || 'Want the speech-to-text layer to start on your own Mac?'}</h2>
             <p>{config.ctaBody || 'Muesli is open-source, Mac-native, and built around local ASR models for dictation and meeting transcription on Apple Silicon.'}</p>
           </div>
-          <a className="primary-cta" href={downloadUrl}>
+          <a className="primary-cta download-cta" href={downloadUrl}>
             <span className="apple-mark" aria-hidden="true"></span>
             Download Muesli
           </a>
@@ -4745,7 +4758,7 @@ function OnDeviceDictationPage() {
             Download a local speech model, hold your hotkey, speak, and release to paste into the active text field.
           </p>
           <div className="cta-row">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -4825,6 +4838,8 @@ function OnDeviceDictationPage() {
           </div>
         </div>
       </section>
+
+      <CoreFeatureVisual type="dictation" />
 
       <section className="dictation-answer-strip" aria-label="Muesli on-device dictation summary">
         {dictationAnswerCards.map((card) => (
@@ -4945,7 +4960,7 @@ function OnDeviceDictationPage() {
         <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <h2>Try local-first dictation before renting another speech pipeline.</h2>
         <p>Open-source, Mac-native, and built for people who would rather keep their voice close.</p>
-        <a className="primary-cta" href={downloadUrl}>
+        <a className="primary-cta download-cta" href={downloadUrl}>
           <span className="apple-mark" aria-hidden="true"></span>
           Download Muesli
         </a>
@@ -4981,7 +4996,7 @@ function MeetingNotesPage() {
             meeting notes you can actually review. The meeting does not need another participant named “AI Notetaker.”
           </p>
           <div className="cta-row">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -5008,6 +5023,8 @@ function MeetingNotesPage() {
           </figcaption>
         </figure>
       </section>
+
+      <CoreFeatureVisual type="meeting" />
 
       <section className="dictation-answer-strip meeting-answer-strip" aria-label="Muesli meeting notes summary">
         {meetingAnswerCards.map((card) => (
@@ -5135,7 +5152,7 @@ function MeetingNotesPage() {
         <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <h2>Try meeting notes that do not enter the room before you do.</h2>
         <p>Mac-native, local-first, and built around a transcript you can inspect.</p>
-        <a className="primary-cta" href={downloadUrl}>
+        <a className="primary-cta download-cta" href={downloadUrl}>
           <span className="apple-mark" aria-hidden="true"></span>
           Download Muesli
         </a>
@@ -5171,7 +5188,7 @@ function LocalFirstPage() {
             with a cloud upload.
           </p>
           <div className="cta-row">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -5304,7 +5321,7 @@ function LocalFirstPage() {
         <img src={iconUrl} alt="Muesli local speech-to-text app icon" />
         <h2>Try speech-to-text that starts on the machine you already trust.</h2>
         <p>Open-source, Mac-native, and designed to keep the default path close.</p>
-        <a className="primary-cta" href={downloadUrl}>
+        <a className="primary-cta download-cta" href={downloadUrl}>
           <span className="apple-mark" aria-hidden="true"></span>
           Download Muesli
         </a>
@@ -5422,9 +5439,9 @@ function LandingPage() {
 
   return (
     <main className="no-graphics has-plugin-announcement">
-      <a className="plugin-announcement" href="/blog/muesli-chatgpt-codex-plugin/">
-        <span>Muesli is now on ChatGPT</span>
-        <span className="plugin-announcement-link">Read the guide <ArrowRight size={14} aria-hidden="true" /></span>
+      <a className="plugin-announcement" href="/changelog">
+        <span>muesli 0.8.6 is here</span>
+        <span className="plugin-announcement-link">See what’s new <ArrowRight size={14} aria-hidden="true" /></span>
       </a>
       <JsonLd data={landingStructuredData} />
       <FloatingNav className="nav">
@@ -5433,22 +5450,7 @@ function LandingPage() {
           <span>muesli</span>
         </a>
         <div className="nav-links">
-          <details className="nav-feature-menu">
-            <summary>
-              Product
-              <ChevronDown size={15} aria-hidden="true" />
-            </summary>
-            <div className="nav-dropdown">
-              <a href="/on-device-dictation/">On-device Dictation</a>
-              <a href="/meeting-notes/">Meeting Notes</a>
-              <a href="/docs/agents/">For coding agents</a>
-              <a href="/local-first-ai/">Local-first AI</a>
-              <a className="nav-dropdown-coming-soon" href="/ios">
-                <span>Muesli for iPhone</span>
-                <small>Coming soon</small>
-              </a>
-            </div>
-          </details>
+          <ProductMenu />
           <a href="#privacy">Privacy</a>
           <a href="/changelog">Changelog</a>
           <a href="/blog">Blog</a>
@@ -5476,7 +5478,7 @@ function LandingPage() {
             <li><a href="/on-device-dictation/"><Zap size={21} fill="currentColor" aria-hidden="true" /><span>Blazing fast</span></a></li>
           </ul>
           <div className="cta-row">
-            <a className="primary-cta" href={downloadUrl}>
+            <a className="primary-cta download-cta" href={downloadUrl}>
               <Download size={19} />
               Download for macOS
             </a>
@@ -5499,10 +5501,9 @@ function LandingPage() {
 
         <div className="notes-layout">
           <div>
-            <h2>From a half-formed thought to text in the place you were already working.</h2>
+            <h2>Speak. Muesli types.</h2>
             <p>
-              Muesli listens from the menu bar, cleans up your words, and pastes them back into the current app.
-              The product story is simple: your Mac becomes a private speech layer for everyday work.
+              Hold your hotkey, speak, and release. Muesli types your words into the app you’re using.
             </p>
           </div>
           <div className="flow-card">
@@ -5596,6 +5597,8 @@ function LandingPage() {
           </div>
         </div>
       </section>
+
+      <HomepageFeatures />
 
       <AgentFeature />
 
@@ -5727,10 +5730,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <div className="garden-ending-wrap">
-        <GardenDownload />
-        <SiteFooterDirectory />
-      </div>
+      <SiteEnding />
 
     </main>
   );
@@ -5743,6 +5743,8 @@ export function App({ pathname = '/' }) {
     : path === '/terms'
       ? 'terms'
       : null;
+
+  if (newFeatures[path]) return <><JsonLd data={baseStructuredData(path)} /><FeaturePage feature={newFeatures[path]} type={path.split('/').pop()} nav={<ProductPageNav />} footer={<SiteEnding />} /></>;
 
   if (path === '/brand') return <BrandPage nav={<ProductPageNav />} footer={<SiteFooterDirectory compact />} />;
 

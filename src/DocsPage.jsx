@@ -59,7 +59,7 @@ export default function DocsPage({ route }) {
     <a className="docs-skip" href="#docs-content">Skip to content</a>
     <header className="docs-topbar"><div className="docs-topbar-inner">
       <a className="docs-brand" href="/" aria-label="Muesli home"><img src={iconUrl} alt="" />muesli<span>docs</span></a>
-      <div className="docs-top-actions"><a className="docs-github" href="https://github.com/Muesli-HQ/muesli"><Github size={17} /><span>GitHub</span></a><a className="docs-download" href="/download/">Download</a>
+      <div className="docs-top-actions"><a className="docs-github" href="https://github.com/Muesli-HQ/muesli"><Github size={17} /><span>GitHub</span></a><a className="docs-download download-cta" href="/download/">Download</a>
       <div className="docs-themes" role="group" aria-label="Color theme">{[['light', Sun], ['dark', Moon], ['system', Monitor]].map(([value, Icon]) => <button key={value} type="button" aria-label={`${value[0].toUpperCase() + value.slice(1)} theme`} aria-pressed={theme === value} title={`${value} theme`} onClick={() => chooseTheme(value)}><Icon size={16} /></button>)}</div></div>
     </div></header>
     <div className="docs-layout">

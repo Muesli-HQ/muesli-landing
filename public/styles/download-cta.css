@@ -1,0 +1,60 @@
+/* Shared by React pages and the standalone download page. */
+a.download-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a.download-cta::after {
+  content: '';
+  position: absolute;
+  inset: -50% -100%;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 40%, var(--download-glint, #ffffff26) 50%, transparent 60%);
+  transform: translateX(-70%);
+}
+
+.garden-download-button.download-cta,
+.docs-download.download-cta {
+  --download-glint: #6ba3f72b;
+}
+
+a.download-cta > svg {
+  flex-shrink: 0;
+  transition: transform 180ms ease;
+}
+
+@keyframes download-shine {
+  to { transform: translateX(70%); }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  a.download-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px #12365b33, 0 0 0 1px #6ba3f740;
+  }
+  a.download-cta:hover::after { animation: download-shine 650ms ease-out both; }
+  a.download-cta:hover > .lucide-download { transform: translateY(2px); }
+  a.download-cta:hover > .lucide-arrow-right { transform: translateX(3px); }
+}
+
+a.download-cta:focus-visible {
+  outline: 3px solid #6ba3f7;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a.download-cta:focus-visible::after { animation: download-shine 650ms ease-out both; }
+  a.download-cta:active { transform: translateY(0) scale(.98); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.download-cta,
+  a.download-cta > svg {
+    transition: none !important;
+    transform: none !important;
+  }
+  a.download-cta::after { display: none; }
+}

@@ -2,7 +2,7 @@ export const granolaImportPost = {
   "path": "/blog/import-granola-notes",
   "title": "Bring your Granola notes home to Muesli",
   "seoTitle": "Export Granola Notes to Muesli | Muesli 0.8.6",
-  "description": "Bring your Granola meeting history to your Mac. Muesli 0.8.6 will import notes and transcripts from the official export, ready to search, edit, and keep.",
+  "description": "Bring your Granola meeting history to your Mac. Muesli imports notes and transcripts from the official export, ready to search, edit, and keep.",
   "date": "2026-10-25",
   "category": "Meeting Notes",
   "tags": [
@@ -23,7 +23,7 @@ export const granolaImportPost = {
     },
     {
       "type": "paragraph",
-      "text": "We believe you should be able to keep that history on your own machine, search it, and take it wherever you work next. That is why we are adding **Granola imports in Muesli 0.8.6**."
+      "text": "We believe you should be able to keep that history on your own machine, search it, and take it wherever you work next. That is why **Muesli 0.8.6 supports Granola imports**."
     },
     {
       "type": "paragraph",
@@ -102,7 +102,7 @@ export const granolaImportPost = {
     },
     {
       "type": "paragraph",
-      "text": "You can prepare your export now and import it when Muesli 0.8.6 is available."
+      "text": "Export your history from Granola, then import the ZIP or CSV into Muesli 0.8.6 or later."
     },
     {
       "type": "image",
@@ -165,7 +165,7 @@ export const granolaImportPost = {
     },
     {
       "type": "paragraph",
-      "text": "You can start using Muesli for new meetings today. When 0.8.6 arrives, bring your Granola history over and keep it alongside everything you record next."
+      "text": "Bring your Granola history into Muesli and keep it alongside everything you record next."
     },
     {
       "type": "paragraph",
@@ -173,7 +173,7 @@ export const granolaImportPost = {
     },
     {
       "type": "paragraph",
-      "text": "[Download Muesli for Mac](https://muesli.works/download/) · [Follow the 0.8.6 release](https://github.com/Muesli-HQ/muesli/releases)"
+      "text": "[Download Muesli for Mac](https://muesli.works/download/) · [See the 0.8.6 release](https://github.com/Muesli-HQ/muesli/releases)"
     }
   ]
 };

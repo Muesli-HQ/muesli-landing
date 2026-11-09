@@ -26,6 +26,22 @@
   ],
   "rewrites": [
     {
+      "source": "/features/time-turner",
+      "destination": "/features/time-turner/index.html"
+    },
+    {
+      "source": "/features/vidshots",
+      "destination": "/features/vidshots/index.html"
+    },
+    {
+      "source": "/features/cotypist",
+      "destination": "/features/cotypist/index.html"
+    },
+    {
+      "source": "/features/chat-and-agents",
+      "destination": "/features/chat-and-agents/index.html"
+    },
+    {
       "source": "/blog/muesli-models-hugging-face",
       "destination": "/blog/muesli-models-hugging-face/index.html"
     },
