@@ -26,6 +26,10 @@
   ],
   "rewrites": [
     {
+      "source": "/blog/time-turner-local-screen-history",
+      "destination": "/blog/time-turner-local-screen-history/index.html"
+    },
+    {
       "source": "/features/time-turner",
       "destination": "/features/time-turner/index.html"
     },

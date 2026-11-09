@@ -3032,9 +3032,9 @@ function ArticleShareBar({ route, title }) {
 }
 
 function ArticleInline({ text }) {
-  return text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\)|\*\*[^*]+\*\*)/g).map((part, index) => {
+  return text.split(/(\[[^\]]+\]\((?:https?:\/\/|\/(?!\/))[^)]+\)|\*\*[^*]+\*\*)/g).map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) return <strong key={index}>{part.slice(2, -2)}</strong>;
-    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    const link = part.match(/^\[([^\]]+)\]\(((?:https?:\/\/|\/(?!\/))[^)]+)\)$/);
     return link ? <a key={index} href={link[2]}>{link[1]}</a> : part;
   });
 }
@@ -3082,7 +3082,7 @@ function BodhanArticle({ post }) {
       <header className={`bodhan-hero${post.imageInBody ? ' article-guide-hero' : post.imageBanner ? ' article-banner-hero' : ''}`}>
         <div>
           <a className="bodhan-back" href="/blog/">← All articles</a>
-          <h1>{post.title}</h1>
+          <h1>{post.titleIcon && <img className="article-title-icon" src={post.titleIcon} alt="" aria-hidden="true" width="20" height="20" />}{post.title}</h1>
           <p>{post.description}</p>
           <div className="bodhan-byline">Muesli · <time dateTime={post.date}>{formatBlogDate(post.date)}</time> · {post.readTime}{post.modifiedDate && <> · Updated <time dateTime={post.modifiedDate}>{formatBlogDate(post.modifiedDate)}</time></>}</div>
         </div>
