@@ -212,7 +212,7 @@ export const siteData = {
     },
   ],
   routes: {
-    ...Object.fromEntries(Object.entries(newFeatures).map(([path, page]) => [path, { title: page.meta, canonical: `https://muesli.works${path}`, description: page.description }])),
+    ...Object.fromEntries(Object.entries(newFeatures).map(([path, page]) => [path, { title: page.meta, canonical: `https://muesli.works${path}`, description: page.description, ...(page.ogImage ? { ogImage: page.ogImage, ogImageAlt: page.ogImageAlt, ogImageWidth: 1200, ogImageHeight: 630 } : {}) }])),
     '/brand': {
       title: 'Muesli brand assets: logos, wordmarks, and social images',
       description: 'Download official Muesli logos, black and white variants, wordmarks, and Open Graph images. Includes an asset index with direct URLs for AI agents.',
