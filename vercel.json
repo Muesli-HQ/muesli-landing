@@ -26,6 +26,10 @@
   ],
   "rewrites": [
     {
+      "source": "/blog/medical-dictation-mac-medasr",
+      "destination": "/blog/medical-dictation-mac-medasr/index.html"
+    },
+    {
       "source": "/blog/time-turner-local-screen-history",
       "destination": "/blog/time-turner-local-screen-history/index.html"
     },
