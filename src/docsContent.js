@@ -1,19 +1,20 @@
 // Verified against v0.8.6 (ecc2af26) and origin/main (f5489672), 2026-11-09.
 // CLI source and command help are authoritative; the repository's older contract omits commands.
 export const cliSetup = 'brew install --cask muesli\nmuesli-cli spec';
+const homebrewCliNote = 'Homebrew puts muesli-cli on your PATH when it installs the Muesli cask.';
 export const docsPages = {
   '/docs': {
     title: 'Muesli CLI quickstart',
     description: 'Read meetings, search Time Turner history, inspect Vidshots, and transcribe audio with the Muesli 0.8.6 CLI on Mac.',
     intro: "Read meetings, find screen history, inspect Vidshots, and transcribe audio from your terminal.",
     sections: [
-      { id: 'install', title: 'Install with Homebrew', code: cliSetup, text: ['Open Muesli once to complete setup. Automatic CLI linking is pending Homebrew approval; until then, use the direct-download setup below.'], link: ['/download/', 'Download the app directly'] },
-      { id: 'connect', title: 'Direct download or older cask', code: 'export PATH="/Applications/Muesli.app/Contents/MacOS:$PATH"\nmuesli-cli spec', text: ['Use this for a DMG install or if muesli-cli is not found. Add the export line to your shell configuration to keep it across sessions. Adjust the path if needed.'] },
+      { id: 'install', title: 'Install with Homebrew', code: cliSetup, text: [homebrewCliNote, 'Open Muesli once to complete setup.'], link: ['/download/', 'Download the app directly'] },
+      { id: 'connect', title: 'Install from a DMG', code: 'export PATH="/Applications/Muesli.app/Contents/MacOS:$PATH"\nmuesli-cli spec', text: ['If you installed Muesli from a DMG, add the app’s executable directory to your PATH. Adjust the path if you installed the app outside /Applications. Save the export line in your shell configuration to keep it across sessions.'] },
       {"id":"read","title":"Read a meeting","text":["Replace 42 with an ID from list."],"code":"muesli-cli meetings list --limit 10\nmuesli-cli meetings get 42","after":"Read data.rawTranscript and data.formattedNotes. If notes are missing, use the transcript."},
       {"id":"context","title":"Find your recent context","text":["Enable Time Turner or record a Vidshot in the Mac app first."],"code":"muesli-cli time-turner history --last 2h --limit 20\nmuesli-cli time-turner search --query \"release plan\"\nmuesli-cli captures list --limit 5\nmuesli-cli captures get latest","link":["/docs/cli/#time-turner","Explore the context commands"]},
       {"id":"transcribe","title":"Transcribe an audio file","text":["Accepts MP3, MP4, M4A, and WAV. Transcription runs locally; models download on first use."],"code":"muesli-cli transcribe interview.m4a\nmuesli-cli transcribe interview.m4a --format json","after":"Output is plain text by default. Add --save-meeting to keep the transcript in Muesli."},
       {"id":"next","title":"Bring in your agent","text":["Codex, Claude Code, and other agents with local shell access can use the CLI with their own model."],"link":["/docs/agents/","Set up an agent workflow"]},
-      {"id":"troubleshooting","title":"Troubleshooting","text":["Command not found: use the direct-download setup above. Once the updated cask is available, existing Homebrew users can run brew update followed by brew reinstall --cask muesli.","Database unavailable: open Muesli once, then check muesli-cli info.","Unknown command or model: check spec or transcribe --help for your installed version."]},
+      {"id":"troubleshooting","title":"Troubleshooting","text":["If an older Homebrew install is missing muesli-cli, run brew update followed by brew reinstall --cask muesli.","Database unavailable: open Muesli once, then check muesli-cli info.","Unknown command or model: check spec or transcribe --help for your installed version."]},
     ],
   },
   '/docs/agents': {
@@ -35,7 +36,7 @@ export const docsPages = {
     description: 'Muesli 0.8.6 CLI reference: meetings, dictations, Time Turner, Vidshots, cross-app history, skills, transcription models, and JSON output.',
     intro: "Muesli 0.8.6 command reference. Run spec or <command> --help for your installed version.",
     sections: [
-      {"id":"discovery","title":"Inspect the CLI","code":"muesli-cli spec\nmuesli-cli info\nmuesli-cli transcribe --help","text":["spec lists commands. info shows data paths. --help lists options."]},
+      { id: 'discovery', title: 'Install and inspect the CLI', code: cliSetup + '\nmuesli-cli info\nmuesli-cli transcribe --help', text: [homebrewCliNote, 'spec lists commands. info shows data paths. --help lists options.'], link: ['/docs/#connect', 'Set up the CLI for a DMG install'] },
       {"id":"meetings","title":"Meetings","code":"muesli-cli meetings list --limit 10\nmuesli-cli meetings list --folder-id 2\nmuesli-cli meetings get 42\nmuesli-cli meetings update-notes 42 --file notes.md\ncat notes.md | muesli-cli meetings update-notes 42 --stdin","text":["Replace example IDs with IDs from list. get returns rawTranscript, formattedNotes, notesState, and available audio paths.","update-notes replaces formatted notes and preserves the transcript. Choose --file or --stdin."]},
       {"id":"dictations","title":"Dictations","code":"muesli-cli dictations list --limit 10\nmuesli-cli dictations get 7","text":["Use an ID from list. get returns rawText, timestamp, durationSeconds, and available appContext."]},
       {"id":"time-turner","title":"Time Turner","text":["Requires history saved by Time Turner in the Mac app.","history: oldest first. Use --last 30m, 6h, or 1d, or --from and --until with ISO-8601 timezones. --app matches an exact app name or bundle ID, case-insensitively.","search: newest first. Filters: --query, --from, --until, --app. Default --limit: 50 for search, 100 for history; range: 1 to 1000.","get: returns OCR and metadata. --output saves a PNG to a new file.","Pagination: use meta.nextCursor when meta.hasMore is true. history retains its filters; search requires you to repeat them. Cursors are command-specific."],"code":"muesli-cli time-turner history --last 6h --app \"Google Chrome\"\nmuesli-cli time-turner search --query \"release plan\" --limit 20\n# Replace <id> with a returned capture ID.\nmuesli-cli time-turner get <id>\nmuesli-cli time-turner get <id> --output screen.png","after":"History is sampled. Text may outlive screenshots; gaps do not establish inactivity.","link":["/time-turner/","Explore Time Turner"]},
