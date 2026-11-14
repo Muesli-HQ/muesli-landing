@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowUp, AtSign, ChevronDown, Clock, Maximize2, Paperclip, Plus, SlidersHorizontal, Sparkles, SquarePen, X } from 'lucide-react';
+import { ArrowUp, AtSign, ChevronDown, Maximize2, Paperclip, Plus, SlidersHorizontal, X } from 'lucide-react';
+import { FeatureLoop, loopDescriptions } from './FeatureLoop.jsx';
 import './nativePreviews.css';
 
 // Layout values and custom icon paths follow the macOS 0.8.6 views.
@@ -31,24 +32,15 @@ function NotesDocument({ ghost=false, dictation=false, compact=false }) {
     <div className="np-notes-body"><div className="np-notes-folders"><b>iCloud</b><span className="np-notes-folder"><NativeIcon name="folder"/> Notes <small>8</small></span><span><NativeIcon name="folder"/> Projects <small>3</small></span></div><div className="np-notes-list"><div className="np-note-current"><b>Product review</b><small>11:18 AM &nbsp; Launch plan and next steps</small></div><div><b>Ideas for next week</b><small>Yesterday &nbsp; A few things to try</small></div><div><b>Reading list</b><small>Monday &nbsp; Saved for later</small></div></div><div className="np-notes-paper"><small>9 November 2026 at 11:18 AM</small><h3>Product review</h3>{ghost?<p>Thanks for the thoughtful conversation today. I’ll share<span className="np-caret"/><span className="np-ghost"> the updated plan before Friday.</span></p>:dictation?<p className="np-dictated">Share the first draft with the team and collect feedback before Friday.<span className="np-caret"/></p>:<><p>Launch plan and next steps</p><h4>Keep the experience simple.</h4><p>Start with a small release. Gather feedback from the first group, then share the rollout plan.</p><h4>Before Friday</h4><ul><li>Share the updated plan</li><li>Review the first round of feedback</li><li>Confirm the launch date</li></ul></>}</div></div>
   </div>;
 }
-function TimeTurnerScreen() {
-  return <Shell active="Time Turner" className="np-time-turner"><div className="np-time-page"><h2>Time Turner</h2><div className="np-capture-controls"><span>On · this Mac</span><Control icon="pause.fill">Pause</Control><Control icon="gearshape"/></div><div className="np-date"><Control icon="chevron.left"/><span>9 Nov 2026 <NativeIcon name="calendar"/></span><Control icon="chevron.right"/></div><div className="np-tabs"><b>History</b><span>Recap</span><span>To-dos</span></div><div className="np-explorer"><div className="np-explorer-toolbar"><NativeIcon name="doc.text" size={20}/><span>Notes · Product review</span><div className="np-explorer-tools"><NativeIcon name="magnifyingglass"/><span><NativeIcon name="lock"/> On this Mac</span><NativeIcon name="arrow.up.left.and.arrow.down.right" size={16}/></div></div><div className="np-memory"><NotesDocument compact/></div><div className="np-scrubber"><div className="np-scrubber-meta"><span>11:18:24 AM</span><span className="np-muted">Gaps compressed</span><div><NativeIcon name="chevron.left" size={12}/><span>24 / 86</span><NativeIcon name="chevron.right" size={12}/></div></div><div className="np-track">{[{left:8,app:'google-chrome',name:'Google Chrome'},{left:24,app:'chatgpt',name:'ChatGPT'},{left:43,app:'apple-notes',name:'Apple Notes'},{left:64,app:'claude',name:'Claude'},{left:85,app:'google-chrome',name:'Google Chrome'}].map(({left,app,name})=><span key={left} style={{left:`${left}%`}} title={name}><img className="np-timeline-app" src={`/native-preview/apps/${app}.png`} alt={name} width={22} height={22}/></span>)}<i className="np-playhead"/></div><div className="np-track-times"><span>9:00 AM</span><span>10:00 AM</span><span>11:00 AM</span><span>12:00 PM</span><span>1:00 PM</span></div></div></div></div></Shell>;
-}
-function VidshotScreen() {
-  return <Shell active="Vidshots" className="np-vidshot"><div className="np-vidshot-page"><Control icon="chevron.left">Vidshots</Control><div className="np-video-heading"><b>Product review feedback</b><span>9 Nov 2026 at 11:32 AM</span><span>0:24</span></div><div className="np-copy-row">{['Context','Image','Video','Video + context files'].map(label=><Control key={label} icon="doc.on.clipboard">{label}</Control>)}</div><p className="np-copy-help">Paste support varies by destination app.</p><Segment labels={['Video','Audio']}/><div className="np-video"><NotesDocument compact/><div className="np-video-annotation"/><div className="np-video-controls"><NativeIcon name="play.fill"/><span>0:12</span><i/><span>−0:12</span><NativeIcon name="speaker.wave.2.fill"/><NativeIcon name="arrow.up.left.and.arrow.down.right"/></div></div><div className="np-narration"><h3>Narration</h3><p>Let’s keep the first release small and collect feedback before Friday.</p></div><div className="np-disclosure"><NativeIcon name="chevron.right" size={11}/>Frames and timestamps</div></div></Shell>;
-}
 function ChatComposer({ compact=false }) { return <div className={`np-composer ${compact?'np-composer-compact':''}`}><div className="np-composer-box"><p>What’s on your mind? Type / for skills.</p>{!compact&&<div className="np-composer-footer"><AtSign size={16}/><SlidersHorizontal size={16}/><span>All saved meetings</span><span className="np-model">Gemma 4 <ChevronDown size={10}/></span><Plus size={16}/><Paperclip size={16}/><span className="np-send"><ArrowUp size={16}/></span></div>}</div>{!compact&&<small>↵ Send · ⇧↵ New line</small>}</div>; }
-function ChatScreen() {
-  return <Shell active="Chat" className="np-chat"><div className="np-chat-header"><span><ArrowLeft size={16}/> Chat</span><i/><Clock size={16}/><span><Sparkles size={14}/> Skills</span><span className="np-chat-title">Product review</span><span><SquarePen size={16}/> New chat</span></div><div className="np-chat-messages"><div className="np-user-message">What did we decide about the launch?</div><div className="np-assistant-message"><p>We agreed to start with a small release and use the first round of feedback to shape the rollout.</p><h3>Next steps</h3><ul><li>Share the first draft with the team.</li><li>Collect feedback before Friday.</li><li>Confirm the launch date in the next review.</li></ul><span className="np-citation"><NativeIcon name="chevron.right" size={10}/> 1 meeting · 3 passages</span></div></div><ChatComposer/></Shell>;
-}
 function MeetingScreen() {
   return <Shell active="Meetings" className="np-meeting"><div className="np-meeting-head"><Control icon="chevron.left">Back to Meetings</Control><div className="np-meeting-identity"><div><h2>Product review</h2><div className="np-meeting-meta"><NativeIcon name="calendar" size={12}/> Nov 9, 2026 · 11:00 AM <span>·</span><NativeIcon name="clock" size={12}/> 24 min <span>·</span><NativeIcon name="doc.text" size={12}/> 1,280 words</div></div><span className="np-resume"><span className="np-record-dot"/>Resume<ChevronDown size={14}/></span><Control icon="square.and.arrow.up">Export <ChevronDown size={10}/></Control><Control icon="ellipsis"/></div><div className="np-meeting-context"><Control icon="folder">Unfiled <NativeIcon name="chevron.down" size={10}/></Control><i/><Control icon="person.2">Add people</Control><Segment labels={['Notes','Transcript']}/></div></div><div className="np-document-toolbar"><Control icon="doc.on.clipboard">Copy</Control></div><div className="np-meeting-document"><h3>Meeting Summary</h3><p>The team agreed to start with a small release and gather feedback before the full launch.</p><h3>Key decisions</h3><ul><li>Share the first draft with the team this week.</li><li>Keep the initial release focused on the core workflow.</li><li>Review the feedback together before expanding access.</li></ul><h3>Action items</h3><ul><li>Share the updated plan by Friday.</li><li>Confirm the launch date in the next product review.</li></ul></div><ChatComposer compact/></Shell>;
 }
 function WritingScreen({ dictation=false }) {
   return <div className="np-writing"><NotesDocument ghost={!dictation} dictation={dictation}/>{dictation?<div className="np-recording-pill">{[.6,.85,1,.85,.6].map((weight,i)=><i key={i} style={{'--amplitude':weight,'--delay':`${i*.07}s`}}/>)}</div>:<div className="np-key-caption"><kbd>tab</kbd> Accept suggestion <kbd>⌥ →</kbd> Accept a word</div>}</div>;
 }
-const screens = {'time-turner':TimeTurnerScreen,vidshots:VidshotScreen,'chat-and-agents':ChatScreen,meeting:MeetingScreen,cotypist:WritingScreen,dictation:()=> <WritingScreen dictation/>};
-const labels = {'time-turner':'Time Turner history',vidshots:'Vidshot detail','chat-and-agents':'Chat',meeting:'Meeting notes',cotypist:'Cotypist inline suggestion',dictation:'Dictation'};
+const screens = {meeting:MeetingScreen,dictation:()=> <WritingScreen dictation/>};
+const labels = {'time-turner':'Time Turner history',vidshots:'Vidshot recording','chat-and-agents':'Chat',meeting:'Meeting notes',cotypist:'Cotypist inline suggestion',dictation:'Dictation'};
 function ScaledScreen({type}) {
   const ref=useRef(null);
   const [scale,setScale]=useState(.5);
@@ -56,9 +48,28 @@ function ScaledScreen({type}) {
   const Screen=screens[type];
   return <div className="np-viewport" ref={ref} role="img" aria-label={`${labels[type]} in muesli, illustrated with sample content`}><div className="np-canvas" style={{transform:`scale(${scale})`}} aria-hidden="true"><Screen/></div></div>;
 }
+function StaticPreview({type}) {
+  const dialog = useRef(null);
+  const [expanded, setExpanded] = useState(false);
+  useEffect(() => { if (expanded) dialog.current?.showModal(); }, [expanded]);
+
+  return <>
+    <ScaledScreen type={type}/>
+    <button className="np-expand" onClick={() => setExpanded(true)} aria-label={`Enlarge ${labels[type]} preview`}>
+      <Maximize2 size={13}/> View closer
+    </button>
+    {expanded && <dialog className="np-dialog" ref={dialog} aria-label={labels[type]} onClose={() => setExpanded(false)}
+      onClick={e => { if (e.target === e.currentTarget) dialog.current.close(); }}>
+      <div className="np-dialog-toolbar"><span>{labels[type]}</span>
+        <button onClick={() => dialog.current.close()} aria-label="Close preview" autoFocus><X size={19}/></button>
+      </div>
+      <ScaledScreen type={type}/>
+    </dialog>}
+  </>;
+}
+
 export function NativePreview({type}) {
-  const dialog=useRef(null);
-  const [expanded,setExpanded]=useState(false);
-  useEffect(()=>{if(expanded)dialog.current?.showModal();},[expanded]);
-  return <div className="np-preview"><ScaledScreen type={type}/><button className="np-expand" onClick={()=>setExpanded(true)} aria-label={`Enlarge ${labels[type]} preview`}><Maximize2 size={13}/> View closer</button>{expanded&&<dialog className="np-dialog" ref={dialog} onClose={()=>setExpanded(false)} onClick={e=>{if(e.target===e.currentTarget)dialog.current.close();}}><div className="np-dialog-toolbar"><span>{labels[type]}</span><button onClick={()=>dialog.current.close()} aria-label="Close preview" autoFocus><X size={19}/></button></div><ScaledScreen type={type}/></dialog>}</div>;
+  return <div className="np-preview">
+    {loopDescriptions[type] ? <FeatureLoop key={type} type={type}/> : <StaticPreview type={type}/>}
+  </div>;
 }

@@ -90,3 +90,6 @@
 .np-preview .np-document-toolbar{display:flex;justify-content:flex-end;padding:12px 32px 0}.np-preview .np-document-toolbar>.np-control{padding:7px 12px;background:#6ba3f71a;border:1px solid #6ba3f740;color:var(--np-primary);font-weight:600}.np-preview .np-meeting-document{max-width:768px;width:100%;margin:0 auto;padding:32px 24px 16px}
 
 .np-preview .np-track .np-timeline-app{display:block;width:22px;height:22px;object-fit:contain}
+
+.np-preview .np-loop { aspect-ratio: 1120 / 790; background: #1e1e1e; }
+.np-loop img, .np-loop video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
